@@ -55,6 +55,11 @@ import '@/components/morphy/transitions/vortex';
 import '@/components/morphy/transitions/tv-turn-off';
 import '@/components/morphy/transitions/shutter-iris';
 import '@/components/morphy/transitions/origami-unfold';
+import '@/components/morphy/transitions/crystal';
+import '@/components/morphy/transitions/paint-drip';
+import '@/components/morphy/transitions/blueprint';
+import '@/components/morphy/transitions/lens-flare';
+import '@/components/morphy/transitions/origami-crush';
 
 function getFamilyEmoji(family: string): string {
   switch (family) {
@@ -124,7 +129,7 @@ export default function TransitionsIndexPage() {
         
         {/* Header Banner */}
         <header className="relative overflow-hidden rounded-3xl border border-[var(--border-color)] bg-[var(--bg-surface)] p-6 sm:p-10 shadow-lg morphy-card">
-          <div className="absolute top-0 right-0 -mt-16 -mr-16 h-64 w-64 rounded-full bg-[#fa5c4f]/15 blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
           <div className="relative z-10 space-y-4">
             <Link
@@ -279,10 +284,10 @@ export default function TransitionsIndexPage() {
               <Link
                 key={entry.slug}
                 href={`/docs/transitions/${entry.slug}`}
-                className={`morphy-card flex flex-col justify-between p-6 rounded-3xl group no-underline transition-all relative overflow-hidden ${
+                className={`flex flex-col justify-between p-6 rounded-3xl group no-underline relative overflow-hidden ${
                   isComingSoon
-                    ? 'border-dashed border-amber-500/40 hover:border-amber-500/70 hover:shadow-amber-500/10'
-                    : 'hover:-translate-y-1.5 hover:border-[#fa5c4f]/50 hover:shadow-xl'
+                    ? 'bg-[var(--bg-card)] border border-dashed border-amber-500/40 hover:border-amber-500/70 hover:-translate-y-1 transition-all'
+                    : 'morphy-card'
                 }`}
               >
                 <div>
@@ -293,15 +298,10 @@ export default function TransitionsIndexPage() {
                     </span>
 
                     <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                      {isComingSoon ? (
+                      {isComingSoon && (
                         <span className="px-2.5 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-bold flex items-center gap-1 shadow-xs">
                           <Clock className="size-3" />
                           <span>Coming Soon</span>
-                        </span>
-                      ) : (
-                        <span className="px-2.5 py-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold flex items-center gap-1 shadow-xs">
-                          <CheckCircle2 className="size-3" />
-                          <span>Ready</span>
                         </span>
                       )}
                     </div>
@@ -312,21 +312,12 @@ export default function TransitionsIndexPage() {
                     {entry.displayName}
                   </h3>
 
-                  {/* Subheading: Prominent Family Indicator */}
-                  <div className="flex items-center gap-2 mt-1 mb-2.5 flex-wrap">
-                    <span className="inline-flex items-center gap-1 text-xs font-bold text-[#fa5c4f] bg-[#fa5c4f]/10 px-2 py-0.5 rounded-lg border border-[#fa5c4f]/20">
-                      <span>{familyEmoji}</span>
-                      <span>Family: {entry.family}</span>
-                    </span>
-                    <span className="text-xs font-mono text-[var(--text-subtle)] uppercase">
-                      • {entry.category}
+                  {/* Subheading: Category */}
+                  <div className="flex items-center gap-2 mt-1 mb-2 flex-wrap">
+                    <span className="text-xs font-mono text-[var(--text-subtle)] uppercase tracking-wider">
+                      {entry.category}
                     </span>
                   </div>
-
-                  {/* CLI identifier */}
-                  <code className="text-xs font-mono text-[var(--text-subtle)] bg-[var(--bg-surface)] px-2 py-1 rounded-lg border border-[var(--border-color)] inline-block">
-                    {entry.slug}
-                  </code>
 
                   {/* Description */}
                   <p className="text-xs text-[var(--text-muted)] mt-3 leading-relaxed line-clamp-2">

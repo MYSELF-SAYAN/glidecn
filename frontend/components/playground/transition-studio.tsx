@@ -18,7 +18,7 @@ import {
   ArrowRight,
   ArrowLeft,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 export const ALL_PLAYGROUND_TRANSITIONS = [
@@ -66,6 +66,42 @@ export const ALL_PLAYGROUND_TRANSITIONS = [
   { id: 'stretch', label: 'Taffy Stretch', category: 'Flow', icon: '🍬', hint: 'Elastic vertical extension', math: 'scaleY: 1.5 | scaleX: 0.8' },
   { id: 'swipe', label: 'Card Swipe', category: 'Flow', icon: '💳', hint: 'Snappy mobile swipe card', math: 'translateX: 110% | rotate: 5deg' },
   { id: 'zoom', label: 'Hyperspace Zoom', category: 'Flow', icon: '🚀', hint: 'Hyper-speed forward warp', math: 'scale: 3.0 | opacity: 0' },
+  // Newly Discovered Transitions
+  { id: 'blackhole', label: 'Blackhole', category: 'Experimental', icon: '✨', hint: 'A dynamic blackhole effect.', math: 'custom transition' },
+  { id: 'blueprint', label: 'Blueprint', category: 'Dynamic', icon: '✨', hint: 'The page turns into a glowing architectural blueprint wireframe', math: 'custom transition' },
+  { id: 'crystal', label: 'Crystal', category: 'Experimental', icon: '✨', hint: 'A crystalline structure grows and shatters to reveal the next page', math: 'custom transition' },
+  { id: 'dimension', label: 'Dimension', category: 'Experimental', icon: '✨', hint: 'A dynamic dimension effect.', math: 'custom transition' },
+  { id: 'dream', label: 'Dream', category: 'Experimental', icon: '✨', hint: 'A dynamic dream effect.', math: 'custom transition' },
+  { id: 'earth', label: 'Earth', category: 'Experimental', icon: '✨', hint: 'A dynamic earth effect.', math: 'custom transition' },
+  { id: 'fire', label: 'Fire', category: 'Experimental', icon: '✨', hint: 'A dynamic fire effect.', math: 'custom transition' },
+  { id: 'galaxy', label: 'Galaxy', category: 'Experimental', icon: '✨', hint: 'A dynamic galaxy effect.', math: 'custom transition' },
+  { id: 'hologram', label: 'Hologram', category: 'Experimental', icon: '✨', hint: 'A dynamic hologram effect.', math: 'custom transition' },
+  { id: 'ice', label: 'Ice', category: 'Experimental', icon: '✨', hint: 'A dynamic ice effect.', math: 'custom transition' },
+  { id: 'illusion', label: 'Illusion', category: 'Experimental', icon: '✨', hint: 'A dynamic illusion effect.', math: 'custom transition' },
+  { id: 'kaleidoscope', label: 'Kaleidoscope', category: 'Experimental', icon: '✨', hint: 'A dynamic kaleidoscope effect.', math: 'custom transition' },
+  { id: 'laser', label: 'Laser', category: 'Experimental', icon: '✨', hint: 'A dynamic laser effect.', math: 'custom transition' },
+  { id: 'lens-flare', label: 'Lens Flare', category: 'Flow', icon: '✨', hint: 'A cinematic anamorphic lens flare sweeps across blinding the camera', math: 'custom transition' },
+  { id: 'lightning', label: 'Lightning', category: 'Experimental', icon: '✨', hint: 'A dynamic lightning effect.', math: 'custom transition' },
+  { id: 'mosaic', label: 'Mosaic', category: 'Experimental', icon: '✨', hint: 'A dynamic mosaic effect.', math: 'custom transition' },
+  { id: 'nightmare', label: 'Nightmare', category: 'Experimental', icon: '✨', hint: 'A dynamic nightmare effect.', math: 'custom transition' },
+  { id: 'origami-crush', label: 'Origami Crush', category: 'Paper', icon: '✨', hint: 'The page crumples up into a tiny paper ball and is thrown away', math: 'custom transition' },
+  { id: 'paint-drip', label: 'Paint Drip', category: 'Mask', icon: '✨', hint: 'Virtual paint drips down the screen, washing away the old page', math: 'custom transition' },
+  { id: 'planet', label: 'Planet', category: 'Experimental', icon: '✨', hint: 'A dynamic planet effect.', math: 'custom transition' },
+  { id: 'prism', label: 'Prism', category: 'Experimental', icon: '✨', hint: 'A dynamic prism effect.', math: 'custom transition' },
+  { id: 'reality', label: 'Reality', category: 'Experimental', icon: '✨', hint: 'A dynamic reality effect.', math: 'custom transition' },
+  { id: 'shatter', label: 'Shatter', category: 'Experimental', icon: '✨', hint: 'A dynamic shatter effect.', math: 'custom transition' },
+  { id: 'smoke', label: 'Smoke', category: 'Experimental', icon: '✨', hint: 'A dynamic smoke effect.', math: 'custom transition' },
+  { id: 'space', label: 'Space', category: 'Experimental', icon: '✨', hint: 'A dynamic space effect.', math: 'custom transition' },
+  { id: 'spark', label: 'Spark', category: 'Experimental', icon: '✨', hint: 'A dynamic spark effect.', math: 'custom transition' },
+  { id: 'star', label: 'Star', category: 'Experimental', icon: '✨', hint: 'A dynamic star effect.', math: 'custom transition' },
+  { id: 'swirl', label: 'Swirl', category: 'Experimental', icon: '✨', hint: 'A dynamic swirl effect.', math: 'custom transition' },
+  { id: 'time', label: 'Time', category: 'Experimental', icon: '✨', hint: 'A dynamic time effect.', math: 'custom transition' },
+  { id: 'tornado', label: 'Tornado', category: 'Experimental', icon: '✨', hint: 'A dynamic tornado effect.', math: 'custom transition' },
+  { id: 'twirl', label: 'Twirl', category: 'Experimental', icon: '✨', hint: 'A dynamic twirl effect.', math: 'custom transition' },
+  { id: 'universe', label: 'Universe', category: 'Experimental', icon: '✨', hint: 'A dynamic universe effect.', math: 'custom transition' },
+  { id: 'water', label: 'Water', category: 'Experimental', icon: '✨', hint: 'A dynamic water effect.', math: 'custom transition' },
+  { id: 'wind', label: 'Wind', category: 'Experimental', icon: '✨', hint: 'A dynamic wind effect.', math: 'custom transition' },
+  { id: 'wormhole2', label: 'Wormhole2', category: 'Experimental', icon: '✨', hint: 'A dynamic wormhole2 effect.', math: 'custom transition' },
 ];
 
 const EASING_PRESETS = ['easeInOut', 'easeOut', 'linear', 'easeIn'] as const;
@@ -80,6 +116,45 @@ export function PlaygroundTransitionStudio() {
   const [copied, setCopied] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    setIsMounted(true);
+    try {
+      const saved = localStorage.getItem('morphy-playground-state');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.isOpen !== undefined) setIsOpen(parsed.isOpen);
+        if (parsed.activeTab) setActiveTab(parsed.activeTab);
+        if (parsed.searchQuery !== undefined) setSearchQuery(parsed.searchQuery);
+        if (parsed.activeCategory) setActiveCategory(parsed.activeCategory);
+        
+        if (parsed.transition) setTransition(parsed.transition);
+        if (parsed.config) setConfig(parsed.config);
+      }
+    } catch (e) {
+      console.error('Failed to parse playground state', e);
+    }
+  }, [setTransition, setConfig]);
+
+  // Save to localStorage whenever state changes
+  useEffect(() => {
+    if (!isMounted) return;
+    try {
+      localStorage.setItem('morphy-playground-state', JSON.stringify({
+        isOpen,
+        activeTab,
+        searchQuery,
+        activeCategory,
+        transition: currentTransition,
+        config,
+      }));
+    } catch (e) {
+      console.error('Failed to save playground state', e);
+    }
+  }, [isOpen, activeTab, searchQuery, activeCategory, currentTransition, config, isMounted]);
 
   const categories = ['All', 'Spatial', 'Portal', 'Paper', 'Mask', 'Retro', 'Flow'];
 
@@ -100,13 +175,16 @@ export function PlaygroundTransitionStudio() {
     if (customTransition) {
       setTransition(customTransition);
     }
-    router.push(targetPage);
+    setTimeout(() => router.push(targetPage), 10);
   };
 
   const handleSurpriseMe = () => {
     const randomTransition = ALL_PLAYGROUND_TRANSITIONS[Math.floor(Math.random() * ALL_PLAYGROUND_TRANSITIONS.length)];
+    // Preserve current physics settings for "Dice" mode
+    const preservedConfig = { ...config };
     setTransition(randomTransition.id);
-    router.push(targetPage);
+    setConfig(preservedConfig);
+    setTimeout(() => router.push(targetPage), 10);
   };
 
   const handleChaosMode = () => {
@@ -119,7 +197,7 @@ export function PlaygroundTransitionStudio() {
       duration: randomDuration,
       direction: randomDirection,
     });
-    router.push(targetPage);
+    setTimeout(() => router.push(targetPage), 10);
   };
 
   const duration = config.duration ?? 0.6;
@@ -141,6 +219,12 @@ export function PlaygroundTransitionStudio() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const DIRECTIONAL_TRANSITIONS = ['slide', 'swipe', 'stretch', 'squeeze', 'fold', 'flip', 'bounce', 'wave', 'cube'];
+  const SPRING_TRANSITIONS = ['bounce', 'wobble'];
+
+  const supportsDirection = DIRECTIONAL_TRANSITIONS.includes(currentTransition);
+  const supportsEase = !SPRING_TRANSITIONS.includes(currentTransition);
 
   return (
     <aside aria-label="Playground Transition Studio" className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2.5 font-sans">
@@ -326,44 +410,48 @@ export function PlaygroundTransitionStudio() {
               </div>
 
               {/* Direction */}
-              <div className="space-y-1.5 pt-2 border-t border-[var(--border-color)]">
-                <span className="font-semibold text-[var(--text-main)] block">Direction Vector</span>
-                <div className="grid grid-cols-4 gap-1 text-[11px] font-mono">
-                  {DIRECTION_PRESETS.map((dir) => (
-                    <button
-                      key={dir}
-                      onClick={() => setConfig({ direction: dir })}
-                      className={`py-1.5 rounded-lg border capitalize transition cursor-pointer ${
-                        direction === dir
-                          ? 'bg-[#fa5c4f] text-white border-[#fa5c4f] font-bold'
-                          : 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-color)] hover:text-[var(--text-main)]'
-                      }`}
-                    >
-                      {dir}
-                    </button>
-                  ))}
+              {supportsDirection && (
+                <div className="space-y-1.5 pt-2 border-t border-[var(--border-color)]">
+                  <span className="font-semibold text-[var(--text-main)] block">Direction Vector</span>
+                  <div className="grid grid-cols-4 gap-1 text-[11px] font-mono">
+                    {DIRECTION_PRESETS.map((dir) => (
+                      <button
+                        key={dir}
+                        onClick={() => setConfig({ direction: dir })}
+                        className={`py-1.5 rounded-lg border capitalize transition cursor-pointer ${
+                          direction === dir
+                            ? 'bg-[#fa5c4f] text-white border-[#fa5c4f] font-bold'
+                            : 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-color)] hover:text-[var(--text-main)]'
+                        }`}
+                      >
+                        {dir}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Easing */}
-              <div className="space-y-1.5 pt-2 border-t border-[var(--border-color)]">
-                <span className="font-semibold text-[var(--text-main)] block">Easing Curve</span>
-                <div className="grid grid-cols-4 gap-1 text-[11px] font-mono">
-                  {EASING_PRESETS.map((easingName) => (
-                    <button
-                      key={easingName}
-                      onClick={() => setConfig({ ease: easingName })}
-                      className={`py-1.5 px-2 rounded-lg border text-center truncate transition cursor-pointer ${
-                        ease === easingName
-                          ? 'bg-[#fa5c4f] text-white border-[#fa5c4f] font-bold'
-                          : 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-color)] hover:text-[var(--text-main)]'
-                      }`}
-                    >
-                      {easingName}
-                    </button>
-                  ))}
+              {supportsEase && (
+                <div className="space-y-1.5 pt-2 border-t border-[var(--border-color)]">
+                  <span className="font-semibold text-[var(--text-main)] block">Easing Curve</span>
+                  <div className="grid grid-cols-4 gap-1 text-[11px] font-mono">
+                    {EASING_PRESETS.map((easingName) => (
+                      <button
+                        key={easingName}
+                        onClick={() => setConfig({ ease: easingName })}
+                        className={`py-1.5 px-2 rounded-lg border text-center truncate transition cursor-pointer ${
+                          ease === easingName
+                            ? 'bg-[#fa5c4f] text-white border-[#fa5c4f] font-bold'
+                            : 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-color)] hover:text-[var(--text-main)]'
+                        }`}
+                      >
+                        {easingName}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
 

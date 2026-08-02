@@ -24,7 +24,6 @@ import {
   Flame,
   CheckCircle2,
 } from 'lucide-react';
-import { SpriteMascot } from '@/components/landing/sprite-mascot';
 import { FAMILIES, TRANSITION_CATALOG } from '@/lib/transition-catalog';
 
 export function DocsOverview() {
@@ -170,9 +169,6 @@ export function DocsOverview() {
 
           {/* Floating Morphy Mascot Preview Card */}
           <div className="hidden lg:flex flex-col items-center justify-center shrink-0 w-64 p-6 rounded-3xl bg-[var(--bg-card)]/80 border border-[var(--border-color)] backdrop-blur-sm shadow-xl text-center space-y-3">
-            <div className="h-28 flex items-center justify-center -my-2">
-              <SpriteMascot pose="waving" size={120} speed={0.9} />
-            </div>
             <div>
               <div className="text-xs font-bold text-[var(--text-main)] font-display">Morphy Engine</div>
               <div className="text-[11px] text-[var(--text-muted)]">Dual-frame coordinator</div>

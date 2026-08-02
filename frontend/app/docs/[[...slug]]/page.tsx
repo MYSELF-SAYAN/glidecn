@@ -36,7 +36,7 @@ export default async function DocsPageContent(props: PageProps) {
           <>
             {/* Header Block for Child Docs Pages */}
             <header className="relative overflow-hidden rounded-3xl border border-[var(--border-color)] bg-[var(--bg-surface)] p-6 sm:p-10 shadow-lg morphy-card">
-              <div className="absolute top-0 right-0 -mt-16 -mr-16 h-56 w-56 rounded-full bg-[#fa5c4f]/10 blur-3xl pointer-events-none" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
               <div className="relative z-10 space-y-4">
                 <div className="flex items-center gap-2">

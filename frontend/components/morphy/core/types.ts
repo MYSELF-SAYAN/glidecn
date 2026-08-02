@@ -39,7 +39,7 @@ export type AnimationState = 'idle' | 'entering' | 'exiting' | 'complete';
 // ---------------------------------------------------------------------------
 
 /** Used for documentation / UI grouping */
-export type TransitionCategory = 'flow' | 'portal' | 'paper' | 'mask' | 'spatial' | 'dynamic' | 'experimental';
+export type TransitionCategory = 'flow' | 'portal' | 'paper' | 'mask' | 'spatial' | 'dynamic' | 'experimental' | 'retro';
 
 // ---------------------------------------------------------------------------
 // Transition Config

@@ -29,7 +29,7 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: {
     default: 'Morphy — Beautiful Page Transitions for React',
-    template: '%s | Morphy',
+    template: '%s | MorphyJS',
   },
   description:
     'An open-source React page transition library with a pluggable architecture, inspired by the developer experience of shadcn/ui.',

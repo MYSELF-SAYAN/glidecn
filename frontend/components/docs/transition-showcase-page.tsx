@@ -7,7 +7,6 @@ import { defaultRegistry } from '@/components/morphy/core/registry';
 import { buildVariants, buildTransition } from '@/components/morphy/core/animation-engine';
 import { mergeConfig } from '@/components/morphy/core/utils';
 import { DEFAULT_TRANSITION_CONFIG } from '@/components/morphy/constants';
-import { MascotHint } from './mascot-hint';
 
 // Ensure transitions are registered
 import '@/components/morphy/transitions/fade';
@@ -106,7 +105,7 @@ export function TransitionShowcasePage({ transition, tagline }: ShowcasePageProp
             <button type="button" onClick={() => setActiveTab('code')} className={`rounded-full px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.25em] transition ${activeTab === 'code' ? 'bg-brand-500 text-white shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'}`}>Code</button>
           </div>
           <div className="flex items-center gap-2">
-            <button type="button" onClick={copyPrompt} className="rounded-full border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 p-2 text-zinc-500 dark:text-zinc-400 transition hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-brand-500" title="Copy AI prompt">
+            <button type="button" onClick={copyPrompt} className="rounded-full border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 p-2 text-zinc-500 dark:text-zinc-400 transition hover:bg-zinc-100 dark:hover:bg-white/10 hover:text-brand-500" title={copiedPrompt ? 'Copied!' : 'Copy AI prompt'}>
               {copiedPrompt ? <Check className="size-4 text-brand-500" /> : <Sparkles className="size-4" />}
             </button>
           </div>
@@ -116,7 +115,6 @@ export function TransitionShowcasePage({ transition, tagline }: ShowcasePageProp
         {activeTab === 'demo' && (
           <div className="p-4">
             <div className="flex flex-col items-center text-center mb-8">
-              <MascotHint text={tagline} pose="waiting" />
               <div className="flex gap-4 p-1 mt-6 bg-zinc-100 dark:bg-zinc-800/50 rounded-full">
                 <button
                   onClick={() => handleTabClick('A')}
@@ -204,7 +202,7 @@ export function TransitionShowcasePage({ transition, tagline }: ShowcasePageProp
             <div className="p-8 text-center text-zinc-500">
                <p className="mb-4">Source code visualization is mocked for the interactive showcase.</p>
                <button onClick={copyPrompt} className="inline-flex items-center gap-2 rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 transition hover:bg-zinc-50 dark:hover:bg-white/10 hover:text-brand-500 dark:hover:text-brand-400">
-                  {copiedPrompt ? <Check className="size-4 text-brand-500" /> : <Copy className="size-4" />} Copy AI prompt instead
+                  {copiedPrompt ? <Check className="size-4 text-brand-500" /> : <Copy className="size-4" />} {copiedPrompt ? 'Copied!' : 'Copy AI prompt instead'}
                </button>
             </div>
           </div>

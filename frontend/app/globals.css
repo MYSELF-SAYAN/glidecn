@@ -231,3 +231,52 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-brand-100);
 }
 
+
+/* ==========================================================================
+ * Theme View Transitions
+ * ========================================================================== */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 1;
+}
+
+.dark::view-transition-new(root) {
+  z-index: 999;
+  clip-path: circle(0% at 50% 50%);
+  animation: clip-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+::view-transition-old(root) {
+  z-index: 999;
+  clip-path: circle(150% at 50% 50%);
+  animation: clip-out 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+@keyframes clip-in {
+  from {
+    clip-path: circle(0% at 50% 50%);
+  }
+  to {
+    clip-path: circle(150% at 50% 50%);
+  }
+}
+
+@keyframes clip-out {
+  from {
+    clip-path: circle(150% at 50% 50%);
+  }
+  to {
+    clip-path: circle(0% at 50% 50%);
+  }
+}
+

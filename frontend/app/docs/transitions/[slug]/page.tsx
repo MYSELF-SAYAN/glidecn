@@ -10,7 +10,37 @@ import Link from 'next/link';
 import { ArrowLeft, Sparkles, Clock, Rocket, Bell, CheckCircle2 } from 'lucide-react';
 import { Page } from '@/components/morphy';
 
-// Ensure all transitions are registered on the server before generateStaticParams runs
+// Ensure all transitions are registered
+import '@/components/morphy/transitions/shatter';
+import '@/components/morphy/transitions/tornado';
+import '@/components/morphy/transitions/swirl';
+import '@/components/morphy/transitions/twirl';
+import '@/components/morphy/transitions/kaleidoscope';
+import '@/components/morphy/transitions/mosaic';
+import '@/components/morphy/transitions/prism';
+import '@/components/morphy/transitions/laser';
+import '@/components/morphy/transitions/hologram';
+import '@/components/morphy/transitions/smoke';
+import '@/components/morphy/transitions/fire';
+import '@/components/morphy/transitions/ice';
+import '@/components/morphy/transitions/water';
+import '@/components/morphy/transitions/earth';
+import '@/components/morphy/transitions/wind';
+import '@/components/morphy/transitions/lightning';
+import '@/components/morphy/transitions/spark';
+import '@/components/morphy/transitions/star';
+import '@/components/morphy/transitions/planet';
+import '@/components/morphy/transitions/galaxy';
+import '@/components/morphy/transitions/universe';
+import '@/components/morphy/transitions/blackhole';
+import '@/components/morphy/transitions/wormhole2';
+import '@/components/morphy/transitions/time';
+import '@/components/morphy/transitions/space';
+import '@/components/morphy/transitions/dimension';
+import '@/components/morphy/transitions/reality';
+import '@/components/morphy/transitions/dream';
+import '@/components/morphy/transitions/nightmare';
+import '@/components/morphy/transitions/illusion';
 import '@/components/morphy/transitions/fade';
 import '@/components/morphy/transitions/slide';
 import '@/components/morphy/transitions/scale';
@@ -44,6 +74,11 @@ import '@/components/morphy/transitions/vortex';
 import '@/components/morphy/transitions/tv-turn-off';
 import '@/components/morphy/transitions/shutter-iris';
 import '@/components/morphy/transitions/origami-unfold';
+import '@/components/morphy/transitions/crystal';
+import '@/components/morphy/transitions/paint-drip';
+import '@/components/morphy/transitions/blueprint';
+import '@/components/morphy/transitions/lens-flare';
+import '@/components/morphy/transitions/origami-crush';
 
 export async function generateStaticParams() {
   const slugs = getAllTransitionSlugs();
@@ -54,7 +89,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const params = await props.params;
   const entry = getCatalogEntry(params.slug);
   if (!entry) return { title: 'Transition — Morphy' };
-  
+
   return {
     title: `${entry.displayName} Transition — Morphy Docs`,
     description: entry.description,
@@ -82,7 +117,7 @@ export default async function TransitionDocsPage(props: { params: Promise<{ slug
   return (
     <Page transition="fade">
       <div className="space-y-8 pb-20 max-w-4xl">
-        
+
         {/* Back Link */}
         <Link
           href="/docs/transitions"
@@ -94,11 +129,11 @@ export default async function TransitionDocsPage(props: { params: Promise<{ slug
 
         {/* Coming Soon Showcase Banner */}
         <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-[var(--bg-surface)] p-8 sm:p-12 shadow-xl morphy-card text-center space-y-6">
-          <div className="absolute top-0 right-0 -mt-16 -mr-16 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
           {/* Emoji & Badge */}
           <div className="flex flex-col items-center gap-3">
-            <div className="text-6xl sm:text-7xl p-4 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-md inline-block animate-bounce">
+            <div className="text-6xl sm:text-7xl p-4 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-md inline-block">
               {catalogEntry.emoji}
             </div>
 

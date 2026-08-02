@@ -15,7 +15,6 @@ import {
   Boxes,
   Zap,
 } from 'lucide-react';
-import { SpriteMascot } from '@/components/landing/sprite-mascot';
 
 export function DocsInstallation() {
   const [copiedCmd, setCopiedCmd] = useState<string | null>(null);

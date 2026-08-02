@@ -16,7 +16,7 @@ function CubeDemo() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-orange-500/10 to-transparent perspective-[600px]">
+    <div className="absolute inset-0 flex items-center justify-center bg-[var(--bg-surface)] perspective-[600px]">
       <motion.div
         animate={{
           rotateY: rotated ? 90 : 0,
@@ -38,7 +38,7 @@ function CircularPortalDemo() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-blue-500/10 to-transparent">
+    <div className="absolute inset-0 flex items-center justify-center bg-[var(--bg-surface)]">
       <div className="relative size-24">
         <div className="absolute inset-0 rounded-full bg-blue-500/20" />
         <motion.div
@@ -67,7 +67,7 @@ function OrigamiDemo() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-amber-500/10 to-transparent">
+    <div className="absolute inset-0 flex items-center justify-center bg-[var(--bg-surface)]">
       <motion.div
         animate={{
           rotateX: folded ? 75 : 0,
@@ -89,7 +89,7 @@ function InkSpreadDemo() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-emerald-500/10 to-transparent">
+    <div className="absolute inset-0 flex items-center justify-center bg-[var(--bg-surface)]">
       <motion.div
         animate={{
           scale: spread ? [0.2, 1.3, 1] : [1, 0.2],
@@ -112,7 +112,7 @@ function TVTurnOffDemo() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-purple-500/10 to-transparent">
+    <div className="absolute inset-0 flex items-center justify-center bg-[var(--bg-surface)]">
       <motion.div
         animate={{
           scaleX: off ? 0.05 : 1,
@@ -120,7 +120,7 @@ function TVTurnOffDemo() {
           opacity: off ? 0.3 : 1,
         }}
         transition={{ duration: 0.5, ease: 'easeIn' }}
-        className="size-20 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-500 shadow-xl shadow-purple-500/20 flex items-center justify-center text-2xl"
+        className="size-20 rounded-xl bg-slate-800 shadow-xl shadow-black/20 flex items-center justify-center text-2xl border border-slate-700"
       >
         📺
       </motion.div>
@@ -135,7 +135,7 @@ function PageCurlDemo() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#fa5c4f]/10 to-transparent overflow-hidden flex items-center justify-center">
+    <div className="absolute inset-0 bg-[var(--bg-surface)] overflow-hidden flex items-center justify-center">
       <div className="relative size-20 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] p-2 shadow-md">
         <div className="h-1.5 w-8 rounded-full bg-[var(--border-color)] mb-1" />
         <div className="h-1.5 w-12 rounded-full bg-[var(--border-color)]" />
@@ -177,7 +177,7 @@ export function TransitionShowcase() {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: false, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="w-full lg:w-1/3 flex flex-col items-start pt-2 lg:sticky lg:top-28 space-y-5"
         >
@@ -223,10 +223,10 @@ export function TransitionShowcase() {
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-20px' }}
-                  transition={{ duration: 0.4, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: false, margin: '-40px' }}
+                  transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                   className="morphy-card flex flex-col overflow-hidden rounded-3xl group"
                 >
                   {/* Animated shader preview area */}

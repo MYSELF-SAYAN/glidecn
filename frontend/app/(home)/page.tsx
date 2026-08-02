@@ -1,26 +1,31 @@
 import { FloatingNavbar } from '@/components/landing/floating-navbar';
+import { ScrollOrchestrator } from '@/components/landing/scroll-orchestrator';
 import { Hero } from '@/components/landing/hero';
-import { FeatureGrid } from '@/components/landing/feature-grid';
+import { FeatureStagger } from '@/components/landing/feature-stagger';
+import { MetricsSection } from '@/components/landing/metrics-section';
 import { TransitionShowcase } from '@/components/landing/transition-showcase';
 import { DxSection } from '@/components/landing/dx-section';
-import { MascotShowcase } from '@/components/landing/mascot-showcase';
-import { Footer } from '@/components/landing/footer';
+import { OpenSource } from '@/components/landing/open-source';
+import { Faq } from '@/components/landing/faq';
 import { Page } from '@/components/morphy';
 import { SiteFooter } from '@/components/site-footer';
 
 export default function HomePage() {
   return (
     <Page transition="fade">
-      <main className="relative bg-[var(--bg-page)] text-[var(--text-main)] font-sans selection:bg-[#fa5c4f]/20 selection:text-[#fa5c4f] min-h-screen">
-        <FloatingNavbar />
-        <Hero />
-        <FeatureGrid />
-        <TransitionShowcase />
-        <DxSection />
-        <MascotShowcase />
-        <Footer />
-        <SiteFooter />
-      </main>
+      <ScrollOrchestrator>
+        <main className="relative bg-[var(--bg-page)] text-[var(--text-main)] font-sans selection:bg-[#fa5c4f]/20 selection:text-[#fa5c4f] min-h-screen">
+          <FloatingNavbar />
+          <Hero />
+          <FeatureStagger />
+          <TransitionShowcase />
+          <DxSection />
+          <MetricsSection />
+          <OpenSource />
+          <Faq />
+          <SiteFooter />
+        </main>
+      </ScrollOrchestrator>
     </Page>
   );
 }

@@ -22,7 +22,16 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
 
   return (
     <button
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      onClick={() => {
+        const nextTheme = isDark ? 'light' : 'dark';
+        if (!document.startViewTransition) {
+          setTheme(nextTheme);
+          return;
+        }
+        document.startViewTransition(() => {
+          setTheme(nextTheme);
+        });
+      }}
       aria-label="Toggle light and dark theme"
       title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       className={`p-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-surface)] hover:bg-[var(--bg-card)] text-[var(--text-main)] hover:border-[#fa5c4f]/50 transition-all active:scale-90 cursor-pointer btn-tactile flex items-center justify-center ${className}`}

@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
 import { SiteFooter } from '@/components/site-footer';
 
 export default function PlaygroundPageTwo() {
-  const { currentTransition, setTransition, setConfig } = useMorphy();
+  const { currentTransition, setTransition, config, setConfig } = useMorphy();
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
@@ -37,13 +37,16 @@ export default function PlaygroundPageTwo() {
     if (transitionId) {
       setTransition(transitionId);
     }
-    router.push('/playground/page-1');
+    setTimeout(() => router.push('/playground/page-1'), 10);
   };
 
   const handleSurpriseJump = () => {
     const randomTransition = ALL_PLAYGROUND_TRANSITIONS[Math.floor(Math.random() * ALL_PLAYGROUND_TRANSITIONS.length)];
+    // Preserve config for Surprise Jump
+    const preservedConfig = { ...config };
     setTransition(randomTransition.id);
-    router.push('/playground/page-1');
+    setConfig(preservedConfig);
+    setTimeout(() => router.push('/playground/page-1'), 10);
   };
 
   const handleChaosJump = () => {
@@ -54,12 +57,12 @@ export default function PlaygroundPageTwo() {
 
     setTransition(randomTransition.id);
     setConfig({ duration: randomDuration, direction: randomDirection });
-    router.push('/playground/page-1');
+    setTimeout(() => router.push('/playground/page-1'), 10);
   };
 
   return (
-    <Page className="items-center">
-      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-12">
+    <Page>
+      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16 mt-20 space-y-12">
         
         {/* ================= PAGE 2 HERO ================= */}
         <div className="text-center space-y-6 max-w-3xl mx-auto">

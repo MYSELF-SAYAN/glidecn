@@ -39,10 +39,10 @@ export function DxSection() {
         
         {/* Left Side — Code Block */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, x: -40, scale: 0.95 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: false, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="relative order-2 lg:order-1"
         >
           <div className="relative overflow-hidden rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] p-6 shadow-xl">
@@ -96,11 +96,11 @@ export function DxSection() {
 
         {/* Right Side — Typography */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-col items-start order-1 lg:order-2 space-y-4"
+          initial={{ opacity: 0, x: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: false, margin: '-60px' }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-start order-1 lg:order-2 space-y-5"
         >
           <span className="sticker-pill">
             <Code2 className="size-3 text-[#fa5c4f]" /> Clean Architecture
