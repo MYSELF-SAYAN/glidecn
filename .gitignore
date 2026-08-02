@@ -1,7 +1,7 @@
 mascot_run
 .agents
 all_tests
-test1
+test*
 .codex*
 skills*
 

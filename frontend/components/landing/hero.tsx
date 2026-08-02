@@ -19,10 +19,10 @@ import Link from 'next/link';
 import { SpriteMascot, MascotPose } from './sprite-mascot';
 
 const PKG_COMMANDS = {
-  pnpm: 'pnpm dlx morphy@latest add',
-  npm: 'npx morphy@latest add',
-  bun: 'bunx morphy@latest add',
-  yarn: 'yarn dlx morphy@latest add',
+  pnpm: 'pnpm dlx morphyjs-cli@latest add',
+  npm: 'npx morphyjs-cli@latest add',
+  bun: 'bunx morphyjs-cli@latest add',
+  yarn: 'yarn dlx morphyjs-cli@latest add',
 };
 
 const HERO_DEMOS = [

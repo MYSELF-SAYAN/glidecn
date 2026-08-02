@@ -73,11 +73,11 @@ export function DocsInstallation() {
                   <code className="text-xs font-mono text-zinc-300">
                     <span className="text-[#fa5c4f]">
                       {activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`}
-                    </span> morphy@latest init
+                    </span> morphyjs-cli@latest init
                   </code>
                   <button
                     onClick={() => copyToClipboard(
-                      `${activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`} morphy@latest init`,
+                      `${activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`} morphyjs-cli@latest init`,
                       'cli-init'
                     )}
                     className="p-2 -mr-2 rounded-xl text-zinc-500 hover:text-[#fa5c4f] hover:bg-[#fa5c4f]/10 transition"
@@ -99,7 +99,7 @@ export function DocsInstallation() {
               <span className="text-[10px] text-zinc-500">Terminal</span>
             </div>
             <div>
-              <span className="text-[#fa5c4f] font-bold">~</span> <span className="text-zinc-500">npx morphy@latest init</span>
+              <span className="text-[#fa5c4f] font-bold">~</span> <span className="text-zinc-500">npx morphyjs-cli@latest init</span>
             </div>
             <div className="text-zinc-400 pl-4 border-l-2 border-zinc-800 space-y-1">
               <div><span className="text-emerald-400">✔</span> Initializing registry...</div>

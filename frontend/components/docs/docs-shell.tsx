@@ -23,7 +23,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
                 <Logo className="size-4 text-white" />
               </div>
               <span className="font-bold tracking-tight text-base font-display text-[var(--text-main)]">
-                Morphy
+                MorphyJS
               </span>
             </Link>
             <span className="text-[var(--text-subtle)] text-sm font-mono">/</span>

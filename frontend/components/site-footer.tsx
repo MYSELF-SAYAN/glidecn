@@ -16,7 +16,7 @@ export function SiteFooter({ className = "mt-20" }: { className?: string }) {
                 <Logo className="size-4 text-white" />
               </div>
               <span className="font-bold tracking-tight text-lg font-display text-[var(--text-main)]">
-                Morphy
+                MorphyJS
               </span>
             </Link>
             <p className="text-sm text-[var(--text-muted)] max-w-sm leading-relaxed">
@@ -73,7 +73,7 @@ export function SiteFooter({ className = "mt-20" }: { className?: string }) {
         </div>
 
         <div className="mt-12 pt-8 border-t border-[var(--border-color)] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--text-subtle)]">
-          <p>© {new Date().getFullYear()} Morphy Engine. Open source under MIT.</p>
+          <p>© {new Date().getFullYear()} MorphyJS Engine. Open source under MIT.</p>
           <p className="flex items-center gap-1.5">
             Built with <Heart className="size-3 text-[#fa5c4f]" fill="currentColor" /> for React & Next.js
           </p>

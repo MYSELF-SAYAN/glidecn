@@ -126,7 +126,7 @@ export function DocsOverview() {
             </h1>
 
             <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
-              Morphy is a synchronized dual-frame transition engine. Zero layout shifts, 60fps GPU compositor acceleration, and copy-paste component CLI inspired by shadcn/ui.
+              MorphyJS is a synchronized dual-frame transition engine. Zero layout shifts, 60fps GPU compositor acceleration, and copy-paste component CLI inspired by shadcn/ui.
             </p>
 
             {/* Quick Install Pill Bar */}
@@ -134,11 +134,11 @@ export function DocsOverview() {
               <div className="inline-flex items-center gap-2 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] px-4 py-2.5 shadow-inner">
                 <Terminal className="size-3.5 text-[#fa5c4f]" />
                 <code className="text-xs font-mono font-bold text-[var(--text-main)]">
-                  npx morphy init
+                  npx morphyjs-cli init
                 </code>
                 <button
                   type="button"
-                  onClick={() => copyToClipboard('npx morphy init', 'hero-init')}
+                  onClick={() => copyToClipboard('npx morphyjs-cli init', 'hero-init')}
                   className="ml-2 p-1 text-[var(--text-subtle)] hover:text-[#fa5c4f] transition rounded-md"
                   title="Copy command"
                 >

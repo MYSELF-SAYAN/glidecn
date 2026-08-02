@@ -21,8 +21,8 @@ export function FloatingNavbar() {
           <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-md shadow-[#fa5c4f]/25 group-hover:rotate-6 transition">
             <Logo className="size-4 text-white" />
           </div>
-          <span className="font-bold tracking-tight text-base font-display text-[var(--text-main)]">
-            Morphy
+          <span className="font-bold tracking-tight text-sm font-display text-[var(--text-main)] group-hover:text-white transition-colors">
+            MorphyJS
           </span>
         </Link>
 

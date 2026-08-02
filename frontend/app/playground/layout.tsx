@@ -38,8 +38,8 @@ export default function PlaygroundLayout({
               <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-md shadow-[#fa5c4f]/25 group-hover:scale-105 transition">
                 <Logo className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-sm text-[var(--text-main)] font-display tracking-tight hidden sm:inline">
-                Morphy
+              <span className="font-bold tracking-tight text-base font-display text-[var(--text-main)]">
+                MorphyJS
               </span>
             </Link>
 

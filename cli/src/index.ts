@@ -11,9 +11,9 @@ import { listCommand } from './commands/list.js';
 const program = new Command();
 
 program
-  .name('morphy')
+  .name('morphyjs-cli')
   .description('✨ Drop-in page transitions for React')
-  .version('0.1.2');
+  .version('0.1.3');
 
 // ---------------------------------------------------------------------------
 // morphy init

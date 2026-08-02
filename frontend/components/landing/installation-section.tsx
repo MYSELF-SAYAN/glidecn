@@ -12,7 +12,7 @@ const steps = [
     icon: Terminal,
     step: '01',
     title: 'Install via CLI',
-    code: 'npx morphy@latest init',
+    code: 'npx morphyjs-cli@latest init',
     description: 'One command copies all components into your project.',
   },
   {

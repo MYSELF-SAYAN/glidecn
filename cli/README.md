@@ -1,8 +1,8 @@
-# Morphy CLI (`morphy`)
+# Morphy CLI (`morphyjs-cli`)
 
 ✨ **Drop-in page transitions for React** — shadcn-style component distribution.
 
-`morphy` is the official CLI to scaffold Morphy page transitions directly into your codebase. You own the code; no black-box dependencies.
+`morphyjs-cli` is the official CLI to scaffold Morphy page transitions directly into your codebase. You own the code; no black-box dependencies.
 
 ---
 
@@ -13,16 +13,16 @@ Works with **npm**, **pnpm**, **yarn**, and **bun**:
 
 ```bash
 # npm
-npx morphy init
+npx morphyjs-cli init
 
 # pnpm
-pnpm dlx morphy init
+pnpm dlx morphyjs-cli init
 
 # yarn
-yarn dlx morphy init
+yarn dlx morphyjs-cli init
 
 # bun
-bunx morphy init
+bunx morphyjs-cli init
 ```
 
 The interactive wizard will:
@@ -40,34 +40,34 @@ The interactive wizard will:
 
 ## 📦 Commands
 
-### `morphy init`
+### `morphyjs-cli init`
 Run the full setup wizard to configure Morphy in a project.
 
 ```bash
-npx morphy init
+npx morphyjs-cli init
 ```
 
-### `morphy add [transitions...]`
+### `morphyjs-cli add [transitions...]`
 Chain-install additional transitions into an existing Morphy setup.
 
 ```bash
 # Add specific transitions
-npx morphy add cube flip origami-unfold
+npx morphyjs-cli add cube flip origami-unfold
 
 # Add all transitions from a category
-npx morphy add --category spatial
-npx morphy add --category portal
-npx morphy add --category flow
+npx morphyjs-cli add --category spatial
+npx morphyjs-cli add --category portal
+npx morphyjs-cli add --category flow
 
 # Add all 33 available transitions
-npx morphy add --all
+npx morphyjs-cli add --all
 ```
 
-### `morphy list`
+### `morphyjs-cli list`
 List all 33 available transitions categorized with descriptions and emoji tags.
 
 ```bash
-npx morphy list
+npx morphyjs-cli list
 ```
 
 ---

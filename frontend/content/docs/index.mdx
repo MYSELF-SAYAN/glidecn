@@ -3,13 +3,13 @@ title: Overview & Architecture
 description: Cinematic, zero-jank page transitions for modern React and Next.js applications.
 ---
 
-**Morphy** is an open-source page transition engine designed for Next.js App Router and React. It delivers 33+ hardware-accelerated 3D shaders, portals, origami folds, and fluid masks with copy-paste developer experience inspired by shadcn/ui.
+**MorphyJS** is an open-source page transition engine designed for Next.js App Router and React. It delivers 33+ hardware-accelerated 3D shaders, portals, origami folds, and fluid masks with copy-paste developer experience inspired by shadcn/ui.
 
 ---
 
-## Why Morphy?
+## Why MorphyJS?
 
-Traditional page transitions in React often suffer from layout shifts, flashing unmounted content, or complex router locking hacks. Morphy solves this through a synchronized dual-frame rendering architecture:
+Traditional page transitions in React often suffer from layout shifts, flashing unmounted content, or complex router locking hacks. MorphyJS solves this through a synchronized dual-frame rendering architecture:
 
 - **60 FPS Hardware Acceleration**: Operates exclusively on GPU compositor properties (`transform`, `opacity`, `clip-path`, `filter`).
 - **Zero Layout Shift**: The outgoing page's view is frozen at the exact millisecond of navigation, preventing stale re-renders while the incoming page mounts.
@@ -88,7 +88,7 @@ export default function ContactPage() {
 Synchronizes with Next.js navigation lifecycle (`usePathname`) and manages concurrent mounting of outgoing and incoming route segments.
 
 ### 2. Frozen Router Context
-When a route change occurs, Morphy captures the outgoing route segment in a frozen boundary so it doesn't prematurely update with new URL params or unmount mid-animation.
+When a route change occurs, MorphyJS captures the outgoing route segment in a frozen boundary so it doesn't prematurely update with new URL params or unmount mid-animation.
 
 ### 3. Pluggable Shader Registry
 Every transition is an isolated `TransitionDefinition` containing pure Framer Motion variants. You only bundle what you use.

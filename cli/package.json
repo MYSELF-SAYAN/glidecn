@@ -1,12 +1,11 @@
 {
-  "name": "morphy-cli",
-  "version": "0.1.2",
+  "name": "morphyjs-cli",
+  "version": "0.1.3",
   "description": "✨ Drop-in page transitions for React — works with Next.js, Vite, TanStack Router, and more",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
-    "morphy": "./dist/index.js",
-    "morphy-cli": "./dist/index.js"
+    "morphyjs-cli": "./dist/index.js"
   },
   "scripts": {
     "build": "tsup",
