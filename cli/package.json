@@ -1,0 +1,49 @@
+{
+  "name": "morphy-cli",
+  "version": "0.1.2",
+  "description": "✨ Drop-in page transitions for React — works with Next.js, Vite, TanStack Router, and more",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "morphy": "./dist/index.js",
+    "morphy-cli": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "sync": "tsx scripts/sync.ts",
+    "prepublishOnly": "pnpm build"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "keywords": [
+    "react",
+    "transitions",
+    "page-transitions",
+    "framer-motion",
+    "nextjs",
+    "vite",
+    "cli",
+    "morphy",
+    "morphy-cli"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^0.10.0",
+    "commander": "^13.0.0",
+    "fs-extra": "^11.2.0",
+    "picocolors": "^1.1.0",
+    "typescript": "^5.7.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0"
+  }
+}

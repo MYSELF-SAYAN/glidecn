@@ -1,0 +1,102 @@
+---
+title: Overview & Architecture
+description: Cinematic, zero-jank page transitions for modern React and Next.js applications.
+---
+
+**Morphy** is an open-source page transition engine designed for Next.js App Router and React. It delivers 33+ hardware-accelerated 3D shaders, portals, origami folds, and fluid masks with copy-paste developer experience inspired by shadcn/ui.
+
+---
+
+## Why Morphy?
+
+Traditional page transitions in React often suffer from layout shifts, flashing unmounted content, or complex router locking hacks. Morphy solves this through a synchronized dual-frame rendering architecture:
+
+- **60 FPS Hardware Acceleration**: Operates exclusively on GPU compositor properties (`transform`, `opacity`, `clip-path`, `filter`).
+- **Zero Layout Shift**: The outgoing page's view is frozen at the exact millisecond of navigation, preventing stale re-renders while the incoming page mounts.
+- **shadcn/ui-Style DX**: Direct code ownership via CLI (`npx morphy add <transition>`). No monolithic bundle lock-in.
+- **33+ Production Shaders**: From 3D isometric cubes and origami folds to CRT electron-beam collapses and fluid ink diffusion.
+
+---
+
+## 30-Second Quickstart
+
+### 1. Wrap Root Layout
+
+Wrap your root layout with `<MorphyProvider>`:
+
+```tsx title="app/layout.tsx"
+import { MorphyProvider } from '@/components/morphy';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <MorphyProvider defaultTransition="cube">
+          {children}
+        </MorphyProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+### 2. Define Page Transitions
+
+Wrap your page routes with `<Page>` and assign any transition:
+
+```tsx title="app/contact/page.tsx"
+import { Page } from '@/components/morphy';
+
+export default function ContactPage() {
+  return (
+    <Page transition="circular-portal" duration={0.7}>
+      <main className="p-8">
+        <h1>Contact Us</h1>
+        <p>This page reveals with a circular iris portal.</p>
+      </main>
+    </Page>
+  );
+}
+```
+
+---
+
+## How It Works
+
+```
+[ User Navigates: /page-1 → /page-2 ]
+              │
+              ▼
+    ┌──────────────────┐
+    │  MorphyProvider  │  ── Reads incoming page transition spec
+    └──────────────────┘
+              │
+      ┌───────┴───────┐
+      ▼               ▼
+┌───────────┐   ┌───────────┐
+│ Outgoing  │   │ Incoming  │
+│  (Frozen) │   │  (Active) │
+│ Exit Anim │   │ Enter Anim│
+└───────────┘   └───────────┘
+      │               │
+      └───────┬───────┘
+              ▼
+   [ Frame Exit Cleanup ]
+```
+
+### 1. Global MorphyProvider
+Synchronizes with Next.js navigation lifecycle (`usePathname`) and manages concurrent mounting of outgoing and incoming route segments.
+
+### 2. Frozen Router Context
+When a route change occurs, Morphy captures the outgoing route segment in a frozen boundary so it doesn't prematurely update with new URL params or unmount mid-animation.
+
+### 3. Pluggable Shader Registry
+Every transition is an isolated `TransitionDefinition` containing pure Framer Motion variants. You only bundle what you use.
+
+---
+
+## Next Steps
+
+- **[Quickstart / Installation Guide](/docs/installation)** — Step-by-step setup for Next.js and Vite.
+- **[Transitions Catalog](/docs/transitions)** — Explore all 33+ shaders with interactive live parameter previews.
+- **[2-Page Interactive Playground](/playground/page-1)** — Test and toggle transitions live in a sandbox.

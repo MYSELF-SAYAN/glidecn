@@ -1,0 +1,28 @@
+{
+  "title": "Transitions",
+  "pages": [
+    "---⭐ Featured---",
+    "fade",
+    "slide",
+    "scale",
+    "circular-portal",
+    "page-curl",
+    "---🌊 Flow---",
+    "fade",
+    "slide",
+    "scale",
+    "---🌀 Portal---",
+    "circular-portal",
+    "wormhole",
+    "---📄 Paper---",
+    "page-curl",
+    "---🎭 Mask---",
+    "ink-spread",
+    "---🧊 Spatial---",
+    "cube",
+    "---⚡ Dynamic---",
+    "slash",
+    "---🌌 Experimental---",
+    "liquid-morph"
+  ]
+}

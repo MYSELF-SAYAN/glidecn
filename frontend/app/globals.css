@@ -1,0 +1,233 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+/* ==========================================================================
+ * Morphy — Design Tokens
+ * Coral accent. Monochrome base. Everything rounded & playful.
+ * ========================================================================== */
+
+@theme {
+  /* Brand — Coral/Salmon */
+  --color-brand-50: #fff1f0;
+  --color-brand-100: #ffe1df;
+  --color-brand-200: #ffc8c5;
+  --color-brand-300: #ffa29b;
+  --color-brand-400: #ff7166;
+  --color-brand-500: #fa5c4f;
+  --color-brand-600: #e54235;
+  --color-brand-700: #c13327;
+  --color-brand-800: #a02d24;
+  --color-brand-900: #842a23;
+  --color-brand-950: #48120e;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+
+  /* Font */
+  --font-sans: var(--font-sans), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+  --font-display: var(--font-display), "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-cursive: var(--font-cursive), "Caveat", cursive;
+
+  /* Transition */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}
+
+/* ==========================================================================
+ * Dynamic CSS Variables (Light & Dark)
+ * ========================================================================== */
+
+:root {
+  --fd-primary: 6 95% 64%;
+  --fd-background: 0 0% 100%;
+  --fd-muted: 240 5% 96%;
+  --fd-card: 0 0% 100%;
+  --fd-border: 240 5% 90%;
+
+  /* Semantic UI Tokens */
+  --bg-page: #ffffff;
+  --bg-surface: #f4f4f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f9f9fb;
+  --bg-subtle: #f8fafc;
+  --border-color: #e4e4e7;
+  --border-hover: #fa5c4f;
+  
+  --text-main: #09090b;
+  --text-muted: #52525b;
+  --text-subtle: #a1a1aa;
+
+  --code-bg: #f4f4f5;
+  --code-border: #e4e4e7;
+  --code-text: #09090b;
+
+  --badge-bg: #fff1f0;
+  --badge-text: #fa5c4f;
+  --badge-border: #ffc8c5;
+}
+
+.dark {
+  --fd-primary: 6 95% 70%;
+  --fd-background: 240 6% 7%;
+  --fd-muted: 240 4% 13%;
+  --fd-card: 240 4% 10%;
+  --fd-border: 240 4% 16%;
+
+  /* Semantic UI Tokens */
+  --bg-page: #09090b;
+  --bg-surface: #121216;
+  --bg-card: #18181b;
+  --bg-card-hover: #222227;
+  --bg-subtle: #111115;
+  --border-color: #27272a;
+  --border-hover: #fa5c4f;
+
+  --text-main: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-subtle: #71717a;
+
+  --code-bg: #121216;
+  --code-border: #27272a;
+  --code-text: #f4f4f5;
+
+  --badge-bg: rgba(250, 92, 79, 0.12);
+  --badge-text: #ff7166;
+  --badge-border: rgba(250, 92, 79, 0.25);
+}
+
+/* ==========================================================================
+ * Base Styles
+ * ========================================================================== */
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Playful headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-cursive {
+  font-family: var(--font-cursive);
+}
+
+/* ==========================================================================
+ * Tactile & Card Utilities
+ * ========================================================================== */
+
+.morphy-card,
+.pageflow-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+}
+
+.morphy-card:hover,
+.pageflow-card:hover {
+  border-color: #fa5c4f;
+  box-shadow: 0 12px 32px -8px rgba(250, 92, 79, 0.12);
+  transform: translateY(-2px);
+}
+
+.btn-tactile {
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.12s ease;
+}
+
+.btn-tactile:active {
+  transform: scale(0.96) translateY(1px);
+}
+
+.sticker-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--badge-border);
+  box-shadow: 0 2px 6px rgba(250, 92, 79, 0.08);
+}
+
+/* Hide scrollbar */
+.hide-scrollbar, .no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar, .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom smooth scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) transparent;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-brand-200);
+  color: var(--color-brand-900);
+}
+
+.dark ::selection {
+  background-color: var(--color-brand-800);
+  color: var(--color-brand-100);
+}
+
