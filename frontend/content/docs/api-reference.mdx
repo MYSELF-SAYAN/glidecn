@@ -3,30 +3,44 @@ title: API Reference & Props
 description: Complete guide to the components, hooks, and configuration props available in MorphyJS.
 ---
 
-MorphyJS provides a clean, minimalistic API surface. You only need to interact with two main components and one hook to build incredibly rich transitions.
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Callout } from 'fumadocs-ui/components/callout';
 
----
+MorphyJS provides a clean, minimalistic API surface. You only need to interact with two main components and one hook to build incredibly rich transitions.
 
 ## `<MorphyProvider>`
 
 The `MorphyProvider` is the root coordinator. It intercepts routing events, manages the outgoing freeze-frame snapshots, and handles the dual-frame crossfade mounting logic.
 
-You should place this as high in your component tree as possible (e.g., inside `app/layout.tsx` or `pages/_app.tsx`).
+<Callout type="info">
+  **Placement Strategy**: Place this as high in your component tree as possible (e.g., inside `app/layout.tsx`).
+</Callout>
 
 ### Props
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `children` | `React.ReactNode` | **Required** | Your application layout/content. |
-| `defaultTransition` | `string` | `"fade"` | The default transition animation used if a `<Page>` does not specify its own `transition` prop. |
-| `defaultDuration` | `number` | `0.5` | The default duration (in seconds) for animations. |
-| `className` | `string` | `undefined` | Optional CSS classes to apply to the provider's wrapper container. |
-| `style` | `React.CSSProperties` | `undefined` | Optional inline styles for the provider wrapper. |
-
-> [!TIP]
-> **Why do we need a provider?** MorphyJS needs a fixed boundary to take a visual snapshot of the "outgoing" page when a route changes. The provider maintains this boundary so layout shifts don't ruin the transition.
-
----
+<TypeTable
+  type={{
+    children: {
+      description: 'Your application layout and content.',
+      type: 'ReactNode',
+      default: 'Required',
+    },
+    defaultTransition: {
+      description: 'The fallback transition animation used if a <Page> does not specify its own.',
+      type: 'string',
+      default: '"fade"',
+    },
+    defaultDuration: {
+      description: 'The default duration (in seconds) for animations.',
+      type: 'number',
+      default: '0.5',
+    },
+    className: {
+      description: 'Optional CSS classes to apply to the provider wrapper container.',
+      type: 'string',
+    },
+  }}
+/>
 
 ## `<Page>`
 
@@ -34,19 +48,29 @@ The `<Page>` component represents an animatable route segment. You should wrap t
 
 ### Props
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `children` | `React.ReactNode` | **Required** | The content of your page. |
-| `transition` | `string` | *Inherits* | Overrides the `defaultTransition` set in the provider. Choose from any of the 33+ shaders (e.g., `"cube"`, `"circular-portal"`, `"origami-unfold"`). |
-| `duration` | `number` | *Inherits* | Overrides the default duration for this specific page. |
-| `direction` | `"in" \| "out" \| "left" \| "right" \| "up" \| "down"` | `undefined` | Defines the directional flow of the animation (applicable for spatial and kinetic shaders like `slide` or `cube`). |
-| `className` | `string` | `undefined` | CSS classes to apply to the page container. |
-| `style` | `React.CSSProperties` | `undefined` | Inline styles for the page container. |
-
-> [!IMPORTANT]  
-> If you omit `transition` or `duration` on a `<Page>`, it will automatically inherit the global defaults configured in your `<MorphyProvider>`.
-
----
+<TypeTable
+  type={{
+    children: {
+      description: 'The content of your page.',
+      type: 'ReactNode',
+      default: 'Required',
+    },
+    transition: {
+      description: 'Overrides the defaultTransition. Choose from any of the 33+ shaders.',
+      type: 'string',
+      default: 'Inherited',
+    },
+    duration: {
+      description: 'Overrides the default duration for this specific page.',
+      type: 'number',
+      default: 'Inherited',
+    },
+    direction: {
+      description: 'Defines the directional flow (applicable for spatial and kinetic shaders like "slide" or "cube").',
+      type: '"in" | "out" | "left" | "right" | "up" | "down"',
+    },
+  }}
+/>
 
 ## `useMorphy()`
 
@@ -54,12 +78,26 @@ A custom React hook that allows you to programmatically read and modify the acti
 
 ### Returned Object
 
-| Property | Type | Description |
-| :--- | :--- | :--- |
-| `currentTransition` | `string` | The currently active transition ID. |
-| `config` | `object` | The current global configuration object containing `duration` and `direction`. |
-| `setTransition` | `(id: string) => void` | Programmatically update the global transition type. |
-| `setConfig` | `(cfg: Partial<Config>) => void` | Update the global transition configuration (e.g., duration, direction). |
+<TypeTable
+  type={{
+    currentTransition: {
+      description: 'The currently active transition ID.',
+      type: 'string',
+    },
+    config: {
+      description: 'The current global configuration object containing duration and direction.',
+      type: 'object',
+    },
+    setTransition: {
+      description: 'Programmatically update the global transition type.',
+      type: '(id: string) => void',
+    },
+    setConfig: {
+      description: 'Update the global transition configuration (e.g., duration, direction).',
+      type: '(cfg: Partial<Config>) => void',
+    },
+  }}
+/>
 
 ### Example Usage
 
@@ -84,9 +122,3 @@ export function SettingsPanel() {
   );
 }
 ```
-
----
-
-## Next Steps
-
-Now that you understand the API, check out the full [Transition Gallery](/docs/transitions) to see all the available `transition` strings you can pass to the `transition` prop!

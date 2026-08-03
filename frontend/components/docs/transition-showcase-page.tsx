@@ -272,7 +272,7 @@ function PageAContent() {
               <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center mb-6 ring-1 ring-blue-500/20">
-                  <span className="text-xl">⚡️</span>
+                  <span className="text-xl">️</span>
                 </div>
                 <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Lightning Fast</h4>
                 <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-md">
@@ -285,7 +285,7 @@ function PageAContent() {
               <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 flex items-center justify-center mb-6 ring-1 ring-emerald-500/20">
-                  <span className="text-xl">🎨</span>
+                  <span className="text-xl"></span>
                 </div>
                 <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Customizable</h4>
                 <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">

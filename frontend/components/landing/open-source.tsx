@@ -1,90 +1,95 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Github, Users, Star, GitBranch } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Github, GitPullRequest } from 'lucide-react';
 import Link from 'next/link';
+import { useRef } from 'react';
 
 export function OpenSource() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+
   return (
-    <section className="relative w-full bg-[#0F172A] py-32 sm:py-40 overflow-hidden">
-      
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-      
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 relative z-10 flex flex-col items-center">
+    <section 
+      ref={containerRef}
+      className="relative w-full bg-[var(--bg-page)] py-32 sm:py-48 overflow-hidden border-t border-[var(--border-color)]"
+    >
+      <motion.div style={{ y, opacity }} className="relative z-10 mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
         
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: false, margin: "-10%" }}
-          transition={{ duration: 0.5, type: 'spring' }}
-          className="size-20 rounded-3xl bg-gradient-to-br from-[#fa5c4f] to-amber-500 shadow-2xl shadow-[#fa5c4f]/30 flex flex-col items-center justify-center mb-10"
-        >
-          <Github className="size-10 text-white" />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-10%" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white font-display mb-6">
-            Proudly Open Source
-          </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            Morphy is built by the community, for the community. We believe fluid web experiences should be accessible to every developer without locking them into proprietary ecosystems.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl mb-16">
-          {[
-            { icon: <Star className="size-6 text-yellow-500" />, label: 'Stars', value: '4.2k+' },
-            { icon: <Users className="size-6 text-blue-500" />, label: 'Contributors', value: '120+' },
-            { icon: <GitBranch className="size-6 text-emerald-500" />, label: 'Forks', value: '340+' },
-            { icon: <Github className="size-6 text-purple-500" />, label: 'Issues Closed', value: '890+' },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
-              transition={{ duration: 0.5, delay: 0.2 + (i * 0.1) }}
-              className="flex flex-col items-center justify-center p-6 rounded-2xl bg-[#1E293B]/80 border border-slate-700 backdrop-blur-sm"
-            >
-              <div className="mb-4">{stat.icon}</div>
-              <div className="text-3xl font-extrabold text-white font-display mb-1">{stat.value}</div>
-              <div className="text-sm font-medium text-slate-400 uppercase tracking-widest">{stat.label}</div>
-            </motion.div>
-          ))}
+        {/* Minimalist Graphic */}
+        <div className="relative w-32 h-32 mb-12 flex items-center justify-center">
+          <motion.div 
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute inset-0 rounded-full border border-[var(--border-color)] flex items-center justify-center"
+          >
+            <motion.div 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute w-full h-full rounded-full border border-dashed border-[var(--text-subtle)]/30"
+            />
+            <div className="w-16 h-16 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] flex items-center justify-center shadow-sm">
+              <Github className="w-6 h-6 text-[var(--text-main)]" />
+            </div>
+          </motion.div>
         </div>
 
-        <motion.div
+        {/* Header */}
+        <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center gap-4"
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-4xl sm:text-6xl font-light tracking-tight text-[var(--text-main)] mb-6 font-display"
+        >
+          Open by design.
+        </motion.h2>
+        
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[var(--text-muted)] text-lg font-light leading-relaxed max-w-lg mb-12"
+        >
+          MorphyJS is freely available under the MIT license. Explore the source code, review the architecture, and contribute to the ecosystem.
+        </motion.p>
+
+        {/* Action Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
         >
           <Link
-            href="https://github.com/morphyjs"
+            href="https://github.com/morphy"
             target="_blank"
-            className="group flex items-center gap-2 rounded-full bg-white hover:bg-slate-200 px-8 py-4 text-sm font-bold text-slate-900 transition-all active:scale-95"
+            className="group flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[var(--text-main)] text-[var(--bg-page)] text-sm font-bold shadow-lg transition-transform hover:scale-105 w-full sm:w-auto"
           >
-            <Github className="size-5" />
-            Star on GitHub
+            <Github className="w-4 h-4" />
+            <span>GitHub Repository</span>
           </Link>
+          
           <Link
             href="/docs/contributing"
-            className="flex items-center gap-2 rounded-full border border-slate-700 bg-slate-800/50 hover:bg-slate-800 px-8 py-4 text-sm font-bold text-white transition-all active:scale-95"
+            className="group flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-main)] text-sm font-bold hover:bg-[var(--bg-card-hover)] hover:border-[#fa5c4f]/50 transition-all w-full sm:w-auto"
           >
-            <GitBranch className="size-5" />
-            Read Contribution Guide
+            <GitPullRequest className="w-4 h-4 text-[#fa5c4f]" />
+            <span>Contribution Guide</span>
           </Link>
         </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

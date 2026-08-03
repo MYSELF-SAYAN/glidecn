@@ -3,29 +3,44 @@ title: Quickstart & Installation
 description: Add MorphyJS to your Next.js or React application in under 2 minutes.
 ---
 
-## 1. Install CLI & Initialize
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Steps>
+<Step>
+## Initialize the CLI
 
 Run the initialization command using your preferred package manager. This configures the component registry and installs `framer-motion`:
 
-```bash
-# pnpm
-pnpm dlx morphyjs-cli@latest init
-
-# npm
-npx morphyjs-cli@latest init
-
-# bun
-bunx morphyjs-cli@latest init
-
-# yarn
-yarn dlx morphyjs-cli@latest init
-```
+<Tabs items={['pnpm', 'npm', 'bun', 'yarn']}>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx morphyjs-cli@latest init
+    ```
+  </Tab>
+  <Tab value="npm">
+    ```bash
+    npx morphyjs-cli@latest init
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx morphyjs-cli@latest init
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dlx morphyjs-cli@latest init
+    ```
+  </Tab>
+</Tabs>
 
 This creates the `@/components/morphy` folder in your project with full source code ownership.
+</Step>
 
----
-
-## 2. Wrap Your Root Layout
+<Step>
+## Wrap Your Root Layout
 
 Add `<MorphyProvider>` inside your root layout (`app/layout.tsx`). This synchronizes route changes and coordinates frame exits/entries:
 
@@ -45,9 +60,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
----
+<Callout type="info">
+  **Why do we need a provider?** MorphyJS needs a fixed boundary to take a visual snapshot of the "outgoing" page when a route changes. The provider maintains this boundary so layout shifts don't ruin the transition.
+</Callout>
+</Step>
 
-## 3. Wrap Your Pages
+<Step>
+## Wrap Your Pages
 
 Wrap each route segment in `<Page>` and define its unique transition:
 
@@ -59,7 +78,6 @@ export default function DashboardPage() {
     <Page
       transition="circular-portal"
       duration={0.7}
-      direction="in"
       className="p-8 max-w-5xl mx-auto"
     >
       <h1 className="text-3xl font-bold">Dashboard</h1>
@@ -68,10 +86,10 @@ export default function DashboardPage() {
   );
 }
 ```
+</Step>
 
----
-
-## 4. Add Shaders to Your Project
+<Step>
+## Add Shaders to Your Project
 
 Use the CLI to pull specific shaders directly into your repository without bloating your bundle:
 
@@ -81,19 +99,13 @@ npx morphy add cube
 
 # Add Circular Iris Portal
 npx morphy add circular-portal
-
-# Add Origami 3D Blossom
-npx morphy add origami-unfold
-
-# Add Fluid Ink Spread
-npx morphy add ink-spread
 ```
+</Step>
+</Steps>
 
----
+## Dynamic Switching
 
-## 5. Dynamic Switching with `useMorphy()`
-
-To switch transitions programmatically at runtime (e.g. In a user preferences modal or navigation drawer), use the `useMorphy` hook:
+To switch transitions programmatically at runtime (e.g. In a user preferences modal), use the `useMorphy` hook:
 
 ```tsx title="components/transition-picker.tsx"
 'use client';
@@ -107,15 +119,7 @@ export function TransitionPicker() {
     <div className="flex gap-2">
       <button onClick={() => setTransition('cube')}>3D Cube</button>
       <button onClick={() => setTransition('circular-portal')}>Portal</button>
-      <button onClick={() => setTransition('origami-unfold')}>Origami</button>
     </div>
   );
 }
 ```
-
----
-
-## Next Steps
-
-- **[Explore 33+ Transitions](/docs/transitions)** — View all motion families and live interactive parameters.
-- **[Launch 2-Page Playground](/playground/page-1)** — Test and toggle transitions live in a sandbox.

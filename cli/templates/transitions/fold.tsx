@@ -1,3 +1,7 @@
+/* ==========================================================================
+ * Morphy — Fold Transition
+ * ========================================================================== */
+
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
 
@@ -5,8 +9,8 @@ export const foldTransition: TransitionDefinition = {
   metadata: {
     name: 'fold',
     displayName: 'Fold',
-    description: 'Dynamic fold transition',
-    category: 'experimental',
+    description: 'Seamless paper accordion fold',
+    category: 'spatial',
     props: [
       {
         name: 'duration',
@@ -14,16 +18,37 @@ export const foldTransition: TransitionDefinition = {
         default: '0.7',
         description: 'Duration of the transition in seconds.',
       }
-    ]
+    ],
   },
   defaultConfig: {
     duration: 0.7,
-    
   },
-  getVariants: (config) => ({
-    initial: (() => { const d = config.direction || 'left'; return ({ rotateX: d === "up" ? -90 : 90, opacity: 0, transformOrigin: d === "up" ? "top" : "bottom", transformPerspective: 1000 }); })(),
-    animate: { rotateX: 0, opacity: 1 },
-    exit: (() => { const d = config.direction || 'left'; return ({ rotateX: d === "up" ? 90 : -90, opacity: 0, transformOrigin: d === "up" ? "bottom" : "top", transformPerspective: 1000 }); })(),
+  getVariants: () => ({
+    initial: { 
+      opacity: 0, 
+      rotateX: 90,
+      scaleY: 0,
+      transformOrigin: 'top',
+      filter: 'brightness(0.5)',
+    },
+    animate: { 
+      opacity: 1, 
+      rotateX: 0,
+      scaleY: 1,
+      transformOrigin: 'top',
+      filter: 'brightness(1)',
+    },
+    exit: { 
+      opacity: 0, 
+      rotateX: -90,
+      scaleY: 0,
+      transformOrigin: 'bottom',
+      filter: 'brightness(0.5)',
+    }
+  }),
+  getTransition: (config) => ({
+    duration: config.duration,
+    ease: [0.33, 1, 0.68, 1],
   }),
 };
 

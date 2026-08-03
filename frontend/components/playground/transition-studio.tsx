@@ -15,93 +15,95 @@ import {
   Sparkles,
   Zap,
   ArrowRightLeft,
-  ArrowRight,
-  ArrowLeft,
+  Settings2,
+  Cpu,
+  Command
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 export const ALL_PLAYGROUND_TRANSITIONS = [
   // Spatial 3D
-  { id: 'cube', label: 'Cube 3D', category: 'Spatial', icon: '🧊', hint: '3D isometric box rotate', math: 'perspective: 1200px | rotateY: ±90°' },
-  { id: 'flip', label: 'Card Flip', category: 'Spatial', icon: '🃏', hint: 'Vertical axis 3D flip', math: 'rotateY: 90° | perspective: 1000' },
-  { id: 'ghost', label: 'Ghost Shift', category: 'Spatial', icon: '👻', hint: 'Ethereal floating depth blur', math: 'translateZ: -100px | blur: 8px' },
-  { id: 'glass', label: 'Glass Refract', category: 'Spatial', icon: '🪟', hint: 'Frosted glass distortion', math: 'backdrop-blur: 24px | scale: 0.95' },
-  { id: 'mirror', label: 'Mirror Split', category: 'Spatial', icon: '🪞', hint: 'Symmetrical reflection reveal', math: 'scaleX: -1 → 1' },
-  { id: 'shadow', label: 'Shadow Depth', category: 'Spatial', icon: '🌑', hint: 'Deep elevation shadow drop', math: 'box-shadow: 0 40px 100px' },
-  { id: 'spin', label: 'Spin Vortex', category: 'Spatial', icon: '💫', hint: 'Rapid 360° axial rotation', math: 'rotate: 360deg | scale: 0.8' },
+  { id: 'cube', label: 'Cube 3D', category: 'Spatial', icon: '', hint: '3D isometric box rotate', math: 'perspective: 1200px | rotateY: ±90°' },
+  { id: 'flip', label: 'Card Flip', category: 'Spatial', icon: '', hint: 'Vertical axis 3D flip', math: 'rotateY: 90° | perspective: 1000' },
+  { id: 'ghost', label: 'Ghost Shift', category: 'Spatial', icon: '', hint: 'Ethereal floating depth blur', math: 'translateZ: -100px | blur: 8px' },
+  { id: 'glass', label: 'Glass Refract', category: 'Spatial', icon: '', hint: 'Frosted glass distortion', math: 'backdrop-blur: 24px | scale: 0.95' },
+  { id: 'mirror', label: 'Mirror Split', category: 'Spatial', icon: '', hint: 'Symmetrical reflection reveal', math: 'scaleX: -1 → 1' },
+  { id: 'shadow', label: 'Shadow Depth', category: 'Spatial', icon: '', hint: 'Deep elevation shadow drop', math: 'box-shadow: 0 40px 100px' },
+  { id: 'spin', label: 'Spin Vortex', category: 'Spatial', icon: '', hint: 'Rapid 360° axial rotation', math: 'rotate: 360deg | scale: 0.8' },
 
   // Portal & Aperture
-  { id: 'circular-portal', label: 'Circular Portal', category: 'Portal', icon: '🌀', hint: 'Expanding center iris', math: 'clipPath: circle(0% → 150%)' },
-  { id: 'shutter-iris', label: 'Camera Shutter', category: 'Portal', icon: '📷', hint: 'Mechanical 10-pt aperture', math: 'polygon() mechanical iris' },
-  { id: 'wormhole', label: 'Wormhole', category: 'Portal', icon: '🕳️', hint: 'Singularity radial suction', math: 'scale: 0.05 | rotate: 180deg' },
-  { id: 'vortex', label: 'Vortex Swirl', category: 'Portal', icon: '🌪️', hint: 'Centrifugal spiral collapse', math: 'rotate: -720deg | scale: 0.1' },
-  { id: 'ripple', label: 'Wave Ripple', category: 'Portal', icon: '🌊', hint: 'Concentric water ring shockwave', math: 'clipPath: radial ripple' },
+  { id: 'circular-portal', label: 'Circular Portal', category: 'Portal', icon: '', hint: 'Expanding center iris', math: 'clipPath: circle(0% → 150%)' },
+  { id: 'shutter-iris', label: 'Camera Shutter', category: 'Portal', icon: '', hint: 'Mechanical 10-pt aperture', math: 'polygon() mechanical iris' },
+  { id: 'wormhole', label: 'Wormhole', category: 'Portal', icon: '', hint: 'Singularity radial suction', math: 'scale: 0.05 | rotate: 180deg' },
+  { id: 'vortex', label: 'Vortex Swirl', category: 'Portal', icon: '', hint: 'Centrifugal spiral collapse', math: 'rotate: -720deg | scale: 0.1' },
+  { id: 'ripple', label: 'Wave Ripple', category: 'Portal', icon: '', hint: 'Concentric water ring shockwave', math: 'clipPath: radial ripple' },
 
   // Paper & Origami
-  { id: 'page-curl', label: 'Page Curl', category: 'Paper', icon: '📜', hint: 'Editorial book page curl', math: 'origin: 100% | shadow: 60px' },
-  { id: 'fold', label: 'Paper Fold', category: 'Paper', icon: '📐', hint: 'Origami accordion fold', math: 'rotateX: ±90° | origin: top/bottom' },
-  { id: 'origami-unfold', label: 'Origami Unfold', category: 'Paper', icon: '🦢', hint: 'Multi-facet sheet blossom', math: 'rotateY: 90deg | origin: left' },
-  { id: 'slash', label: 'Blade Slash', category: 'Paper', icon: '⚔️', hint: 'Diagonal split cleave', math: 'polygon() diagonal shear' },
+  { id: 'page-curl', label: 'Page Curl', category: 'Paper', icon: '', hint: 'Editorial book page curl', math: 'origin: 100% | shadow: 60px' },
+  { id: 'fold', label: 'Paper Fold', category: 'Paper', icon: '', hint: 'Origami accordion fold', math: 'rotateX: ±90° | origin: top/bottom' },
+  { id: 'origami-unfold', label: 'Origami Unfold', category: 'Paper', icon: '', hint: 'Multi-facet sheet blossom', math: 'rotateY: 90deg | origin: left' },
+  { id: 'slash', label: 'Blade Slash', category: 'Paper', icon: '', hint: 'Diagonal split cleave', math: 'polygon() diagonal shear' },
 
   // Mask & Fluid
-  { id: 'ink-spread', label: 'Ink Spread', category: 'Mask', icon: '🖋️', hint: 'Organic fluid ink diffusion', math: 'contrast: 1.2 | filter: brightness' },
-  { id: 'liquid-morph', label: 'Liquid Morph', category: 'Mask', icon: '🧪', hint: 'Viscous gooey droplet merge', math: 'filter: url(#gooey)' },
-  { id: 'wave', label: 'Sine Wave', category: 'Mask', icon: '〰️', hint: 'Curvilinear oscillation wash', math: 'sin() displacement mask' },
-  { id: 'wobble', label: 'Jelly Wobble', category: 'Mask', icon: '🍮', hint: 'Elastic gelatin rebound', math: 'skewX: ±15deg | spring' },
+  { id: 'ink-spread', label: 'Ink Spread', category: 'Mask', icon: '', hint: 'Organic fluid ink diffusion', math: 'contrast: 1.2 | filter: brightness' },
+  { id: 'liquid-morph', label: 'Liquid Morph', category: 'Mask', icon: '', hint: 'Viscous gooey droplet merge', math: 'filter: url(#gooey)' },
+  { id: 'wave', label: 'Sine Wave', category: 'Mask', icon: '', hint: 'Curvilinear oscillation wash', math: 'sin() displacement mask' },
+  { id: 'wobble', label: 'Jelly Wobble', category: 'Mask', icon: '', hint: 'Elastic gelatin rebound', math: 'skewX: ±15deg | spring' },
 
   // Retro & Glitch
-  { id: 'glitch', label: 'Cyber Glitch', category: 'Retro', icon: '👾', hint: 'RGB chromatic aberration slice', math: 'translateX: ±20px | clip-path' },
-  { id: 'tv-turn-off', label: 'CRT Turn-Off', category: 'Retro', icon: '📺', hint: 'Vintage tube phosphor collapse', math: 'scaleY: 0.005 → scaleX: 0' },
-  { id: 'pixel', label: 'Pixel Dissolve', category: 'Retro', icon: '🟩', hint: '8-bit mosaic pixelation', math: 'mosaic grid dissolve' },
-  { id: 'neon', label: 'Neon Flicker', category: 'Retro', icon: '💡', hint: 'Cyberpunk voltage strobes', math: 'filter: drop-shadow(neon)' },
+  { id: 'glitch', label: 'Cyber Glitch', category: 'Retro', icon: '', hint: 'RGB chromatic aberration slice', math: 'translateX: ±20px | clip-path' },
+  { id: 'tv-turn-off', label: 'CRT Turn-Off', category: 'Retro', icon: '', hint: 'Vintage tube phosphor collapse', math: 'scaleY: 0.005 → scaleX: 0' },
+  { id: 'pixel', label: 'Pixel Dissolve', category: 'Retro', icon: '', hint: '8-bit mosaic pixelation', math: 'mosaic grid dissolve' },
+  { id: 'neon', label: 'Neon Flicker', category: 'Retro', icon: '', hint: 'Cyberpunk voltage strobes', math: 'filter: drop-shadow(neon)' },
 
   // Flow & Bounce
-  { id: 'slide', label: 'Slide Flow', category: 'Flow', icon: '➡️', hint: 'Translational directional slide', math: 'translateX: ±100% | spring' },
-  { id: 'scale', label: 'Scale Zoom', category: 'Flow', icon: '🔍', hint: 'Cinematic focal zoom', math: 'scale: 0.92 → 1.0 → 1.08' },
-  { id: 'fade', label: 'Smooth Fade', category: 'Flow', icon: '✨', hint: 'Minimalist opacity dissolve', math: 'opacity: 0 → 1' },
-  { id: 'bounce', label: 'Elastic Bounce', category: 'Flow', icon: '🏀', hint: 'High-energy rubber ball rebound', math: 'spring(300, 15)' },
-  { id: 'dissolve', label: 'Dissolve', category: 'Flow', icon: '🌫️', hint: 'Gaussian particle blur crossfade', math: 'blur: 16px | opacity: 0' },
-  { id: 'squeeze', label: 'Squeeze & Pop', category: 'Flow', icon: '🍋', hint: 'Squishy horizontal compression', math: 'scaleX: 0.6 | scaleY: 1.4' },
-  { id: 'stretch', label: 'Taffy Stretch', category: 'Flow', icon: '🍬', hint: 'Elastic vertical extension', math: 'scaleY: 1.5 | scaleX: 0.8' },
-  { id: 'swipe', label: 'Card Swipe', category: 'Flow', icon: '💳', hint: 'Snappy mobile swipe card', math: 'translateX: 110% | rotate: 5deg' },
-  { id: 'zoom', label: 'Hyperspace Zoom', category: 'Flow', icon: '🚀', hint: 'Hyper-speed forward warp', math: 'scale: 3.0 | opacity: 0' },
-  // Newly Discovered Transitions
-  { id: 'blackhole', label: 'Blackhole', category: 'Experimental', icon: '✨', hint: 'A dynamic blackhole effect.', math: 'custom transition' },
-  { id: 'blueprint', label: 'Blueprint', category: 'Dynamic', icon: '✨', hint: 'The page turns into a glowing architectural blueprint wireframe', math: 'custom transition' },
-  { id: 'crystal', label: 'Crystal', category: 'Experimental', icon: '✨', hint: 'A crystalline structure grows and shatters to reveal the next page', math: 'custom transition' },
-  { id: 'dimension', label: 'Dimension', category: 'Experimental', icon: '✨', hint: 'A dynamic dimension effect.', math: 'custom transition' },
-  { id: 'dream', label: 'Dream', category: 'Experimental', icon: '✨', hint: 'A dynamic dream effect.', math: 'custom transition' },
-  { id: 'earth', label: 'Earth', category: 'Experimental', icon: '✨', hint: 'A dynamic earth effect.', math: 'custom transition' },
-  { id: 'fire', label: 'Fire', category: 'Experimental', icon: '✨', hint: 'A dynamic fire effect.', math: 'custom transition' },
-  { id: 'galaxy', label: 'Galaxy', category: 'Experimental', icon: '✨', hint: 'A dynamic galaxy effect.', math: 'custom transition' },
-  { id: 'hologram', label: 'Hologram', category: 'Experimental', icon: '✨', hint: 'A dynamic hologram effect.', math: 'custom transition' },
-  { id: 'ice', label: 'Ice', category: 'Experimental', icon: '✨', hint: 'A dynamic ice effect.', math: 'custom transition' },
-  { id: 'illusion', label: 'Illusion', category: 'Experimental', icon: '✨', hint: 'A dynamic illusion effect.', math: 'custom transition' },
-  { id: 'kaleidoscope', label: 'Kaleidoscope', category: 'Experimental', icon: '✨', hint: 'A dynamic kaleidoscope effect.', math: 'custom transition' },
-  { id: 'laser', label: 'Laser', category: 'Experimental', icon: '✨', hint: 'A dynamic laser effect.', math: 'custom transition' },
-  { id: 'lens-flare', label: 'Lens Flare', category: 'Flow', icon: '✨', hint: 'A cinematic anamorphic lens flare sweeps across blinding the camera', math: 'custom transition' },
-  { id: 'lightning', label: 'Lightning', category: 'Experimental', icon: '✨', hint: 'A dynamic lightning effect.', math: 'custom transition' },
-  { id: 'mosaic', label: 'Mosaic', category: 'Experimental', icon: '✨', hint: 'A dynamic mosaic effect.', math: 'custom transition' },
-  { id: 'nightmare', label: 'Nightmare', category: 'Experimental', icon: '✨', hint: 'A dynamic nightmare effect.', math: 'custom transition' },
-  { id: 'origami-crush', label: 'Origami Crush', category: 'Paper', icon: '✨', hint: 'The page crumples up into a tiny paper ball and is thrown away', math: 'custom transition' },
-  { id: 'paint-drip', label: 'Paint Drip', category: 'Mask', icon: '✨', hint: 'Virtual paint drips down the screen, washing away the old page', math: 'custom transition' },
-  { id: 'planet', label: 'Planet', category: 'Experimental', icon: '✨', hint: 'A dynamic planet effect.', math: 'custom transition' },
-  { id: 'prism', label: 'Prism', category: 'Experimental', icon: '✨', hint: 'A dynamic prism effect.', math: 'custom transition' },
-  { id: 'reality', label: 'Reality', category: 'Experimental', icon: '✨', hint: 'A dynamic reality effect.', math: 'custom transition' },
-  { id: 'shatter', label: 'Shatter', category: 'Experimental', icon: '✨', hint: 'A dynamic shatter effect.', math: 'custom transition' },
-  { id: 'smoke', label: 'Smoke', category: 'Experimental', icon: '✨', hint: 'A dynamic smoke effect.', math: 'custom transition' },
-  { id: 'space', label: 'Space', category: 'Experimental', icon: '✨', hint: 'A dynamic space effect.', math: 'custom transition' },
-  { id: 'spark', label: 'Spark', category: 'Experimental', icon: '✨', hint: 'A dynamic spark effect.', math: 'custom transition' },
-  { id: 'star', label: 'Star', category: 'Experimental', icon: '✨', hint: 'A dynamic star effect.', math: 'custom transition' },
-  { id: 'swirl', label: 'Swirl', category: 'Experimental', icon: '✨', hint: 'A dynamic swirl effect.', math: 'custom transition' },
-  { id: 'time', label: 'Time', category: 'Experimental', icon: '✨', hint: 'A dynamic time effect.', math: 'custom transition' },
-  { id: 'tornado', label: 'Tornado', category: 'Experimental', icon: '✨', hint: 'A dynamic tornado effect.', math: 'custom transition' },
-  { id: 'twirl', label: 'Twirl', category: 'Experimental', icon: '✨', hint: 'A dynamic twirl effect.', math: 'custom transition' },
-  { id: 'universe', label: 'Universe', category: 'Experimental', icon: '✨', hint: 'A dynamic universe effect.', math: 'custom transition' },
-  { id: 'water', label: 'Water', category: 'Experimental', icon: '✨', hint: 'A dynamic water effect.', math: 'custom transition' },
-  { id: 'wind', label: 'Wind', category: 'Experimental', icon: '✨', hint: 'A dynamic wind effect.', math: 'custom transition' },
-  { id: 'wormhole2', label: 'Wormhole2', category: 'Experimental', icon: '✨', hint: 'A dynamic wormhole2 effect.', math: 'custom transition' },
+  { id: 'slide', label: 'Slide Flow', category: 'Flow', icon: '', hint: 'Translational directional slide', math: 'translateX: ±100% | spring' },
+  { id: 'scale', label: 'Scale Zoom', category: 'Flow', icon: '', hint: 'Cinematic focal zoom', math: 'scale: 0.92 → 1.0 → 1.08' },
+  { id: 'fade', label: 'Smooth Fade', category: 'Flow', icon: '', hint: 'Minimalist opacity dissolve', math: 'opacity: 0 → 1' },
+  { id: 'bounce', label: 'Elastic Bounce', category: 'Flow', icon: '', hint: 'High-energy rubber ball rebound', math: 'spring(300, 15)' },
+  { id: 'dissolve', label: 'Dissolve', category: 'Flow', icon: '', hint: 'Gaussian particle blur crossfade', math: 'blur: 16px | opacity: 0' },
+  { id: 'squeeze', label: 'Squeeze & Pop', category: 'Flow', icon: '', hint: 'Squishy horizontal compression', math: 'scaleX: 0.6 | scaleY: 1.4' },
+  { id: 'stretch', label: 'Taffy Stretch', category: 'Flow', icon: '', hint: 'Elastic vertical extension', math: 'scaleY: 1.5 | scaleX: 0.8' },
+  { id: 'swipe', label: 'Card Swipe', category: 'Flow', icon: '', hint: 'Snappy mobile swipe card', math: 'translateX: 110% | rotate: 5deg' },
+  { id: 'zoom', label: 'Hyperspace Zoom', category: 'Flow', icon: '', hint: 'Hyper-speed forward warp', math: 'scale: 3.0 | opacity: 0' },
+
+  // Experimental & Dynamic
+  { id: 'blackhole', label: 'Blackhole', category: 'Experimental', icon: '', hint: 'A dynamic blackhole effect.', math: 'custom transition' },
+  { id: 'blueprint', label: 'Blueprint', category: 'Dynamic', icon: '', hint: 'The page turns into a glowing architectural blueprint wireframe', math: 'custom transition' },
+  { id: 'crystal', label: 'Crystal', category: 'Experimental', icon: '', hint: 'A crystalline structure grows and shatters to reveal the next page', math: 'custom transition' },
+  { id: 'dimension', label: 'Dimension', category: 'Experimental', icon: '', hint: 'A dynamic dimension effect.', math: 'custom transition' },
+  { id: 'dream', label: 'Dream', category: 'Experimental', icon: '', hint: 'A dynamic dream effect.', math: 'custom transition' },
+  { id: 'earth', label: 'Earth', category: 'Experimental', icon: '', hint: 'A dynamic earth effect.', math: 'custom transition' },
+  { id: 'fire', label: 'Fire', category: 'Experimental', icon: '', hint: 'A dynamic fire effect.', math: 'custom transition' },
+  { id: 'galaxy', label: 'Galaxy', category: 'Experimental', icon: '', hint: 'A dynamic galaxy effect.', math: 'custom transition' },
+  { id: 'hologram', label: 'Hologram', category: 'Experimental', icon: '', hint: 'A dynamic hologram effect.', math: 'custom transition' },
+  { id: 'ice', label: 'Ice', category: 'Experimental', icon: '', hint: 'A dynamic ice effect.', math: 'custom transition' },
+  { id: 'illusion', label: 'Illusion', category: 'Experimental', icon: '', hint: 'A dynamic illusion effect.', math: 'custom transition' },
+  { id: 'kaleidoscope', label: 'Kaleidoscope', category: 'Experimental', icon: '', hint: 'A dynamic kaleidoscope effect.', math: 'custom transition' },
+  { id: 'laser', label: 'Laser', category: 'Experimental', icon: '', hint: 'A dynamic laser effect.', math: 'custom transition' },
+  { id: 'lens-flare', label: 'Lens Flare', category: 'Flow', icon: '', hint: 'A cinematic anamorphic lens flare sweeps across blinding the camera', math: 'custom transition' },
+  { id: 'lightning', label: 'Lightning', category: 'Experimental', icon: '', hint: 'A dynamic lightning effect.', math: 'custom transition' },
+  { id: 'mosaic', label: 'Mosaic', category: 'Experimental', icon: '', hint: 'A dynamic mosaic effect.', math: 'custom transition' },
+  { id: 'nightmare', label: 'Nightmare', category: 'Experimental', icon: '', hint: 'A dynamic nightmare effect.', math: 'custom transition' },
+  { id: 'origami-crush', label: 'Origami Crush', category: 'Paper', icon: '', hint: 'The page crumples up into a tiny paper ball and is thrown away', math: 'custom transition' },
+  { id: 'paint-drip', label: 'Paint Drip', category: 'Mask', icon: '', hint: 'Virtual paint drips down the screen, washing away the old page', math: 'custom transition' },
+  { id: 'planet', label: 'Planet', category: 'Experimental', icon: '', hint: 'A dynamic planet effect.', math: 'custom transition' },
+  { id: 'prism', label: 'Prism', category: 'Experimental', icon: '', hint: 'A dynamic prism effect.', math: 'custom transition' },
+  { id: 'reality', label: 'Reality', category: 'Experimental', icon: '', hint: 'A dynamic reality effect.', math: 'custom transition' },
+  { id: 'shatter', label: 'Shatter', category: 'Experimental', icon: '', hint: 'A dynamic shatter effect.', math: 'custom transition' },
+  { id: 'smoke', label: 'Smoke', category: 'Experimental', icon: '', hint: 'A dynamic smoke effect.', math: 'custom transition' },
+  { id: 'space', label: 'Space', category: 'Experimental', icon: '', hint: 'A dynamic space effect.', math: 'custom transition' },
+  { id: 'spark', label: 'Spark', category: 'Experimental', icon: '', hint: 'A dynamic spark effect.', math: 'custom transition' },
+  { id: 'star', label: 'Star', category: 'Experimental', icon: '', hint: 'A dynamic star effect.', math: 'custom transition' },
+  { id: 'swirl', label: 'Swirl', category: 'Experimental', icon: '', hint: 'A dynamic swirl effect.', math: 'custom transition' },
+  { id: 'time', label: 'Time', category: 'Experimental', icon: '', hint: 'A dynamic time effect.', math: 'custom transition' },
+  { id: 'tornado', label: 'Tornado', category: 'Experimental', icon: '', hint: 'A dynamic tornado effect.', math: 'custom transition' },
+  { id: 'twirl', label: 'Twirl', category: 'Experimental', icon: '', hint: 'A dynamic twirl effect.', math: 'custom transition' },
+  { id: 'universe', label: 'Universe', category: 'Experimental', icon: '', hint: 'A dynamic universe effect.', math: 'custom transition' },
+  { id: 'water', label: 'Water', category: 'Experimental', icon: '', hint: 'A dynamic water effect.', math: 'custom transition' },
+  { id: 'wind', label: 'Wind', category: 'Experimental', icon: '', hint: 'A dynamic wind effect.', math: 'custom transition' },
+  { id: 'wormhole2', label: 'Wormhole2', category: 'Experimental', icon: '', hint: 'A dynamic wormhole2 effect.', math: 'custom transition' },
 ];
 
 const EASING_PRESETS = ['easeInOut', 'easeOut', 'linear', 'easeIn'] as const;
@@ -119,7 +121,6 @@ export function PlaygroundTransitionStudio() {
 
   const [isMounted, setIsMounted] = useState(false);
 
-  // Load from localStorage on mount
   useEffect(() => {
     setIsMounted(true);
     try {
@@ -130,7 +131,6 @@ export function PlaygroundTransitionStudio() {
         if (parsed.activeTab) setActiveTab(parsed.activeTab);
         if (parsed.searchQuery !== undefined) setSearchQuery(parsed.searchQuery);
         if (parsed.activeCategory) setActiveCategory(parsed.activeCategory);
-        
         if (parsed.transition) setTransition(parsed.transition);
         if (parsed.config) setConfig(parsed.config);
       }
@@ -139,7 +139,6 @@ export function PlaygroundTransitionStudio() {
     }
   }, [setTransition, setConfig]);
 
-  // Save to localStorage whenever state changes
   useEffect(() => {
     if (!isMounted) return;
     try {
@@ -166,21 +165,16 @@ export function PlaygroundTransitionStudio() {
     return matchesCategory && matchesSearch;
   });
 
-  // Determines the opposite page (flips between page-1 and page-2)
   const isPage1 = pathname.includes('page-1') || pathname === '/playground';
   const targetPage = isPage1 ? '/playground/page-2' : '/playground/page-1';
-  const targetPageLabel = isPage1 ? 'Page 2 (Side B)' : 'Page 1 (Side A)';
 
   const handleFlipPage = (customTransition?: string) => {
-    if (customTransition) {
-      setTransition(customTransition);
-    }
+    if (customTransition) setTransition(customTransition);
     setTimeout(() => router.push(targetPage), 10);
   };
 
   const handleSurpriseMe = () => {
     const randomTransition = ALL_PLAYGROUND_TRANSITIONS[Math.floor(Math.random() * ALL_PLAYGROUND_TRANSITIONS.length)];
-    // Preserve current physics settings for "Dice" mode
     const preservedConfig = { ...config };
     setTransition(randomTransition.id);
     setConfig(preservedConfig);
@@ -191,12 +185,8 @@ export function PlaygroundTransitionStudio() {
     const randomTransition = ALL_PLAYGROUND_TRANSITIONS[Math.floor(Math.random() * ALL_PLAYGROUND_TRANSITIONS.length)];
     const randomDuration = Number((Math.random() * 1.4 + 0.2).toFixed(2));
     const randomDirection = DIRECTION_PRESETS[Math.floor(Math.random() * DIRECTION_PRESETS.length)];
-
     setTransition(randomTransition.id);
-    setConfig({
-      duration: randomDuration,
-      direction: randomDirection,
-    });
+    setConfig({ duration: randomDuration, direction: randomDirection });
     setTimeout(() => router.push(targetPage), 10);
   };
 
@@ -227,66 +217,62 @@ export function PlaygroundTransitionStudio() {
   const supportsEase = !SPRING_TRANSITIONS.includes(currentTransition);
 
   return (
-    <aside aria-label="Playground Transition Studio" className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2.5 font-sans">
+    <aside aria-label="Playground Transition Studio" className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 font-sans">
       {isOpen && (
-        <div className="w-[420px] max-w-[calc(100vw-2rem)] rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-[0_20px_50px_rgba(0,0,0,0.18)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.7)] p-5 space-y-4 animate-in fade-in zoom-in-95 duration-200 backdrop-blur-2xl">
+        <div className="w-[420px] max-w-[calc(100vw-2rem)] rounded-[2rem] bg-black/60 border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-5 space-y-4 animate-in fade-in zoom-in-95 duration-300 backdrop-blur-3xl text-white">
           
           {/* Header */}
-          <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white font-bold text-xs shadow-md shadow-[#fa5c4f]/25">
-                <Sliders className="w-4 h-4" />
+          <div className="flex items-center justify-between pb-4 border-b border-white/10">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-[#fa5c4f]/20 flex items-center justify-center text-[#fa5c4f] border border-[#fa5c4f]/30">
+                <Cpu className="w-5 h-5" />
               </div>
               <div>
-                <div className="flex items-center gap-1.5">
-                  <h2 className="text-xs font-bold font-display uppercase tracking-wider text-[var(--text-main)]">
-                    Transition Studio
-                  </h2>
-                  <span className="sticker-pill text-[9px] py-0 px-1.5">33 Shaders</span>
-                </div>
-                <p className="text-[11px] text-[var(--text-muted)] font-cursive text-sm -mt-0.5">
-                  ~ clicking any shader flips between Page 1 & Page 2 ~
+                <h2 className="text-[11px] font-bold font-mono uppercase tracking-[0.2em] text-white/90">
+                  Transition Studio
+                </h2>
+                <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold mt-0.5">
+                  Command Center
                 </p>
               </div>
             </div>
 
             <button
               onClick={() => setIsOpen(false)}
-              aria-label="Close studio"
-              className="w-7 h-7 rounded-xl bg-[var(--bg-surface)] hover:bg-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center justify-center transition cursor-pointer btn-tactile"
+              className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white flex items-center justify-center transition border border-white/5"
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Sub-Tabs */}
-          <div className="grid grid-cols-3 gap-1 p-1 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-color)] text-xs font-semibold">
+          {/* Sub-Tabs (Segmented Control) */}
+          <div className="flex p-1 bg-black/40 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest">
             <button
               onClick={() => setActiveTab('shaders')}
-              className={`py-1.5 rounded-lg transition cursor-pointer flex items-center justify-center gap-1 text-[11px] ${
+              className={`flex-1 py-2 rounded-full transition-all flex items-center justify-center gap-1.5 ${
                 activeTab === 'shaders'
-                  ? 'bg-[var(--bg-card)] text-[#fa5c4f] shadow-sm font-bold'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
+                  ? 'bg-white text-black shadow-md'
+                  : 'text-white/40 hover:text-white hover:bg-white/5'
               }`}
             >
-              <Layers className="w-3 h-3" /> Shaders ({ALL_PLAYGROUND_TRANSITIONS.length})
+              <Layers className="w-3 h-3" /> Shaders
             </button>
             <button
               onClick={() => setActiveTab('physics')}
-              className={`py-1.5 rounded-lg transition cursor-pointer flex items-center justify-center gap-1 text-[11px] ${
+              className={`flex-1 py-2 rounded-full transition-all flex items-center justify-center gap-1.5 ${
                 activeTab === 'physics'
-                  ? 'bg-[var(--bg-card)] text-[#fa5c4f] shadow-sm font-bold'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
+                  ? 'bg-white text-black shadow-md'
+                  : 'text-white/40 hover:text-white hover:bg-white/5'
               }`}
             >
-              <Sliders className="w-3 h-3" /> Physics
+              <Settings2 className="w-3 h-3" /> Physics
             </button>
             <button
               onClick={() => setActiveTab('export')}
-              className={`py-1.5 rounded-lg transition cursor-pointer flex items-center justify-center gap-1 text-[11px] ${
+              className={`flex-1 py-2 rounded-full transition-all flex items-center justify-center gap-1.5 ${
                 activeTab === 'export'
-                  ? 'bg-[var(--bg-card)] text-[#fa5c4f] shadow-sm font-bold'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
+                  ? 'bg-[#fa5c4f] text-white shadow-md shadow-[#fa5c4f]/20'
+                  : 'text-white/40 hover:text-white hover:bg-white/5'
               }`}
             >
               <Code2 className="w-3 h-3" /> Export
@@ -295,66 +281,56 @@ export function PlaygroundTransitionStudio() {
 
           {/* TAB 1: SHADERS */}
           {activeTab === 'shaders' && (
-            <div className="space-y-3">
-              {/* Search & Category filter */}
-              <div className="space-y-2">
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-[var(--text-subtle)] absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="text"
-                    placeholder="Search 33 transitions..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs text-[var(--text-main)] placeholder-[var(--text-subtle)] focus:outline-none focus:border-[#fa5c4f] transition"
-                  />
-                </div>
-
-                <div className="flex items-center gap-1 overflow-x-auto pb-1 text-[10px] no-scrollbar">
-                  {categories.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setActiveCategory(cat)}
-                      className={`px-2.5 py-1 rounded-lg font-medium transition whitespace-nowrap cursor-pointer ${
-                        activeCategory === cat
-                          ? 'bg-[#fa5c4f] text-white shadow-sm font-bold'
-                          : 'bg-[var(--bg-surface)] text-[var(--text-muted)] hover:text-[var(--text-main)] border border-[var(--border-color)]'
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
+            <div className="space-y-4">
+              <div className="relative">
+                <Search className="w-3.5 h-3.5 text-white/30 absolute left-4 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="SEARCH MODULES..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono uppercase tracking-widest text-white placeholder-white/30 focus:outline-none focus:border-[#fa5c4f] transition-all"
+                />
               </div>
 
-              {/* Shaders Grid */}
-              <div className="grid grid-cols-2 gap-2 max-h-56 overflow-y-auto pr-1">
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[9px] font-bold uppercase tracking-widest no-scrollbar">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-3 py-1.5 rounded-full transition-all whitespace-nowrap border ${
+                      activeCategory === cat
+                        ? 'bg-[#fa5c4f] text-white border-[#fa5c4f]'
+                        : 'bg-transparent text-white/40 hover:text-white border-white/10'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
                 {filteredTransitions.map((t) => {
                   const active = currentTransition === t.id;
                   return (
                     <div
                       key={t.id}
                       onClick={() => handleFlipPage(t.id)}
-                      className={`p-2.5 rounded-2xl text-left text-xs transition cursor-pointer flex flex-col justify-between border btn-tactile relative group ${
+                      className={`p-3 rounded-2xl text-left transition-all cursor-pointer flex flex-col justify-between border relative group ${
                         active
-                          ? 'bg-[#fa5c4f]/10 border-[#fa5c4f] text-[var(--text-main)] shadow-sm ring-1 ring-[#fa5c4f]'
-                          : 'bg-[var(--bg-surface)] hover:bg-[var(--bg-card-hover)] border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-main)]'
+                          ? 'bg-[#fa5c4f]/20 border-[#fa5c4f]/50 shadow-[0_0_15px_rgba(250,92,79,0.2)]'
+                          : 'bg-white/5 hover:bg-white/10 border-white/10'
                       }`}
                     >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-base group-hover:scale-125 transition-transform duration-200">{t.icon}</span>
-                        {active ? (
-                          <span className="w-4 h-4 rounded-full bg-[#fa5c4f] text-white flex items-center justify-center text-[10px] shadow-sm">
-                            <Check className="w-2.5 h-2.5 stroke-[3]" />
-                          </span>
-                        ) : (
-                          <span className="text-[9px] uppercase tracking-wider text-[var(--text-subtle)] font-mono">
-                            {t.category}
-                          </span>
+                      <div className="flex items-center justify-between mb-2">
+                        {t.icon ? <span className="text-lg">{t.icon}</span> : <Command className={`w-4 h-4 ${active ? 'text-[#fa5c4f]' : 'text-white/30'}`} />}
+                        {active && (
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#fa5c4f] animate-pulse" />
                         )}
                       </div>
                       <div>
-                        <span className="font-bold text-xs text-[var(--text-main)] block font-display line-clamp-1">{t.label}</span>
-                        <span className="text-[10px] text-[var(--text-muted)] block line-clamp-1 mt-0.5">{t.hint}</span>
+                        <span className={`font-semibold text-xs block tracking-tight ${active ? 'text-white' : 'text-white/80'}`}>{t.label}</span>
+                        <span className="text-[9px] uppercase tracking-widest text-white/40 block mt-1 font-mono">{t.category}</span>
                       </div>
                     </div>
                   );
@@ -365,16 +341,11 @@ export function PlaygroundTransitionStudio() {
 
           {/* TAB 2: PHYSICS */}
           {activeTab === 'physics' && (
-            <div className="space-y-4 text-xs">
-              {/* Duration */}
-              <div className="space-y-2">
+            <div className="space-y-6">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-[var(--text-main)] flex items-center gap-1">
-                    Duration: <span className="font-mono text-[#fa5c4f] font-bold">{duration.toFixed(2)}s</span>
-                  </span>
-                  <span className="text-[10px] text-[var(--text-muted)] font-cursive text-sm">
-                    {duration <= 0.3 ? '⚡ snappy' : duration <= 0.7 ? '🌊 smooth' : '🎬 dramatic'}
-                  </span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/50">Duration Engine</span>
+                  <span className="font-mono text-xs text-[#fa5c4f] font-bold bg-[#fa5c4f]/10 px-2 py-0.5 rounded-md">{duration.toFixed(2)}s</span>
                 </div>
 
                 <input
@@ -384,44 +355,38 @@ export function PlaygroundTransitionStudio() {
                   step="0.05"
                   value={duration}
                   onChange={(e) => setConfig({ duration: parseFloat(e.target.value) })}
-                  className="w-full h-2 bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-[#fa5c4f]"
+                  className="w-full h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#fa5c4f]"
                 />
 
-                <div className="grid grid-cols-4 gap-1 pt-1 font-mono text-[10px]">
-                  {[
-                    { label: '0.2s', val: 0.2 },
-                    { label: '0.4s', val: 0.4 },
-                    { label: '0.6s', val: 0.6 },
-                    { label: '1.2s', val: 1.2 },
-                  ].map((p) => (
+                <div className="grid grid-cols-4 gap-2">
+                  {[0.2, 0.4, 0.6, 1.2].map((val) => (
                     <button
-                      key={p.label}
-                      onClick={() => setConfig({ duration: p.val })}
-                      className={`py-1 rounded-lg border transition cursor-pointer ${
-                        duration === p.val
-                          ? 'bg-[#fa5c4f] text-white border-[#fa5c4f] font-bold'
-                          : 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-color)] hover:text-[var(--text-main)]'
+                      key={val}
+                      onClick={() => setConfig({ duration: val })}
+                      className={`py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all ${
+                        duration === val
+                          ? 'bg-[#fa5c4f] border-[#fa5c4f] text-white'
+                          : 'bg-white/5 border-white/10 text-white/50 hover:text-white'
                       }`}
                     >
-                      {p.label}
+                      {val}s
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Direction */}
               {supportsDirection && (
-                <div className="space-y-1.5 pt-2 border-t border-[var(--border-color)]">
-                  <span className="font-semibold text-[var(--text-main)] block">Direction Vector</span>
-                  <div className="grid grid-cols-4 gap-1 text-[11px] font-mono">
+                <div className="space-y-3 pt-4 border-t border-white/10">
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/50 block">Direction Vector</span>
+                  <div className="grid grid-cols-4 gap-2">
                     {DIRECTION_PRESETS.map((dir) => (
                       <button
                         key={dir}
                         onClick={() => setConfig({ direction: dir })}
-                        className={`py-1.5 rounded-lg border capitalize transition cursor-pointer ${
+                        className={`py-1.5 rounded-lg border text-[10px] font-bold uppercase tracking-wider transition-all ${
                           direction === dir
-                            ? 'bg-[#fa5c4f] text-white border-[#fa5c4f] font-bold'
-                            : 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-color)] hover:text-[var(--text-main)]'
+                            ? 'bg-[#fa5c4f] border-[#fa5c4f] text-white'
+                            : 'bg-white/5 border-white/10 text-white/50 hover:text-white'
                         }`}
                       >
                         {dir}
@@ -431,19 +396,18 @@ export function PlaygroundTransitionStudio() {
                 </div>
               )}
 
-              {/* Easing */}
               {supportsEase && (
-                <div className="space-y-1.5 pt-2 border-t border-[var(--border-color)]">
-                  <span className="font-semibold text-[var(--text-main)] block">Easing Curve</span>
-                  <div className="grid grid-cols-4 gap-1 text-[11px] font-mono">
+                <div className="space-y-3 pt-4 border-t border-white/10">
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-white/50 block">Easing Curve</span>
+                  <div className="grid grid-cols-2 gap-2">
                     {EASING_PRESETS.map((easingName) => (
                       <button
                         key={easingName}
                         onClick={() => setConfig({ ease: easingName })}
-                        className={`py-1.5 px-2 rounded-lg border text-center truncate transition cursor-pointer ${
+                        className={`py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all ${
                           ease === easingName
-                            ? 'bg-[#fa5c4f] text-white border-[#fa5c4f] font-bold'
-                            : 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-color)] hover:text-[var(--text-main)]'
+                            ? 'bg-[#fa5c4f] border-[#fa5c4f] text-white'
+                            : 'bg-white/5 border-white/10 text-white/50 hover:text-white'
                         }`}
                       >
                         {easingName}
@@ -457,47 +421,45 @@ export function PlaygroundTransitionStudio() {
 
           {/* TAB 3: EXPORT */}
           {activeTab === 'export' && (
-            <div className="space-y-3">
+            <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[var(--text-main)]">Ready-to-Paste Code</span>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-white/50">React Component</span>
                 <button
                   onClick={handleCopyCode}
-                  className="px-2.5 py-1 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--border-color)] text-[var(--text-main)] text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer border border-[var(--border-color)]"
+                  className="px-3 py-1.5 rounded-full bg-[#fa5c4f]/20 hover:bg-[#fa5c4f] text-[#fa5c4f] hover:text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 transition-all"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copied ? 'Copied!' : 'Copy'}
+                  {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? 'Copied' : 'Copy'}
                 </button>
               </div>
-              <pre className="p-3.5 rounded-2xl bg-[var(--code-bg)] border border-[var(--code-border)] text-[var(--code-text)] font-mono text-[11px] leading-relaxed overflow-x-auto">
+              <pre className="p-4 rounded-2xl bg-black border border-white/10 text-white/70 font-mono text-[11px] leading-relaxed overflow-x-auto shadow-inner">
                 {exportCodeSnippet}
               </pre>
             </div>
           )}
 
           {/* Quick Actions Footer */}
-          <div className="pt-3 border-t border-[var(--border-color)] space-y-2">
+          <div className="pt-4 border-t border-white/10">
             <div className="grid grid-cols-3 gap-2">
               <button
                 onClick={handleSurpriseMe}
-                className="py-2 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-700 dark:text-amber-300 font-bold text-[11px] flex items-center justify-center gap-1 btn-tactile cursor-pointer"
-                title="Random transition & flip"
+                className="py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-1.5 transition-all"
               >
-                <Dices className="w-3.5 h-3.5" /> Dice 🎲
+                <Dices className="w-3.5 h-3.5 text-amber-500" /> Dice 
               </button>
 
               <button
                 onClick={handleChaosMode}
-                className="py-2 rounded-2xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-700 dark:text-purple-300 font-bold text-[11px] flex items-center justify-center gap-1 btn-tactile cursor-pointer"
-                title="Random speed & vector"
+                className="py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-1.5 transition-all"
               >
-                <Zap className="w-3.5 h-3.5 text-purple-500" /> Chaos 👾
+                <Zap className="w-3.5 h-3.5 text-purple-500" /> Chaos 
               </button>
 
               <button
                 onClick={() => handleFlipPage()}
-                className="py-2 rounded-2xl bg-[#fa5c4f] hover:bg-[#e54235] text-white font-bold text-[11px] flex items-center justify-center gap-1 shadow-md shadow-[#fa5c4f]/30 btn-tactile cursor-pointer truncate"
+                className="py-2.5 rounded-xl bg-[#fa5c4f] hover:bg-[#e54235] text-white font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-1.5 shadow-lg shadow-[#fa5c4f]/20 transition-all"
               >
-                <ArrowRightLeft className="w-3 h-3" /> Flip Page
+                <ArrowRightLeft className="w-3.5 h-3.5" /> Flip
               </button>
             </div>
           </div>
@@ -508,17 +470,17 @@ export function PlaygroundTransitionStudio() {
       {/* Floating Launcher HUD Pill */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 pl-4 pr-3.5 py-3 rounded-full bg-[var(--bg-card)]/95 backdrop-blur-xl hover:bg-[var(--bg-card-hover)] text-[var(--text-main)] text-xs font-bold shadow-[0_10px_30px_rgba(0,0,0,0.12)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-[var(--border-color)] transition-all cursor-pointer btn-tactile group"
+        className="flex items-center gap-4 pl-5 pr-2 py-2 rounded-full bg-black/60 backdrop-blur-2xl hover:bg-black/80 text-white text-xs font-bold shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-white/10 transition-all group"
       >
-        <span className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#fa5c4f] animate-pulse" />
-          <span className="text-[var(--text-muted)]">Transition:</span>
-          <span className="text-[#fa5c4f] font-mono font-bold bg-[#fa5c4f]/10 px-2 py-0.5 rounded-lg border border-[#fa5c4f]/20">
+        <span className="flex items-center gap-3">
+          <span className="w-2 h-2 rounded-full bg-[#fa5c4f] shadow-[0_0_10px_rgba(250,92,79,1)] animate-pulse" />
+          <span className="text-[10px] uppercase tracking-widest text-white/50">Active Module:</span>
+          <span className="text-[#fa5c4f] font-mono font-bold bg-[#fa5c4f]/10 px-2.5 py-1 rounded-md border border-[#fa5c4f]/20">
             {currentTransition}
           </span>
         </span>
-        <div className="w-6 h-6 rounded-full bg-[var(--bg-surface)] group-hover:bg-[#fa5c4f] group-hover:text-white flex items-center justify-center transition">
-          <ChevronUp className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <div className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-[#fa5c4f] flex items-center justify-center transition-colors">
+          <ChevronUp className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
         </div>
       </button>
     </aside>

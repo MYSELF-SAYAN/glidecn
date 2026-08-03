@@ -34,38 +34,41 @@ export function DxSection() {
   };
 
   return (
-    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24">
-      <div className="grid gap-10 lg:grid-cols-2 items-center">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 py-24 md:py-32">
+      <div className="grid gap-16 lg:grid-cols-2 items-center">
         
-        {/* Left Side — Code Block */}
+        {/* Left Side — Code Block (macOS Glassmorphism) */}
         <motion.div
           initial={{ opacity: 0, x: -40, scale: 0.95 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: false, margin: '-60px' }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative order-2 lg:order-1"
+          className="relative order-2 lg:order-1 group"
         >
-          <div className="relative overflow-hidden rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] p-6 shadow-xl">
+          {/* Ambient Glow */}
+          <div className="absolute -inset-4 bg-gradient-to-tr from-blue-500/20 to-[#fa5c4f]/20 rounded-[40px] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          
+          <div className="relative overflow-hidden rounded-2xl bg-[#0d0d0d]/90 border border-white/10 p-2 shadow-2xl backdrop-blur-2xl ring-1 ring-white/5">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50 pointer-events-none" />
             
             {/* Window controls */}
-            <div className="mb-4 flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
-              <div className="flex items-center gap-1.5">
-                <div className="size-3 rounded-full bg-red-500/80" />
-                <div className="size-3 rounded-full bg-yellow-500/80" />
-                <div className="size-3 rounded-full bg-green-500/80" />
-                <span className="ml-2 font-mono text-[11px] text-[var(--text-subtle)]">layout.tsx</span>
+            <div className="flex items-center justify-between px-4 py-3 bg-white/5 rounded-t-xl border-b border-white/10 mb-2 relative z-10">
+              <div className="flex items-center gap-2">
+                <div className="size-3 rounded-full bg-[#ff5f56] shadow-sm border border-black/10" />
+                <div className="size-3 rounded-full bg-[#ffbd2e] shadow-sm border border-black/10" />
+                <div className="size-3 rounded-full bg-[#27c93f] shadow-sm border border-black/10" />
+                <span className="ml-3 font-mono text-[11px] text-white/50 tracking-wider">layout.tsx</span>
               </div>
               
               <button
                 onClick={handleCopy}
-                aria-label="Copy code snippet"
-                className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition cursor-pointer"
+                className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-mono text-white/50 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                 title="Copy code"
               >
                 {copied ? (
                   <>
-                    <Check className="size-3.5 text-emerald-500" />
-                    <span className="text-emerald-500 font-bold">Copied!</span>
+                    <Check className="size-3.5 text-emerald-400" />
+                    <span className="text-emerald-400 font-bold">Copied!</span>
                   </>
                 ) : (
                   <>
@@ -76,19 +79,19 @@ export function DxSection() {
               </button>
             </div>
             
-            <pre className="font-mono text-xs leading-relaxed text-[var(--text-main)] overflow-x-auto no-scrollbar py-2">
+            <pre className="font-mono text-sm leading-relaxed text-white/80 overflow-x-auto no-scrollbar px-5 py-4 relative z-10">
               <code dangerouslySetInnerHTML={{
                 __html: CODE_SNIPPET
-                  .replace(/import/g, '<span class="text-pink-500 font-bold">import</span>')
-                  .replace(/from/g, '<span class="text-pink-500 font-bold">from</span>')
-                  .replace(/export default function|export function/g, '<span class="text-pink-500 font-bold">$&</span>')
-                  .replace(/return/g, '<span class="text-pink-500 font-bold">return</span>')
-                  .replace(/Morphy/g, '<span class="text-emerald-600 dark:text-emerald-400 font-bold">Morphy</span>')
-                  .replace(/Page/g, '<span class="text-blue-600 dark:text-blue-400 font-bold">Page</span>')
-                  .replace(/transition=/g, '<span class="text-[#fa5c4f] font-bold">transition=</span>')
-                  .replace(/defaultTransition=/g, '<span class="text-[#fa5c4f] font-bold">defaultTransition=</span>')
-                  .replace(/"cube"|"circular-portal"|'@\/components\/morphy'/g, '<span class="text-amber-600 dark:text-amber-300">$&</span>')
-                  .replace(/h1/g, '<span class="text-cyan-600 dark:text-cyan-400">h1</span>')
+                  .replace(/import/g, '<span class="text-pink-400 font-bold">import</span>')
+                  .replace(/from/g, '<span class="text-pink-400 font-bold">from</span>')
+                  .replace(/export default function|export function/g, '<span class="text-pink-400 font-bold">$&</span>')
+                  .replace(/return/g, '<span class="text-pink-400 font-bold">return</span>')
+                  .replace(/Morphy/g, '<span class="text-emerald-400 font-bold">Morphy</span>')
+                  .replace(/Page/g, '<span class="text-blue-400 font-bold">Page</span>')
+                  .replace(/transition=/g, '<span class="text-yellow-200">transition=</span>')
+                  .replace(/defaultTransition=/g, '<span class="text-yellow-200">defaultTransition=</span>')
+                  .replace(/"cube"|"circular-portal"|'@\/components\/morphy'/g, '<span class="text-amber-300">$&</span>')
+                  .replace(/h1/g, '<span class="text-cyan-400">h1</span>')
               }} />
             </pre>
           </div>
@@ -100,33 +103,33 @@ export function DxSection() {
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: false, margin: '-60px' }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-start order-1 lg:order-2 space-y-5"
+          className="flex flex-col items-start order-1 lg:order-2 space-y-8"
         >
-          <span className="sticker-pill">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-muted)] text-[10px] uppercase tracking-widest font-bold">
             <Code2 className="size-3 text-[#fa5c4f]" /> Clean Architecture
           </span>
           
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-main)] font-display leading-[1.12]">
+          <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.15]">
             Minimal boilerplate. <br />
             Maximum flexibility.
           </h2>
           
-          <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-md">
-            Wrap your app in <code className="px-1.5 py-0.5 rounded bg-[var(--bg-surface)] text-[#fa5c4f] border border-[var(--border-color)] font-mono text-xs">&lt;Morphy&gt;</code>, specify a transition on <code className="px-1.5 py-0.5 rounded bg-[var(--bg-surface)] text-[#fa5c4f] border border-[var(--border-color)] font-mono text-xs">&lt;Page&gt;</code>, and let Morphy coordinate frame exits and entries.
+          <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed max-w-lg font-light">
+            Wrap your app in <code className="px-2 py-1 rounded-md bg-[var(--bg-surface)] text-[#fa5c4f] border border-[var(--border-color)] font-mono text-sm">&lt;Morphy&gt;</code>, specify a transition on <code className="px-2 py-1 rounded-md bg-[var(--bg-surface)] text-[#fa5c4f] border border-[var(--border-color)] font-mono text-sm">&lt;Page&gt;</code>, and let the engine coordinate frame exits and entries. No complex state management required.
           </p>
 
-          <div className="flex items-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">
             <Link
               href="/docs"
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#fa5c4f] hover:bg-[#e54235] px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-[#fa5c4f]/25 transition btn-tactile"
+              className="w-full sm:w-auto group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#e54235] hover:shadow-[0_0_30px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-0.5"
             >
               <span>Read Documentation</span>
-              <ArrowRight className="size-3.5" />
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Link>
 
             <Link
               href="/playground/page-1"
-              className="inline-flex items-center gap-2 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] hover:bg-[var(--bg-card)] px-4 py-2.5 text-xs font-semibold text-[var(--text-main)] transition btn-tactile"
+              className="w-full sm:w-auto group flex justify-center items-center gap-2 text-sm font-medium text-[var(--text-main)] hover:text-[#fa5c4f] transition-colors"
             >
               <span>Try Live in Playground</span>
             </Link>

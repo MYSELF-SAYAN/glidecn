@@ -116,73 +116,59 @@ export default async function TransitionDocsPage(props: { params: Promise<{ slug
   // Coming soon state
   return (
     <Page transition="fade">
-      <div className="space-y-8 pb-20 max-w-4xl">
-
-        {/* Back Link */}
+      <div className="space-y-8 pb-20 max-w-4xl mx-auto">
         <Link
           href="/docs/transitions"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#fa5c4f] hover:text-[#e54235] no-underline transition group cursor-pointer"
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[#fa5c4f] transition group"
         >
-          <ArrowLeft className="size-3.5 group-hover:-translate-x-1 transition" />
-          <span>Back to Transition Gallery</span>
+          <ArrowLeft className="size-3.5 group-hover:-translate-x-1 transition-transform" />
+          <span>Back to Gallery</span>
         </Link>
 
-        {/* Coming Soon Showcase Banner */}
-        <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-[var(--bg-surface)] p-8 sm:p-12 shadow-xl morphy-card text-center space-y-6">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-
-          {/* Emoji & Badge */}
-          <div className="flex flex-col items-center gap-3">
-            <div className="text-6xl sm:text-7xl p-4 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-md inline-block">
+        <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border-color)] bg-[var(--bg-surface)] p-8 sm:p-16 shadow-2xl group text-center flex flex-col items-center">
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay" />
+          <div className="absolute -inset-4 bg-gradient-to-br from-[#fa5c4f]/5 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          
+          <div className="relative z-10 flex flex-col items-center space-y-6 max-w-lg">
+            <div className="text-6xl sm:text-7xl p-6 rounded-3xl bg-black/40 border border-white/10 shadow-2xl backdrop-blur-xl">
               {catalogEntry.emoji}
             </div>
-
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+            
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#fa5c4f]/20 bg-[#fa5c4f]/10 text-[#fa5c4f] text-[10px] uppercase font-bold tracking-widest shadow-sm">
               <Clock className="size-3.5" />
-              <span>In Roadmap • Coming Soon in v1.1</span>
+              <span>In Roadmap • Coming Soon</span>
             </div>
-          </div>
 
-          {/* Title & Description */}
-          <div className="space-y-3">
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-main)] font-display">
+            <h1 className="text-4xl sm:text-6xl font-light tracking-tighter text-[var(--text-main)] font-display">
               {catalogEntry.displayName}
             </h1>
-            <p className="max-w-xl mx-auto text-sm text-[var(--text-muted)] leading-relaxed">
+            
+            <p className="text-sm font-light text-[var(--text-muted)] leading-relaxed">
               {catalogEntry.description}
             </p>
-          </div>
 
-          {/* Shader Lab Notice */}
-          <div className="max-w-md mx-auto p-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] text-left space-y-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-[var(--text-main)]">
-              <Sparkles className="size-3.5 text-[#fa5c4f]" />
-              <span>Shader Recipe in Development</span>
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-[var(--border-color)] to-transparent my-4" />
+
+            <div className="flex items-start gap-3 text-left p-5 rounded-2xl bg-black/20 border border-white/5">
+              <Sparkles className="size-5 text-[#fa5c4f] shrink-0 mt-0.5" />
+              <div>
+                <h3 className="text-sm font-bold text-[var(--text-main)] mb-1">Shader Recipe in Development</h3>
+                <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
+                  Our WebGL shader team is fine-tuning easing curves, GPU viewport masks, and zero-jank frame synchronization for this transition.
+                </p>
+              </div>
             </div>
-            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-              Our WebGL shader team is currently fine-tuning easing curves, GPU viewport masks, and zero-jank frame synchronization for this transition.
-            </p>
+
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
+              <Link
+                href="/docs/transitions"
+                className="w-full sm:w-auto flex-1 flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] hover:bg-[#e54235] px-6 py-3.5 text-xs font-bold text-white shadow-lg shadow-[#fa5c4f]/25 transition-all hover:-translate-y-0.5"
+              >
+                Explore 33+ Available
+              </Link>
+            </div>
           </div>
-
-          {/* Actions */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <Link
-              href="/docs/transitions"
-              className="flex items-center gap-2 rounded-2xl bg-[#fa5c4f] hover:bg-[#e54235] px-6 py-3 text-xs font-bold text-white shadow-md shadow-[#fa5c4f]/25 transition btn-tactile w-full sm:w-auto justify-center"
-            >
-              <span>Explore 33+ Available Transitions</span>
-            </Link>
-
-            <Link
-              href="/docs/installation"
-              className="flex items-center gap-2 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] px-6 py-3 text-xs font-semibold text-[var(--text-main)] hover:bg-[var(--bg-card)] transition btn-tactile w-full sm:w-auto justify-center"
-            >
-              <span>Read Documentation</span>
-            </Link>
-          </div>
-
         </div>
-
       </div>
     </Page>
   );

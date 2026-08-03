@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Copy, Check, Star, ChevronDown, Layers, Gamepad2, BookOpen } from 'lucide-react';
+import { ArrowRight, Copy, Check, Star, ChevronDown, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 const PKG_COMMANDS = {
@@ -25,129 +25,124 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center pt-24 pb-16">
       
-      {/* Structural Grid Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(var(--border-color)_1px,transparent_1px)] [background-size:24px_24px] opacity-50 pointer-events-none -z-10 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_10%,transparent_100%)]" />
+      {/* Ambient Glows */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#fa5c4f]/10 rounded-full blur-[120px] pointer-events-none -z-10 mix-blend-screen" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none -z-10 mix-blend-screen" />
 
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 w-full flex flex-col items-center text-center z-10">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full flex flex-col items-center text-center z-10">
         
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-10%" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-10"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap items-center justify-center gap-3 mb-12"
         >
-          <span className="sticker-pill">
-            <Star className="size-3 fill-[#fa5c4f] text-[#fa5c4f]" />
-            33+ Zero-Jank Shaders
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-muted)] text-xs font-medium tracking-wide">
+            <Sparkles className="size-3 text-[#fa5c4f]" /> 
+            v1.0 is live
           </span>
-          <Link
-            href="/playground/page-1"
-            className="sticker-pill hover:scale-105 transition-transform cursor-pointer"
-          >
-            <Gamepad2 className="size-3" />
-            Playground Mode
-          </Link>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-10%" }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-[var(--text-main)] font-display leading-[1.05] mb-8 max-w-4xl"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-6xl sm:text-8xl lg:text-9xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.05] mb-8 max-w-5xl"
         >
           Page transitions <br className="hidden sm:block" />
           that{' '}
-          <span className="relative inline-block font-cursive text-[#fa5c4f] text-6xl sm:text-8xl lg:text-9xl font-normal tracking-normal pr-4">
+          <span className="relative inline-block font-cursive text-[#fa5c4f] font-normal tracking-normal pr-4 scale-110">
             flow.
             <motion.svg
-              className="absolute -bottom-2 sm:-bottom-4 left-0 w-full text-[#fa5c4f]/40"
+              className="absolute -bottom-1 sm:-bottom-3 left-0 w-full text-[#fa5c4f]/60"
               viewBox="0 0 120 12"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               initial={{ pathLength: 0, opacity: 0 }}
-              whileInView={{ pathLength: 1, opacity: 1 }}
-              viewport={{ once: false }}
-              transition={{ duration: 1.2, delay: 0.4, ease: 'easeOut' }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 1.5, delay: 0.6, ease: 'easeOut' }}
             >
-              <path d="M5 8C25 2 45 12 65 6C85 0 105 10 115 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+              <path d="M5 8C25 2 45 12 65 6C85 0 105 10 115 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
             </motion.svg>
           </span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-10%" }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl text-lg sm:text-xl leading-relaxed text-[var(--text-muted)] mb-12 font-medium"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-2xl text-lg sm:text-2xl leading-relaxed text-[var(--text-muted)] mb-14 font-light"
         >
-          The pluggable page transition library for React & Next.js. Copy-paste hardware-accelerated shaders directly into your codebase. No lock-in. No bloat.
+          The pluggable page transition library for React & Next.js. Hardware-accelerated shaders that drop straight into your codebase. No lock-in. No bloat.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-10%" }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-14"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-8 w-full sm:w-auto mb-20"
         >
           <Link
             href="/docs/installation"
-            className="w-full sm:w-auto group flex justify-center items-center gap-2 rounded-2xl bg-[#fa5c4f] px-8 py-4 text-sm font-bold text-white btn-tactile hover:shadow-[0_12px_32px_-8px_rgba(250,92,79,0.12)] hover:bg-[#e54235] hover:-translate-y-[2px]"
+            className="group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-8 py-4 text-sm font-bold text-white transition-all duration-300 hover:bg-[#e54235] hover:shadow-[0_0_40px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-1"
           >
-            <BookOpen className="size-5" />
-            Get Started
+            <span>Start Building</span>
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </Link>
+          
           <Link
-            href="/docs/transitions"
-            className="w-full sm:w-auto group flex justify-center items-center gap-2 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] px-8 py-4 text-sm font-bold text-[var(--text-main)] btn-tactile hover:shadow-[0_12px_32px_-8px_rgba(250,92,79,0.12)] hover:bg-[var(--bg-card)] hover:border-[#fa5c4f] hover:-translate-y-[2px]"
+            href="/playground/page-1"
+            className="group flex justify-center items-center gap-2 text-sm font-medium text-[var(--text-main)] hover:text-[#fa5c4f] transition-colors"
           >
-            <Layers className="size-5 text-[#fa5c4f] group-hover:rotate-12 transition-transform" />
-            Browse 33+ Transitions
+            <span>Explore Playground</span>
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>
 
+        {/* Glassmorphic CLI Installer */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: false, margin: "-10%" }}
-          transition={{ duration: 0.6, delay: 0.4, type: 'spring' }}
-          className="w-full max-w-lg rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] p-2 shadow-lg backdrop-blur-md mx-auto"
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, type: 'spring' }}
+          className="w-full max-w-lg relative group"
         >
-          <div className="flex items-center justify-between px-2 pb-2 border-b border-[var(--border-color)]">
-            <div className="flex items-center gap-1">
-              {(['pnpm', 'npm', 'bun', 'yarn'] as const).map((pkg) => (
-                <button
-                  key={pkg}
-                  onClick={() => setSelectedPkg(pkg)}
-                  className={`px-3 py-1 rounded-md text-xs font-bold transition-colors cursor-pointer ${
-                    selectedPkg === pkg
-                      ? 'bg-[#fa5c4f]/10 text-[#fa5c4f]'
-                      : 'text-[var(--text-subtle)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]'
-                  }`}
-                >
-                  {pkg}
-                </button>
-              ))}
+          {/* Subtle glowing shadow behind the box */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#fa5c4f]/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          
+          <div className="relative rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)]/80 p-2 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 mx-auto overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50 pointer-events-none" />
+            
+            <div className="relative flex items-center justify-between px-3 pb-2 pt-1 border-b border-[var(--border-color)]">
+              <div className="flex items-center gap-1.5">
+                {(['pnpm', 'npm', 'bun', 'yarn'] as const).map((pkg) => (
+                  <button
+                    key={pkg}
+                    onClick={() => setSelectedPkg(pkg)}
+                    className={`px-3 py-1 rounded-md text-xs font-medium transition-all duration-300 cursor-pointer ${
+                      selectedPkg === pkg
+                        ? 'bg-[var(--text-main)] text-[var(--bg-page)] shadow-sm'
+                        : 'text-[var(--text-subtle)] hover:text-[var(--text-main)]'
+                    }`}
+                  >
+                    {pkg}
+                  </button>
+                ))}
+              </div>
             </div>
-            <span className="text-[10px] text-[var(--text-subtle)] font-bold tracking-widest uppercase px-2 hidden sm:block">CLI Installer</span>
-          </div>
 
-          <div className="flex items-center justify-between px-4 py-3 font-mono text-sm text-[var(--text-main)] bg-[var(--bg-card)]/50 rounded-b-xl mt-1">
-            <div className="flex items-center gap-3 overflow-x-auto no-scrollbar">
-              <span className="text-[#fa5c4f] font-bold select-none">~</span>
-              <span className="whitespace-nowrap">{PKG_COMMANDS[selectedPkg]}</span>
+            <div className="relative flex items-center justify-between px-5 py-4 font-mono text-sm text-[var(--text-main)]">
+              <div className="flex items-center gap-3 overflow-x-auto no-scrollbar">
+                <span className="text-[var(--text-subtle)] font-medium select-none">$</span>
+                <span className="whitespace-nowrap">{PKG_COMMANDS[selectedPkg]}</span>
+              </div>
+              <button
+                onClick={handleCopy}
+                className="p-2 ml-4 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border-color)] transition-colors cursor-pointer shrink-0"
+                title="Copy command"
+              >
+                {copied ? <Check className="size-4 text-emerald-500" /> : <Copy className="size-4" />}
+              </button>
             </div>
-            <button
-              onClick={handleCopy}
-              className="p-2 ml-4 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--border-color)] text-[var(--text-main)] transition-colors cursor-pointer shrink-0 border border-[var(--border-color)] shadow-sm"
-              title="Copy command"
-            >
-              {copied ? <Check className="size-4 text-emerald-500" /> : <Copy className="size-4" />}
-            </button>
           </div>
         </motion.div>
 
@@ -155,13 +150,12 @@ export function Hero() {
 
       <motion.div
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: false }}
-        transition={{ delay: 0.8, duration: 0.8 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
-          <ChevronDown className="size-6 text-[var(--text-subtle)]" />
+          <ChevronDown className="size-5 text-[var(--text-subtle)] opacity-50" />
         </motion.div>
       </motion.div>
     </section>

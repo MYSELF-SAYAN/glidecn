@@ -1,8 +1,8 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { Box, Loader2, Feather, PenTool, Monitor, ArrowRight, Sparkles, Gamepad2 } from 'lucide-react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Gamepad2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 /* ───────────────────────────────────────────────────────────────────────── */
@@ -25,7 +25,7 @@ function CubeDemo() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className="size-20 rounded-2xl bg-gradient-to-br from-[#fa5c4f] to-[#ff8a7a] shadow-xl shadow-[#fa5c4f]/30 flex items-center justify-center text-white text-2xl font-bold font-mono"
       >
-        🧊
+        <Box className="size-8" />
       </motion.div>
     </div>
   );
@@ -48,7 +48,7 @@ function CircularPortalDemo() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center"
         >
-          <span className="text-2xl">🌀</span>
+          <Loader2 className="size-8 text-white animate-spin-slow" />
         </motion.div>
         <motion.div
           animate={{ scale: revealed ? 1.15 : 1, opacity: revealed ? 0.4 : 1 }}
@@ -76,7 +76,7 @@ function OrigamiDemo() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="size-20 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-400 shadow-xl shadow-amber-500/20 flex items-center justify-center text-2xl"
       >
-        🦢
+        <Feather className="size-8 text-white" />
       </motion.div>
     </div>
   );
@@ -99,7 +99,7 @@ function InkSpreadDemo() {
         transition={{ duration: 0.9, ease: 'easeOut' }}
         className="size-20 bg-gradient-to-br from-emerald-500 to-teal-400 shadow-xl shadow-emerald-500/20 flex items-center justify-center text-2xl"
       >
-        🖋️
+        <PenTool className="size-8 text-white" />
       </motion.div>
     </div>
   );
@@ -122,7 +122,7 @@ function TVTurnOffDemo() {
         transition={{ duration: 0.5, ease: 'easeIn' }}
         className="size-20 rounded-xl bg-slate-800 shadow-xl shadow-black/20 flex items-center justify-center text-2xl border border-slate-700"
       >
-        📺
+        <Monitor className="size-8 text-slate-400" />
       </motion.div>
     </div>
   );
@@ -170,8 +170,8 @@ const transitionsList = [
 
 export function TransitionShowcase() {
   return (
-    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24 overflow-hidden">
-      <div className="flex flex-col lg:flex-row gap-10 items-start">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 py-24 md:py-32 overflow-hidden">
+      <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-start">
         
         {/* Left Side — Headline & CTAs */}
         <motion.div
@@ -179,27 +179,27 @@ export function TransitionShowcase() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: false, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full lg:w-1/3 flex flex-col items-start pt-2 lg:sticky lg:top-28 space-y-5"
+          className="w-full lg:w-1/3 flex flex-col items-start pt-2 lg:sticky lg:top-32 space-y-8"
         >
-          <span className="sticker-pill">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-muted)] text-[10px] uppercase tracking-widest font-bold">
             <Sparkles className="size-3 text-[#fa5c4f]" /> Handcrafted Shaders
           </span>
           
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-main)] font-display leading-[1.12]">
+          <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.15]">
             33+ production shaders. <br />
-            <span className="font-cursive text-[#fa5c4f] font-normal text-4xl sm:text-5xl">
+            <span className="font-cursive text-[#fa5c4f] font-normal text-5xl sm:text-6xl inline-block mt-2">
               Infinite possibilities.
             </span>
           </h2>
 
-          <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+          <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed font-light">
             Every transition is fully customizable. Test any shader live inside the interactive 2-page playground.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">
             <Link
               href="/playground/page-1"
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#fa5c4f] hover:bg-[#e54235] px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-[#fa5c4f]/25 transition btn-tactile"
+              className="w-full sm:w-auto group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#e54235] hover:shadow-[0_0_30px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-0.5"
             >
               <Gamepad2 className="size-4" />
               <span>Launch Playground</span>
@@ -207,52 +207,57 @@ export function TransitionShowcase() {
 
             <Link
               href="/docs/transitions"
-              className="inline-flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] hover:bg-[var(--bg-card)] px-4 py-2.5 text-xs font-semibold text-[var(--text-main)] transition btn-tactile"
+              className="w-full sm:w-auto group flex justify-center items-center gap-2 text-sm font-medium text-[var(--text-main)] hover:text-[#fa5c4f] transition-colors"
             >
               <span>View All 33+</span>
-              <ArrowRight className="size-3.5" />
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </motion.div>
 
-        {/* Right Side — Interactive Shader Grid */}
+        {/* Right Side — Interactive Shader Grid (Masonry Staggered) */}
         <div className="w-full lg:w-2/3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {transitionsList.map((item, i) => {
               const DemoComponent = item.Demo;
+              // Stagger the right column for masonry effect
+              const isEvenColumn = i % 2 !== 0;
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: false, margin: '-40px' }}
-                  transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="morphy-card flex flex-col overflow-hidden rounded-3xl group"
+                  transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className={`flex flex-col overflow-hidden rounded-[24px] bg-[var(--bg-surface)] border border-[var(--border-color)] group hover:border-[#fa5c4f]/50 hover:shadow-[0_20px_40px_-15px_rgba(250,92,79,0.15)] transition-all duration-500 ease-out hover:-translate-y-1 ${
+                    isEvenColumn ? 'sm:mt-12' : ''
+                  }`}
                 >
                   {/* Animated shader preview area */}
-                  <div className="relative h-36 w-full border-b border-[var(--border-color)] overflow-hidden">
+                  <div className="relative h-48 w-full overflow-hidden bg-[var(--bg-page)]/50">
                     <DemoComponent />
-                    <span className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-[var(--bg-surface)]/80 backdrop-blur-sm border border-[var(--border-color)] text-[9px] font-mono font-bold uppercase text-[var(--text-subtle)]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <span className="absolute top-4 right-4 px-2.5 py-1 rounded-md bg-[var(--bg-surface)]/80 backdrop-blur-md border border-[var(--border-color)] text-[9px] font-mono font-bold uppercase tracking-widest text-[var(--text-subtle)]">
                       {item.category}
                     </span>
                   </div>
 
-                  <div className="flex flex-col p-4 flex-1 justify-between space-y-3">
+                  <div className="flex flex-col p-6 flex-1 justify-between space-y-4 bg-gradient-to-b from-[var(--bg-page)]/50 to-[var(--bg-surface)]">
                     <div>
-                      <h3 className="text-sm font-bold text-[var(--text-main)] font-display group-hover:text-[#fa5c4f] transition">
+                      <h3 className="text-lg font-light text-[var(--text-main)] font-display group-hover:text-[#fa5c4f] transition-colors">
                         {item.name}
                       </h3>
-                      <p className="text-[11px] text-[var(--text-muted)] mt-1 leading-relaxed line-clamp-2">
+                      <p className="text-sm text-[var(--text-muted)] mt-2 leading-relaxed font-light">
                         {item.desc}
                       </p>
                     </div>
 
                     <Link
                       href="/playground/page-1"
-                      className="pt-2 border-t border-[var(--border-color)] flex items-center justify-between text-[11px] font-bold text-[#fa5c4f] group-hover:text-[#e54235] no-underline transition-colors"
+                      className="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs font-bold text-[var(--text-main)] group-hover:text-[#fa5c4f] transition-colors"
                     >
                       <span>Test in Playground</span>
-                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
                 </motion.div>

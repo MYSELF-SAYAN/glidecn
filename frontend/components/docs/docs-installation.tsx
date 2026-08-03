@@ -311,9 +311,9 @@ export function DocsInstallation() {
 
         <div className="grid sm:grid-cols-2 gap-4">
           {[
-            { cmd: 'npx morphy add cube', name: '3D Cube', emoji: '🧊' },
-            { cmd: 'npx morphy add circular-portal', name: 'Iris Portal', emoji: '🌀' },
-            { cmd: 'npx morphy add origami-unfold', name: 'Origami Fold', emoji: '📜' },
+            { cmd: 'npx morphy add cube', name: '3D Cube', emoji: '' },
+            { cmd: 'npx morphy add circular-portal', name: 'Iris Portal', emoji: '' },
+            { cmd: 'npx morphy add origami-unfold', name: 'Origami Fold', emoji: '' },
             { cmd: 'npx morphy add ink-spread', name: 'Ink Diffusion', emoji: '🖋️' },
           ].map((item) => (
             <div

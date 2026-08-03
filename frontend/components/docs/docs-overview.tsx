@@ -61,7 +61,7 @@ export function DocsOverview() {
     {
       name: 'Spatial & 3D',
       desc: 'Hardware 3D isometric cubes, page curls, 3D flips, and origami mesh folds.',
-      icon: '🧊',
+      icon: '',
       count: '6 Shaders',
       tag: 'GPU Transform',
       href: '/docs/transitions#spatial',
@@ -70,7 +70,7 @@ export function DocsOverview() {
     {
       name: 'Portals & Iris',
       desc: 'Dynamic clip-path radial portals, iris shutters, and liquid morphing masks.',
-      icon: '🌀',
+      icon: '',
       count: '4 Shaders',
       tag: 'Clip Path',
       href: '/docs/transitions#portal',
@@ -79,7 +79,7 @@ export function DocsOverview() {
     {
       name: 'Retro & Analog',
       desc: 'CRT electron-beam collapses, RGB channel glitch split, and neon glow dissolves.',
-      icon: '📺',
+      icon: '',
       count: '5 Shaders',
       tag: 'Filter & SVG',
       href: '/docs/transitions#retro',
@@ -88,7 +88,7 @@ export function DocsOverview() {
     {
       name: 'Kinetic & Dynamic',
       desc: 'Diagonal blade slashes, ripple springs, bounce overshoots, and fluid ink flows.',
-      icon: '⚡',
+      icon: '',
       count: '8 Shaders',
       tag: 'Framer Physics',
       href: '/docs/transitions#dynamic',
