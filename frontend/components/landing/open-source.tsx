@@ -27,7 +27,7 @@ export function OpenSource() {
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 rounded-full border border-[var(--border-color)] flex items-center justify-center"
           >
@@ -46,7 +46,7 @@ export function OpenSource() {
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-4xl sm:text-6xl font-light tracking-tight text-[var(--text-main)] mb-6 font-display"
         >
@@ -56,7 +56,7 @@ export function OpenSource() {
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-[var(--text-muted)] text-lg font-light leading-relaxed max-w-lg mb-12"
         >
@@ -67,7 +67,7 @@ export function OpenSource() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
         >

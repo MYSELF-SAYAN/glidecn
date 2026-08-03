@@ -23,17 +23,58 @@ export function PerformanceSection() {
       <motion.div style={{ scale, opacity }} className="mx-auto max-w-7xl px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
+          >
             <Gauge className="w-4 h-4 text-blue-500" />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500">60 FPS Native</span>
-          </div>
-          <h2 className="text-4xl sm:text-6xl font-light tracking-tight text-[var(--text-main)] mb-6 font-display leading-[1.1]">
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl sm:text-6xl font-light tracking-tight text-[var(--text-main)] mb-6 font-display leading-[1.1]"
+          >
             Never drop a frame.<br />
-            <span className="italic font-cursive text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-emerald-400">Ever again.</span>
-          </h2>
-          <p className="text-lg text-[var(--text-muted)] font-light leading-relaxed">
+            <span className="italic font-cursive text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-emerald-400 relative inline-block">
+              Ever again.
+              <motion.svg 
+                className="absolute -bottom-1 left-0 w-full text-emerald-400/60" 
+                viewBox="0 0 100 10" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <motion.path 
+                  d="M2 8C20 2 40 8 60 5C75 3 85 7 98 4" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 1.5, delay: 0.5, ease: 'easeInOut' }}
+                />
+              </motion.svg>
+            </span>
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-lg text-[var(--text-muted)] font-light leading-relaxed"
+          >
             By offloading transitions to the browser's compositor thread, MorphyJS guarantees butter-smooth animations even when React is heavily blocking the main thread.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">

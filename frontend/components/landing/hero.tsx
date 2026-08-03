@@ -33,7 +33,8 @@ export function Hero() {
         
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap items-center justify-center gap-3 mb-12"
         >
@@ -45,7 +46,8 @@ export function Hero() {
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-6xl sm:text-8xl lg:text-9xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.05] mb-8 max-w-5xl"
         >
@@ -58,18 +60,29 @@ export function Hero() {
               viewBox="0 0 120 12"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 1.5, delay: 0.6, ease: 'easeOut' }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <path d="M5 8C25 2 45 12 65 6C85 0 105 10 115 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+              <motion.path 
+                d="M5 8C25 2 45 12 65 6C85 0 105 10 115 5" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 1.5, delay: 0.6, ease: 'easeInOut' }}
+              />
             </motion.svg>
           </span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl text-lg sm:text-2xl leading-relaxed text-[var(--text-muted)] mb-14 font-light"
         >
@@ -78,7 +91,8 @@ export function Hero() {
 
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-8 w-full sm:w-auto mb-20"
         >
@@ -102,7 +116,8 @@ export function Hero() {
         {/* Glassmorphic CLI Installer */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.4, type: 'spring' }}
           className="w-full max-w-lg relative group"
         >
@@ -150,7 +165,8 @@ export function Hero() {
 
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false, amount: 0.2 }}
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >

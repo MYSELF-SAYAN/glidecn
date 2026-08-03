@@ -53,7 +53,7 @@ export function FeatureGrid() {
         variants={containerVariants as any}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-60px' }}
+        viewport={{ once: false, margin: '-60px' }}
         className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
       >
         {features.map((feature) => {

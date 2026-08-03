@@ -83,7 +83,7 @@ export function ExamplesSection() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-100px' }}
+        viewport={{ once: false, margin: '-100px' }}
         transition={{ duration: 0.6 }}
         className="mb-12 text-center"
       >
@@ -116,7 +116,7 @@ export function ExamplesSection() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         transition={{ duration: 0.5 }}
         className="overflow-hidden rounded-2xl border border-fd-border bg-fd-card"
       >

@@ -168,18 +168,48 @@ export function FeatureStagger() {
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-12 items-center h-full">
             
             <div className="lg:col-span-5 relative z-50">
-              <h2 className="text-5xl sm:text-6xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.15] mb-8">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="text-5xl sm:text-6xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.15] mb-8"
+              >
                 Engineered for <br className="hidden lg:block" />
                 <span className="relative inline-block font-cursive text-[#fa5c4f] font-normal tracking-normal text-6xl sm:text-7xl mt-2 scale-110">
                   pure fluidity
-                  <svg className="absolute -bottom-2 left-0 w-full text-[#fa5c4f]/40" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 8C20 2 40 8 60 5C75 3 85 7 98 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
+                  <motion.svg 
+                    className="absolute -bottom-2 left-0 w-full text-[#fa5c4f]/60" 
+                    viewBox="0 0 100 10" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    <motion.path 
+                      d="M2 8C20 2 40 8 60 5C75 3 85 7 98 4" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round"
+                      initial={{ pathLength: 0 }}
+                      whileInView={{ pathLength: 1 }}
+                      viewport={{ once: false, amount: 0.2 }}
+                      transition={{ duration: 1.5, delay: 0.3, ease: 'easeInOut' }}
+                    />
+                  </motion.svg>
                 </span>
-              </h2>
-              <p className="text-[var(--text-muted)] text-lg leading-relaxed max-w-sm mb-12 font-light">
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[var(--text-muted)] text-lg leading-relaxed max-w-sm mb-12 font-light"
+              >
                 Every transition is hand-crafted to avoid layout thrashing. We freeze your router, orchestrate the exit, and inject the entry animation with sub-millisecond precision.
-              </p>
+              </motion.p>
             </div>
 
             <div className="lg:col-span-7 relative w-full h-[75vh] max-h-[800px] perspective-[1000px]">

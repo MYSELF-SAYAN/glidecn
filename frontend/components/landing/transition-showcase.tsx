@@ -187,8 +187,29 @@ export function TransitionShowcase() {
           
           <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.15]">
             33+ production shaders. <br />
-            <span className="font-cursive text-[#fa5c4f] font-normal text-5xl sm:text-6xl inline-block mt-2">
+            <span className="relative font-cursive text-[#fa5c4f] font-normal text-5xl sm:text-6xl inline-block mt-2">
               Infinite possibilities.
+              <motion.svg 
+                className="absolute -bottom-1 left-0 w-full text-[#fa5c4f]/60" 
+                viewBox="0 0 100 10" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <motion.path 
+                  d="M2 8C20 2 40 8 60 5C75 3 85 7 98 4" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 1.5, delay: 0.3, ease: 'easeInOut' }}
+                />
+              </motion.svg>
             </span>
           </h2>
 
