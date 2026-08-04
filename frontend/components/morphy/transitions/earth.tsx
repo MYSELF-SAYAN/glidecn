@@ -4,35 +4,36 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const earthTransition: TransitionDefinition = {
   metadata: {
     name: 'earth',
     displayName: 'Earth',
-    description: 'A dynamic earth effect.',
+    description: 'A heavy tectonic upward shift with slight 3D rotation.',
     category: 'experimental',
     props: [
       {
         name: 'duration',
         type: 'number',
-        default: '0.6',
-        description: 'Duration of the transition in seconds.',
+        default: '0.8',
+        description: 'Duration of the transition',
       }
     ],
   },
   defaultConfig: {
-    duration: 0.6,
+    duration: 0.8,
   },
-  getVariants: (config) => ({
-
-    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' }
-    
+  getVariants: () => ({
+    initial: { opacity: 0, y: '30%', rotateX: -15, transformPerspective: 1000 },
+    animate: { opacity: 1, y: '0%', rotateX: 0, transformPerspective: 1000 },
+    exit: { opacity: 0, y: '-20%', rotateX: 10, transformPerspective: 1000 }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    type: 'spring',
+    stiffness: 70,
+    damping: 15,
   }),
 };
 

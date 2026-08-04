@@ -61,7 +61,7 @@ export function TransitionManager({
   };
 
   return (
-    <AnimatePresence mode={mode} initial={false} onExitComplete={handleExitComplete}>
+    <AnimatePresence mode={mode} initial={true} onExitComplete={handleExitComplete}>
       <FrozenRouter key={routeKey}>{children}</FrozenRouter>
     </AnimatePresence>
   );

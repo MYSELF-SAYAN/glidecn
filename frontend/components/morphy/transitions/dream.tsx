@@ -4,35 +4,34 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const dreamTransition: TransitionDefinition = {
   metadata: {
     name: 'dream',
     displayName: 'Dream',
-    description: 'A dynamic dream effect.',
+    description: 'An ethereal slow fade with heavy blur and brightness.',
     category: 'experimental',
     props: [
       {
         name: 'duration',
         type: 'number',
-        default: '0.6',
-        description: 'Duration of the transition in seconds.',
+        default: '1.2',
+        description: 'Duration of the transition',
       }
     ],
   },
   defaultConfig: {
-    duration: 0.6,
+    duration: 1.2,
   },
-  getVariants: (config) => ({
-
-    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' }
-    
+  getVariants: () => ({
+    initial: { opacity: 0, scale: 1.05, filter: 'blur(20px) brightness(1.5)' },
+    animate: { opacity: 1, scale: 1, filter: 'blur(0px) brightness(1)' },
+    exit: { opacity: 0, scale: 0.95, filter: 'blur(20px) brightness(0.5)' }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [0.25, 0.1, 0.25, 1],
   }),
 };
 

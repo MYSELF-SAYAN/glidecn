@@ -4,35 +4,34 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const mosaicTransition: TransitionDefinition = {
   metadata: {
     name: 'mosaic',
     displayName: 'Mosaic',
-    description: 'A dynamic mosaic effect.',
+    description: 'A jagged shattered polygon expansion.',
     category: 'experimental',
     props: [
       {
         name: 'duration',
         type: 'number',
-        default: '0.6',
-        description: 'Duration of the transition in seconds.',
+        default: '0.7',
+        description: 'Duration of the transition',
       }
     ],
   },
   defaultConfig: {
-    duration: 0.6,
+    duration: 0.7,
   },
-  getVariants: (config) => ({
-
-    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' }
-    
+  getVariants: () => ({
+    initial: { clipPath: 'polygon(50% 50%, 60% 40%, 40% 60%, 50% 50%)', opacity: 0 },
+    animate: { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', opacity: 1 },
+    exit: { clipPath: 'polygon(40% 40%, 60% 60%, 40% 50%, 50% 60%)', opacity: 0 }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [0.65, 0, 0.35, 1],
   }),
 };
 

@@ -4,35 +4,34 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const waterTransition: TransitionDefinition = {
   metadata: {
     name: 'water',
     displayName: 'Water',
-    description: 'A dynamic water effect.',
+    description: 'A fluid, blurry rise from the depths.',
     category: 'experimental',
     props: [
       {
         name: 'duration',
         type: 'number',
-        default: '0.6',
-        description: 'Duration of the transition in seconds.',
+        default: '0.9',
+        description: 'Duration of the transition',
       }
     ],
   },
   defaultConfig: {
-    duration: 0.6,
+    duration: 0.9,
   },
-  getVariants: (config) => ({
-
-    initial: { opacity: 0, y: -20, scaleY: 0.9, filter: 'hue-rotate(180deg) blur(4px) contrast(1.2)' },
-    animate: { opacity: 1, y: 0, scaleY: 1, filter: 'hue-rotate(0deg) blur(0px) contrast(1)' },
-    exit: { opacity: 0, y: 20, scaleY: 1.1, filter: 'hue-rotate(180deg) blur(4px) contrast(1.2)' }
-      
+  getVariants: () => ({
+    initial: { opacity: 0, y: 150, filter: 'blur(20px) hue-rotate(90deg)' },
+    animate: { opacity: 1, y: 0, filter: 'blur(0px) hue-rotate(0deg)' },
+    exit: { opacity: 0, y: -150, filter: 'blur(20px) hue-rotate(-90deg)' }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [0.25, 1, 0.5, 1], // Smooth fluid motion
   }),
 };
 

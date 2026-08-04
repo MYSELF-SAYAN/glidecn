@@ -165,8 +165,17 @@ export function PlaygroundTransitionStudio() {
     return matchesCategory && matchesSearch;
   });
 
-  const isPage1 = pathname.includes('page-1') || pathname === '/playground';
-  const targetPage = isPage1 ? '/playground/page-2' : '/playground/page-1';
+  const playgroundPages = [
+    '/playground/landing',
+    '/playground/features',
+    '/playground/showcase',
+    '/playground/pricing',
+    '/playground/about',
+  ];
+
+  const currentIndex = playgroundPages.findIndex(p => pathname.includes(p));
+  const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % playgroundPages.length;
+  const targetPage = playgroundPages[nextIndex];
 
   const handleFlipPage = (customTransition?: string) => {
     if (customTransition) setTransition(customTransition);
