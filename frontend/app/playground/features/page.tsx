@@ -1,64 +1,114 @@
 'use client';
 
 import { Page } from '@/components/morphy';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import { LayoutGrid, Maximize, GitMerge, ArrowUpRight } from 'lucide-react';
 
-export default function FeaturesPage() {
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06, delayChildren: 0.15 }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 14, scale: 0.97 },
+  visible: { 
+    opacity: 1, y: 0, scale: 1,
+    transition: { type: 'spring', stiffness: 300, damping: 25 }
+  }
+};
+
+export default function BentoMatrixPage() {
+  const blocks = [
+    { span: '@md/device:col-span-8 @md/device:row-span-2', label: 'Primary Node', desc: 'Hero section component — the largest element anchors the visual hierarchy.', type: 'hero' },
+    { span: '@md/device:col-span-4 @md/device:row-span-1', label: 'Metrics A', desc: 'Conversion rate', type: 'data' },
+    { span: '@md/device:col-span-4 @md/device:row-span-1', label: 'Metrics B', desc: 'Bounce rate', type: 'data' },
+    { span: '@md/device:col-span-4 @md/device:row-span-1', label: 'Module 01', desc: 'Navigation component', type: 'unit' },
+    { span: '@md/device:col-span-4 @md/device:row-span-1', label: 'Module 02', desc: 'Sidebar layout', type: 'unit' },
+    { span: '@md/device:col-span-4 @md/device:row-span-1', label: 'Module 03', desc: 'Footer section', type: 'unit' },
+  ];
+
   return (
     <Page>
-      <div className="min-h-[100dvh] w-full bg-white text-zinc-950 font-sans relative overflow-hidden flex flex-col">
+      <div className="w-full min-h-full bg-[var(--bg-page)] flex flex-col relative transition-colors duration-700 font-sans">
         
-        {/* Minimal White Context - Stark Contrast from Landing */}
-        <div className="flex-1 w-full max-w-7xl mx-auto px-6 py-32 md:py-48 flex flex-col justify-center relative z-10">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
-            <h1 className="text-5xl md:text-8xl font-semibold tracking-tighter text-zinc-900 max-w-4xl leading-[0.9]">
-              Zero-latency rendering.
+        {/* Header */}
+        <header className="px-6 py-10 @md/device:px-10 @md/device:py-14 flex flex-col @md/device:flex-row justify-between items-start @md/device:items-end z-20 gap-4 @md/device:gap-6 shrink-0 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-page)] via-[var(--bg-page)] to-transparent pointer-events-none" />
+          <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="relative z-10">
+            <span className="text-[10px] @md/device:text-xs font-semibold tracking-widest text-[var(--text-muted)] uppercase mb-3 block">
+              Bento Architecture
+            </span>
+            <h1 className="text-3xl @md/device:text-5xl font-medium tracking-tight @md/device:tracking-[-0.03em] text-[var(--text-main)]" style={{ fontOpticalSizing: 'auto' }}>
+              Structural Matrix
             </h1>
-            
-            <Link href="/playground/showcase" className="group shrink-0 inline-flex items-center justify-center w-20 h-20 bg-zinc-950 hover:bg-zinc-800 text-white rounded-full transition-all duration-500 hover:scale-105 active:scale-95">
-              <ArrowRight className="w-8 h-8 group-hover:translate-x-1 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-            </Link>
-          </div>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="flex flex-wrap items-center gap-4 @md/device:gap-5 text-xs text-[var(--text-muted)] relative z-10">
+            <span className="flex items-center gap-1.5 font-medium"><LayoutGrid className="w-3.5 h-3.5 opacity-70" /> CSS Grid</span>
+            <span className="flex items-center gap-1.5 font-medium"><Maximize className="w-3.5 h-3.5 opacity-70" /> Fluid Scale</span>
+            <span className="flex items-center gap-1.5 font-medium"><GitMerge className="w-3.5 h-3.5 opacity-70" /> Dense Flow</span>
+          </motion.div>
+        </header>
 
-          {/* Gapless Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 auto-rows-[300px] gap-4 grid-flow-dense">
-            
-            {/* Massive Hero Cell */}
-            <div className="md:col-span-2 md:row-span-2 bg-zinc-100 rounded-3xl p-10 flex flex-col justify-between overflow-hidden relative group">
-              <div className="absolute inset-0 bg-zinc-200/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-              <div>
-                <h3 className="text-3xl font-medium tracking-tight mb-4 text-zinc-900">GPU-Accelerated Compositing</h3>
-                <p className="text-zinc-500 leading-relaxed max-w-sm">
-                  Offloading layout calculations entirely to the GPU, guaranteeing a locked 120fps regardless of DOM complexity.
-                </p>
+        {/* Bento Grid */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="mx-4 @md/device:mx-10 grid grid-cols-1 @md/device:grid-cols-12 gap-4 @md/device:gap-5 @md/device:grid-flow-dense shrink-0"
+        >
+          {blocks.map((block, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              whileHover={{ scale: 0.98, y: -4 }}
+              transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+              className={`bg-white/50 dark:bg-black/30 backdrop-blur-2xl ${block.span} p-6 @md/device:p-8 rounded-[2rem] flex flex-col justify-between cursor-pointer border border-black/5 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:bg-white/80 dark:hover:bg-black/50 transition-all min-h-[160px] @md/device:min-h-[180px] group`}
+            >
+              <div className="flex justify-between items-start">
+                <span className="text-xs font-semibold tracking-wider text-[var(--text-muted)]">0{i + 1}</span>
+                <span className="w-2 h-2 rounded-full bg-black/10 dark:bg-white/20 group-hover:bg-[var(--text-main)] group-hover:scale-150 transition-all duration-300" />
               </div>
-              <div className="mt-12 aspect-[4/3] w-full rounded-2xl overflow-hidden bg-zinc-300">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover mix-blend-multiply opacity-50 grayscale group-hover:scale-105 transition-transform duration-[1000ms]" alt="Architecture" />
+              
+              <div className="mt-4 @md/device:mt-auto">
+                <h3 className={`font-medium tracking-tight ${block.type === 'hero' ? 'text-2xl @md/device:text-3xl @md/device:tracking-[-0.02em]' : 'text-lg @md/device:text-xl'} text-[var(--text-main)]`}>
+                  {block.label}
+                </h3>
+                <p className="text-sm text-[var(--text-muted)] mt-2 font-medium opacity-70 leading-relaxed">{block.desc}</p>
               </div>
-            </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-            {/* Standard Cells */}
-            <div className="md:col-span-1 md:row-span-1 bg-zinc-100 rounded-3xl p-8 flex flex-col justify-between group overflow-hidden">
-              <h3 className="text-xl font-medium tracking-tight text-zinc-900">Scroll Physics</h3>
-              <p className="text-zinc-500 text-sm mt-4">Inertia mapped to physical device momentum.</p>
+        {/* Grid Metrics Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: [0.16,1,0.3,1] }}
+          className="mx-4 @md/device:mx-10 mt-6 mb-10 shrink-0"
+        >
+          <div className="bg-white/50 dark:bg-black/30 backdrop-blur-2xl rounded-[2rem] p-6 @md/device:p-8 border border-black/5 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+            <div className="text-[10px] @md/device:text-xs font-bold tracking-widest text-[var(--text-muted)] uppercase mb-5">
+              Grid Specifications
             </div>
-
-            <div className="md:col-span-1 md:row-span-1 bg-zinc-100 rounded-3xl p-8 flex flex-col justify-between group overflow-hidden relative">
-              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover grayscale opacity-20 group-hover:opacity-40 transition-opacity duration-700" alt="Texture" />
-              <h3 className="text-xl font-medium tracking-tight text-zinc-900 relative z-10">Shader Masking</h3>
+            <div className="grid grid-cols-2 @md/device:grid-cols-4 gap-4">
+              {[
+                { label: 'Columns', value: '12' },
+                { label: 'Gutter', value: '20px' },
+                { label: 'Margin', value: '40px' },
+                { label: 'Breakpoint', value: '768px' },
+              ].map((spec, i) => (
+                <div key={i} className="flex flex-col">
+                  <span className="text-2xl @md/device:text-3xl font-medium tracking-tight text-[var(--text-main)]">{spec.value}</span>
+                  <span className="text-[10px] font-semibold tracking-wider text-[var(--text-muted)] uppercase mt-1 opacity-60">{spec.label}</span>
+                </div>
+              ))}
             </div>
-
-            <div className="md:col-span-2 md:row-span-1 bg-zinc-950 rounded-3xl p-10 flex flex-col justify-center text-white group overflow-hidden relative">
-              <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <h3 className="text-2xl font-medium tracking-tight mb-2 relative z-10">Absolute Determinism</h3>
-              <p className="text-zinc-400 relative z-10">Transitions follow strict mathematical curves. No arbitrary bouncing.</p>
-            </div>
-
           </div>
+        </motion.div>
 
-        </div>
       </div>
     </Page>
   );

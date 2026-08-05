@@ -104,6 +104,260 @@
 }
 
 /* ==========================================================================
+ * Playground Themes (Scoped to .playground-root)
+ * ========================================================================== */
+
+.playground-root[data-theme="zinc"] {
+  --bg-page: #ffffff;
+  --bg-surface: #f4f4f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f9f9fb;
+  --bg-subtle: #f8fafc;
+  --border-color: #e4e4e7;
+  --border-hover: #18181b;
+  --text-main: #09090b;
+  --text-muted: #52525b;
+  --text-subtle: #a1a1aa;
+}
+.dark .playground-root[data-theme="zinc"] {
+  --bg-page: #09090b;
+  --bg-surface: #18181b;
+  --bg-card: #09090b;
+  --bg-card-hover: #121216;
+  --bg-subtle: #111115;
+  --border-color: #27272a;
+  --border-hover: #ffffff;
+  --text-main: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-subtle: #71717a;
+}
+
+.playground-root[data-theme="ocean"] {
+  --bg-page: #f8fafc;
+  --bg-surface: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-subtle: #f1f5f9;
+  --border-color: #e2e8f0;
+  --border-hover: #0284c7;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #94a3b8;
+}
+.dark .playground-root[data-theme="ocean"] {
+  --bg-page: #020617;
+  --bg-surface: #0f172a;
+  --bg-card: #020617;
+  --bg-card-hover: #0b1120;
+  --bg-subtle: #0f172a;
+  --border-color: #1e293b;
+  --border-hover: #38bdf8;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #475569;
+}
+
+.playground-root[data-theme="emerald"] {
+  --bg-page: #f0fdf4;
+  --bg-surface: #dcfce7;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0fdf4;
+  --bg-subtle: #dcfce7;
+  --border-color: #bbf7d0;
+  --border-hover: #10b981;
+  --text-main: #064e3b;
+  --text-muted: #065f46;
+  --text-subtle: #10b981;
+}
+.dark .playground-root[data-theme="emerald"] {
+  --bg-page: #022c22;
+  --bg-surface: #064e3b;
+  --bg-card: #022c22;
+  --bg-card-hover: #043a2d;
+  --bg-subtle: #064e3b;
+  --border-color: #065f46;
+  --border-hover: #34d399;
+  --text-main: #ecfdf5;
+  --text-muted: #6ee7b7;
+  --text-subtle: #34d399;
+}
+
+.playground-root[data-theme="amber"] {
+  --bg-page: #fffbeb;
+  --bg-surface: #fef3c7;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fffbeb;
+  --bg-subtle: #fef3c7;
+  --border-color: #fde68a;
+  --border-hover: #f59e0b;
+  --text-main: #78350f;
+  --text-muted: #92400e;
+  --text-subtle: #b45309;
+}
+.dark .playground-root[data-theme="amber"] {
+  --bg-page: #451a03;
+  --bg-surface: #78350f;
+  --bg-card: #451a03;
+  --bg-card-hover: #5e2609;
+  --bg-subtle: #78350f;
+  --border-color: #92400e;
+  --border-hover: #fbbf24;
+  --text-main: #fef3c7;
+  --text-muted: #fcd34d;
+  --text-subtle: #fbbf24;
+}
+
+.playground-root[data-theme="violet"] {
+  --bg-page: #f5f3ff;
+  --bg-surface: #ede9fe;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f3ff;
+  --bg-subtle: #ede9fe;
+  --border-color: #ddd6fe;
+  --border-hover: #8b5cf6;
+  --text-main: #2e1065;
+  --text-muted: #4c1d95;
+  --text-subtle: #7c3aed;
+}
+.dark .playground-root[data-theme="violet"] {
+  --bg-page: #1e1b4b;
+  --bg-surface: #2e1065;
+  --bg-card: #1e1b4b;
+  --bg-card-hover: #26165e;
+  --bg-subtle: #2e1065;
+  --border-color: #4c1d95;
+  --border-hover: #a78bfa;
+  --text-main: #ede9fe;
+  --text-muted: #c4b5fd;
+  --text-subtle: #a78bfa;
+}
+
+.playground-root[data-theme="rose"] {
+  --bg-page: #fff1f2;
+  --bg-surface: #ffe4e6;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fff1f2;
+  --bg-subtle: #ffe4e6;
+  --border-color: #fecdd3;
+  --border-hover: #f43f5e;
+  --text-main: #4c0519;
+  --text-muted: #881337;
+  --text-subtle: #be123c;
+}
+.dark .playground-root[data-theme="rose"] {
+  --bg-page: #4c0519;
+  --bg-surface: #881337;
+  --bg-card: #4c0519;
+  --bg-card-hover: #6a0b25;
+  --bg-subtle: #881337;
+  --border-color: #9f1239;
+  --border-hover: #fb7185;
+  --text-main: #ffe4e6;
+  --text-muted: #fecdd3;
+  --text-subtle: #fda4af;
+}
+
+.playground-root[data-theme="slate"] {
+  --bg-page: #f8fafc;
+  --bg-surface: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-subtle: #f1f5f9;
+  --border-color: #e2e8f0;
+  --border-hover: #64748b;
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --text-subtle: #64748b;
+}
+.dark .playground-root[data-theme="slate"] {
+  --bg-page: #020617;
+  --bg-surface: #0f172a;
+  --bg-card: #020617;
+  --bg-card-hover: #0b1120;
+  --bg-subtle: #0f172a;
+  --border-color: #1e293b;
+  --border-hover: #94a3b8;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+}
+
+.playground-root[data-theme="indigo"] {
+  --bg-page: #eef2ff;
+  --bg-surface: #e0e7ff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #eef2ff;
+  --bg-subtle: #e0e7ff;
+  --border-color: #c7d2fe;
+  --border-hover: #4f46e5;
+  --text-main: #312e81;
+  --text-muted: #4338ca;
+  --text-subtle: #6366f1;
+}
+.dark .playground-root[data-theme="indigo"] {
+  --bg-page: #1e1b4b;
+  --bg-surface: #312e81;
+  --bg-card: #1e1b4b;
+  --bg-card-hover: #23215e;
+  --bg-subtle: #312e81;
+  --border-color: #4338ca;
+  --border-hover: #818cf8;
+  --text-main: #eef2ff;
+  --text-muted: #a5b4fc;
+  --text-subtle: #818cf8;
+}
+
+.playground-root[data-theme="crimson"] {
+  --bg-page: #fef2f2;
+  --bg-surface: #fee2e2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fef2f2;
+  --bg-subtle: #fee2e2;
+  --border-color: #fecaca;
+  --border-hover: #dc2626;
+  --text-main: #7f1d1d;
+  --text-muted: #991b1b;
+  --text-subtle: #ef4444;
+}
+.dark .playground-root[data-theme="crimson"] {
+  --bg-page: #450a0a;
+  --bg-surface: #7f1d1d;
+  --bg-card: #450a0a;
+  --bg-card-hover: #570e0e;
+  --bg-subtle: #7f1d1d;
+  --border-color: #991b1b;
+  --border-hover: #f87171;
+  --text-main: #fef2f2;
+  --text-muted: #fca5a5;
+  --text-subtle: #f87171;
+}
+
+.playground-root[data-theme="teal"] {
+  --bg-page: #f0fdfa;
+  --bg-surface: #ccfbf1;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0fdfa;
+  --bg-subtle: #ccfbf1;
+  --border-color: #99f6e4;
+  --border-hover: #0d9488;
+  --text-main: #134e4a;
+  --text-muted: #115e59;
+  --text-subtle: #14b8a6;
+}
+.dark .playground-root[data-theme="teal"] {
+  --bg-page: #042f2e;
+  --bg-surface: #134e4a;
+  --bg-card: #042f2e;
+  --bg-card-hover: #073f3e;
+  --bg-subtle: #134e4a;
+  --border-color: #115e59;
+  --border-hover: #2dd4bf;
+  --text-main: #f0fdfa;
+  --text-muted: #5eead4;
+  --text-subtle: #2dd4bf;
+}
+
+/* ==========================================================================
  * Base Styles
  * ========================================================================== */
 
