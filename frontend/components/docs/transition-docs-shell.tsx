@@ -8,43 +8,13 @@ import { defaultRegistry } from '@/components/morphy/core/registry';
 import { buildVariants, buildTransition } from '@/components/morphy/core/animation-engine';
 import { mergeConfig } from '@/components/morphy/core/utils';
 import { DEFAULT_TRANSITION_CONFIG } from '@/components/morphy/constants';
+
+// Ensure all transitions are registered
+import '@/components/morphy/transitions';
 import { getCatalogEntry, TRANSITION_CATALOG } from '@/lib/transition-catalog';
 import type { TransitionCatalogEntry } from '@/lib/transition-catalog';
 
 // Ensure transitions are registered
-import '@/components/morphy/transitions/fade';
-import '@/components/morphy/transitions/slide';
-import '@/components/morphy/transitions/scale';
-import '@/components/morphy/transitions/circular-portal';
-import '@/components/morphy/transitions/page-curl';
-import '@/components/morphy/transitions/cube';
-import '@/components/morphy/transitions/slash';
-import '@/components/morphy/transitions/wormhole';
-import '@/components/morphy/transitions/ink-spread';
-import '@/components/morphy/transitions/liquid-morph';
-import '@/components/morphy/transitions/dissolve';
-import '@/components/morphy/transitions/swipe';
-import '@/components/morphy/transitions/flip';
-import '@/components/morphy/transitions/spin';
-import '@/components/morphy/transitions/zoom';
-import '@/components/morphy/transitions/bounce';
-import '@/components/morphy/transitions/wobble';
-import '@/components/morphy/transitions/stretch';
-import '@/components/morphy/transitions/squeeze';
-import '@/components/morphy/transitions/ripple';
-import '@/components/morphy/transitions/glass';
-import '@/components/morphy/transitions/ghost';
-import '@/components/morphy/transitions/shadow';
-import '@/components/morphy/transitions/neon';
-import '@/components/morphy/transitions/glitch';
-import '@/components/morphy/transitions/fold';
-import '@/components/morphy/transitions/wave';
-import '@/components/morphy/transitions/pixel';
-import '@/components/morphy/transitions/mirror';
-import '@/components/morphy/transitions/vortex';
-import '@/components/morphy/transitions/tv-turn-off';
-import '@/components/morphy/transitions/shutter-iris';
-import '@/components/morphy/transitions/origami-unfold';
 
 interface TooltipProps {
   label: string;
@@ -201,12 +171,12 @@ export function TransitionDocsShell({ transition, tagline }: ShowcasePageProps) 
 
   return (
     <div className="space-y-12">
-      
+
       {/* HEADER SECTION */}
       <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border-color)] bg-[var(--bg-surface)] p-8 sm:p-12 shadow-2xl group">
         <div className="absolute -inset-4 bg-gradient-to-br from-[#fa5c4f]/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay" />
-        
+
         <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto space-y-6">
           {catalog && (
             <div className="text-6xl sm:text-7xl p-6 rounded-3xl bg-black/40 border border-white/10 shadow-2xl backdrop-blur-xl mb-2">
@@ -224,7 +194,7 @@ export function TransitionDocsShell({ transition, tagline }: ShowcasePageProps) 
 
       {/* DEMO / CODE PLAYER */}
       <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d0d0d] shadow-2xl ring-1 ring-white/5">
-        
+
         {/* Mac-style Window Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-white/5 px-4 py-3 relative z-20">
           <div className="flex items-center gap-2">
@@ -297,7 +267,7 @@ export function TransitionDocsShell({ transition, tagline }: ShowcasePageProps) 
       {/* METRICS & DETAILS */}
       {catalog && (
         <div className="grid gap-6 lg:grid-cols-2">
-          
+
           {/* Left: Metrics Bento */}
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2 relative overflow-hidden rounded-[2rem] border border-[var(--border-color)] bg-[var(--bg-surface)] p-8 shadow-xl group hover:border-[#fa5c4f]/40 transition-colors">
@@ -400,7 +370,7 @@ function PageAContent() {
         {/* Cinematic Background */}
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-luminosity saturate-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-[#0d0d0d]/80 to-transparent" />
-        
+
         <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-start space-y-6">
           <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/50 border border-white/20 px-3 py-1 rounded-full backdrop-blur-md">
             Issue No. 04
@@ -440,7 +410,7 @@ function PageBContent() {
             </div>
             <div className="space-y-6 pt-2">
               <p className="text-sm leading-relaxed font-light text-black/70">
-                The ideology that design should be dictated by its purpose is not new, but in the digital era, it has taken on a profound new meaning. 
+                The ideology that design should be dictated by its purpose is not new, but in the digital era, it has taken on a profound new meaning.
                 Stripping away the superfluous leaves us with the raw essence of the interface.
               </p>
               <p className="text-sm leading-relaxed font-light text-black/70">

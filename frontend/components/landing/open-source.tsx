@@ -74,7 +74,7 @@ export function OpenSource() {
           <Link
             href="https://github.com/morphy"
             target="_blank"
-            className="group flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[var(--text-main)] text-[var(--bg-page)] text-sm font-bold shadow-lg transition-transform hover:scale-105 w-full sm:w-auto"
+            className="group flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[var(--text-main)] text-[var(--bg-page)] text-sm font-bold shadow-lg transition-transform duration-200 hover:scale-105 active:scale-[0.97] w-full sm:w-auto"
           >
             <Github className="w-4 h-4" />
             <span>GitHub Repository</span>
@@ -82,7 +82,7 @@ export function OpenSource() {
           
           <Link
             href="/docs/contributing"
-            className="group flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-main)] text-sm font-bold hover:bg-[var(--bg-card-hover)] hover:border-[#fa5c4f]/50 transition-all w-full sm:w-auto"
+            className="group flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-main)] text-sm font-bold hover:bg-[var(--bg-card-hover)] hover:border-[#fa5c4f]/50 transition-[background-color,border-color,transform] duration-200 active:scale-[0.97] w-full sm:w-auto"
           >
             <GitPullRequest className="w-4 h-4 text-[#fa5c4f]" />
             <span>Contribution Guide</span>

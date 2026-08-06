@@ -82,7 +82,7 @@ export function Page({
       exit={variants.exit as any}
       transition={motionTransition as any}
       style={{ willChange, ...style }}
-      className={`w-full h-full overflow-y-auto custom-scrollbar ${className || ''}`}
+      className={`w-full h-full ${className || ''}`}
     >
       {children}
     </motion.div>

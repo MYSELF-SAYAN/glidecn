@@ -220,7 +220,7 @@ export function TransitionShowcase() {
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">
             <Link
               href="/playground/page-1"
-              className="w-full sm:w-auto group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#e54235] hover:shadow-[0_0_30px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-0.5"
+              className="w-full sm:w-auto group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-6 py-3.5 text-sm font-bold text-white transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#e54235] hover:shadow-[0_0_30px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-0.5 active:scale-[0.97]"
             >
               <Gamepad2 className="size-4" />
               <span>Launch Playground</span>
@@ -250,7 +250,7 @@ export function TransitionShowcase() {
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: false, margin: '-40px' }}
                   transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className={`flex flex-col overflow-hidden rounded-[24px] bg-[var(--bg-surface)] border border-[var(--border-color)] group hover:border-[#fa5c4f]/50 hover:shadow-[0_20px_40px_-15px_rgba(250,92,79,0.15)] transition-all duration-500 ease-out hover:-translate-y-1 ${
+                  className={`flex flex-col overflow-hidden rounded-[24px] bg-[var(--bg-surface)] border border-[var(--border-color)] group hover:border-[#fa5c4f]/50 hover:shadow-[0_20px_40px_-15px_rgba(250,92,79,0.15)] transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 ${
                     isEvenColumn ? 'sm:mt-12' : ''
                   }`}
                 >

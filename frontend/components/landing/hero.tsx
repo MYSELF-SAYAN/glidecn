@@ -98,7 +98,7 @@ export function Hero() {
         >
           <Link
             href="/docs/installation"
-            className="group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-8 py-4 text-sm font-bold text-white transition-all duration-300 hover:bg-[#e54235] hover:shadow-[0_0_40px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-1"
+            className="group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-8 py-4 text-sm font-bold text-white transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#e54235] hover:shadow-[0_0_40px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-1 active:scale-[0.97]"
           >
             <span>Start Building</span>
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -133,10 +133,10 @@ export function Hero() {
                   <button
                     key={pkg}
                     onClick={() => setSelectedPkg(pkg)}
-                    className={`px-3 py-1 rounded-md text-xs font-medium transition-all duration-300 cursor-pointer ${
+                    className={`px-3 py-1 rounded-md text-xs font-medium transition-[background-color,color,box-shadow,transform] duration-150 cursor-pointer ${
                       selectedPkg === pkg
                         ? 'bg-[var(--text-main)] text-[var(--bg-page)] shadow-sm'
-                        : 'text-[var(--text-subtle)] hover:text-[var(--text-main)]'
+                        : 'text-[var(--text-subtle)] hover:text-[var(--text-main)] active:scale-[0.97]'
                     }`}
                   >
                     {pkg}

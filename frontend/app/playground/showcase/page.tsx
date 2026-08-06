@@ -31,7 +31,7 @@ const images = [
 export default function MediaTelemetryPage() {
   return (
     <Page>
-      <div className="w-full min-h-full bg-[var(--bg-page)] flex flex-col relative transition-colors duration-700 font-sans">
+      <div data-lenis-prevent="true" className="w-full h-full overflow-y-auto overflow-x-hidden bg-[var(--bg-page)] flex flex-col relative transition-colors duration-700 font-sans">
         
         {/* Header */}
         <header className="px-6 py-10 @md/device:px-10 @md/device:py-14 flex flex-col @md/device:flex-row justify-between items-start @md/device:items-end z-20 gap-4 @md/device:gap-6 shrink-0 relative">
