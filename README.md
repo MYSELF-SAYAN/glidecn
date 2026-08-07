@@ -10,7 +10,7 @@
 [![Built with Next.js](https://img.shields.io/badge/built%20with-Next.js%2015-000?style=flat-square&logo=next.js)](https://nextjs.org)
 [![Framer Motion](https://img.shields.io/badge/powered%20by-Framer%20Motion-0055FF?style=flat-square)](https://www.framer.com/motion/)
 
-[Live Demo](https://sectionflow.vercel.app) · [Documentation](https://sectionflow.vercel.app/docs) · [Playground](https://sectionflow.vercel.app/playground)
+[Live Demo](https://glidecn.vercel.app) · [Documentation](https://glidecn.vercel.app/docs) · [Playground](https://glidecn.vercel.app/playground)
 
 </div>
 
@@ -69,7 +69,7 @@ That's it. The engine handles exit freezing, enter orchestration, and GPU compos
 | **Retro** | Nostalgic effects | `tv-turn-off`, `pixel`, `vortex` |
 | **Experimental** | Elemental & cosmic | `fire`, `ice`, `galaxy`, `lightning` |
 
-[Browse all transitions →](https://sectionflow.vercel.app/docs/transitions)
+[Browse all transitions →](https://glidecn.vercel.app/docs/transitions)
 
 ---
 

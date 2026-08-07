@@ -2,6 +2,8 @@
   "name": "glidecn-cli",
   "version": "0.1.4",
   "description": "✨ Drop-in page transitions for React — works with Next.js, Vite, TanStack Router, and more",
+  "homepage": "https://glidecn.vercel.app",
+  "repository": "github:MYSELF-SAYAN/glidecn",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
