@@ -62,6 +62,12 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
                 </Link>
               </li>
               <li>
+                <Link href="/contributing" className="group flex items-center text-white/70 hover:text-white transition-colors">
+                  <span>Contributing</span>
+                  <ArrowUpRight className="size-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/playground/landing" className="group flex items-center text-[#fa5c4f] hover:text-[#e54235] transition-colors">
                   <span>Playground Area</span>
                   <ArrowUpRight className="size-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
