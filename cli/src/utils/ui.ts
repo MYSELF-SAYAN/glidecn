@@ -9,17 +9,17 @@ import pc from 'picocolors';
 // ASCII Art Banner
 // ---------------------------------------------------------------------------
 
-const MORPHY_ART = `
-  ${pc.magenta('███')}${pc.cyan('╗')}   ${pc.magenta('███')}${pc.cyan('╗')} ${pc.yellow('██████')}${pc.cyan('╗')} ${pc.green('██████')}${pc.cyan('╗')} ${pc.blue('██████')}${pc.cyan('╗')} ${pc.red('██')}${pc.cyan('╗')}  ${pc.red('██')}${pc.cyan('╗')} ${pc.magenta('██')}${pc.cyan('╗')}  ${pc.magenta('██')}${pc.cyan('╗')}
-  ${pc.magenta('████')}${pc.cyan('╗')} ${pc.magenta('████')}${pc.cyan('║')}${pc.yellow('██')}${pc.cyan('╔═══')}${pc.yellow('██')}${pc.cyan('╗')}${pc.green('██')}${pc.cyan('╔══')}${pc.green('██')}${pc.cyan('╗')}${pc.blue('██')}${pc.cyan('╔══')}${pc.blue('██')}${pc.cyan('╗')}${pc.red('██')}${pc.cyan('║')}  ${pc.red('██')}${pc.cyan('║')} ${pc.magenta('╚██')}${pc.cyan('╗')}${pc.magenta('██')}${pc.cyan('╔╝')}
-  ${pc.magenta('██')}${pc.cyan('╔')}${pc.magenta('████')}${pc.cyan('╔')}${pc.magenta('██')}${pc.cyan('║')}${pc.yellow('██')}${pc.cyan('║   ')}${pc.yellow('██')}${pc.cyan('║')}${pc.green('██████')}${pc.cyan('╔╝')}${pc.blue('██████')}${pc.cyan('╔╝')}${pc.red('██████')}${pc.cyan('╗')}  ${pc.magenta('╚███')}${pc.cyan('╔╝')}
-  ${pc.magenta('██')}${pc.cyan('║╚')}${pc.magenta('██')}${pc.cyan('╔╝')}${pc.magenta('██')}${pc.cyan('║')}${pc.yellow('██')}${pc.cyan('║   ')}${pc.yellow('██')}${pc.cyan('║')}${pc.green('██')}${pc.cyan('╔══')}${pc.green('██')}${pc.cyan('╗')}${pc.blue('██')}${pc.cyan('╔═══╝ ')}${pc.red('██')}${pc.cyan('╔══')}${pc.red('██')}${pc.cyan('╗')} ${pc.magenta('██')}${pc.cyan('╔')}${pc.magenta('██')}${pc.cyan('╗')}
-  ${pc.magenta('██')}${pc.cyan('║ ╚═╝ ')}${pc.magenta('██')}${pc.cyan('║')}${pc.yellow('╚██████')}${pc.cyan('╔╝')}${pc.green('██')}${pc.cyan('║  ')}${pc.green('██')}${pc.cyan('║')}${pc.blue('██')}${pc.cyan('║     ')}${pc.red('██')}${pc.cyan('║  ')}${pc.red('██')}${pc.cyan('║')}${pc.magenta('██')}${pc.cyan('╔╝ ')}${pc.magenta('██')}${pc.cyan('╗')}
-  ${pc.cyan('╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝')}
+const GLIDECN_ART = `
+  ${pc.magenta('██████')}${pc.cyan('╗')} ${pc.yellow('██')}${pc.cyan('╗')}      ${pc.green('██')}${pc.cyan('╗')} ${pc.blue('██████')}${pc.cyan('╗')}  ${pc.magenta('███████')}${pc.cyan('╗')} ${pc.red('██████')}${pc.cyan('╗')} ${pc.yellow('██')}${pc.cyan('╗')}   ${pc.yellow('██')}${pc.cyan('╗')}
+ ${pc.magenta('██')}${pc.cyan('╔════╝')} ${pc.yellow('██')}${pc.cyan('║')}      ${pc.green('██')}${pc.cyan('║')} ${pc.blue('██')}${pc.cyan('╔══')}${pc.blue('██')}${pc.cyan('╗')} ${pc.magenta('██')}${pc.cyan('╔════╝')} ${pc.red('██')}${pc.cyan('╔════╝')} ${pc.yellow('████')}${pc.cyan('╗  ')}${pc.yellow('██')}${pc.cyan('║')}
+ ${pc.magenta('██')}${pc.cyan('║  ███╗')}${pc.yellow('██')}${pc.cyan('║')}      ${pc.green('██')}${pc.cyan('║')} ${pc.blue('██')}${pc.cyan('║  ')}${pc.blue('██')}${pc.cyan('║')} ${pc.magenta('█████')}${pc.cyan('╗')}   ${pc.red('██')}${pc.cyan('║')}      ${pc.yellow('██')}${pc.cyan('╔')}${pc.yellow('██')}${pc.cyan('╗ ')}${pc.yellow('██')}${pc.cyan('║')}
+ ${pc.magenta('██')}${pc.cyan('║   ██║')}${pc.yellow('██')}${pc.cyan('║')}      ${pc.green('██')}${pc.cyan('║')} ${pc.blue('██')}${pc.cyan('║  ')}${pc.blue('██')}${pc.cyan('║')} ${pc.magenta('██')}${pc.cyan('╔══╝')}   ${pc.red('██')}${pc.cyan('║')}      ${pc.yellow('██')}${pc.cyan('║╚')}${pc.yellow('██')}${pc.cyan('╗')}${pc.yellow('██')}${pc.cyan('║')}
+ ${pc.magenta('╚██████╔╝')}${pc.yellow('███████')}${pc.cyan('╗')}${pc.green('██')}${pc.cyan('║')} ${pc.blue('██████')}${pc.cyan('╔╝')} ${pc.magenta('███████')}${pc.cyan('╗')} ${pc.red('╚██████')}${pc.cyan('╗')} ${pc.yellow('██')}${pc.cyan('║ ╚')}${pc.yellow('████')}${pc.cyan('║')}
+  ${pc.cyan('╚═════╝ ╚══════╝╚═╝ ╚═════╝  ╚══════╝  ╚═════╝ ╚═╝  ╚═══╝')}
 `;
 
 export function printBanner() {
-  console.log(MORPHY_ART);
+  console.log(GLIDECN_ART);
   console.log(
     pc.dim('  ') +
       pc.bold(pc.white('✨ Page transitions for React')) +

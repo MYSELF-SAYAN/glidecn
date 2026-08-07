@@ -102,7 +102,7 @@ export function DocsApiReference() {
         </div>
       </section>
 
-      {/* 2. MORPHY PROVIDER */}
+      {/* 2. GLIDECN PROVIDER */}
       <section className="relative scroll-mt-32" id="glidecn-provider">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
 
@@ -218,7 +218,7 @@ export function DocsApiReference() {
         </div>
       </section>
 
-      {/* 4. USEMORPHY HOOK & USE CASES */}
+      {/* 4. USEGLIDE HOOK & USE CASES */}
       <section className="relative scroll-mt-32" id="use-glidecn">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
 
