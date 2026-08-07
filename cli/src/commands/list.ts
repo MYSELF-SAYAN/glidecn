@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy CLI — `morphy list`
+ * GlideCN CLI — `glidecn list`
  * Display the full transition catalog, grouped by category.
  * ========================================================================== */
 
@@ -19,7 +19,7 @@ export function listCommand() {
   printBanner();
 
   console.log(
-    pc.bold(`  🎨 morphy transitions — ${pc.cyan(String(TRANSITIONS.length))} available`),
+    pc.bold(`  🎨 glidecn transitions — ${pc.cyan(String(TRANSITIONS.length))} available`),
   );
   console.log('');
   printDivider();
@@ -45,13 +45,13 @@ export function listCommand() {
   printDivider();
   console.log('');
   console.log(
-    `  ${pc.dim('Add transitions:')} ${pc.cyan('morphy add cube flip origami-unfold')}`,
+    `  ${pc.dim('Add transitions:')} ${pc.cyan('glidecn add cube flip origami-unfold')}`,
   );
   console.log(
-    `  ${pc.dim('Add by category:')} ${pc.cyan('morphy add --category spatial')}`,
+    `  ${pc.dim('Add by category:')} ${pc.cyan('glidecn add --category spatial')}`,
   );
   console.log(
-    `  ${pc.dim('Add all:')}         ${pc.cyan('morphy add --all')}`,
+    `  ${pc.dim('Add all:')}         ${pc.cyan('glidecn add --all')}`,
   );
   console.log('');
 }

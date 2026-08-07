@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy CLI — Terminal UI Helpers
+ * GlideCN CLI — Terminal UI Helpers
  * Banner, boxes, styled output for the playful CLI experience.
  * ========================================================================== */
 

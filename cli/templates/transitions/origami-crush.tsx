@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Origami Crush Transition
+ * GlideCN — Origami Crush Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

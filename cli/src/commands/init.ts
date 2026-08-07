@@ -1,6 +1,6 @@
 /* ==========================================================================
- * Morphy CLI — `morphy init`
- * Interactive setup wizard for initializing Morphy in a project.
+ * GlideCN CLI — `glidecn init`
+ * Interactive setup wizard for initializing GlideCN in a project.
  * Supports TypeScript (.tsx/.ts) and JavaScript (.jsx/.js).
  * ========================================================================== */
 
@@ -42,7 +42,7 @@ import {
 export async function initCommand() {
   printBanner();
 
-  p.intro(pc.bgCyan(pc.black(' morphy init ')));
+  p.intro(pc.bgCyan(pc.black(' glidecn init ')));
 
   // -----------------------------------------------------------------------
   // 1. Find Project Root
@@ -129,10 +129,10 @@ export async function initCommand() {
   // -----------------------------------------------------------------------
 
   const defaultPath =
-    adapter === 'next-app' ? 'components/morphy' : 'src/components/morphy';
+    adapter === 'next-app' ? 'components/glidecn' : 'src/components/glidecn';
 
   const installPath = await p.text({
-    message: 'Where should Morphy be installed?',
+    message: 'Where should GlideCN be installed?',
     placeholder: defaultPath,
     defaultValue: defaultPath,
     validate: (val) => {
@@ -246,7 +246,7 @@ export async function initCommand() {
   // -----------------------------------------------------------------------
 
   const s = p.spinner();
-  s.start(`Setting up Morphy (${language === 'js' ? 'JavaScript' : 'TypeScript'})...`);
+  s.start(`Setting up GlideCN (${language === 'js' ? 'JavaScript' : 'TypeScript'})...`);
 
   let coreResult: { dirs: string[]; files: string[] };
   let adapterFiles: string[];
@@ -265,9 +265,9 @@ export async function initCommand() {
     // Generate barrel index.ts or index.js
     await generateBarrelExport(destDir, adapter as string, transitionNames, language);
 
-    s.stop(pc.green(`Morphy installed (${language === 'js' ? 'JavaScript' : 'TypeScript'})!`));
+    s.stop(pc.green(`GlideCN installed (${language === 'js' ? 'JavaScript' : 'TypeScript'})!`));
   } catch (err) {
-    s.stop(pc.red('Failed to copy Morphy files'));
+    s.stop(pc.red('Failed to copy GlideCN files'));
     p.log.error(err instanceof Error ? err.message : String(err));
     p.outro(pc.red('Setup aborted'));
     process.exit(1);
@@ -310,7 +310,7 @@ export async function initCommand() {
   p.outro(
     pc.bold(pc.green('✨ Happy transitioning!')) +
       pc.dim(' — run ') +
-      pc.cyan('morphy list') +
+      pc.cyan('glidecn list') +
       pc.dim(' to see all available transitions'),
   );
 }
@@ -326,14 +326,14 @@ function getQuickStart(adapter: string, importPath: string, language: 'ts' | 'js
   switch (adapter) {
     case 'next-app':
       return `${pc.dim(`// app/layout${ext}`)}
-import { MorphyProvider } from '${importPath}';
-import { MorphyNextApp } from '${importPath}/adapters/next-app';
+import { GlideCNProvider } from '${importPath}';
+import { GlideCNNextApp } from '${importPath}/adapters/next-app';
 
 export default function Layout({ children }) {
   return (
-    <MorphyProvider defaultTransition="fade">
-      <MorphyNextApp>{children}</MorphyNextApp>
-    </MorphyProvider>
+    <GlideCNProvider defaultTransition="fade">
+      <GlideCNNextApp>{children}</GlideCNNextApp>
+    </GlideCNProvider>
   );
 }
 
@@ -341,21 +341,21 @@ ${pc.dim(`// app/page${ext}`)}
 import { Page } from '${importPath}';
 
 export default function Home() {
-  return <Page>Hello Morphy! ✨</Page>;
+  return <Page>Hello GlideCN! ✨</Page>;
 }`;
 
     case 'next-pages':
       return `${pc.dim(`// pages/_app${ext}`)}
-import { MorphyProvider } from '${importPath}';
-import { MorphyNextPages } from '${importPath}/adapters/next-pages';
+import { GlideCNProvider } from '${importPath}';
+import { GlideCNNextPages } from '${importPath}/adapters/next-pages';
 
 export default function App({ Component, pageProps, router }) {
   return (
-    <MorphyProvider defaultTransition="fade">
-      <MorphyNextPages routerAsPath={router.asPath}>
+    <GlideCNProvider defaultTransition="fade">
+      <GlideCNNextPages routerAsPath={router.asPath}>
         <Component {...pageProps} key={router.asPath} />
-      </MorphyNextPages>
-    </MorphyProvider>
+      </GlideCNNextPages>
+    </GlideCNProvider>
   );
 }
 
@@ -363,39 +363,39 @@ ${pc.dim(`// pages/index${ext}`)}
 import { Page } from '${importPath}';
 
 export default function Home() {
-  return <Page>Hello Morphy! ✨</Page>;
+  return <Page>Hello GlideCN! ✨</Page>;
 }`;
 
     case 'react-router':
       return `${pc.dim(`// src/App${ext}`)}
 import { useLocation, Routes, Route } from 'react-router-dom';
-import { MorphyProvider, MorphyReactRouter } from '${importPath}';
+import { GlideCNProvider, GlideCNReactRouter } from '${importPath}';
 
 export default function App() {
   const location = useLocation();
   return (
-    <MorphyProvider defaultTransition="fade">
-      <MorphyReactRouter locationKey={location.pathname}>
+    <GlideCNProvider defaultTransition="fade">
+      <GlideCNReactRouter locationKey={location.pathname}>
         <Routes location={location} key={location.pathname}>
           {/* your routes */}
         </Routes>
-      </MorphyReactRouter>
-    </MorphyProvider>
+      </GlideCNReactRouter>
+    </GlideCNProvider>
   );
 }`;
 
     case 'universal':
       return `${pc.dim(`// Wrap your routes (e.g. src/App${ext})`)}
-import { MorphyProvider, MorphyUniversal } from '${importPath}';
+import { GlideCNProvider, GlideCNUniversal } from '${importPath}';
 
 export default function App() {
   const routeKey = /* your current route key */;
   return (
-    <MorphyProvider defaultTransition="fade">
-      <MorphyUniversal routeKey={routeKey}>
+    <GlideCNProvider defaultTransition="fade">
+      <GlideCNUniversal routeKey={routeKey}>
         {/* your page component */}
-      </MorphyUniversal>
-    </MorphyProvider>
+      </GlideCNUniversal>
+    </GlideCNProvider>
   );
 }`;
 

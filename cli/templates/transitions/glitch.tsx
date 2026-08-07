@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Glitch Transition
+ * GlideCN — Glitch Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

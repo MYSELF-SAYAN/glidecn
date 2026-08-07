@@ -1,7 +1,7 @@
 'use client';
 
 /* ==========================================================================
- * Morphy — Universal / Framework-Agnostic Adapter
+ * GlideCN — Universal / Framework-Agnostic Adapter
  * Works seamlessly with TanStack Router, Wouter, Astro, or any React SPA.
  * Requires ZERO Next.js dependencies.
  * ========================================================================== */
@@ -9,7 +9,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-export interface UniversalMorphyProps {
+export interface UniversalGlideCNProps {
   children: ReactNode;
   /** Unique key representing current route/view (e.g. pathname or route ID) */
   routeKey?: string;
@@ -21,13 +21,13 @@ export interface UniversalMorphyProps {
   restoreScroll?: boolean;
 }
 
-export function MorphyUniversal({
+export function GlideCNUniversal({
   children,
   routeKey,
   mode = 'wait',
   className = 'w-full flex-1 flex flex-col',
   restoreScroll = true,
-}: UniversalMorphyProps) {
+}: UniversalGlideCNProps) {
   // Auto-detect browser path if routeKey is not explicitly passed
   const [currentPath, setCurrentPath] = useState<string>(() => {
     return routeKey ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
@@ -52,7 +52,7 @@ export function MorphyUniversal({
   useEffect(() => {
     if (!restoreScroll || typeof window === 'undefined') return;
     return () => {
-      sessionStorage.setItem(`morphy-scroll-${activeKey}`, window.scrollY.toString());
+      sessionStorage.setItem(`glidecn-scroll-${activeKey}`, window.scrollY.toString());
     };
   }, [activeKey, restoreScroll]);
 
@@ -60,7 +60,7 @@ export function MorphyUniversal({
     if (!restoreScroll || typeof window === 'undefined') return;
     if (window.location.hash) return;
 
-    const savedScroll = sessionStorage.getItem(`morphy-scroll-${activeKey}`);
+    const savedScroll = sessionStorage.getItem(`glidecn-scroll-${activeKey}`);
     if (savedScroll) {
       window.scrollTo(0, parseInt(savedScroll, 10));
     } else {
@@ -78,4 +78,4 @@ export function MorphyUniversal({
 }
 
 // Alias for convenience
-export { MorphyUniversal as UniversalTransitionManager };
+export { GlideCNUniversal as UniversalTransitionManager };

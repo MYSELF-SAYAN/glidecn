@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Constants
+ * GlideCN — Constants
  * Default values, easing presets, and configuration constants.
  * ========================================================================== */
 

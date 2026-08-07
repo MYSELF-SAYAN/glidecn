@@ -1,7 +1,7 @@
 'use client';
 
 /* ==========================================================================
- * Morphy — Transition Manager
+ * GlideCN — Transition Manager
  * Orchestrates AnimatePresence and manages enter/exit lifecycle.
  * ========================================================================== */
 

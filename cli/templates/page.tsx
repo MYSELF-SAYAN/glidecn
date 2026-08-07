@@ -1,14 +1,14 @@
 'use client';
 
 /* ==========================================================================
- * Morphy — Page Component
+ * GlideCN — Page Component
  * Wraps page content with the resolved transition animation.
  * ========================================================================== */
 
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import type { PageProps } from './core/types';
-import { useMorphy } from './core/transition-context';
+import { useGlide } from './core/transition-context';
 import { defaultRegistry } from './core/registry';
 import { mergeConfig } from './core/utils';
 import { buildVariants, buildTransition, getWillChangeHint } from './core/animation-engine';
@@ -40,7 +40,7 @@ export function Page({
   className,
   style,
 }: PageProps) {
-  const { currentTransition, config: globalConfig, reducedMotion } = useMorphy();
+  const { currentTransition, config: globalConfig, reducedMotion } = useGlide();
 
   // Resolve the transition definition: page-level prop takes precedence over global transition from context
   const transitionName = transition ?? currentTransition ?? DEFAULT_TRANSITION_NAME;

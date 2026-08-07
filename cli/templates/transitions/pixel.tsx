@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Pixel Transition
+ * GlideCN — Pixel Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

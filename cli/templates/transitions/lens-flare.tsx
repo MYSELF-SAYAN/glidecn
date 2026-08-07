@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Lens Flare Transition
+ * GlideCN — Lens Flare Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

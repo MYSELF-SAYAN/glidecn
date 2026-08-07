@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Paint Drip Transition
+ * GlideCN — Paint Drip Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

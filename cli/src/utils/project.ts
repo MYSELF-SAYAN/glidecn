@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy CLI — Project Detection Utilities
+ * GlideCN CLI — Project Detection Utilities
  * Find project root, detect package manager, resolve paths.
  * ========================================================================== */
 
@@ -111,19 +111,19 @@ export function detectPackageManager(cwd: string = process.cwd()): PackageManage
 }
 
 // ---------------------------------------------------------------------------
-// Morphy Installation Detection
+// GlideCN Installation Detection
 // ---------------------------------------------------------------------------
 
 /**
- * Look for an existing Morphy installation.
- * Returns the path to the morphy directory, or `null` if not found.
+ * Look for an existing GlideCN installation.
+ * Returns the path to the glidecn directory, or `null` if not found.
  */
 export function findExistingInstallation(projectRoot: string): string | null {
   // Common locations
   const candidates = [
-    path.join(projectRoot, 'components', 'morphy'),
-    path.join(projectRoot, 'src', 'components', 'morphy'),
-    path.join(projectRoot, 'app', 'components', 'morphy'),
+    path.join(projectRoot, 'components', 'glidecn'),
+    path.join(projectRoot, 'src', 'components', 'glidecn'),
+    path.join(projectRoot, 'app', 'components', 'glidecn'),
   ];
 
   for (const candidate of candidates) {

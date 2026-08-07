@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Wave Transition
+ * GlideCN — Wave Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

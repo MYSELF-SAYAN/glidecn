@@ -1,6 +1,6 @@
 /* ==========================================================================
- * Morphy — Animation Engine
- * Builds Framer Motion transition objects from Morphy config.
+ * GlideCN — Animation Engine
+ * Builds Framer Motion transition objects from GlideCN config.
  * Pure functions — no React dependency.
  * ========================================================================== */
 
@@ -37,7 +37,7 @@ export function buildVariants(
 // ---------------------------------------------------------------------------
 
 /**
- * Produces a Framer Motion `transition` object from a Morphy config.
+ * Produces a Framer Motion `transition` object from a GlideCN config.
  * If the definition provides its own `getTransition`, that takes priority.
  */
 export function buildTransition(

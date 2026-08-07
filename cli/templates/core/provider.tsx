@@ -1,12 +1,12 @@
 'use client';
 
 /* ==========================================================================
- * Morphy — Provider
+ * GlideCN — Provider
  * Top-level wrapper that composes context, registry, and transition manager.
  * ========================================================================== */
 
 import { useMemo, type ReactNode } from 'react';
-import type { MorphyProviderProps } from './types';
+import type { GlideCNProviderProps } from './types';
 import { TransitionContextProvider } from './transition-context';
 import { DEFAULT_TRANSITION_NAME } from '../constants';
 import { prefersReducedMotion } from './utils';
@@ -47,25 +47,25 @@ import '../transitions/wormhole';
 import '../transitions/zoom';
 
 // ---------------------------------------------------------------------------
-// MorphyProvider
+// GlideCNProvider
 // ---------------------------------------------------------------------------
 
 /**
- * The root provider for Morphy. Wrap your app or layout with this.
+ * The root provider for GlideCN. Wrap your app or layout with this.
  *
  * @example
  * ```tsx
- * <MorphyProvider defaultTransition="cube">
+ * <GlideCNProvider defaultTransition="cube">
  *   {children}
- * </MorphyProvider>
+ * </GlideCNProvider>
  * ```
  */
-export function MorphyProvider({
+export function GlideCNProvider({
   children,
   defaultTransition = DEFAULT_TRANSITION_NAME,
   defaultConfig = {},
   reducedMotion,
-}: MorphyProviderProps) {
+}: GlideCNProviderProps) {
   const isReducedMotion = useMemo(() => {
     if (reducedMotion !== undefined) return reducedMotion;
     return prefersReducedMotion();
@@ -82,4 +82,4 @@ export function MorphyProvider({
   );
 }
 
-export const PageFlowProvider = MorphyProvider;
+export const PageFlowProvider = GlideCNProvider;

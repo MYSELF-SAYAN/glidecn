@@ -1,28 +1,28 @@
-# Morphy CLI (`morphyjs-cli`)
+# GlideCN CLI (`glidecn-cli`)
 
 ✨ **Drop-in page transitions for React** — shadcn-style component distribution.
 
-`morphyjs-cli` is the official CLI to scaffold Morphy page transitions directly into your codebase. You own the code; no black-box dependencies.
+`glidecn-cli` is the official CLI to scaffold GlideCN page transitions directly into your codebase. You own the code; no black-box dependencies.
 
 ---
 
 ## 🚀 Quick Start
 
-### 1. Initialize Morphy in your project
+### 1. Initialize GlideCN in your project
 Works with **npm**, **pnpm**, **yarn**, and **bun**:
 
 ```bash
 # npm
-npx morphyjs-cli init
+npx glidecn-cli init
 
 # pnpm
-pnpm dlx morphyjs-cli init
+pnpm dlx glidecn-cli init
 
 # yarn
-yarn dlx morphyjs-cli init
+yarn dlx glidecn-cli init
 
 # bun
-bunx morphyjs-cli init
+bunx glidecn-cli init
 ```
 
 The interactive wizard will:
@@ -31,7 +31,7 @@ The interactive wizard will:
    - **Next.js Pages Router** (`pages/_app.tsx`)
    - **React Router / Vite** (`react-router-dom`)
    - **TanStack / Universal** (framework-agnostic)
-2. Ask where to place components (e.g. `components/morphy` or `src/components/morphy`)
+2. Ask where to place components (e.g. `components/glidecn` or `src/components/glidecn`)
 3. Let you pick which transitions to install (or select all 33 transitions)
 4. Check if required dependencies (`react`, `react-dom`, `framer-motion`) are installed and offer to install missing ones
 5. Scaffold the components and generate barrel exports (`index.ts`) with helpful quickstart instructions
@@ -40,34 +40,34 @@ The interactive wizard will:
 
 ## 📦 Commands
 
-### `morphyjs-cli init`
-Run the full setup wizard to configure Morphy in a project.
+### `glidecn-cli init`
+Run the full setup wizard to configure GlideCN in a project.
 
 ```bash
-npx morphyjs-cli init
+npx glidecn-cli init
 ```
 
-### `morphyjs-cli add [transitions...]`
-Chain-install additional transitions into an existing Morphy setup.
+### `glidecn-cli add [transitions...]`
+Chain-install additional transitions into an existing GlideCN setup.
 
 ```bash
 # Add specific transitions
-npx morphyjs-cli add cube flip origami-unfold
+npx glidecn-cli add cube flip origami-unfold
 
 # Add all transitions from a category
-npx morphyjs-cli add --category spatial
-npx morphyjs-cli add --category portal
-npx morphyjs-cli add --category flow
+npx glidecn-cli add --category spatial
+npx glidecn-cli add --category portal
+npx glidecn-cli add --category flow
 
 # Add all 33 available transitions
-npx morphyjs-cli add --all
+npx glidecn-cli add --all
 ```
 
-### `morphyjs-cli list`
+### `glidecn-cli list`
 List all 33 available transitions categorized with descriptions and emoji tags.
 
 ```bash
-npx morphyjs-cli list
+npx glidecn-cli list
 ```
 
 ---
@@ -76,7 +76,7 @@ npx morphyjs-cli list
 
 For contributors and maintainers:
 
-To synchronize the CLI's templates and transition catalog with the latest source code in `frontend/components/morphy`:
+To synchronize the CLI's templates and transition catalog with the latest source code in `frontend/components/glidecn`:
 
 ```bash
 cd cli

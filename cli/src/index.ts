@@ -1,6 +1,6 @@
 /* ==========================================================================
- * Morphy CLI — Entry Point
- * `npx morphy init` / `npx morphy add` / `npx morphy list`
+ * GlideCN CLI — Entry Point
+ * `npx glidecn init` / `npx glidecn add` / `npx glidecn list`
  * ========================================================================== */
 
 import { Command } from 'commander';
@@ -11,28 +11,28 @@ import { listCommand } from './commands/list.js';
 const program = new Command();
 
 program
-  .name('morphyjs-cli')
+  .name('glidecn-cli')
   .description('✨ Drop-in page transitions for React')
   .version('0.1.3');
 
 // ---------------------------------------------------------------------------
-// morphy init
+// glidecn init
 // ---------------------------------------------------------------------------
 
 program
   .command('init')
-  .description('Set up Morphy in your project (interactive wizard)')
+  .description('Set up GlideCN in your project (interactive wizard)')
   .action(async () => {
     await initCommand();
   });
 
 // ---------------------------------------------------------------------------
-// morphy add [transitions...]
+// glidecn add [transitions...]
 // ---------------------------------------------------------------------------
 
 program
   .command('add [transitions...]')
-  .description('Add transitions to an existing Morphy setup')
+  .description('Add transitions to an existing GlideCN setup')
   .option('-c, --category <category>', 'Add all transitions from a category')
   .option('-a, --all', 'Add all available transitions')
   .action(async (transitions: string[], options: { category?: string; all?: boolean }) => {
@@ -40,7 +40,7 @@ program
   });
 
 // ---------------------------------------------------------------------------
-// morphy list
+// glidecn list
 // ---------------------------------------------------------------------------
 
 program

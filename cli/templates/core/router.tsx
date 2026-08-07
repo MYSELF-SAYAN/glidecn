@@ -1,7 +1,7 @@
 'use client';
 
 /* ==========================================================================
- * Morphy — Core Router Utilities
+ * GlideCN — Core Router Utilities
  * Framework-agnostic route key detection and universal router passthrough.
  * ========================================================================== */
 

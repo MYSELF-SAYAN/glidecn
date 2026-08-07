@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Shatter Transition
+ * GlideCN — Shatter Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

@@ -1,7 +1,7 @@
 'use client';
 
 /* ==========================================================================
- * Morphy — Transition Context
+ * GlideCN — Transition Context
  * React context and hooks for accessing transition state.
  * ========================================================================== */
 
@@ -14,7 +14,7 @@ import {
   type ReactNode,
 } from 'react';
 import type {
-  MorphyContextValue,
+  GlideCNContextValue,
   TransitionConfig,
   AnimationState,
   TransitionDefinition,
@@ -27,10 +27,10 @@ import { defaultRegistry } from './registry';
 // Context
 // ---------------------------------------------------------------------------
 
-const MorphyContext = createContext<MorphyContextValue | null>(null);
+const GlideCNContext = createContext<GlideCNContextValue | null>(null);
 
 // ---------------------------------------------------------------------------
-// Provider (internal — composed inside MorphyProvider)
+// Provider (internal — composed inside GlideCNProvider)
 // ---------------------------------------------------------------------------
 
 interface TransitionContextProviderProps {
@@ -75,7 +75,7 @@ export function TransitionContextProvider({
     setConfigOverrides((prev) => ({ ...prev, ...c }));
   }, []);
 
-  const value: MorphyContextValue = useMemo(
+  const value: GlideCNContextValue = useMemo(
     () => ({
       currentTransition,
       config,
@@ -97,9 +97,9 @@ export function TransitionContextProvider({
   );
 
   return (
-    <MorphyContext.Provider value={value}>
+    <GlideCNContext.Provider value={value}>
       {children}
-    </MorphyContext.Provider>
+    </GlideCNContext.Provider>
   );
 }
 
@@ -108,25 +108,25 @@ export function TransitionContextProvider({
 // ---------------------------------------------------------------------------
 
 /**
- * Hook to access Morphy context.
- * Must be used within a <MorphyProvider>.
+ * Hook to access GlideCN context.
+ * Must be used within a <GlideCNProvider>.
  */
-export function useMorphy(): MorphyContextValue {
-  const context = useContext(MorphyContext);
+export function useGlide(): GlideCNContextValue {
+  const context = useContext(GlideCNContext);
   if (!context) {
-    throw new Error('useMorphy must be used within a MorphyProvider');
+    throw new Error('useGlide must be used within a GlideCNProvider');
   }
   return context;
 }
 
 /** Shortcut: only the resolved transition config. */
 export function useTransitionConfig(): { config: TransitionConfig, setConfig: (config: TransitionConfig) => void } {
-  const { config, setConfig } = useMorphy();
+  const { config, setConfig } = useGlide();
   return { config, setConfig };
 }
 
 /** Shortcut: current animation state. */
 export function useAnimationState(): AnimationState {
-  const { animationState } = useMorphy();
+  const { animationState } = useGlide();
   return animationState;
 }

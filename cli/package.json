@@ -1,11 +1,11 @@
 {
-  "name": "morphyjs-cli",
+  "name": "glidecn-cli",
   "version": "0.1.4",
   "description": "✨ Drop-in page transitions for React — works with Next.js, Vite, TanStack Router, and more",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
-    "morphyjs-cli": "./dist/index.js"
+    "glidecn-cli": "./dist/index.js"
   },
   "scripts": {
     "build": "tsup",
@@ -25,8 +25,8 @@
     "nextjs",
     "vite",
     "cli",
-    "morphy",
-    "morphy-cli"
+    "glidecn",
+    "glidecn-cli"
   ],
   "publishConfig": {
     "access": "public"

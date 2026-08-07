@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Transition Registry
+ * GlideCN — Transition Registry
  * A simple, extensible registry for transition definitions.
  * Future transitions only need to call `registerTransition()`.
  * ========================================================================== */
@@ -20,7 +20,7 @@ export class TransitionRegistry {
   register(name: string, definition: TransitionDefinition): void {
     if (this.transitions.has(name)) {
       console.warn(
-        `[Morphy] Transition "${name}" is already registered. Overwriting.`,
+        `[GlideCN] Transition "${name}" is already registered. Overwriting.`,
       );
     }
     this.transitions.set(name, definition);
@@ -34,7 +34,7 @@ export class TransitionRegistry {
     const def = this.transitions.get(name);
     if (!def) {
       throw new Error(
-        `[Morphy] Transition "${name}" not found. ` +
+        `[GlideCN] Transition "${name}" not found. ` +
           `Available: ${[...this.transitions.keys()].join(', ')}`,
       );
     }

@@ -1,18 +1,18 @@
 /* ==========================================================================
- * Morphy — Public API
+ * GlideCN — Public API
  * Clean barrel export for all public-facing components and utilities.
  * ========================================================================== */
 
 // Core components
-export { MorphyProvider, PageFlowProvider } from './core/provider';
-export { TransitionManager as Morphy, TransitionManager as PageFlow, TransitionManager } from './core/transition-manager';
+export { GlideCNProvider, PageFlowProvider } from './core/provider';
+export { TransitionManager as GlideCN, TransitionManager as PageFlow, TransitionManager } from './core/transition-manager';
 export { Page } from './page';
 
 // Router Adapters (Universal, React Router)
 export {
-  MorphyUniversal,
+  GlideCNUniversal,
   UniversalTransitionManager,
-  MorphyReactRouter,
+  GlideCNReactRouter,
   ReactRouterTransitionManager,
 } from './adapters';
 export { FrozenRouter } from './core/router';
@@ -28,8 +28,8 @@ export {
 
 // Context & hooks
 export {
-  useMorphy,
-  useMorphy as usePageFlow,
+  useGlide,
+  useGlide as usePageFlow,
   useTransitionConfig,
   useAnimationState,
 } from './core/transition-context';
@@ -71,11 +71,11 @@ export type {
   TransitionCategory,
   EasingPreset,
   AnimationState,
-  MorphyContextValue,
-  MorphyContextValue as PageFlowContextValue,
+  GlideCNContextValue,
+  GlideCNContextValue as PageFlowContextValue,
   PageProps,
-  MorphyProviderProps,
-  MorphyProviderProps as PageFlowProviderProps,
+  GlideCNProviderProps,
+  GlideCNProviderProps as PageFlowProviderProps,
 } from './core/types';
 
 // Transition definitions (for docs / metadata access)

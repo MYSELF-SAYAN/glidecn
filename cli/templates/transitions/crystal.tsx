@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Crystal Transition
+ * GlideCN — Crystal Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

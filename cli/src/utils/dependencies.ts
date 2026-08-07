@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy CLI — Dependency Management
+ * GlideCN CLI — Dependency Management
  * Check required dependencies, prompt for installation, execute install.
  * ========================================================================== */
 
@@ -18,7 +18,7 @@ export interface DepCheck {
   installed: boolean;
 }
 
-/** Dependencies required by Morphy */
+/** Dependencies required by GlideCN */
 const REQUIRED_DEPS = ['react', 'react-dom', 'framer-motion'];
 
 /** Additional deps per adapter */

@@ -1,6 +1,6 @@
 /* ==========================================================================
- * Morphy CLI — `morphy add <transitions...>`
- * Chain-install transitions into an existing Morphy setup.
+ * GlideCN CLI — `glidecn add <transitions...>`
+ * Chain-install transitions into an existing GlideCN setup.
  * Supports TypeScript (.tsx) and JavaScript (.jsx).
  * ========================================================================== */
 
@@ -32,7 +32,7 @@ export async function addCommand(
 ) {
   printBanner();
 
-  p.intro(pc.bgMagenta(pc.black(' morphy add ')));
+  p.intro(pc.bgMagenta(pc.black(' glidecn add ')));
 
   // -----------------------------------------------------------------------
   // 1. Find Project & Existing Installation
@@ -46,17 +46,17 @@ export async function addCommand(
   }
 
   const existingPath = findExistingInstallation(projectRoot);
-  let morphyDir: string;
+  let glidecnDir: string;
 
   if (existingPath) {
-    p.log.info(`Found Morphy at: ${pc.cyan(path.relative(projectRoot, existingPath))}`);
-    morphyDir = existingPath;
+    p.log.info(`Found GlideCN at: ${pc.cyan(path.relative(projectRoot, existingPath))}`);
+    glidecnDir = existingPath;
   } else {
     // Ask where it's installed
     const installPath = await p.text({
-      message: 'Where is Morphy installed?',
-      placeholder: 'components/morphy',
-      defaultValue: 'components/morphy',
+      message: 'Where is GlideCN installed?',
+      placeholder: 'components/glidecn',
+      defaultValue: 'components/glidecn',
     });
 
     if (p.isCancel(installPath)) {
@@ -64,18 +64,18 @@ export async function addCommand(
       process.exit(0);
     }
 
-    morphyDir = path.resolve(projectRoot, installPath as string);
+    glidecnDir = path.resolve(projectRoot, installPath as string);
 
-    if (!fs.existsSync(morphyDir)) {
-      p.log.error(`Directory not found: ${morphyDir}`);
-      p.log.info(`Run ${pc.cyan('morphy init')} first to set up Morphy.`);
+    if (!fs.existsSync(glidecnDir)) {
+      p.log.error(`Directory not found: ${glidecnDir}`);
+      p.log.info(`Run ${pc.cyan('glidecn init')} first to set up GlideCN.`);
       p.outro(pc.red('Aborted'));
       process.exit(1);
     }
   }
 
-  // Detect language of existing Morphy setup
-  const language = detectProjectLanguage(morphyDir);
+  // Detect language of existing GlideCN setup
+  const language = detectProjectLanguage(glidecnDir);
   const transitionExt = language === 'js' ? '.jsx' : '.tsx';
   const indexFile = language === 'js' ? 'index.js' : 'index.ts';
 
@@ -113,7 +113,7 @@ export async function addCommand(
         toAdd.push(name);
       } else {
         p.log.warn(
-          `Unknown transition "${name}". Skipping. Run ${pc.cyan('morphy list')} to see available transitions.`,
+          `Unknown transition "${name}". Skipping. Run ${pc.cyan('glidecn list')} to see available transitions.`,
         );
       }
     }
@@ -127,8 +127,8 @@ export async function addCommand(
       for (const t of transitions) {
         // Check if already installed
         const isInstalled =
-          fs.existsSync(path.join(morphyDir, 'transitions', `${t.name}.tsx`)) ||
-          fs.existsSync(path.join(morphyDir, 'transitions', `${t.name}.jsx`));
+          fs.existsSync(path.join(glidecnDir, 'transitions', `${t.name}.tsx`)) ||
+          fs.existsSync(path.join(glidecnDir, 'transitions', `${t.name}.jsx`));
 
         options.push({
           value: t.name,
@@ -167,8 +167,8 @@ export async function addCommand(
 
   for (const name of toAdd) {
     const exists =
-      fs.existsSync(path.join(morphyDir, 'transitions', `${name}.tsx`)) ||
-      fs.existsSync(path.join(morphyDir, 'transitions', `${name}.jsx`));
+      fs.existsSync(path.join(glidecnDir, 'transitions', `${name}.tsx`)) ||
+      fs.existsSync(path.join(glidecnDir, 'transitions', `${name}.jsx`));
 
     if (exists) {
       alreadyInstalled.push(name);
@@ -198,10 +198,10 @@ export async function addCommand(
 
   let copied: string[];
   try {
-    copied = await copyTransitions(morphyDir, newTransitions, language);
+    copied = await copyTransitions(glidecnDir, newTransitions, language);
 
     // Update barrel exports
-    const indexPath = path.join(morphyDir, indexFile);
+    const indexPath = path.join(glidecnDir, indexFile);
     if (fs.existsSync(indexPath)) {
       await appendTransitionExports(indexPath, newTransitions);
     }

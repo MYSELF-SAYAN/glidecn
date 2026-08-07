@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Utility Functions
+ * GlideCN — Utility Functions
  * Helpers for config merging, easing resolution, and motion detection.
  * ========================================================================== */
 

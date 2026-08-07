@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Blueprint Transition
+ * GlideCN — Blueprint Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

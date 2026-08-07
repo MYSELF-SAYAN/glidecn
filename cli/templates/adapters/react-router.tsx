@@ -1,14 +1,14 @@
 'use client';
 
 /* ==========================================================================
- * Morphy — React Router Adapter (v6 / v7 / Vite / Remix)
+ * GlideCN — React Router Adapter (v6 / v7 / Vite / Remix)
  * Seamless page transitions for React Router applications.
  * ========================================================================== */
 
 import { useEffect, type ReactNode } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-export interface ReactRouterMorphyProps {
+export interface ReactRouterGlideCNProps {
   children: ReactNode;
   /** Pass location.pathname or location.key from useLocation() */
   locationKey?: string;
@@ -25,36 +25,36 @@ export interface ReactRouterMorphyProps {
  *
  * @example
  * ```tsx
- * import { MorphyReactRouter } from '@/components/morphy/adapters/react-router';
+ * import { GlideCNReactRouter } from '@/components/glidecn/adapters/react-router';
  * import { useLocation, Routes, Route } from 'react-router-dom';
  *
  * function App() {
  *   const location = useLocation();
  *   return (
- *     <MorphyReactRouter locationKey={location.pathname}>
+ *     <GlideCNReactRouter locationKey={location.pathname}>
  *       <Routes location={location} key={location.pathname}>
  *         <Route path="/" element={<Page><Home /></Page>} />
  *         <Route path="/about" element={<Page><About /></Page>} />
  *       </Routes>
- *     </MorphyReactRouter>
+ *     </GlideCNReactRouter>
  *   );
  * }
  * ```
  */
-export function MorphyReactRouter({
+export function GlideCNReactRouter({
   children,
   locationKey,
   mode = 'wait',
   className = 'w-full flex-1 flex flex-col',
   restoreScroll = true,
-}: ReactRouterMorphyProps) {
+}: ReactRouterGlideCNProps) {
   const activeKey =
     locationKey ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
 
   useEffect(() => {
     if (!restoreScroll || typeof window === 'undefined') return;
     return () => {
-      sessionStorage.setItem(`morphy-scroll-${activeKey}`, window.scrollY.toString());
+      sessionStorage.setItem(`glidecn-scroll-${activeKey}`, window.scrollY.toString());
     };
   }, [activeKey, restoreScroll]);
 
@@ -62,7 +62,7 @@ export function MorphyReactRouter({
     if (!restoreScroll || typeof window === 'undefined') return;
     if (window.location.hash) return;
 
-    const savedScroll = sessionStorage.getItem(`morphy-scroll-${activeKey}`);
+    const savedScroll = sessionStorage.getItem(`glidecn-scroll-${activeKey}`);
     if (savedScroll) {
       window.scrollTo(0, parseInt(savedScroll, 10));
     } else {
@@ -80,4 +80,4 @@ export function MorphyReactRouter({
 }
 
 // Alias for convenience
-export { MorphyReactRouter as ReactRouterTransitionManager };
+export { GlideCNReactRouter as ReactRouterTransitionManager };

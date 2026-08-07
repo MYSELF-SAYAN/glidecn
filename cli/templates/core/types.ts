@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Core Types
+ * GlideCN — Core Types
  * All TypeScript definitions for the transition engine.
  * ========================================================================== */
 
@@ -154,11 +154,11 @@ export interface TransitionDefinition {
 }
 
 // ---------------------------------------------------------------------------
-// Morphy Context
+// GlideCN Context
 // ---------------------------------------------------------------------------
 
 /** Values exposed via React context */
-export interface MorphyContextValue {
+export interface GlideCNContextValue {
   /** Currently active transition name */
   currentTransition: string;
 
@@ -221,8 +221,8 @@ export interface PageProps {
 // Provider Props
 // ---------------------------------------------------------------------------
 
-/** Props for the <MorphyProvider> */
-export interface MorphyProviderProps {
+/** Props for the <GlideCNProvider> */
+export interface GlideCNProviderProps {
   children: ReactNode;
 
   /** Fallback transition if none specified on <Page> */

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Fold Transition
+ * GlideCN — Fold Transition
  * ========================================================================== */
 
 import type { TransitionDefinition } from '../core/types';

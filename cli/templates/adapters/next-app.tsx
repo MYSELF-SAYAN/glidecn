@@ -1,7 +1,7 @@
 'use client';
 
 /* ==========================================================================
- * Morphy — Next.js App Router Adapter
+ * GlideCN — Next.js App Router Adapter
  * Uses the FrozenRouter pattern to prevent white flashes and preserve exit animations.
  * ========================================================================== */
 
@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation';
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { AnimatePresence } from 'framer-motion';
 
-export interface NextAppMorphyProps {
+export interface NextAppGlideCNProps {
   children: ReactNode;
   /** AnimatePresence mode: "wait" ensures exit completes before enter */
   mode?: 'wait' | 'sync' | 'popLayout';
@@ -43,19 +43,19 @@ export function FrozenRouter({ children }: { children: ReactNode }) {
 /**
  * Transition manager specifically engineered for Next.js App Router (`app/layout.tsx`).
  */
-export function MorphyNextApp({
+export function GlideCNNextApp({
   children,
   mode = 'wait',
   routeKey: customRouteKey,
   restoreScroll = true,
-}: NextAppMorphyProps) {
+}: NextAppGlideCNProps) {
   const pathname = usePathname();
   const routeKey = customRouteKey ?? pathname;
 
   useEffect(() => {
     if (!restoreScroll || typeof window === 'undefined') return;
     return () => {
-      sessionStorage.setItem(`morphy-scroll-${routeKey}`, window.scrollY.toString());
+      sessionStorage.setItem(`glidecn-scroll-${routeKey}`, window.scrollY.toString());
     };
   }, [routeKey, restoreScroll]);
 
@@ -63,7 +63,7 @@ export function MorphyNextApp({
     if (!restoreScroll || typeof window === 'undefined') return;
     if (window.location.hash) return;
 
-    const savedScroll = sessionStorage.getItem(`morphy-scroll-${routeKey}`);
+    const savedScroll = sessionStorage.getItem(`glidecn-scroll-${routeKey}`);
     if (savedScroll) {
       window.scrollTo(0, parseInt(savedScroll, 10));
     } else {
@@ -79,4 +79,4 @@ export function MorphyNextApp({
 }
 
 // Alias for convenience
-export { MorphyNextApp as NextAppTransitionManager };
+export { GlideCNNextApp as NextAppTransitionManager };
