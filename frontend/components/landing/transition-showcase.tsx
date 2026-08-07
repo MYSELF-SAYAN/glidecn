@@ -235,7 +235,7 @@ export function TransitionShowcase() {
 
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">
             <Link
-              href="/playground/page-1"
+              href="/playground/landing"
               className="w-full sm:w-auto group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-6 py-3.5 text-sm font-bold text-white transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#e54235] hover:shadow-[0_0_30px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-0.5 active:scale-[0.97]"
             >
               <Gamepad2 className="size-4" />
@@ -287,7 +287,7 @@ export function TransitionShowcase() {
                     </div>
 
                     <Link
-                      href="/playground/page-1"
+                      href="/playground/landing"
                       className="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs font-bold text-[var(--text-main)] group-hover:text-[#fa5c4f] transition-colors"
                     >
                       <span>Test in Playground</span>

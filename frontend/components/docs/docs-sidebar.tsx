@@ -358,7 +358,7 @@ export function DocsSidebar() {
             {/* Group 3: Interactive Playground CTA */}
             <div className="pt-6">
               <Link
-                href="/playground/page-1"
+                href="/playground/landing"
                 onClick={() => setMobileOpen(false)}
                 className="group relative flex items-center justify-between rounded-2xl p-4 overflow-hidden bg-[#fa5c4f] text-white shadow-lg shadow-[#fa5c4f]/20 hover:shadow-[#fa5c4f]/40 hover:-translate-y-0.5 transition-all active:scale-95"
               >

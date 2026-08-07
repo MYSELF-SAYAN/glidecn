@@ -10,7 +10,7 @@
 [![Built with Next.js](https://img.shields.io/badge/built%20with-Next.js%2015-000?style=flat-square&logo=next.js)](https://nextjs.org)
 [![Framer Motion](https://img.shields.io/badge/powered%20by-Framer%20Motion-0055FF?style=flat-square)](https://www.framer.com/motion/)
 
-[Live Demo](https://glidecn.vercel.app) · [Documentation](https://glidecn.vercel.app/docs) · [Playground](https://glidecn.vercel.app/playground)
+[Live Demo](https://glidecn.vercel.app) · [Documentation](https://glidecn.vercel.app/docs) · [Playground](https://glidecn.vercel.app/playground/landing)
 
 </div>
 

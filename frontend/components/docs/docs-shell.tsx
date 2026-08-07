@@ -33,7 +33,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
           {/* Header Action Buttons */}
           <div className="flex items-center gap-3">
             <Link
-              href="/playground/page-1"
+              href="/playground/landing"
               className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fa5c4f]/10 text-[#fa5c4f] border border-[#fa5c4f]/30 hover:bg-[#fa5c4f] hover:text-white transition text-xs font-bold btn-tactile"
             >
               <Gamepad2 className="w-4 h-4" />

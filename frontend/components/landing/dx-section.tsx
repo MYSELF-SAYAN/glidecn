@@ -130,7 +130,7 @@ export function DxSection() {
             </Link>
 
             <Link
-              href="/playground/page-1"
+              href="/playground/landing"
               className="w-full sm:w-auto group flex justify-center items-center gap-2 text-sm font-medium text-[var(--text-main)] hover:text-[#fa5c4f] transition-colors"
             >
               <span>Try Live in Playground</span>

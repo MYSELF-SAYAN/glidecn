@@ -74,7 +74,7 @@ export function FloatingNavbar() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#fa5c4f] group-hover:animate-pulse" />
           </Link>
           <div className="w-px h-4 bg-black/10 dark:bg-white/10 mx-1" />
-          <Link href="/playground/page-1" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-subtle)] hover:text-[#fa5c4f] hover:bg-[#fa5c4f]/10 transition-colors duration-200 flex items-center gap-1.5">
+          <Link href="/playground/landing" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-subtle)] hover:text-[#fa5c4f] hover:bg-[#fa5c4f]/10 transition-colors duration-200 flex items-center gap-1.5">
             <Gamepad2 className="w-3.5 h-3.5" />
             <span>Playground</span>
           </Link>
