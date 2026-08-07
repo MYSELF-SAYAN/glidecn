@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Terminal,
   Copy,
@@ -56,59 +57,86 @@ export function DocsInstallation() {
               {/* Terminal Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-200 dark:border-zinc-800/50 bg-zinc-50 dark:bg-zinc-900/50">
                 <div className="flex gap-2 shrink-0">
-                  <div className="size-3 rounded-full bg-zinc-300 dark:bg-zinc-700" />
-                  <div className="size-3 rounded-full bg-zinc-300 dark:bg-zinc-700" />
-                  <div className="size-3 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                  <div className="size-3 rounded-full bg-[#ff5f56] border border-black/10 dark:border-transparent" />
+                  <div className="size-3 rounded-full bg-[#ffbd2e] border border-black/10 dark:border-transparent" />
+                  <div className="size-3 rounded-full bg-[#27c93f] border border-black/10 dark:border-transparent" />
                 </div>
                 
-                <div className="flex items-center gap-1 bg-zinc-200/50 dark:bg-zinc-950 p-1 rounded-lg border border-zinc-200 dark:border-zinc-800 overflow-x-auto no-scrollbar">
-                  {['pnpm', 'npm', 'bun', 'yarn'].map((pm) => (
+                <div className="flex items-center gap-1 p-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+                  {(['pnpm', 'npm', 'bun', 'yarn'] as const).map((pm) => (
                     <button
                       key={pm}
-                      onClick={() => setActivePm(pm as any)}
-                      className={`px-3 py-1 rounded-md text-[11px] font-mono font-medium transition-colors whitespace-nowrap ${
-                        activePm === pm
-                          ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm'
-                          : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900/50'
+                      onClick={() => setActivePm(pm)}
+                      className={`relative px-3 py-1.5 rounded-full text-xs font-bold transition-colors ${
+                        activePm === pm ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'
                       }`}
                     >
-                      {pm}
+                      {activePm === pm && (
+                        <motion.div
+                          layoutId="activePmIndicator"
+                          className="absolute inset-0 rounded-full bg-white dark:bg-[#1f1f1f] shadow-sm border border-black/5 dark:border-white/10"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                      )}
+                      <span className="relative z-10">{pm}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* Terminal Body */}
-              <div className="p-6 font-mono text-[13px] text-zinc-300 bg-[#0a0a0c]">
-                <div className="flex items-center justify-between mb-6 group/cmd">
-                  <code className="text-zinc-300">
-                    <span className="text-emerald-500 mr-2">~</span>
-                    <span className="text-zinc-500">
-                      {activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`}
-                    </span>{' '}
-                    <span className="text-zinc-100 font-medium">glidecn-cli@latest init</span>
-                  </code>
-                  <button
-                    onClick={() => copyToClipboard(
-                      `${activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`} glidecn-cli@latest init`,
-                      'cli-init'
+              <div className="p-6 md:p-8 flex items-center justify-between gap-4 bg-[#0a0a0c]">
+                <div className="flex items-center gap-3 font-mono text-sm md:text-[15px] overflow-x-auto">
+                  <span className="text-emerald-500 font-bold select-none">~</span>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activePm}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      transition={{ duration: 0.15 }}
+                      className="text-zinc-100 whitespace-nowrap"
+                    >
+                      <span className="text-zinc-500">
+                        {activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`}
+                      </span>{' '}
+                      <span className="font-medium">glidecn-cli@latest init</span>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+                
+                <button
+                  onClick={() => copyToClipboard(
+                    `${activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`} glidecn-cli@latest init`,
+                    'cli-init'
+                  )}
+                  className="flex-shrink-0 flex items-center justify-center size-9 rounded-lg bg-white/5 border border-transparent hover:border-white/10 text-zinc-500 hover:text-zinc-100 transition-colors opacity-0 group-hover:opacity-100"
+                  aria-label="Copy to clipboard"
+                >
+                  <AnimatePresence mode="wait" initial={false}>
+                    {copiedCmd === 'cli-init' ? (
+                      <motion.div
+                        key="check"
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.5, opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        <Check className="size-4 text-emerald-500" />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="copy"
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.5, opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        <Copy className="size-4" />
+                      </motion.div>
                     )}
-                    className="p-2 -mr-2 rounded-lg text-zinc-500 hover:text-zinc-100 hover:bg-zinc-800 transition-colors opacity-0 group-hover/cmd:opacity-100"
-                  >
-                    {copiedCmd === 'cli-init' ? <Check className="size-4 text-emerald-500" /> : <Copy className="size-4" />}
-                  </button>
-                </div>
-                
-                <div className="pl-2 border-l-2 border-zinc-800/50 space-y-2 py-1 text-zinc-400">
-                  <div className="animate-in fade-in slide-in-from-left-2 duration-500"><span className="text-zinc-500 mr-2">✔</span> Initializing registry...</div>
-                  <div className="animate-in fade-in slide-in-from-left-2 duration-500 delay-150"><span className="text-zinc-500 mr-2">✔</span> Installing <span className="text-zinc-300">framer-motion</span></div>
-                  <div className="animate-in fade-in slide-in-from-left-2 duration-500 delay-300"><span className="text-zinc-500 mr-2">✔</span> Created <span className="text-zinc-300">@/components/glidecn</span></div>
-                </div>
-                
-                <div className="mt-6 text-zinc-100 font-medium flex items-center gap-2 animate-in fade-in duration-500 delay-500">
-                  <div className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                  Success. Ready to animate.
-                </div>
+                  </AnimatePresence>
+                </button>
               </div>
             </div>
           </div>

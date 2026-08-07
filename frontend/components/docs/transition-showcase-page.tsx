@@ -45,7 +45,7 @@ export function TransitionShowcasePage({ transition, tagline }: ShowcasePageProp
     setActivePage(page);
   };
 
-  const installCommand = `npx glidecn-cli-cli add ${transition}`;
+  const installCommand = `npx glidecn-cli add ${transition}`;
   const aiPrompt = `Implement the ${transition} transition using glidecn...`;
 
   const copyInstall = async () => {
@@ -90,8 +90,8 @@ export function TransitionShowcasePage({ transition, tagline }: ShowcasePageProp
                   onClick={() => handleTabClick('A')}
                   disabled={isAnimating}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${activePage === 'A'
-                      ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-sm'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
+                    ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-sm'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
                     }`}
                 >
                   Page A
@@ -100,8 +100,8 @@ export function TransitionShowcasePage({ transition, tagline }: ShowcasePageProp
                   onClick={() => handleTabClick('B')}
                   disabled={isAnimating}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${activePage === 'B'
-                      ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-sm'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
+                    ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-sm'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
                     }`}
                 >
                   Page B

@@ -20,7 +20,7 @@ import { TRANSITION_CATALOG } from '@/lib/transition-catalog';
 export function DocsOverview() {
   const [copiedCmd, setCopiedCmd] = useState<string | null>(null);
   const [activeCodeTab, setActiveCodeTab] = useState<'app-router' | 'pages-router' | 'vite' | 'cli'>('app-router');
-  
+
   // Interactive Dual-Frame Simulation State
   const [simStep, setSimStep] = useState<number>(0);
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
@@ -36,11 +36,11 @@ export function DocsOverview() {
   const triggerSimulation = () => {
     if (isSimulating) return;
     setIsSimulating(true);
-    setSimStep(1); 
-    
-    setTimeout(() => setSimStep(2), 700);  
-    setTimeout(() => setSimStep(3), 1500); 
-    setTimeout(() => setSimStep(4), 2400); 
+    setSimStep(1);
+
+    setTimeout(() => setSimStep(2), 700);
+    setTimeout(() => setSimStep(3), 1500);
+    setTimeout(() => setSimStep(4), 2400);
     setTimeout(() => {
       setIsSimulating(false);
       setSimStep(0);
@@ -80,7 +80,7 @@ export function DocsOverview() {
 
   return (
     <div className="space-y-24 md:space-y-32 pb-24">
-      
+
       {/* 1. HERO SECTION */}
       <section className="relative pt-12 md:pt-20">
         <div className="max-w-4xl">
@@ -103,11 +103,11 @@ export function DocsOverview() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div className="flex items-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 px-4 py-3 shadow-sm">
               <code className="text-sm font-mono text-zinc-800 dark:text-zinc-300">
-                npx glidecn-cli-cli init
+                npx glidecn-cli init
               </code>
               <button
                 type="button"
-                onClick={() => copyToClipboard('npx glidecn-cli-cli init', 'hero-init')}
+                onClick={() => copyToClipboard('npx glidecn-cli init', 'hero-init')}
                 className="ml-4 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition"
               >
                 {copiedCmd === 'hero-init' ? (
@@ -141,7 +141,7 @@ export function DocsOverview() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-zinc-200 dark:bg-zinc-800 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-          
+
           <div className="bg-zinc-50 dark:bg-[#09090b] p-8 md:p-10 flex flex-col justify-between group">
             <div className="space-y-6">
               <Zap className="size-6 text-zinc-400 dark:text-zinc-500" />
@@ -221,11 +221,10 @@ export function DocsOverview() {
             type="button"
             onClick={triggerSimulation}
             disabled={isSimulating}
-            className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-colors shrink-0 ${
-              isSimulating
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-colors shrink-0 ${isSimulating
                 ? 'bg-zinc-100 dark:bg-zinc-900 text-zinc-400 cursor-not-allowed'
                 : 'bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200'
-            }`}
+              }`}
           >
             {isSimulating ? (
               <>
@@ -242,25 +241,23 @@ export function DocsOverview() {
         </div>
 
         <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-[#09090b] p-8 md:p-12 overflow-hidden">
-          
+
           <div className="flex justify-between items-center mb-12 px-4 max-w-2xl mx-auto">
             {['Triggered', 'Frozen', 'Shader Active', 'Unmounted'].map((label, idx) => {
               const stepNum = idx + 1;
               const isActive = simStep === stepNum;
               const isPast = simStep > stepNum;
-              
+
               return (
                 <div key={label} className="flex flex-col items-center gap-3">
-                  <div className={`size-8 rounded-full flex items-center justify-center text-xs font-mono font-medium transition-colors ${
-                    isActive ? 'bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 ring-4 ring-zinc-900/10 dark:ring-zinc-100/10' :
-                    isPast ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400' :
-                    'border border-zinc-200 dark:border-zinc-800 text-zinc-400 dark:text-zinc-600'
-                  }`}>
+                  <div className={`size-8 rounded-full flex items-center justify-center text-xs font-mono font-medium transition-colors ${isActive ? 'bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 ring-4 ring-zinc-900/10 dark:ring-zinc-100/10' :
+                      isPast ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400' :
+                        'border border-zinc-200 dark:border-zinc-800 text-zinc-400 dark:text-zinc-600'
+                    }`}>
                     {stepNum}
                   </div>
-                  <span className={`text-[11px] font-mono uppercase tracking-wider hidden sm:block ${
-                    isActive ? 'text-zinc-900 dark:text-zinc-100 font-bold' : 'text-zinc-400 dark:text-zinc-600'
-                  }`}>
+                  <span className={`text-[11px] font-mono uppercase tracking-wider hidden sm:block ${isActive ? 'text-zinc-900 dark:text-zinc-100 font-bold' : 'text-zinc-400 dark:text-zinc-600'
+                    }`}>
                     {label}
                   </span>
                 </div>
@@ -269,12 +266,12 @@ export function DocsOverview() {
           </div>
 
           <div className="relative h-64 md:h-80 w-full flex items-center justify-center rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden bg-white dark:bg-[#09090b]">
-            
+
             {/* Background Grid Pattern */}
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fa5c4f_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
             <div className="relative z-10 w-full max-w-lg flex items-center justify-center gap-4 sm:gap-8 p-4">
-              
+
               {/* Frame A (Outgoing Route) */}
               <motion.div
                 animate={{
@@ -316,11 +313,10 @@ export function DocsOverview() {
                     scale: isSimulating ? [1, 1.25, 1] : 1,
                   }}
                   transition={{ duration: 1.5, repeat: isSimulating ? Infinity : 0 }}
-                  className={`size-10 rounded-2xl flex items-center justify-center shadow-lg transition-all ${
-                    isSimulating
+                  className={`size-10 rounded-2xl flex items-center justify-center shadow-lg transition-all ${isSimulating
                       ? 'bg-[#fa5c4f] text-white shadow-[#fa5c4f]/40 ring-4 ring-[#fa5c4f]/20'
                       : 'bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700 text-zinc-400'
-                  }`}
+                    }`}
                 >
                   <Sparkles className="size-5" />
                 </motion.div>
@@ -338,11 +334,10 @@ export function DocsOverview() {
                   rotateY: simStep === 3 ? 10 : 0,
                 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className={`w-40 sm:w-48 h-40 sm:h-48 rounded-2xl border p-4 shadow-xl flex flex-col justify-between ${
-                  simStep >= 3
+                className={`w-40 sm:w-48 h-40 sm:h-48 rounded-2xl border p-4 shadow-xl flex flex-col justify-between ${simStep >= 3
                     ? 'border-[#fa5c4f]/60 bg-white dark:bg-zinc-900 shadow-[#fa5c4f]/15'
                     : 'border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/30'
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#fa5c4f]/10 text-[#fa5c4f]">
@@ -388,11 +383,10 @@ export function DocsOverview() {
               <button
                 key={tab}
                 onClick={() => setActiveCodeTab(tab as any)}
-                className={`pb-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${
-                  activeCodeTab === tab
+                className={`pb-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${activeCodeTab === tab
                     ? 'border-zinc-900 dark:border-zinc-50 text-zinc-900 dark:text-zinc-50'
                     : 'border-transparent text-zinc-500 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300'
-                }`}
+                  }`}
               >
                 {tab === 'app-router' ? 'Next.js App' : tab === 'pages-router' ? 'Next.js Pages' : tab === 'vite' ? 'Vite' : 'CLI'}
               </button>

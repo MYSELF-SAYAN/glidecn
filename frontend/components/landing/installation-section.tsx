@@ -12,7 +12,7 @@ const steps = [
     icon: Terminal,
     step: '01',
     title: 'Install via CLI',
-    code: 'npx glidecn-cli-cli@latest init',
+    code: 'npx glidecn-cli@latest init',
     description: 'One command copies all components into your project.',
   },
   {
