@@ -27,7 +27,7 @@ export function Logo({ className }: { className?: string }) {
 
   return (
     <motion.svg
-      viewBox="0 0 28 28"
+      viewBox="-6 -6 40 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -36,10 +36,11 @@ export function Logo({ className }: { className?: string }) {
       animate="show"
       whileHover="hover"
     >
-      <motion.rect custom={1} variants={item} x="1" y="1" width="11" height="11" rx="3.5" fill="currentColor" opacity="0.9" />
-      <motion.rect custom={2} variants={item} x="16" y="1" width="11" height="11" rx="3.5" fill="currentColor" opacity="0.6" />
-      <motion.rect custom={3} variants={item} x="1" y="16" width="11" height="11" rx="3.5" fill="currentColor" opacity="0.7" />
-      <motion.rect custom={4} variants={item} x="16" y="16" width="11" height="11" rx="3.5" fill="currentColor" opacity="0.4" />
+      <rect x="-6" y="-6" width="40" height="40" rx="10" fill="#fa5c4f" />
+      <motion.rect custom={1} variants={item} x="1" y="1" width="11" height="11" rx="3.5" fill="#ffffff" opacity="0.9" />
+      <motion.rect custom={2} variants={item} x="16" y="1" width="11" height="11" rx="3.5" fill="#ffffff" opacity="0.6" />
+      <motion.rect custom={3} variants={item} x="1" y="16" width="11" height="11" rx="3.5" fill="#ffffff" opacity="0.7" />
+      <motion.rect custom={4} variants={item} x="16" y="16" width="11" height="11" rx="3.5" fill="#ffffff" opacity="0.4" />
     </motion.svg>
   );
 }
