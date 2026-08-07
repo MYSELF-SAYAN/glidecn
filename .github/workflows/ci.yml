@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-verification:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: |
+            frontend/pnpm-lock.yaml
+            cli/pnpm-lock.yaml
+
+      - name: Install Dependencies (Frontend)
+        working-directory: ./frontend
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Dependencies (CLI)
+        working-directory: ./cli
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CLI
+        working-directory: ./cli
+        run: pnpm run build
+
+      - name: Build Frontend (Next.js)
+        working-directory: ./frontend
+        run: pnpm run build
+
+  link-checker:
+    name: Documentation Broken Link Checker
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check Links with Lychee
+        uses: lycheeverse/lychee-action@v1.10.0
+        with:
+          # Check all markdown files in the repo, prioritizing the frontend docs content
+          args: >-
+            --exclude-path '**/node_modules/**'
+            --exclude-path '**/.next/**'
+            --exclude-path '**/dist/**'
+            --no-progress 
+            './**/*.md' './**/*.mdx'
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

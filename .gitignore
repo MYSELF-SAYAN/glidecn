@@ -1,9 +1,6 @@
-mascot_run
-.agents
-all_tests
-test*
-.codex*
-skills*
+# ──────────────────────────────────────────────
+# GlideCN — .gitignore
+# ──────────────────────────────────────────────
 
 # Dependencies
 node_modules/
@@ -13,6 +10,12 @@ node_modules/
 out/
 build/
 dist/
+
+# Fumadocs
+.source/
+
+# TypeScript
+*.tsbuildinfo
 
 # Env files
 .env
@@ -30,3 +33,29 @@ pnpm-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# AI agent configs (local-only)
+.agents/
+.claude/
+.codex/
+.codex.toml
+.opencode/
+.kiro/
+.gemini/
+.impeccable/
+.antigravityignore
+skills-lock.json
+
+# Test scaffolds & experiments
+test*/
+all_tests/
+mascot_run/
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
