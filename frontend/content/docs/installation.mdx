@@ -1,6 +1,6 @@
 ---
 title: Quickstart & Installation
-description: Add MorphyJS to your Next.js or React application in under 2 minutes.
+description: Add GlideCN to your Next.js or React application in under 2 minutes.
 ---
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
@@ -16,44 +16,44 @@ Run the initialization command using your preferred package manager. This config
 <Tabs items={['pnpm', 'npm', 'bun', 'yarn']}>
   <Tab value="pnpm">
     ```bash
-    pnpm dlx morphyjs-cli@latest init
+    pnpm dlx glidecn-cli-cli@latest init
     ```
   </Tab>
   <Tab value="npm">
     ```bash
-    npx morphyjs-cli@latest init
+    npx glidecn-cli-cli@latest init
     ```
   </Tab>
   <Tab value="bun">
     ```bash
-    bunx morphyjs-cli@latest init
+    bunx glidecn-cli-cli@latest init
     ```
   </Tab>
   <Tab value="yarn">
     ```bash
-    yarn dlx morphyjs-cli@latest init
+    yarn dlx glidecn-cli-cli@latest init
     ```
   </Tab>
 </Tabs>
 
-This creates the `@/components/morphy` folder in your project with full source code ownership.
+This creates the `@/components/glidecn` folder in your project with full source code ownership.
 </Step>
 
 <Step>
 ## Wrap Your Root Layout
 
-Add `<MorphyProvider>` inside your root layout (`app/layout.tsx`). This synchronizes route changes and coordinates frame exits/entries:
+Add `<GlideCNProvider>` inside your root layout (`app/layout.tsx`). This synchronizes route changes and coordinates frame exits/entries:
 
 ```tsx title="app/layout.tsx"
-import { MorphyProvider } from '@/components/morphy';
+import { GlideCNProvider } from '@/components/glidecn';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <MorphyProvider defaultTransition="cube">
+        <GlideCNProvider defaultTransition="cube">
           {children}
-        </MorphyProvider>
+        </GlideCNProvider>
       </body>
     </html>
   );
@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 <Callout type="info">
-  **Why do we need a provider?** MorphyJS needs a fixed boundary to take a visual snapshot of the "outgoing" page when a route changes. The provider maintains this boundary so layout shifts don't ruin the transition.
+  **Why do we need a provider?** GlideCN needs a fixed boundary to take a visual snapshot of the "outgoing" page when a route changes. The provider maintains this boundary so layout shifts don't ruin the transition.
 </Callout>
 </Step>
 
@@ -71,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 Wrap each route segment in `<Page>` and define its unique transition:
 
 ```tsx title="app/dashboard/page.tsx"
-import { Page } from '@/components/morphy';
+import { Page } from '@/components/glidecn';
 
 export default function DashboardPage() {
   return (
@@ -95,25 +95,25 @@ Use the CLI to pull specific shaders directly into your repository without bloat
 
 ```bash
 # Add 3D Cube Transition
-npx morphy add cube
+npx glidecn-cli add cube
 
 # Add Circular Iris Portal
-npx morphy add circular-portal
+npx glidecn-cli add circular-portal
 ```
 </Step>
 </Steps>
 
 ## Dynamic Switching
 
-To switch transitions programmatically at runtime (e.g. In a user preferences modal), use the `useMorphy` hook:
+To switch transitions programmatically at runtime (e.g. In a user preferences modal), use the `useGlide` hook:
 
 ```tsx title="components/transition-picker.tsx"
 'use client';
 
-import { useMorphy } from '@/components/morphy';
+import { useGlide } from '@/components/glidecn';
 
 export function TransitionPicker() {
-  const { currentTransition, setTransition } = useMorphy();
+  const { currentTransition, setTransition } = useGlide();
 
   return (
     <div className="flex gap-2">

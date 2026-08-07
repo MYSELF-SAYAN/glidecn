@@ -16,7 +16,7 @@ export function baseOptions(): BaseLayoutProps {
             <rect x="1" y="16" width="11" height="11" rx="3.5" fill="hsl(var(--fd-primary))" opacity="0.7" />
             <rect x="16" y="16" width="11" height="11" rx="3.5" fill="hsl(var(--fd-primary))" opacity="0.4" />
           </svg>
-          Morphy
+          GlideCN
         </span>
       ),
     },
@@ -36,7 +36,7 @@ export function baseOptions(): BaseLayoutProps {
         text: 'Github',
         label: 'Github',
         icon: <GitBranch className="size-5" />,
-        url: 'https://github.com/morphy/morphy',
+        url: 'https://github.com/MYSELF-SAYAN/glidecn',
         external: true,
       },
     ],

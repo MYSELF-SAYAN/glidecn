@@ -60,7 +60,7 @@ export function OpenSource() {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-[var(--text-muted)] text-lg font-light leading-relaxed max-w-lg mb-12"
         >
-          MorphyJS is freely available under the MIT license. Explore the source code, review the architecture, and contribute to the ecosystem.
+          GlideCN is freely available under the MIT license. Explore the source code, review the architecture, and contribute to the ecosystem.
         </motion.p>
 
         {/* Action Buttons */}
@@ -72,7 +72,7 @@ export function OpenSource() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
         >
           <Link
-            href="https://github.com/morphy"
+            href="https://github.com/MYSELF-SAYAN/glidecn"
             target="_blank"
             className="group flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[var(--text-main)] text-[var(--bg-page)] text-sm font-bold shadow-lg transition-transform duration-200 hover:scale-105 active:scale-[0.97] w-full sm:w-auto"
           >

@@ -4,13 +4,14 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Copy, Sparkles, Terminal, ChevronDown, ChevronUp, Layers3, MonitorPlay, WandSparkles, ArrowRight, Zap, Package, Gauge, ShieldCheck, Code2 } from 'lucide-react';
 import Link from 'next/link';
-import { defaultRegistry } from '@/components/morphy/core/registry';
-import { buildVariants, buildTransition } from '@/components/morphy/core/animation-engine';
-import { mergeConfig } from '@/components/morphy/core/utils';
-import { DEFAULT_TRANSITION_CONFIG } from '@/components/morphy/constants';
+import { defaultRegistry } from '@/components/glidecn/core/registry';
+import { buildVariants, buildTransition } from '@/components/glidecn/core/animation-engine';
+import { mergeConfig } from '@/components/glidecn/core/utils';
+import { DEFAULT_TRANSITION_CONFIG } from '@/components/glidecn/constants';
+import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 
 // Ensure all transitions are registered
-import '@/components/morphy/transitions';
+import '@/components/glidecn/transitions';
 import { getCatalogEntry, TRANSITION_CATALOG } from '@/lib/transition-catalog';
 import type { TransitionCatalogEntry } from '@/lib/transition-catalog';
 
@@ -44,7 +45,7 @@ function InstallBlock({ slug }: { slug: string }) {
   const [pm, setPm] = useState<'npx' | 'pnpm' | 'yarn' | 'bun'>('npx');
   const [copied, setCopied] = useState(false);
   const PM_LABELS = { npx: 'npx', pnpm: 'pnpm dlx', yarn: 'yarn dlx', bun: 'bunx' };
-  const command = `${PM_LABELS[pm]} morphy-cli add ${slug}`;
+  const command = `${PM_LABELS[pm]} glidecn-cli add ${slug}`;
 
   async function copy() {
     await navigator.clipboard.writeText(command);
@@ -120,8 +121,8 @@ function FileBlock({ filename, source, defaultOpen = false, badge }: { filename:
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             style={{ overflow: 'hidden' }}
           >
-            <div className="max-h-[40vh] overflow-auto border-t border-white/5 bg-black/40 p-4 text-sm font-mono whitespace-pre-wrap text-white/70">
-              {source}
+            <div className="border-t border-white/5 bg-black/40 w-full overflow-hidden [&>div]:!m-0 [&>div]:!border-0 [&>div]:!rounded-none [&>div]:!bg-transparent [&_pre]:!bg-transparent [&_pre]:!p-4">
+              <DynamicCodeBlock lang="tsx" code={source} />
             </div>
           </motion.div>
         )}
@@ -133,9 +134,10 @@ function FileBlock({ filename, source, defaultOpen = false, badge }: { filename:
 interface ShowcasePageProps {
   transition: string;
   tagline: string;
+  sourceCode?: string;
 }
 
-export function TransitionDocsShell({ transition, tagline }: ShowcasePageProps) {
+export function TransitionDocsShell({ transition, tagline, sourceCode }: ShowcasePageProps) {
   const [activeTab, setActiveTab] = useState<'demo' | 'code'>('demo');
   const [activePage, setActivePage] = useState<'A' | 'B'>('A');
   const [isAnimating, setIsAnimating] = useState(false);
@@ -155,8 +157,8 @@ export function TransitionDocsShell({ transition, tagline }: ShowcasePageProps) 
     setActivePage(page);
   };
 
-  const aiPrompt = `Implement the ${transition} transition using morphy...\n(Mock AI Prompt for Showcase)`;
-  const mockCode = `// Mock Source Code for ${transition}.tsx\nimport { motion } from 'framer-motion';\n\nexport default function Transition() {\n  return null;\n}`;
+  const aiPrompt = `Implement the ${transition} transition using glidecn...\n(Mock AI Prompt for Showcase)`;
+  const codeToDisplay = sourceCode || `// Mock Source Code for ${transition}.tsx\nimport { motion } from 'framer-motion';\n\nexport default function Transition() {\n  return null;\n}`;
 
   async function copyToClipboard(text: string, type: 'prompt' | 'all') {
     if (typeof navigator === 'undefined') return;
@@ -217,7 +219,7 @@ export function TransitionDocsShell({ transition, tagline }: ShowcasePageProps) 
               </button>
             </Tooltip>
             <Tooltip label={copiedAll ? 'Copied!' : 'Copy Source'}>
-              <button type="button" onClick={() => copyToClipboard(mockCode, 'all')} className="rounded-full bg-white/5 border border-white/10 p-2 text-white/50 transition hover:bg-white/10 hover:text-white">
+              <button type="button" onClick={() => copyToClipboard(codeToDisplay, 'all')} className="rounded-full bg-white/5 border border-white/10 p-2 text-white/50 transition hover:bg-white/10 hover:text-white">
                 {copiedAll ? <Check className="size-3.5 text-[#fa5c4f]" /> : <Code2 className="size-3.5" />}
               </button>
             </Tooltip>
@@ -259,7 +261,7 @@ export function TransitionDocsShell({ transition, tagline }: ShowcasePageProps) 
         {activeTab === 'code' && (
           <div className="bg-[#050505] min-h-[650px]">
             <InstallBlock slug={transition} />
-            <FileBlock filename={`components/morphy/transitions/${transition}.tsx`} source={mockCode} defaultOpen badge="source" />
+            <FileBlock filename={`components/glidecn/transitions/${transition}.tsx`} source={codeToDisplay} defaultOpen badge="source" />
           </div>
         )}
       </section>

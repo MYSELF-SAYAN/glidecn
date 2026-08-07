@@ -23,7 +23,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
                 <Logo className="size-4 text-white" />
               </div>
               <span className="font-bold tracking-tight text-base font-display text-[var(--text-main)]">
-                MorphyJS
+                GlideCN
               </span>
             </Link>
             <span className="text-[var(--text-subtle)] text-sm font-mono">/</span>
@@ -43,7 +43,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
             <ThemeToggle className="w-8 h-8" />
 
             <a
-              href="https://github.com/morphy/morphy"
+              href="https://github.com/MYSELF-SAYAN/glidecn"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub repository"

@@ -2,18 +2,42 @@
 
 import Link from 'next/link';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Github, ArrowRight, Gamepad2, Command } from 'lucide-react';
+import { Github, ArrowRight, Gamepad2, Download } from 'lucide-react';
 import { Logo } from './logo';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function FloatingNavbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [stars, setStars] = useState<string>('-');
+  const [downloads, setDownloads] = useState<string>('-');
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
   });
+
+  useEffect(() => {
+    // Fetch GitHub stars
+    fetch('https://api.github.com/repos/MYSELF-SAYAN/glidecn')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.stargazers_count !== undefined) {
+          setStars(new Intl.NumberFormat('en-US', { notation: "compact", compactDisplay: "short" }).format(data.stargazers_count));
+        }
+      })
+      .catch(() => setStars('0'));
+
+    // Fetch npm downloads
+    fetch('https://api.npmjs.org/downloads/point/last-month/glidecn-cli')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.downloads !== undefined) {
+          setDownloads(new Intl.NumberFormat('en-US', { notation: "compact", compactDisplay: "short" }).format(data.downloads));
+        }
+      })
+      .catch(() => setDownloads('0'));
+  }, []);
 
   return (
     <motion.header
@@ -36,17 +60,14 @@ export function FloatingNavbar() {
             <Logo className="size-4 text-white" />
           </div>
           <span className="font-bold tracking-tight text-sm font-display text-[var(--text-main)] transition-colors">
-            MorphyJS
+            GlideCN
           </span>
         </Link>
 
         {/* Navigation Links - Centered & Glassy */}
         <nav className="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
           <Link href="/docs" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white dark:hover:bg-white/10 transition-colors duration-200">
-            Overview
-          </Link>
-          <Link href="/docs/installation" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white dark:hover:bg-white/10 transition-colors duration-200">
-            Quickstart
+            Docs
           </Link>
           <Link href="/docs/transitions" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white dark:hover:bg-white/10 transition-colors duration-200 flex items-center gap-1.5 group">
             <span>Transitions</span>
@@ -65,13 +86,25 @@ export function FloatingNavbar() {
           <ThemeToggle />
 
           <a
-            href="https://github.com/morphy/morphy"
+            href="https://www.npmjs.com/package/glidecn-cli"
             target="_blank"
             rel="noreferrer"
             className="hidden sm:flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/5 px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/10 transition-[background-color,color,transform] duration-200 active:scale-95 btn-tactile shadow-sm backdrop-blur-md"
+            title="NPM Downloads (Last 30 Days)"
+          >
+            <Download className="size-3.5" />
+            <span>{downloads}</span>
+          </a>
+
+          <a
+            href="https://github.com/MYSELF-SAYAN/glidecn"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/5 px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/10 transition-[background-color,color,transform] duration-200 active:scale-95 btn-tactile shadow-sm backdrop-blur-md"
+            title="GitHub Stars"
           >
             <Github className="size-3.5" />
-            <span>9.2k</span>
+            <span>{stars}</span>
           </a>
 
           <Link

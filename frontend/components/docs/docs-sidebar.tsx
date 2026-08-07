@@ -15,11 +15,13 @@ import {
   Menu,
   X,
   Command,
+  Star,
 } from 'lucide-react';
 import {
   TRANSITION_CATALOG,
   getTransitionsByFamily,
   FAMILIES,
+  FEATURED_TRANSITIONS,
 } from '@/lib/transition-catalog';
 
 export function DocsSidebar() {
@@ -198,6 +200,54 @@ export function DocsSidebar() {
                     {link.active && <ArrowRight className="size-3.5 text-[#fa5c4f]" />}
                   </Link>
                 ))}
+              </div>
+            </div>
+
+            {/* Featured Transitions */}
+            <div className="space-y-3">
+              <div className="px-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-subtle)] flex items-center gap-2">
+                <Star className="size-3 text-[#fa5c4f]" />
+                <span>Featured</span>
+              </div>
+              <div className="relative p-1.5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm flex flex-col gap-0.5">
+                {FEATURED_TRANSITIONS.map((item) => {
+                  const active = pathname === `/docs/transitions/${item.slug}`;
+                  const isComingSoon = item.status === 'coming-soon';
+
+                  return (
+                    <Link
+                      key={item.slug}
+                      href={`/docs/transitions/${item.slug}`}
+                      onClick={() => setMobileOpen(false)}
+                      className="group relative flex items-center justify-between rounded-xl px-3 py-2 text-[13px] font-medium transition-colors z-10"
+                    >
+                      {active && (
+                        <motion.div 
+                          layoutId="featured-active"
+                          className="absolute inset-0 bg-[#fa5c4f]/10 border border-[#fa5c4f]/20 rounded-xl -z-10"
+                        />
+                      )}
+                      {!active && (
+                        <div className="absolute inset-0 bg-[var(--bg-surface)] opacity-0 group-hover:opacity-100 transition-opacity rounded-xl -z-10" />
+                      )}
+                      
+                      <span className="flex items-center gap-2.5 truncate">
+                        <span className={`truncate ${active ? 'text-[#fa5c4f] font-bold' : 'text-[var(--text-muted)] group-hover:text-[var(--text-main)]'}`}>
+                          {item.displayName}
+                        </span>
+                      </span>
+                      
+                      {isComingSoon && (
+                        <span className="px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 text-[9px] font-bold uppercase tracking-widest ml-2 border border-amber-500/20">
+                          Soon
+                        </span>
+                      )}
+                      {!isComingSoon && !active && (
+                        <ArrowRight className="size-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all text-[var(--text-subtle)] group-hover:text-[#fa5c4f]" />
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 

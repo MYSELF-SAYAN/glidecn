@@ -1,6 +1,6 @@
 'use client';
 
-import { Page } from '@/components/morphy';
+import { Page } from '@/components/glidecn';
 import { motion, Variants } from 'framer-motion';
 import { Image as ImageIcon, Scaling, Layers } from 'lucide-react';
 

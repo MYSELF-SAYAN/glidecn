@@ -1,6 +1,6 @@
 'use client';
 
-import { Page, useMorphy } from '@/components/morphy';
+import { Page, useGlide } from '@/components/glidecn';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Box, Plus, Minus, MousePointerClick, Gauge, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ export default function KineticComponentsPage() {
   const [openAccordion, setOpenAccordion] = useState<number | null>(1);
   const [toggled, setToggled] = useState(false);
   const [sliderVal, setSliderVal] = useState(50);
-  const { config } = useMorphy();
+  const { config } = useGlide();
 
   const springConfig = {
     type: 'spring' as const,
@@ -53,7 +53,7 @@ export default function KineticComponentsPage() {
             </div>
             
             {[
-              { id: 1, title: 'Spring Physics Engine', desc: 'Every accordion expansion uses spring dynamics. The duration and bounce values are inherited from the Morphy global config, so adjusting the sidebar sliders changes this animation in real-time.' },
+              { id: 1, title: 'Spring Physics Engine', desc: 'Every accordion expansion uses spring dynamics. The duration and bounce values are inherited from the GlideCN global config, so adjusting the sidebar sliders changes this animation in real-time.' },
               { id: 2, title: 'Interruption Handling', desc: 'Try rapidly clicking different items. The animation queue handles interrupts gracefully — no jank, no layout shift. Each expansion cleanly cancels the previous one.' },
               { id: 3, title: 'Height Auto Measurement', desc: 'Content height is measured dynamically. No fixed pixel values. The container measures its children and animates to the exact height needed, even if the text reflows at different widths.' },
             ].map((item) => (

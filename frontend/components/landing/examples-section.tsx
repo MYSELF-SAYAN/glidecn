@@ -10,24 +10,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 const examples = [
   {
     label: 'Basic',
-    code: `import { MorphyProvider, Page } from '@/components/morphy';
+    code: `import { GlideCNProvider, Page } from '@/components/glidecn';
 
 export default function Layout({ children }) {
   return (
-    <MorphyProvider>
+    <GlideCNProvider>
       <Page transition="fade">
         {children}
       </Page>
-    </MorphyProvider>
+    </GlideCNProvider>
   );
 }`,
   },
   {
     label: 'Per-route',
     code: `// app/layout.tsx
-<MorphyProvider>
+<GlideCNProvider>
   {children}
-</MorphyProvider>
+</GlideCNProvider>
 
 // app/page.tsx
 <Page transition="slide" direction="left">
@@ -55,7 +55,7 @@ export default function Layout({ children }) {
   },
   {
     label: 'Custom Transition',
-    code: `import { registerTransition } from '@/components/morphy';
+    code: `import { registerTransition } from '@/components/glidecn';
 
 registerTransition('my-transition', {
   metadata: {

@@ -1,4 +1,5 @@
 'use client';
+import { TRANSITION_CATALOG } from '@/lib/transition-catalog';
 
 import { motion, useScroll, useSpring, useTransform, MotionValue } from 'framer-motion';
 import { Layers, Zap, Code2, Globe, Cpu } from 'lucide-react';
@@ -14,7 +15,7 @@ const FEATURES = [
   },
   {
     tag: 'Design System',
-    title: '33+ Premium Shaders.',
+    title: `${TRANSITION_CATALOG.length}+ Premium Shaders.`,
     description: 'We built a comprehensive library of spatial 3D effects, fluid portals, and retro simulations. Powered entirely by CSS and Framer Motion.',
     icon: <Layers className="w-6 h-6" />,
     cta: 'View Gallery'

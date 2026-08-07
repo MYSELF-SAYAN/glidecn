@@ -1,6 +1,6 @@
 'use client';
 
-import { Page } from '@/components/morphy';
+import { Page } from '@/components/glidecn';
 import { motion } from 'framer-motion';
 import { MousePointer2, Move, Target, Grip, Sparkles, ArrowUpRight } from 'lucide-react';
 import { useState, useRef } from 'react';
@@ -169,7 +169,7 @@ export default function InteractiveStagePage() {
             { 
               icon: <ArrowUpRight className="w-5 h-5" />,
               title: 'Live Preview Engine', 
-              desc: 'See changes instantly across all lab pages. The playground syncs transition values globally through the Morphy engine.',
+              desc: 'See changes instantly across all lab pages. The playground syncs transition values globally through the GlideCN engine.',
             },
           ].map((card, i) => (
             <motion.div 

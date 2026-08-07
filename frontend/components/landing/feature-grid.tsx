@@ -1,4 +1,5 @@
 'use client';
+import { TRANSITION_CATALOG } from '@/lib/transition-catalog';
 
 import { motion } from 'framer-motion';
 import { Zap, Layers, Sparkles, Terminal, Sliders, ShieldCheck } from 'lucide-react';
@@ -6,15 +7,15 @@ import { Zap, Layers, Sparkles, Terminal, Sliders, ShieldCheck } from 'lucide-re
 const features = [
   {
     icon: Sliders,
-    title: '33+ Shader Transitions',
+    title: `${TRANSITION_CATALOG.length}+ Shader Transitions`,
     description: 'Spatial 3D cubes, radial iris portals, origami folds, CRT phosphors, and fluid inks.',
     colorClass: 'text-[#fa5c4f]',
     bgClass: 'bg-[#fa5c4f]/10 border-[#fa5c4f]/20',
   },
   {
     icon: Terminal,
-    title: 'shadcn/ui-Style CLI',
-    description: 'Direct code ownership. Run "npx morphy add" to copy code straight into your repo.',
+    title: 'Copy, Paste, Own',
+    description: 'Direct code ownership. Run "npx glidecn-cli add" to copy code straight into your repo.',
     colorClass: 'text-amber-600 dark:text-amber-400',
     bgClass: 'bg-amber-500/10 border-amber-500/20',
   },
@@ -28,7 +29,7 @@ const features = [
   {
     icon: Zap,
     title: 'Dynamic State Hook',
-    description: 'Switch transitions at runtime using the ergonomic useMorphy() React context hook.',
+    description: 'Switch transitions at runtime using the ergonomic useGlide() React context hook.',
     colorClass: 'text-purple-600 dark:text-purple-400',
     bgClass: 'bg-purple-500/10 border-purple-500/20',
   },
@@ -62,7 +63,7 @@ export function FeatureGrid() {
             <motion.div
               key={feature.title}
               variants={itemVariants as any}
-              className="morphy-card p-6 rounded-3xl group flex flex-col justify-between space-y-4"
+              className="glidecn-card p-6 rounded-3xl group flex flex-col justify-between space-y-4"
             >
               <div className={`size-11 rounded-2xl flex items-center justify-center border ${feature.bgClass} group-hover:scale-110 transition-transform duration-200`}>
                 <Icon className={`size-5 ${feature.colorClass}`} strokeWidth={2.2} />

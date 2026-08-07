@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Copy, Sparkles, Terminal } from 'lucide-react';
-import { defaultRegistry } from '@/components/morphy/core/registry';
-import { buildVariants, buildTransition } from '@/components/morphy/core/animation-engine';
-import { mergeConfig } from '@/components/morphy/core/utils';
-import { DEFAULT_TRANSITION_CONFIG } from '@/components/morphy/constants';
+import { defaultRegistry } from '@/components/glidecn/core/registry';
+import { buildVariants, buildTransition } from '@/components/glidecn/core/animation-engine';
+import { mergeConfig } from '@/components/glidecn/core/utils';
+import { DEFAULT_TRANSITION_CONFIG } from '@/components/glidecn/constants';
 
 // Ensure all transitions are registered
-import '@/components/morphy/transitions';
+import '@/components/glidecn/transitions';
 
 // Ensure transitions are registered
 
@@ -45,8 +45,8 @@ export function TransitionShowcasePage({ transition, tagline }: ShowcasePageProp
     setActivePage(page);
   };
 
-  const installCommand = `npx morphy-cli add ${transition}`;
-  const aiPrompt = `Implement the ${transition} transition using morphy...`;
+  const installCommand = `npx glidecn-cli-cli add ${transition}`;
+  const aiPrompt = `Implement the ${transition} transition using glidecn...`;
 
   const copyInstall = async () => {
     await navigator.clipboard.writeText(installCommand);

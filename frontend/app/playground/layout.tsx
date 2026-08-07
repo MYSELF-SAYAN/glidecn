@@ -1,6 +1,7 @@
 'use client';
 
-import { MorphyNextApp as Morphy } from '@/components/morphy/adapters/next-app';
+import { GlideCNNextApp as GlideCN } from '@/components/glidecn/adapters/next-app';
+import { GlideCNProvider } from '@/components/glidecn';
 import { PlaygroundTransitionStudio } from '@/components/playground/transition-studio';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,7 +19,8 @@ export default function PlaygroundLayout({
   const [deviceView, setDeviceView] = useState<DeviceView>('desktop');
 
   return (
-    <div id="playground-root" className="playground-root h-[100dvh] w-full flex flex-col lg:flex-row bg-[var(--bg-page)] text-[var(--text-main)] relative overflow-hidden transition-colors duration-700 font-sans text-sm selection:bg-black/10 dark:selection:bg-white/20">
+    <GlideCNProvider defaultTransition="fade">
+      <div id="playground-root" className="playground-root h-[100dvh] w-full flex flex-col lg:flex-row bg-[var(--bg-page)] text-[var(--text-main)] relative overflow-hidden transition-colors duration-700 font-sans text-sm selection:bg-black/10 dark:selection:bg-white/20">
       
       {/* Collapsed Sidebar Handle (Absolute toggle) */}
       <AnimatePresence>
@@ -126,11 +128,11 @@ export default function PlaygroundLayout({
               'w-full h-full bg-transparent'
             }`}
           >
-            {/* Inner frame wrapper for masking Morphy fixed elements properly inside the simulator */}
+            {/* Inner frame wrapper for masking GlideCN fixed elements properly inside the simulator */}
             <div className="absolute inset-0 overflow-hidden bg-[var(--bg-page)]">
-              <Morphy>
+              <GlideCN>
                 {children}
-              </Morphy>
+              </GlideCN>
             </div>
           </div>
 
@@ -138,6 +140,7 @@ export default function PlaygroundLayout({
 
       </main>
 
-    </div>
+      </div>
+    </GlideCNProvider>
   );
 }

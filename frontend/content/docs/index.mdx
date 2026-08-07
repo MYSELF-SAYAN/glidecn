@@ -5,12 +5,13 @@ description: Cinematic, zero-jank page transitions for modern React and Next.js 
 
 import { Cards, Card } from 'fumadocs-ui/components/card';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { TransitionCount } from '@/components/docs/transition-count';
 
-**MorphyJS** is an open-source page transition engine designed for Next.js App Router and React. It delivers 33+ hardware-accelerated 3D shaders, portals, origami folds, and fluid masks with copy-paste developer experience.
+**GlideCN** is an open-source page transition engine designed for Next.js App Router and React. It delivers <TransitionCount /> hardware-accelerated 3D shaders, portals, origami folds, and fluid masks with copy-paste developer experience.
 
-## Why MorphyJS?
+## Why GlideCN?
 
-Traditional page transitions in React often suffer from layout shifts, flashing unmounted content, or complex router locking hacks. MorphyJS solves this through a synchronized dual-frame rendering architecture.
+Traditional page transitions in React often suffer from layout shifts, flashing unmounted content, or complex router locking hacks. GlideCN solves this through a synchronized dual-frame rendering architecture.
 
 <Cards>
   <Card title="60 FPS Hardware Acceleration">
@@ -20,7 +21,7 @@ Traditional page transitions in React often suffer from layout shifts, flashing 
     The outgoing page's view is frozen at the exact millisecond of navigation, preventing stale re-renders while the incoming page mounts.
   </Card>
   <Card title="shadcn/ui-Style DX">
-    Direct code ownership via CLI (`npx morphy add <transition>`). No monolithic bundle lock-in. You own the code.
+    Direct code ownership via CLI (`npx glidecn-cli add <transition>`). No monolithic bundle lock-in. You own the code.
   </Card>
 </Cards>
 
@@ -31,18 +32,18 @@ Traditional page transitions in React often suffer from layout shifts, flashing 
 
 ### Wrap Root Layout
 
-Wrap your root layout with `<MorphyProvider>`:
+Wrap your root layout with `<GlideCNProvider>`:
 
 ```tsx title="app/layout.tsx"
-import { MorphyProvider } from '@/components/morphy';
+import { GlideCNProvider } from '@/components/glidecn';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <MorphyProvider defaultTransition="cube">
+        <GlideCNProvider defaultTransition="cube">
           {children}
-        </MorphyProvider>
+        </GlideCNProvider>
       </body>
     </html>
   );
@@ -57,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 Wrap your page routes with `<Page>` and assign any transition:
 
 ```tsx title="app/contact/page.tsx"
-import { Page } from '@/components/morphy';
+import { Page } from '@/components/glidecn';
 
 export default function ContactPage() {
   return (
@@ -76,8 +77,8 @@ export default function ContactPage() {
 
 ## Architecture
 
-MorphyJS synchronizes with the Next.js navigation lifecycle to manage concurrent mounting of outgoing and incoming route segments.
+GlideCN synchronizes with the Next.js navigation lifecycle to manage concurrent mounting of outgoing and incoming route segments.
 
-1. **Global MorphyProvider**: Intercepts navigations and orchestrates the timeline.
+1. **Global GlideCNProvider**: Intercepts navigations and orchestrates the timeline.
 2. **Frozen Router Context**: Captures the outgoing route segment in a frozen visual boundary, preventing it from updating with new URL params or unmounting mid-animation.
 3. **Pluggable Shader Registry**: Every transition is an isolated `TransitionDefinition` containing pure Framer Motion variants. You only bundle what you use.

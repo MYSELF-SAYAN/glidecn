@@ -3,7 +3,7 @@
 @import "fumadocs-ui/css/preset.css";
 
 /* ==========================================================================
- * Morphy — Design Tokens
+ * GlideCN — Design Tokens
  * Coral accent. Monochrome base. Everything rounded & playful.
  * ========================================================================== */
 
@@ -403,7 +403,7 @@ h1, h2, h3, h4, h5, h6 {
  * Tactile & Card Utilities
  * ========================================================================== */
 
-.morphy-card,
+.glidecn-card,
 .pageflow-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -412,7 +412,7 @@ h1, h2, h3, h4, h5, h6 {
               border-color 0.2s ease;
 }
 
-.morphy-card:hover,
+.glidecn-card:hover,
 .pageflow-card:hover {
   border-color: #fa5c4f;
   box-shadow: 0 12px 32px -8px rgba(250, 92, 79, 0.12);

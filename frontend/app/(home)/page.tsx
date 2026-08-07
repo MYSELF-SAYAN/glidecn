@@ -8,7 +8,7 @@ import { PerformanceSection } from '@/components/landing/performance-section';
 import { MetricsSection } from '@/components/landing/metrics-section';
 import { DxSection } from '@/components/landing/dx-section';
 import { OpenSource } from '@/components/landing/open-source';
-import { Page } from '@/components/morphy';
+import { Page } from '@/components/glidecn';
 import { SiteFooter } from '@/components/site-footer';
 
 export default function HomePage() {

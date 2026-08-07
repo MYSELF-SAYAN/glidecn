@@ -5,13 +5,13 @@ import { Copy, Check, Sparkles, Terminal, Code2, ArrowRight } from 'lucide-react
 import { useState } from 'react';
 import Link from 'next/link';
 
-const CODE_SNIPPET = `import { Morphy, Page } from '@/components/morphy';
+const CODE_SNIPPET = `import { GlideCNProvider, Page } from '@/components/glidecn';
 
 export default function RootLayout({ children }) {
   return (
-    <Morphy defaultTransition="cube">
+    <GlideCNProvider defaultTransition="cube">
       {children}
-    </Morphy>
+    </GlideCNProvider>
   );
 }
 
@@ -82,15 +82,17 @@ export function DxSection() {
             <pre className="font-mono text-sm leading-relaxed text-white/80 overflow-x-auto no-scrollbar px-5 py-4 relative z-10">
               <code dangerouslySetInnerHTML={{
                 __html: CODE_SNIPPET
+                  .replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;')
                   .replace(/import/g, '<span class="text-pink-400 font-bold">import</span>')
                   .replace(/from/g, '<span class="text-pink-400 font-bold">from</span>')
                   .replace(/export default function|export function/g, '<span class="text-pink-400 font-bold">$&</span>')
                   .replace(/return/g, '<span class="text-pink-400 font-bold">return</span>')
-                  .replace(/Morphy/g, '<span class="text-emerald-400 font-bold">Morphy</span>')
+                  .replace(/GlideCNProvider|GlideCN/g, '<span class="text-emerald-400 font-bold">$&</span>')
                   .replace(/Page/g, '<span class="text-blue-400 font-bold">Page</span>')
                   .replace(/transition=/g, '<span class="text-yellow-200">transition=</span>')
                   .replace(/defaultTransition=/g, '<span class="text-yellow-200">defaultTransition=</span>')
-                  .replace(/"cube"|"circular-portal"|'@\/components\/morphy'/g, '<span class="text-amber-300">$&</span>')
+                  .replace(/"cube"|"circular-portal"|'@\/components\/glidecn'/g, '<span class="text-amber-300">$&</span>')
                   .replace(/h1/g, '<span class="text-cyan-400">h1</span>')
               }} />
             </pre>
@@ -115,7 +117,7 @@ export function DxSection() {
           </h2>
           
           <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed max-w-lg font-light">
-            Wrap your app in <code className="px-2 py-1 rounded-md bg-[var(--bg-surface)] text-[#fa5c4f] border border-[var(--border-color)] font-mono text-sm">&lt;Morphy&gt;</code>, specify a transition on <code className="px-2 py-1 rounded-md bg-[var(--bg-surface)] text-[#fa5c4f] border border-[var(--border-color)] font-mono text-sm">&lt;Page&gt;</code>, and let the engine coordinate frame exits and entries. No complex state management required.
+            Wrap your app in <code className="px-2 py-1 rounded-md bg-[var(--bg-surface)] text-[#fa5c4f] border border-[var(--border-color)] font-mono text-sm">&lt;GlideCNProvider&gt;</code>, specify a transition on <code className="px-2 py-1 rounded-md bg-[var(--bg-surface)] text-[#fa5c4f] border border-[var(--border-color)] font-mono text-sm">&lt;Page&gt;</code>, and let the engine coordinate frame exits and entries. No complex state management required.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">

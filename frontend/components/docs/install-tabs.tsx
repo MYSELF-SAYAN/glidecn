@@ -18,7 +18,7 @@ const MANAGERS = [
   { name: 'bun', cmd: 'bun add' },
 ] as const;
 
-export function InstallTabs({ packages = 'morphy' }: InstallTabsProps) {
+export function InstallTabs({ packages = 'glidecn' }: InstallTabsProps) {
   const [active, setActive] = useState(0);
   const [copied, setCopied] = useState(false);
 

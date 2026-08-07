@@ -3,10 +3,11 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { TRANSITION_CATALOG } from '@/lib/transition-catalog';
 
 const metrics = [
   { value: '60', suffix: ' FPS', label: 'Compositor Speed', desc: 'Locked frame rates with Zero Layout Shift out of the box.' },
-  { value: '33', suffix: '+', label: 'Built-in Shaders', desc: 'A massive curated library of spatial, portal, and organic effects.' },
+  { value: TRANSITION_CATALOG.length.toString(), suffix: '+', label: 'Built-in Shaders', desc: 'A massive curated library of spatial, portal, and organic effects.' },
   { value: '0', suffix: ' kb', label: 'Runtime Bloat', desc: 'Copy-paste code ownership. You own the framer-motion variants.' },
 ];
 
@@ -32,7 +33,7 @@ export function MetricsSection() {
             Engineered for <span className="text-[#fa5c4f]">Performance</span>
           </h2>
           <p className="text-sm text-[var(--text-muted)] max-w-xl mx-auto">
-            Morphy doesn't just look good. It's built on an architecture that guarantees silky smooth transitions on any device.
+            GlideCN doesn't just look good. It's built on an architecture that guarantees silky smooth transitions on any device.
           </p>
         </motion.div>
 

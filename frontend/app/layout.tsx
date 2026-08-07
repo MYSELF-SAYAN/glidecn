@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono, Space_Grotesk, Caveat } from 'next/font/google';
 import { RootProvider } from 'fumadocs-ui/provider';
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { MorphyProvider } from '@/components/morphy';
+import { GlideCNProvider } from '@/components/glidecn';
 import { LenisProvider } from '@/components/lenis-provider';
 
 const inter = Inter({
@@ -28,8 +28,8 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Morphy — Beautiful Page Transitions for React',
-    template: '%s | MorphyJS',
+    default: 'GlideCN — Beautiful Page Transitions for React',
+    template: '%s | GlideCN',
   },
   description:
     'An open-source React page transition library with a pluggable architecture, inspired by the developer experience of shadcn/ui.',
@@ -55,9 +55,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="antialiased">
         <RootProvider>
           <LenisProvider>
-            <MorphyProvider defaultTransition="fade">
+            <GlideCNProvider defaultTransition="liquid-morph">
               {children}
-            </MorphyProvider>
+            </GlideCNProvider>
           </LenisProvider>
         </RootProvider>
       </body>

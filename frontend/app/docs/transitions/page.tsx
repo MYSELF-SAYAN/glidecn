@@ -8,7 +8,7 @@ import {
   Sparkles,
   Search,
 } from 'lucide-react';
-import { Page } from '@/components/morphy';
+import { Page } from '@/components/glidecn';
 import {
   TRANSITION_CATALOG,
   getTransitionsByFamily,
@@ -16,44 +16,44 @@ import {
 } from '@/lib/transition-catalog';
 
 // Ensure all transitions are registered
-import '@/components/morphy/transitions/fade';
-import '@/components/morphy/transitions/slide';
-import '@/components/morphy/transitions/scale';
-import '@/components/morphy/transitions/circular-portal';
-import '@/components/morphy/transitions/page-curl';
-import '@/components/morphy/transitions/cube';
-import '@/components/morphy/transitions/slash';
-import '@/components/morphy/transitions/wormhole';
-import '@/components/morphy/transitions/ink-spread';
-import '@/components/morphy/transitions/liquid-morph';
-import '@/components/morphy/transitions/dissolve';
-import '@/components/morphy/transitions/swipe';
-import '@/components/morphy/transitions/flip';
-import '@/components/morphy/transitions/spin';
-import '@/components/morphy/transitions/zoom';
-import '@/components/morphy/transitions/bounce';
-import '@/components/morphy/transitions/wobble';
-import '@/components/morphy/transitions/stretch';
-import '@/components/morphy/transitions/squeeze';
-import '@/components/morphy/transitions/ripple';
-import '@/components/morphy/transitions/glass';
-import '@/components/morphy/transitions/ghost';
-import '@/components/morphy/transitions/shadow';
-import '@/components/morphy/transitions/neon';
-import '@/components/morphy/transitions/glitch';
-import '@/components/morphy/transitions/fold';
-import '@/components/morphy/transitions/wave';
-import '@/components/morphy/transitions/pixel';
-import '@/components/morphy/transitions/mirror';
-import '@/components/morphy/transitions/vortex';
-import '@/components/morphy/transitions/tv-turn-off';
-import '@/components/morphy/transitions/shutter-iris';
-import '@/components/morphy/transitions/origami-unfold';
-import '@/components/morphy/transitions/crystal';
-import '@/components/morphy/transitions/paint-drip';
-import '@/components/morphy/transitions/blueprint';
-import '@/components/morphy/transitions/lens-flare';
-import '@/components/morphy/transitions/origami-crush';
+import '@/components/glidecn/transitions/fade';
+import '@/components/glidecn/transitions/slide';
+import '@/components/glidecn/transitions/scale';
+import '@/components/glidecn/transitions/circular-portal';
+import '@/components/glidecn/transitions/page-curl';
+import '@/components/glidecn/transitions/cube';
+import '@/components/glidecn/transitions/slash';
+import '@/components/glidecn/transitions/wormhole';
+import '@/components/glidecn/transitions/ink-spread';
+import '@/components/glidecn/transitions/liquid-morph';
+import '@/components/glidecn/transitions/dissolve';
+import '@/components/glidecn/transitions/swipe';
+import '@/components/glidecn/transitions/flip';
+import '@/components/glidecn/transitions/spin';
+import '@/components/glidecn/transitions/zoom';
+import '@/components/glidecn/transitions/bounce';
+import '@/components/glidecn/transitions/wobble';
+import '@/components/glidecn/transitions/stretch';
+import '@/components/glidecn/transitions/squeeze';
+import '@/components/glidecn/transitions/ripple';
+import '@/components/glidecn/transitions/glass';
+import '@/components/glidecn/transitions/ghost';
+import '@/components/glidecn/transitions/shadow';
+import '@/components/glidecn/transitions/neon';
+import '@/components/glidecn/transitions/glitch';
+import '@/components/glidecn/transitions/fold';
+import '@/components/glidecn/transitions/wave';
+import '@/components/glidecn/transitions/pixel';
+import '@/components/glidecn/transitions/mirror';
+import '@/components/glidecn/transitions/vortex';
+import '@/components/glidecn/transitions/tv-turn-off';
+import '@/components/glidecn/transitions/shutter-iris';
+import '@/components/glidecn/transitions/origami-unfold';
+import '@/components/glidecn/transitions/crystal';
+import '@/components/glidecn/transitions/paint-drip';
+import '@/components/glidecn/transitions/blueprint';
+import '@/components/glidecn/transitions/lens-flare';
+import '@/components/glidecn/transitions/origami-crush';
 
 export default function TransitionsIndexPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -116,7 +116,7 @@ export default function TransitionsIndexPage() {
             </h1>
 
             <p className="text-lg sm:text-xl font-light text-[var(--text-muted)] leading-relaxed max-w-2xl">
-              Explore the complete catalog of 33+ GPU-accelerated page transitions. Every ready transition features live parameter controls, interactive canvas preview, and one-line CLI installation.
+              Explore the complete catalog of {TRANSITION_CATALOG.length}+ GPU-accelerated page transitions. Every ready transition features live parameter controls, interactive canvas preview, and one-line CLI installation.
             </p>
             
             <div className="flex items-center gap-4 flex-wrap pt-2">

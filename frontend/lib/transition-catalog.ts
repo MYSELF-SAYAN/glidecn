@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Morphy — Transition Catalog
+ * GlideCN — Transition Catalog
  * The single source of truth for ALL transition metadata used across the
  * documentation site: sidebar, gallery, showcase pages, and overview cards.
  *
@@ -1226,10 +1226,8 @@ export function getTransitionsByFamily(): Record<string, TransitionCatalogEntry[
   return result;
 }
 
-/** Featured transitions */
-export function getFeaturedTransitions(): TransitionCatalogEntry[] {
-  return TRANSITION_CATALOG.filter((t) => t.featured);
-}
+/** Top 5 featured transitions for sidebar and marketing */
+export const FEATURED_TRANSITIONS = TRANSITION_CATALOG.filter((t) => t.featured).slice(0, 5);
 
 /** Lookup a single transition by slug */
 export function getCatalogEntry(slug: string): TransitionCatalogEntry | undefined {

@@ -1,5 +1,5 @@
 ---
-name: Morphy
+name: GlideCN
 description: Cinematic page transitions for Next.js, built on Framer Motion.
 colors:
   primary: "#fa5c4f"
@@ -32,18 +32,18 @@ components:
     textColor: "{colors.primary}"
     rounded: "{rounded.full}"
     padding: "0.25rem 0.625rem"
-  morphy-card:
+  glidecn-card:
     backgroundColor: "{colors.neutral-bg}"
     rounded: "{rounded.xl}"
 ---
 
-# Design System: Morphy
+# Design System: GlideCN
 
 ## Overview
 
 **Creative North Star: "The Cinematic Studio"**
 
-Morphy is focused on storytelling, premium motion, and immersive flow. The design system acts as a stage—clean, unopinionated, and structured—so that the transitions themselves take the spotlight. It uses a high-energy coral accent to draw attention, balanced against a strict, monochrome structural canvas. The result is a highly tactile, responsive, and cinematic experience that feels like a premium interactive studio.
+GlideCN is focused on storytelling, premium motion, and immersive flow. The design system acts as a stage—clean, unopinionated, and structured—so that the transitions themselves take the spotlight. It uses a high-energy coral accent to draw attention, balanced against a strict, monochrome structural canvas. The result is a highly tactile, responsive, and cinematic experience that feels like a premium interactive studio.
 
 **Key Characteristics:**
 - Zero visual clutter; content serves the motion.
@@ -104,7 +104,7 @@ Forms are highly tactile with generous border radii (mostly `0.75rem` to `1.5rem
 
 ## Components
 
-### Morphy Cards
+### GlideCN Cards
 - **Shape:** Rounded xl (1.5rem radius) or 2xl.
 - **Background:** Page background or subtle surface.
 - **Border:** Light structural border.

@@ -4,7 +4,7 @@
  * Props Table — Auto-generated props documentation
  * ========================================================================== */
 
-import type { TransitionPropSchema } from '@/components/morphy/core/types';
+import type { TransitionPropSchema } from '@/components/glidecn/core/types';
 
 interface PropsTableProps {
   props: TransitionPropSchema[];

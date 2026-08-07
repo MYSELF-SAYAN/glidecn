@@ -97,17 +97,17 @@ export function DocsOverview() {
           </h1>
 
           <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed mb-12">
-            MorphyJS is a synchronized dual-frame transition engine. Zero layout shifts, 60fps GPU compositor acceleration, and copy-paste components.
+            GlideCN is a synchronized dual-frame transition engine. Zero layout shifts, 60fps GPU compositor acceleration, and copy-paste components.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div className="flex items-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 px-4 py-3 shadow-sm">
               <code className="text-sm font-mono text-zinc-800 dark:text-zinc-300">
-                npx morphyjs-cli init
+                npx glidecn-cli-cli init
               </code>
               <button
                 type="button"
-                onClick={() => copyToClipboard('npx morphyjs-cli init', 'hero-init')}
+                onClick={() => copyToClipboard('npx glidecn-cli-cli init', 'hero-init')}
                 className="ml-4 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition"
               >
                 {copiedCmd === 'hero-init' ? (
@@ -177,7 +177,7 @@ export function DocsOverview() {
               <Sparkles className="size-6 text-zinc-400 dark:text-zinc-500" />
               <div>
                 <div className="text-4xl md:text-5xl font-display font-medium text-zinc-900 dark:text-zinc-50 tracking-tight mb-2">
-                  33+
+                  {TRANSITION_CATALOG.length}+
                 </div>
                 <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">Production Shaders</div>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -213,7 +213,7 @@ export function DocsOverview() {
               Dual-Frame Pipeline
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Watch how Morphy orchestrates outgoing freeze snapshots and incoming mounts simultaneously.
+              Watch how GlideCN orchestrates outgoing freeze snapshots and incoming mounts simultaneously.
             </p>
           </div>
 
@@ -411,20 +411,20 @@ export function DocsOverview() {
             {activeCodeTab === 'app-router' && (
               <pre>
                 <span className="text-zinc-500">{'// app/layout.tsx'}</span>{'\n'}
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">MorphyProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/morphy'</span>;{'\n\n'}
+                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;{'\n\n'}
                 <span className="text-pink-400">export default function</span> <span className="text-blue-300">RootLayout</span>({'{'} children {'}'}: {'{'} children: React.ReactNode {'}'}) {'{'}{'\n'}
                 {'  '}<span className="text-pink-400">return</span> ({'\n'}
                 {'    '}&lt;<span className="text-blue-300">html</span> <span className="text-amber-200">lang</span>=<span className="text-emerald-300">"en"</span>&gt;{'\n'}
                 {'      '}&lt;<span className="text-blue-300">body</span>&gt;{'\n'}
-                {'        '}&lt;<span className="text-amber-200">MorphyProvider</span> <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;{'\n'}
+                {'        '}&lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;{'\n'}
                 {'          '}{'{'}children{'}'}{'\n'}
-                {'        '}&lt;/<span className="text-amber-200">MorphyProvider</span>&gt;{'\n'}
+                {'        '}&lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;{'\n'}
                 {'      '}&lt;/<span className="text-blue-300">body</span>&gt;{'\n'}
                 {'    '}&lt;/<span className="text-blue-300">html</span>&gt;{'\n'}
                 {'  '});{'\n'}
                 {'}'}{'\n\n'}
                 <span className="text-zinc-500">{'// app/page.tsx'}</span>{'\n'}
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/morphy'</span>;{'\n\n'}
+                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;{'\n\n'}
                 <span className="text-pink-400">export default function</span> <span className="text-blue-300">Home</span>() {'{'}{'\n'}
                 {'  '}<span className="text-pink-400">return</span> ({'\n'}
                 {'    '}&lt;<span className="text-amber-200">Page</span> <span className="text-amber-200">transition</span>=<span className="text-emerald-300">"circular-portal"</span> <span className="text-amber-200">duration</span>={'{'}0.6{'}'}&gt;{'\n'}
@@ -437,13 +437,13 @@ export function DocsOverview() {
 
             {activeCodeTab === 'pages-router' && (
               <pre>
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">MorphyProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/morphy'</span>;{'\n'}
+                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;{'\n'}
                 <span className="text-pink-400">import type</span> {'{'} <span className="text-amber-200">AppProps</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'next/app'</span>;{'\n\n'}
                 <span className="text-pink-400">export default function</span> <span className="text-blue-300">MyApp</span>({'{'} Component, pageProps, router {'}'}: <span className="text-amber-200">AppProps</span>) {'{'}{'\n'}
                 {'  '}<span className="text-pink-400">return</span> ({'\n'}
-                {'    '}&lt;<span className="text-amber-200">MorphyProvider</span> <span className="text-amber-200">key</span>={'{'}router.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"fold"</span>&gt;{'\n'}
+                {'    '}&lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">key</span>={'{'}router.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"fold"</span>&gt;{'\n'}
                 {'      '}&lt;<span className="text-blue-300">Component</span> {'{'}...pageProps{'}'} /&gt;{'\n'}
-                {'    '}&lt;/<span className="text-amber-200">MorphyProvider</span>&gt;{'\n'}
+                {'    '}&lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;{'\n'}
                 {'  '});{'\n'}
                 {'}'}
               </pre>
@@ -451,16 +451,16 @@ export function DocsOverview() {
 
             {activeCodeTab === 'vite' && (
               <pre>
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">MorphyProvider</span>, <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/morphy'</span>;{'\n'}
+                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span>, <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;{'\n'}
                 <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">useLocation</span>, <span className="text-amber-200">Routes</span>, <span className="text-amber-200">Route</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'react-router-dom'</span>;{'\n\n'}
                 <span className="text-pink-400">export function</span> <span className="text-blue-300">App</span>() {'{'}{'\n'}
                 {'  '}<span className="text-pink-400">const</span> location = <span className="text-amber-200">useLocation</span>();{'\n'}
                 {'  '}<span className="text-pink-400">return</span> ({'\n'}
-                {'    '}&lt;<span className="text-amber-200">MorphyProvider</span> <span className="text-amber-200">key</span>={'{'}location.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"slash"</span>&gt;{'\n'}
+                {'    '}&lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">key</span>={'{'}location.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"slash"</span>&gt;{'\n'}
                 {'      '}&lt;<span className="text-blue-300">Routes</span> <span className="text-amber-200">location</span>={'{'}location{'}'}&gt;{'\n'}
                 {'        '}&lt;<span className="text-blue-300">Route</span> <span className="text-amber-200">path</span>=<span className="text-emerald-300">"/"</span> <span className="text-amber-200">element</span>={'{'}&lt;<span className="text-amber-200">Page</span> <span className="text-amber-200">transition</span>=<span className="text-emerald-300">"slide"</span>&gt;&lt;<span className="text-blue-300">Home</span> /&gt;&lt;/<span className="text-amber-200">Page</span>&gt;{'}'} /&gt;{'\n'}
                 {'      '}&lt;/<span className="text-blue-300">Routes</span>&gt;{'\n'}
-                {'    '}&lt;/<span className="text-amber-200">MorphyProvider</span>&gt;{'\n'}
+                {'    '}&lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;{'\n'}
                 {'  '});{'\n'}
                 {'}'}
               </pre>
@@ -468,14 +468,14 @@ export function DocsOverview() {
 
             {activeCodeTab === 'cli' && (
               <pre>
-                <span className="text-zinc-500"># 1. Initialize Morphy in your Next.js / React project</span>{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">morphy</span> init{'\n\n'}
+                <span className="text-zinc-500"># 1. Initialize GlideCN in your Next.js / React project</span>{'\n'}
+                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> init{'\n\n'}
                 <span className="text-zinc-500"># 2. Add individual transitions on-demand (shadcn style)</span>{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">morphy</span> add cube{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">morphy</span> add circular-portal{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">morphy</span> add origami-unfold{'\n\n'}
+                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> add cube{'\n'}
+                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> add circular-portal{'\n'}
+                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> add origami-unfold{'\n\n'}
                 <span className="text-zinc-500"># 3. Add all transitions at once</span>{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">morphy</span> add --all
+                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> add --all
               </pre>
             )}
           </div>
@@ -497,7 +497,7 @@ export function DocsOverview() {
             href="/docs/transitions"
             className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-50 hover:opacity-70 transition-opacity shrink-0"
           >
-            Explore 33+ Transitions
+            Explore {TRANSITION_CATALOG.length}+ Transitions
             <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

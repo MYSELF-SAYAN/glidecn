@@ -46,7 +46,7 @@ export function DocsInstallation() {
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed">
-              Morphy does not distribute as an NPM runtime dependency. Instead, we generate the exact source code directly into your repository so you own the animation logic completely.
+              GlideCN does not distribute as an NPM runtime dependency. Instead, we generate the exact source code directly into your repository so you own the animation logic completely.
             </p>
           </div>
 
@@ -86,11 +86,11 @@ export function DocsInstallation() {
                     <span className="text-zinc-500">
                       {activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`}
                     </span>{' '}
-                    <span className="text-zinc-100 font-medium">morphyjs-cli@latest init</span>
+                    <span className="text-zinc-100 font-medium">glidecn-cli@latest init</span>
                   </code>
                   <button
                     onClick={() => copyToClipboard(
-                      `${activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`} morphyjs-cli@latest init`,
+                      `${activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`} glidecn-cli@latest init`,
                       'cli-init'
                     )}
                     className="p-2 -mr-2 rounded-lg text-zinc-500 hover:text-zinc-100 hover:bg-zinc-800 transition-colors opacity-0 group-hover/cmd:opacity-100"
@@ -102,7 +102,7 @@ export function DocsInstallation() {
                 <div className="pl-2 border-l-2 border-zinc-800/50 space-y-2 py-1 text-zinc-400">
                   <div className="animate-in fade-in slide-in-from-left-2 duration-500"><span className="text-zinc-500 mr-2">✔</span> Initializing registry...</div>
                   <div className="animate-in fade-in slide-in-from-left-2 duration-500 delay-150"><span className="text-zinc-500 mr-2">✔</span> Installing <span className="text-zinc-300">framer-motion</span></div>
-                  <div className="animate-in fade-in slide-in-from-left-2 duration-500 delay-300"><span className="text-zinc-500 mr-2">✔</span> Created <span className="text-zinc-300">@/components/morphy</span></div>
+                  <div className="animate-in fade-in slide-in-from-left-2 duration-500 delay-300"><span className="text-zinc-500 mr-2">✔</span> Created <span className="text-zinc-300">@/components/glidecn</span></div>
                 </div>
                 
                 <div className="mt-6 text-zinc-100 font-medium flex items-center gap-2 animate-in fade-in duration-500 delay-500">
@@ -125,7 +125,7 @@ export function DocsInstallation() {
               <div>
                 <h2 className="text-2xl font-display font-medium text-zinc-900 dark:text-zinc-50 mb-3">Zero Black-Box Dependencies</h2>
                 <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm">
-                  When you initialize, Morphy adds exactly the code you need directly into your project's component directory. You own it, you can modify it, and it won't break on upstream updates.
+                  When you initialize, GlideCN adds exactly the code you need directly into your project's component directory. You own it, you can modify it, and it won't break on upstream updates.
                 </p>
               </div>
             </div>
@@ -147,7 +147,7 @@ export function DocsInstallation() {
                   <div className="absolute top-2 -left-[1px] w-4 border-t border-zinc-200 dark:border-zinc-800" />
                   <div className="flex flex-col gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800/50">
                     <div className="flex items-center gap-2 font-medium text-zinc-900 dark:text-zinc-100">
-                      <FolderTree className="size-4" /> morphy/
+                      <FolderTree className="size-4" /> glidecn/
                     </div>
                     <div className="pl-6 flex items-center gap-2 text-xs">
                       <FileCode2 className="size-3.5 text-zinc-400" /> index.ts
@@ -205,7 +205,7 @@ export function DocsInstallation() {
                 <div>
                   <h3 className="font-medium text-base text-zinc-900 dark:text-zinc-50 mb-1">Wrap Your Root Layout</h3>
                   <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
-                    Add <code>&lt;MorphyProvider&gt;</code> to coordinate route changes and manage the dual-frame crossfade.
+                    Add <code>&lt;GlideCNProvider&gt;</code> to coordinate route changes and manage the dual-frame crossfade.
                   </p>
                 </div>
               </div>
@@ -214,14 +214,14 @@ export function DocsInstallation() {
                 {activeTab === 'app' && (
                   <pre>
 <span className="text-zinc-500">// app/layout.tsx</span>
-<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">MorphyProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/morphy'</span>;
+<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;
 <br/><br/><span className="text-pink-400">export default function</span> <span className="text-blue-300">RootLayout</span>({'{'} children {'}'}: {'{'} children: React.ReactNode {'}'}) {'{'}
 <br/>  <span className="text-pink-400">return</span> (
 <br/>    &lt;<span className="text-blue-300">html</span> <span className="text-amber-200">lang</span>=<span className="text-emerald-300">"en"</span>&gt;
 <br/>      &lt;<span className="text-blue-300">body</span>&gt;
-<br/>        &lt;<span className="text-amber-200">MorphyProvider</span> <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
+<br/>        &lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
 <br/>          {'{'}children{'}'}
-<br/>        &lt;/<span className="text-amber-200">MorphyProvider</span>&gt;
+<br/>        &lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;
 <br/>      &lt;/<span className="text-blue-300">body</span>&gt;
 <br/>    &lt;/<span className="text-blue-300">html</span>&gt;
 <br/>  );
@@ -231,12 +231,12 @@ export function DocsInstallation() {
                 {activeTab === 'pages' && (
                   <pre>
 <span className="text-zinc-500">// pages/_app.tsx</span>
-<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">MorphyProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/morphy'</span>;
+<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;
 <br/><br/><span className="text-pink-400">export default function</span> <span className="text-blue-300">App</span>({'{'} Component, pageProps, router {'}'}: AppProps) {'{'}
 <br/>  <span className="text-pink-400">return</span> (
-<br/>    &lt;<span className="text-amber-200">MorphyProvider</span> <span className="text-amber-200">key</span>={'{'}router.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
+<br/>    &lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">key</span>={'{'}router.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
 <br/>      &lt;<span className="text-blue-300">Component</span> {'{'}...pageProps{'}'} /&gt;
-<br/>    &lt;/<span className="text-amber-200">MorphyProvider</span>&gt;
+<br/>    &lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;
 <br/>  );
 <br/>{'}'}
                   </pre>
@@ -244,14 +244,14 @@ export function DocsInstallation() {
                 {activeTab === 'vite' && (
                   <pre>
 <span className="text-zinc-500">// src/App.tsx</span>
-<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">MorphyProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/morphy'</span>;
+<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;
 <br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">useLocation</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'react-router-dom'</span>;
 <br/><br/><span className="text-pink-400">export function</span> <span className="text-blue-300">App</span>() {'{'}
 <br/>  <span className="text-pink-400">const</span> location = <span className="text-amber-200">useLocation</span>();
 <br/>  <span className="text-pink-400">return</span> (
-<br/>    &lt;<span className="text-amber-200">MorphyProvider</span> <span className="text-amber-200">key</span>={'{'}location.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
+<br/>    &lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">key</span>={'{'}location.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
 <br/>      <span className="text-zinc-500">{/* Your Routes */}</span>
-<br/>    &lt;/<span className="text-amber-200">MorphyProvider</span>&gt;
+<br/>    &lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;
 <br/>  );
 <br/>{'}'}
                   </pre>
@@ -273,7 +273,7 @@ export function DocsInstallation() {
               
               <div className="ml-12 rounded-xl bg-[#0d0d0d] border border-zinc-800 p-6 font-mono text-[13px] text-zinc-300 overflow-x-auto leading-loose">
                 <pre>
-<span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/morphy'</span>;
+<span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;
 <br/><br/><span className="text-pink-400">export default function</span> <span className="text-blue-300">Dashboard</span>() {'{'}
 <br/>  <span className="text-pink-400">return</span> (
 <br/>    &lt;<span className="text-amber-200">Page</span> <span className="text-amber-200">transition</span>=<span className="text-emerald-300">"circular-portal"</span> <span className="text-amber-200">duration</span>={'{'}0.7{'}'}&gt;
@@ -303,10 +303,10 @@ export function DocsInstallation() {
 
         <div className="grid sm:grid-cols-2 gap-4">
           {[
-            { cmd: 'npx morphy add cube', name: '3D Cube' },
-            { cmd: 'npx morphy add circular-portal', name: 'Iris Portal' },
-            { cmd: 'npx morphy add origami-unfold', name: 'Origami Fold' },
-            { cmd: 'npx morphy add ink-spread', name: 'Ink Diffusion' },
+            { cmd: 'npx glidecn-cli add cube', name: '3D Cube' },
+            { cmd: 'npx glidecn-cli add circular-portal', name: 'Iris Portal' },
+            { cmd: 'npx glidecn-cli add origami-unfold', name: 'Origami Fold' },
+            { cmd: 'npx glidecn-cli add ink-spread', name: 'Ink Diffusion' },
           ].map((item) => (
             <div
               key={item.cmd}
@@ -339,7 +339,7 @@ export function DocsInstallation() {
               <div>
                 <h2 className="text-2xl font-display font-medium text-zinc-900 dark:text-zinc-50 mb-3">Dynamic Hooks</h2>
                 <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm">
-                  Build user preferences, presentation modals, or context-aware animations by updating the transition programmatically at runtime using the <code>useMorphy()</code> hook.
+                  Build user preferences, presentation modals, or context-aware animations by updating the transition programmatically at runtime using the <code>useGlide()</code> hook.
                 </p>
               </div>
             </div>
@@ -347,7 +347,7 @@ export function DocsInstallation() {
 
           <div className="w-full lg:w-1/2 bg-[#0d0d0d] p-8 md:p-12 font-mono text-[13px] leading-loose overflow-x-auto flex items-center text-zinc-300">
             <pre>
-<span className="text-pink-400">const</span> {'{'} setTransition {'}'} = <span className="text-amber-200">useMorphy</span>();
+<span className="text-pink-400">const</span> {'{'} setTransition {'}'} = <span className="text-amber-200">useGlide</span>();
 <br/><br/><span className="text-pink-400">return</span> (
 <br/>  &lt;<span className="text-blue-300">button</span> 
 <br/>    <span className="text-amber-200">onClick</span>={'{'}() =&gt; <span className="text-blue-300">setTransition</span>(<span className="text-emerald-300">'cube'</span>){'}'}

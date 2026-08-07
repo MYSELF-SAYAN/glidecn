@@ -1,6 +1,6 @@
 'use client';
 
-import { Page } from '@/components/morphy';
+import { Page } from '@/components/glidecn';
 import { Type, AlignLeft, SplitSquareHorizontal, Minus, LetterText } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';

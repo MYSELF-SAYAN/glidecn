@@ -97,13 +97,13 @@ export function DocsApiReference() {
           </h1>
 
           <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-light text-balance">
-            Morphy provides a clean, minimalistic API surface designed for maximum control. You only need to interact with two main components and one hook to build incredibly rich, cinematic transitions.
+            GlideCN provides a clean, minimalistic API surface designed for maximum control. You only need to interact with two main components and one hook to build incredibly rich, cinematic transitions.
           </p>
         </div>
       </section>
 
       {/* 2. MORPHY PROVIDER */}
-      <section className="relative scroll-mt-32" id="morphy-provider">
+      <section className="relative scroll-mt-32" id="glidecn-provider">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
 
           <div className="lg:col-span-5 sticky top-32 space-y-6">
@@ -111,7 +111,7 @@ export function DocsApiReference() {
               <Layers className="size-5" />
             </div>
             <h2 className="text-4xl font-display font-medium tracking-tight text-zinc-900 dark:text-white">
-              MorphyProvider
+              GlideCNProvider
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-balance">
               The root coordinator. It intercepts routing events, manages outgoing freeze-frame snapshots, and handles the dual-frame crossfading engine. Place this high in your component tree, typically in your root layout.
@@ -121,7 +121,7 @@ export function DocsApiReference() {
           <div className="lg:col-span-7 space-y-8">
             <CodeBlock
               badge="app/layout.tsx"
-              code={`import { MorphyProvider } from 'morphy';\n\nexport default function RootLayout({ children }) {\n  return (\n    <html lang="en">\n      <body>\n        <MorphyProvider defaultTransition="slide" defaultDuration={0.6}>\n          {children}\n        </MorphyProvider>\n      </body>\n    </html>\n  );\n}`}
+              code={`import { GlideCNProvider } from 'glidecn';\n\nexport default function RootLayout({ children }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider defaultTransition="slide" defaultDuration={0.6}>\n          {children}\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
             />
 
             <div className="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-xl overflow-hidden">
@@ -133,7 +133,7 @@ export function DocsApiReference() {
                   name="children"
                   type="React.ReactNode"
                   required
-                  description="Your application layout and content. This must wrap the actual router nodes so Morphy can freeze the DOM when a route change is detected."
+                  description="Your application layout and content. This must wrap the actual router nodes so GlideCN can freeze the DOM when a route change is detected."
                 />
                 <PropRow
                   name="defaultTransition"
@@ -179,7 +179,7 @@ export function DocsApiReference() {
           <div className="lg:col-span-7 space-y-8">
             <CodeBlock
               badge="app/about/page.tsx"
-              code={`import { Page } from 'morphy';\n\nexport default function AboutPage() {\n  return (\n    // This specific page will use the 'liquid-morph' transition \n    // instead of the global default.\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
+              code={`import { Page } from 'glidecn';\n\nexport default function AboutPage() {\n  return (\n    // This specific page will use the 'liquid-morph' transition \n    // instead of the global default.\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
             />
 
             <div className="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-xl overflow-hidden">
@@ -219,7 +219,7 @@ export function DocsApiReference() {
       </section>
 
       {/* 4. USEMORPHY HOOK & USE CASES */}
-      <section className="relative scroll-mt-32" id="use-morphy">
+      <section className="relative scroll-mt-32" id="use-glidecn">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
 
           <div className="lg:col-span-5 sticky top-32 space-y-6">
@@ -227,7 +227,7 @@ export function DocsApiReference() {
               <Braces className="size-5" />
             </div>
             <h2 className="text-4xl font-display font-medium tracking-tight text-zinc-900 dark:text-white">
-              useMorphy
+              useGlide
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-balance mb-6">
               A custom React hook allowing you to programmatically read and modify the active transition configuration at runtime. Perfect for dynamic route orchestration.
@@ -270,19 +270,19 @@ export function DocsApiReference() {
               <AccordionItem
                 title="1. Programmatic Navigation (Next Button)"
                 description={<p>You can override the transition dynamically just before navigating. For example, triggering a dramatic <code>scale</code> transition only when the user clicks the final "Submit" button in an onboarding flow.</p>}
-                code={`import { useMorphy } from 'morphy';\nimport { useRouter } from 'next/navigation';\n\nexport function CheckoutButton() {\n  const { setTransition } = useMorphy();\n  const router = useRouter();\n\n  const handleCheckout = () => {\n    // Force a specific transition for this action\n    setTransition('circular-portal');\n    \n    // Navigate immediately after setting it\n    router.push('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`}
+                code={`import { useGlide } from 'glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function CheckoutButton() {\n  const { setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleCheckout = () => {\n    // Force a specific transition for this action\n    setTransition('circular-portal');\n    \n    // Navigate immediately after setting it\n    router.push('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`}
               />
 
               <AccordionItem
                 title="2. Respecting User Preferences"
-                description={<p>You can tie Morphy into your application's settings context. If a user toggles "Reduced Motion" in your app settings, you can instantly turn off all animations globally.</p>}
-                code={`import { useMorphy } from 'morphy';\nimport { useEffect } from 'react';\nimport { useSettings } from '@/hooks/useSettings';\n\nexport function MotionController() {\n  const { setConfig } = useMorphy();\n  const { prefersReducedMotion } = useSettings();\n\n  useEffect(() => {\n    if (prefersReducedMotion) {\n      setConfig({ duration: 0 }); // Instant snap\n    } else {\n      setConfig({ duration: 0.6 }); // Standard smooth motion\n    }\n  }, [prefersReducedMotion]);\n\n  return null;\n}`}
+                description={<p>You can tie GlideCN into your application's settings context. If a user toggles "Reduced Motion" in your app settings, you can instantly turn off all animations globally.</p>}
+                code={`import { useGlide } from 'glidecn';\nimport { useEffect } from 'react';\nimport { useSettings } from '@/hooks/useSettings';\n\nexport function MotionController() {\n  const { setConfig } = useGlide();\n  const { prefersReducedMotion } = useSettings();\n\n  useEffect(() => {\n    if (prefersReducedMotion) {\n      setConfig({ duration: 0 }); // Instant snap\n    } else {\n      setConfig({ duration: 0.6 }); // Standard smooth motion\n    }\n  }, [prefersReducedMotion]);\n\n  return null;\n}`}
               />
 
               <AccordionItem
                 title="3. Directional Orchestration"
                 description={<p>If you have a carousel-like UI (e.g., onboarding steps), you can dynamically change the slide direction based on whether the user clicked "Next" or "Back".</p>}
-                code={`import { useMorphy } from 'morphy';\nimport { useRouter } from 'next/navigation';\n\nexport function WizardControls({ currentStep }) {\n  const { setConfig, setTransition } = useMorphy();\n  const router = useRouter();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    router.push(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    router.push(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`}
+                code={`import { useGlide } from 'glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function WizardControls({ currentStep }) {\n  const { setConfig, setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    router.push(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    router.push(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`}
               />
             </div>
 

@@ -40,7 +40,7 @@ export function ArchitectureSection() {
             </h2>
             
             <p className="text-lg text-[var(--text-muted)] font-light leading-relaxed max-w-xl">
-              MorphyJS utilizes a dual-frame rendering architecture. Instead of immediately unmounting the current page, it takes a snapshot and freezes it, allowing the incoming page to render underneath.
+              GlideCN utilizes a dual-frame rendering architecture. Instead of immediately unmounting the current page, it takes a snapshot and freezes it, allowing the incoming page to render underneath.
             </p>
 
             <div className="space-y-6 pt-4">

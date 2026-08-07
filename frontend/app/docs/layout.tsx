@@ -1,13 +1,14 @@
 import type { ReactNode } from 'react';
 import { DocsShell } from '@/components/docs/docs-shell';
-import { Morphy } from '@/components/morphy';
+import { GlideCN } from '@/components/glidecn';
+
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <DocsShell>
-      <Morphy>
+      <GlideCN>
         {children}
-      </Morphy>
+      </GlideCN>
     </DocsShell>
   );
 }

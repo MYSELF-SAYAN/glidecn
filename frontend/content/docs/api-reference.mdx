@@ -1,16 +1,19 @@
 ---
 title: API Reference & Props
-description: Complete guide to the components, hooks, and configuration props available in MorphyJS.
+description: Complete guide to the components, hooks, and configuration props available in GlideCN.
 ---
+
+import { TransitionCount } from '@/components/docs/transition-count';
+
 
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import { Callout } from 'fumadocs-ui/components/callout';
 
-MorphyJS provides a clean, minimalistic API surface. You only need to interact with two main components and one hook to build incredibly rich transitions.
+GlideCN provides a clean, minimalistic API surface. You only need to interact with two main components and one hook to build incredibly rich transitions.
 
-## `<MorphyProvider>`
+## `<GlideCNProvider>`
 
-The `MorphyProvider` is the root coordinator. It intercepts routing events, manages the outgoing freeze-frame snapshots, and handles the dual-frame crossfade mounting logic.
+The `GlideCNProvider` is the root coordinator. It intercepts routing events, manages the outgoing freeze-frame snapshots, and handles the dual-frame crossfade mounting logic.
 
 <Callout type="info">
   **Placement Strategy**: Place this as high in your component tree as possible (e.g., inside `app/layout.tsx`).
@@ -56,7 +59,7 @@ The `<Page>` component represents an animatable route segment. You should wrap t
       default: 'Required',
     },
     transition: {
-      description: 'Overrides the defaultTransition. Choose from any of the 33+ shaders.',
+      description: 'Overrides the defaultTransition. Choose from any of the <TransitionCount /> shaders.',
       type: 'string',
       default: 'Inherited',
     },
@@ -72,7 +75,7 @@ The `<Page>` component represents an animatable route segment. You should wrap t
   }}
 />
 
-## `useMorphy()`
+## `useGlide()`
 
 A custom React hook that allows you to programmatically read and modify the active transition configuration at runtime.
 
@@ -104,10 +107,10 @@ A custom React hook that allows you to programmatically read and modify the acti
 ```tsx title="components/settings-panel.tsx"
 'use client';
 
-import { useMorphy } from '@/components/morphy';
+import { useGlide } from '@/components/glidecn';
 
 export function SettingsPanel() {
-  const { currentTransition, setTransition, setConfig } = useMorphy();
+  const { currentTransition, setTransition, setConfig } = useGlide();
 
   return (
     <div className="flex gap-4">

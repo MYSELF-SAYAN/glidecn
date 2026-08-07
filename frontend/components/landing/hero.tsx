@@ -6,10 +6,10 @@ import { ArrowRight, Copy, Check, Star, ChevronDown, Sparkles } from 'lucide-rea
 import Link from 'next/link';
 
 const PKG_COMMANDS = {
-  pnpm: 'pnpm dlx morphyjs-cli@latest add',
-  npm: 'npx morphyjs-cli@latest add',
-  bun: 'bunx morphyjs-cli@latest add',
-  yarn: 'yarn dlx morphyjs-cli@latest add',
+  pnpm: 'pnpm dlx glidecn-cli@latest add',
+  npm: 'npx glidecn-cli@latest add',
+  bun: 'bunx glidecn-cli@latest add',
+  yarn: 'yarn dlx glidecn-cli@latest add',
 };
 
 export function Hero() {

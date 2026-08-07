@@ -1,4 +1,5 @@
 'use client';
+import { TRANSITION_CATALOG } from '@/lib/transition-catalog';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Box, Loader2, Feather, PenTool, Monitor, ArrowRight, Sparkles, Gamepad2 } from 'lucide-react';
@@ -128,28 +129,40 @@ function TVTurnOffDemo() {
   );
 }
 
-function PageCurlDemo() {
-  const [curled, setCurled] = useState(false);
+function FlowDemo() {
+  const [slide, setSlide] = useState(false);
   useEffect(() => {
-    const id = setInterval(() => setCurled((c) => !c), 2000);
+    const id = setInterval(() => setSlide((s) => !s), 2000);
     return () => clearInterval(id);
   }, []);
   return (
     <div className="absolute inset-0 bg-[var(--bg-surface)] overflow-hidden flex items-center justify-center">
-      <div className="relative size-20 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] p-2 shadow-md">
-        <div className="h-1.5 w-8 rounded-full bg-[var(--border-color)] mb-1" />
-        <div className="h-1.5 w-12 rounded-full bg-[var(--border-color)]" />
-        
-        <motion.div
-          animate={{
-            x: curled ? 0 : 40,
-            y: curled ? 0 : 40,
-            rotate: curled ? 0 : 20,
-            opacity: curled ? 1 : 0.4,
-          }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute top-0 right-0 w-12 h-12 rounded-bl-2xl bg-gradient-to-bl from-[#fa5c4f] to-[#ff8a7a] shadow-md"
-        />
+      <div className="relative size-full flex items-center justify-center">
+        <AnimatePresence initial={false}>
+          {slide ? (
+            <motion.div
+              key="slide-1"
+              initial={{ x: '100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '-100%', opacity: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 bg-gradient-to-br from-[#fa5c4f] to-orange-400 flex items-center justify-center"
+            >
+              <ArrowRight className="size-10 text-white" />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="slide-2"
+              initial={{ x: '-100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '100%', opacity: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center"
+            >
+              <ArrowRight className="size-10 text-white rotate-180" />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -160,12 +173,12 @@ function PageCurlDemo() {
 /* ───────────────────────────────────────────────────────────────────────── */
 
 const transitionsList = [
-  { id: 'cube', name: 'Cube 3D', category: 'Spatial', desc: 'Spatial 3D isometric axis rotation at 60 FPS.', Demo: CubeDemo },
-  { id: 'circular-portal', name: 'Circular Portal', category: 'Portal', desc: 'Expanding radial iris reveal with fluid momentum.', Demo: CircularPortalDemo },
-  { id: 'origami-unfold', name: 'Origami Blossom', category: 'Paper', desc: 'Multi-facet 3D accordion fold unfolding outwards.', Demo: OrigamiDemo },
-  { id: 'ink-spread', name: 'Fluid Ink Spread', category: 'Mask', desc: 'Organic diffusion wash bleeding across viewport.', Demo: InkSpreadDemo },
-  { id: 'tv-turn-off', name: 'CRT Phosphor', category: 'Retro', desc: 'Vintage electron-beam screen collapse.', Demo: TVTurnOffDemo },
-  { id: 'page-curl', name: 'Page Curl', category: 'Paper', desc: 'Realistic physical book page curl simulation.', Demo: PageCurlDemo },
+  { id: 'spatial', name: 'Spatial', desc: 'Spatial 3D isometric axis rotation at 60 FPS.', Demo: CubeDemo },
+  { id: 'portal', name: 'Portal', desc: 'Expanding radial iris reveal with fluid momentum.', Demo: CircularPortalDemo },
+  { id: 'paper', name: 'Paper', desc: 'Multi-facet 3D accordion fold unfolding outwards.', Demo: OrigamiDemo },
+  { id: 'mask', name: 'Mask', desc: 'Organic diffusion wash bleeding across viewport.', Demo: InkSpreadDemo },
+  { id: 'experimental', name: 'Experimental', desc: 'Vintage electron-beam screen collapse.', Demo: TVTurnOffDemo },
+  { id: 'flow', name: 'Flow', desc: 'Classic directional movement between pages.', Demo: FlowDemo },
 ];
 
 export function TransitionShowcase() {
@@ -186,35 +199,38 @@ export function TransitionShowcase() {
           </span>
           
           <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.15]">
-            33+ production shaders. <br />
-            <span className="relative font-cursive text-[#fa5c4f] font-normal text-5xl sm:text-6xl inline-block mt-2">
-              Infinite possibilities.
-              <motion.svg 
-                className="absolute -bottom-1 left-0 w-full text-[#fa5c4f]/60" 
-                viewBox="0 0 100 10" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <motion.path 
-                  d="M2 8C20 2 40 8 60 5C75 3 85 7 98 4" 
-                  stroke="currentColor" 
-                  strokeWidth="2.5" 
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
+            {TRANSITION_CATALOG.length}+ production shaders. <br />
+            <span className="font-cursive text-[var(--text-muted)] font-normal text-5xl sm:text-6xl inline-block mt-2">
+              Infinite <span className="relative text-[#fa5c4f]">
+                possibilities.
+                <motion.svg 
+                  className="absolute -bottom-1 left-0 w-full text-[#fa5c4f]/60" 
+                  viewBox="0 0 100 10" 
+                  preserveAspectRatio="none"
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 1.5, delay: 0.3, ease: 'easeInOut' }}
-                />
-              </motion.svg>
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <motion.path 
+                    d="M2 8C20 2 40 8 60 5C75 3 85 7 98 4" 
+                    stroke="currentColor" 
+                    strokeWidth="2.5" 
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 1.5, delay: 0.3, ease: 'easeInOut' }}
+                  />
+                </motion.svg>
+              </span>
             </span>
           </h2>
 
           <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed font-light">
-            Every transition is fully customizable. Test any shader live inside the interactive 2-page playground.
+            Explore 7 distinct families: Flow, Portal, Paper, Mask, Spatial, Dynamic, and Experimental. Every transition is fully customizable. Test any shader live inside the interactive 2-page playground.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">
@@ -230,7 +246,7 @@ export function TransitionShowcase() {
               href="/docs/transitions"
               className="w-full sm:w-auto group flex justify-center items-center gap-2 text-sm font-medium text-[var(--text-main)] hover:text-[#fa5c4f] transition-colors"
             >
-              <span>View All 33+</span>
+              <span>View All {TRANSITION_CATALOG.length}+</span>
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -258,9 +274,6 @@ export function TransitionShowcase() {
                   <div className="relative h-48 w-full overflow-hidden bg-[var(--bg-page)]/50">
                     <DemoComponent />
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    <span className="absolute top-4 right-4 px-2.5 py-1 rounded-md bg-[var(--bg-surface)]/80 backdrop-blur-md border border-[var(--border-color)] text-[9px] font-mono font-bold uppercase tracking-widest text-[var(--text-subtle)]">
-                      {item.category}
-                    </span>
                   </div>
 
                   <div className="flex flex-col p-6 flex-1 justify-between space-y-4 bg-gradient-to-b from-[var(--bg-page)]/50 to-[var(--bg-surface)]">

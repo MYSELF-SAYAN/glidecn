@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
-import { defaultRegistry } from '@/components/morphy/core/registry';
+import fs from 'fs';
+import path from 'path';
+import { defaultRegistry } from '@/components/glidecn/core/registry';
 import { TransitionDocsShell } from '@/components/docs/transition-docs-shell';
 import {
   TRANSITION_CATALOG,
@@ -8,10 +10,10 @@ import {
 } from '@/lib/transition-catalog';
 import Link from 'next/link';
 import { ArrowLeft, Sparkles, Clock, Rocket, Bell, CheckCircle2 } from 'lucide-react';
-import { Page } from '@/components/morphy';
+import { Page } from '@/components/glidecn';
 
 // Ensure all transitions are registered
-import '@/components/morphy/transitions';
+import '@/components/glidecn/transitions';
 
 // Ensure all transitions are registered
 
@@ -23,10 +25,10 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
   const entry = getCatalogEntry(params.slug);
-  if (!entry) return { title: 'Transition — Morphy' };
+  if (!entry) return { title: 'Transition — GlideCN' };
 
   return {
-    title: `${entry.displayName} Transition — Morphy Docs`,
+    title: `${entry.displayName} Transition — GlideCN Docs`,
     description: entry.description,
   };
 }
@@ -38,12 +40,22 @@ export default async function TransitionDocsPage(props: { params: Promise<{ slug
 
   if (!catalogEntry) notFound();
 
+  // Read the actual transition source code for the Code tab
+  let sourceCode = '';
+  try {
+    const filePath = path.join(process.cwd(), 'components', 'glidecn', 'transitions', `${params.slug}.tsx`);
+    sourceCode = fs.readFileSync(filePath, 'utf8');
+  } catch (e) {
+    // If not found, it will fallback to the mock code inside TransitionDocsShell
+  }
+
   // If transition is fully implemented and registered
   if (transition) {
     return (
       <TransitionDocsShell
         transition={transition.metadata.name}
         tagline={transition.metadata.description}
+        sourceCode={sourceCode}
       />
     );
   }
@@ -99,7 +111,7 @@ export default async function TransitionDocsPage(props: { params: Promise<{ slug
                 href="/docs/transitions"
                 className="w-full sm:w-auto flex-1 flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] hover:bg-[#e54235] px-6 py-3.5 text-xs font-bold text-white shadow-lg shadow-[#fa5c4f]/25 transition-all hover:-translate-y-0.5"
               >
-                Explore 33+ Available
+                Explore {TRANSITION_CATALOG.length}+ Available
               </Link>
             </div>
           </div>

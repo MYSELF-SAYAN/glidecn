@@ -73,7 +73,7 @@ export function PerformanceSection() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg text-[var(--text-muted)] font-light leading-relaxed"
           >
-            By offloading transitions to the browser's compositor thread, MorphyJS guarantees butter-smooth animations even when React is heavily blocking the main thread.
+            By offloading transitions to the browser's compositor thread, GlideCN guarantees butter-smooth animations even when React is heavily blocking the main thread.
           </motion.p>
         </div>
 
@@ -108,12 +108,12 @@ export function PerformanceSection() {
             </div>
           </div>
 
-          {/* MorphyJS Rendering (Smooth) */}
+          {/* GlideCN Rendering (Smooth) */}
           <div className="relative p-8 rounded-[2rem] bg-[var(--bg-card)] border border-[#fa5c4f]/30 shadow-[0_20px_40px_rgba(250,92,79,0.05)] overflow-hidden flex flex-col h-[400px]">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none" />
             <div className="flex items-center justify-between mb-8 relative z-10">
               <h3 className="text-lg font-bold text-[var(--text-main)] flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-500" /> MorphyJS
+                <CheckCircle2 className="w-5 h-5 text-emerald-500" /> GlideCN
               </h3>
               <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">Compositor Thread</span>
             </div>

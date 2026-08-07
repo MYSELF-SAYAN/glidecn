@@ -1,6 +1,6 @@
 'use client';
 
-import { useMorphy, type TransitionDirection } from '@/components/morphy';
+import { useGlide, type TransitionDirection } from '@/components/glidecn';
 import {
   Layers,
   Settings2,
@@ -69,7 +69,7 @@ const EASING_PRESETS = ['easeInOut', 'easeOut', 'linear', 'easeIn'] as const;
 const DIRECTION_PRESETS: TransitionDirection[] = ['left', 'right', 'up', 'down'];
 
 export function PlaygroundTransitionStudio() {
-  const { currentTransition, setTransition, config, setConfig } = useMorphy();
+  const { currentTransition, setTransition, config, setConfig } = useGlide();
   const { theme, setTheme } = useTheme();
   
   const [activeTab, setActiveTab] = useState<'shaders' | 'physics' | 'themes' | 'export'>('shaders');
@@ -85,7 +85,7 @@ export function PlaygroundTransitionStudio() {
   useEffect(() => {
     setIsMounted(true);
     try {
-      const saved = localStorage.getItem('morphy-playground-state');
+      const saved = localStorage.getItem('glidecn-playground-state');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed.activeTab) setActiveTab(parsed.activeTab);
@@ -108,7 +108,7 @@ export function PlaygroundTransitionStudio() {
   useEffect(() => {
     if (!isMounted) return;
     try {
-      localStorage.setItem('morphy-playground-state', JSON.stringify({
+      localStorage.setItem('glidecn-playground-state', JSON.stringify({
         activeTab,
         searchQuery,
         activeCategory,
@@ -183,7 +183,7 @@ export function PlaygroundTransitionStudio() {
   if (!isMounted) return null;
 
   return (
-    <div className="flex flex-col h-full font-sans select-none overflow-hidden relative">
+    <div className="flex flex-col h-full font-sans overflow-hidden relative">
       
       {/* 1. Navigation / Labs */}
       <div className="p-4 border-b border-black/5 dark:border-white/10 space-y-1 overflow-y-auto max-h-[30vh] shrink-0 custom-scrollbar z-10 bg-white/20 dark:bg-black/10 backdrop-blur-md">
@@ -435,7 +435,7 @@ export function PlaygroundTransitionStudio() {
 
         {/* TAB 4: EXPORT */}
         {activeTab === 'export' && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 select-text">
             <div className="flex items-center justify-between text-[10px] font-bold tracking-widest uppercase">
               <span className="text-[var(--text-muted)]">Source</span>
               <button
