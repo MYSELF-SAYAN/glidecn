@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { GlideCNProvider } from '@/components/glidecn';
 import { LenisProvider } from '@/components/lenis-provider';
-
+import { Analytics } from "@vercel/analytics/next"
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -57,6 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <LenisProvider>
             <GlideCNProvider defaultTransition="liquid-morph">
               {children}
+              <Analytics />
             </GlideCNProvider>
           </LenisProvider>
         </RootProvider>
