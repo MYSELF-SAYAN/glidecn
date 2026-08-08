@@ -8,7 +8,7 @@ import fs from 'fs';
 import path from 'path';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const FRONTEND_MORPHY = path.resolve(ROOT, '..', 'frontend', 'components', 'glidecn');
+const FRONTEND_GLIDECN = path.resolve(ROOT, '..', 'frontend', 'components', 'glidecn');
 const TEMPLATES_DIR = path.resolve(ROOT, 'templates');
 const DATA_OUTPUT = path.resolve(ROOT, 'src', 'data', 'transitions.ts');
 
@@ -78,7 +78,7 @@ function extractTransitionMeta(filePath: string, fileName: string): TransitionMe
 }
 
 function scanTransitions(): TransitionMeta[] {
-  const transitionsDir = path.join(FRONTEND_MORPHY, 'transitions');
+  const transitionsDir = path.join(FRONTEND_GLIDECN, 'transitions');
   if (!fs.existsSync(transitionsDir)) {
     console.error('❌ Transitions directory not found');
     process.exit(1);
@@ -191,7 +191,7 @@ console.log('');
 
 // Step 1: Copy templates
 console.log('📦 Copying frontend/components/glidecn → cli/templates/');
-copyRecursive(FRONTEND_MORPHY, TEMPLATES_DIR);
+copyRecursive(FRONTEND_GLIDECN, TEMPLATES_DIR);
 console.log('   ✅ Templates synced');
 console.log('');
 

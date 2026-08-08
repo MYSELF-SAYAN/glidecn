@@ -10,12 +10,11 @@ import pc from 'picocolors';
 // ---------------------------------------------------------------------------
 
 const GLIDECN_ART = `
-  ${pc.magenta('██████')}${pc.cyan('╗')} ${pc.yellow('██')}${pc.cyan('╗')}      ${pc.green('██')}${pc.cyan('╗')} ${pc.blue('██████')}${pc.cyan('╗')}  ${pc.magenta('███████')}${pc.cyan('╗')} ${pc.red('██████')}${pc.cyan('╗')} ${pc.yellow('██')}${pc.cyan('╗')}   ${pc.yellow('██')}${pc.cyan('╗')}
- ${pc.magenta('██')}${pc.cyan('╔════╝')} ${pc.yellow('██')}${pc.cyan('║')}      ${pc.green('██')}${pc.cyan('║')} ${pc.blue('██')}${pc.cyan('╔══')}${pc.blue('██')}${pc.cyan('╗')} ${pc.magenta('██')}${pc.cyan('╔════╝')} ${pc.red('██')}${pc.cyan('╔════╝')} ${pc.yellow('████')}${pc.cyan('╗  ')}${pc.yellow('██')}${pc.cyan('║')}
- ${pc.magenta('██')}${pc.cyan('║  ███╗')}${pc.yellow('██')}${pc.cyan('║')}      ${pc.green('██')}${pc.cyan('║')} ${pc.blue('██')}${pc.cyan('║  ')}${pc.blue('██')}${pc.cyan('║')} ${pc.magenta('█████')}${pc.cyan('╗')}   ${pc.red('██')}${pc.cyan('║')}      ${pc.yellow('██')}${pc.cyan('╔')}${pc.yellow('██')}${pc.cyan('╗ ')}${pc.yellow('██')}${pc.cyan('║')}
- ${pc.magenta('██')}${pc.cyan('║   ██║')}${pc.yellow('██')}${pc.cyan('║')}      ${pc.green('██')}${pc.cyan('║')} ${pc.blue('██')}${pc.cyan('║  ')}${pc.blue('██')}${pc.cyan('║')} ${pc.magenta('██')}${pc.cyan('╔══╝')}   ${pc.red('██')}${pc.cyan('║')}      ${pc.yellow('██')}${pc.cyan('║╚')}${pc.yellow('██')}${pc.cyan('╗')}${pc.yellow('██')}${pc.cyan('║')}
- ${pc.magenta('╚██████╔╝')}${pc.yellow('███████')}${pc.cyan('╗')}${pc.green('██')}${pc.cyan('║')} ${pc.blue('██████')}${pc.cyan('╔╝')} ${pc.magenta('███████')}${pc.cyan('╗')} ${pc.red('╚██████')}${pc.cyan('╗')} ${pc.yellow('██')}${pc.cyan('║ ╚')}${pc.yellow('████')}${pc.cyan('║')}
-  ${pc.cyan('╚═════╝ ╚══════╝╚═╝ ╚═════╝  ╚══════╝  ╚═════╝ ╚═╝  ╚═══╝')}
+${pc.cyan('   _________     __     _______   __')}
+${pc.cyan('  / ____/ (_)___/ /__  / ____/ | / /')}
+${pc.cyan(' / / __/ / / __  / _ \\/ /   /  |/ / ')}
+${pc.cyan('/ /_/ / / / /_/ /  __/ /___/ /|  /  ')}
+${pc.cyan('\\____/_/_/\\__,_/\\___/\\____/_/ |_/   ')}
 `;
 
 export function printBanner() {
