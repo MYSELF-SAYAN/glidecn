@@ -5,8 +5,9 @@ import { GlideCNProvider } from '@/components/glidecn';
 import { PlaygroundTransitionStudio } from '@/components/playground/transition-studio';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Monitor, Smartphone, Tablet, Menu, ChevronLeft, ChevronDown, PanelLeftClose, X } from 'lucide-react';
+import { Monitor, Smartphone, Tablet, Menu, ChevronLeft, ChevronDown, PanelLeftClose, X, ArrowRightLeft } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
 export type DeviceView = 'desktop' | 'tablet' | 'mobile';
 
@@ -17,7 +18,25 @@ export default function PlaygroundLayout({
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [deviceView, setDeviceView] = useState<DeviceView>('desktop');
+  
+  const router = useRouter();
+  const pathname = usePathname();
 
+  const LABS = [
+    { name: 'Interactive Stage', path: '/playground/landing' },
+    { name: 'Bento Matrix', path: '/playground/features' },
+    { name: 'Typography Engine', path: '/playground/pricing' },
+    { name: 'Kinetic Components', path: '/playground/about' },
+    { name: 'Media Telemetry', path: '/playground/showcase' }
+  ];
+
+  const currentIndex = LABS.findIndex(p => pathname.includes(p.path));
+  const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % LABS.length;
+  const targetPage = LABS[nextIndex].path;
+
+  const handleFlipPage = () => {
+    setTimeout(() => router.push(targetPage), 10);
+  };
   return (
     <GlideCNProvider defaultTransition="fade">
       <div id="playground-root" className="playground-root h-[100dvh] w-full flex flex-col lg:flex-row bg-[var(--bg-page)] text-[var(--text-main)] relative overflow-hidden transition-colors duration-700 font-sans text-sm selection:bg-black/10 dark:selection:bg-white/20">
@@ -40,6 +59,17 @@ export default function PlaygroundLayout({
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Floating Flip Page Button */}
+      <div className="absolute top-4 right-4 z-[60]">
+        <button 
+          onClick={handleFlipPage}
+          className="p-3 bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-transform hover:scale-105 active:scale-95 text-[var(--text-main)] flex items-center justify-center"
+          title="Flip Page"
+        >
+          <ArrowRightLeft className="w-5 h-5" />
+        </button>
+      </div>
 
       {/* 
         Responsive Sidebar / Bottom Dock 
