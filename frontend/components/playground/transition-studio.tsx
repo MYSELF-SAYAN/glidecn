@@ -180,6 +180,30 @@ export function PlaygroundTransitionStudio() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      
+      const key = e.key.toLowerCase();
+      if (key === 'f') {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent('shortcut-feedback', { detail: { text: 'Flip', icon: 'flip' } }));
+        handleFlipPage();
+      } else if (key === 'c') {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent('shortcut-feedback', { detail: { text: 'Chaos Mode', icon: 'zap' } }));
+        handleChaosMode();
+      } else if (key === 'd') {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent('shortcut-feedback', { detail: { text: 'Surprise Me', icon: 'dices' } }));
+        handleSurpriseMe();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [config, activeTheme, activeTab, searchQuery, activeCategory, currentTransition]);
+
   if (!isMounted) return null;
 
   return (
@@ -460,22 +484,37 @@ export function PlaygroundTransitionStudio() {
       {/* 4. Action Footer (Absolute to bottom) */}
       <div className="absolute bottom-0 left-0 right-0 p-3 lg:p-4 border-t border-black/5 dark:border-white/10 bg-white/60 dark:bg-black/60 backdrop-blur-2xl grid grid-cols-3 gap-2 z-20">
         <button
-          onClick={handleSurpriseMe}
-          className="py-2.5 rounded-xl bg-white dark:bg-zinc-800 border border-black/5 dark:border-white/10 text-[var(--text-muted)] hover:text-[var(--text-main)] text-[10px] uppercase font-bold tracking-wider flex flex-row items-center justify-center gap-1.5 transition-all hover:-translate-y-0.5 hover:shadow-md"
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent('shortcut-feedback', { detail: { text: 'Surprise Me', icon: 'dices' } }));
+            handleSurpriseMe();
+          }}
+          title="Dice (D)"
+          className="py-2.5 rounded-xl bg-white dark:bg-zinc-800 border border-black/5 dark:border-white/10 text-[var(--text-muted)] hover:text-[var(--text-main)] text-[10px] uppercase font-bold tracking-wider flex flex-row items-center justify-center gap-1.5 transition-all hover:-translate-y-0.5 hover:shadow-md group relative"
         >
           <Dices className="w-3.5 h-3.5 text-amber-500" /> <span className="hidden sm:inline">Dice</span>
+          <kbd className="absolute -top-8 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded-md bg-white/90 dark:bg-zinc-800/90 text-[10px] font-mono text-[var(--text-main)] opacity-0 group-hover:opacity-100 transition-opacity border border-black/5 dark:border-white/10 shadow-sm pointer-events-none">D</kbd>
         </button>
         <button
-          onClick={handleChaosMode}
-          className="py-2.5 rounded-xl bg-white dark:bg-zinc-800 border border-black/5 dark:border-white/10 text-[var(--text-muted)] hover:text-[var(--text-main)] text-[10px] uppercase font-bold tracking-wider flex flex-row items-center justify-center gap-1.5 transition-all hover:-translate-y-0.5 hover:shadow-md"
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent('shortcut-feedback', { detail: { text: 'Chaos Mode', icon: 'zap' } }));
+            handleChaosMode();
+          }}
+          title="Chaos (C)"
+          className="py-2.5 rounded-xl bg-white dark:bg-zinc-800 border border-black/5 dark:border-white/10 text-[var(--text-muted)] hover:text-[var(--text-main)] text-[10px] uppercase font-bold tracking-wider flex flex-row items-center justify-center gap-1.5 transition-all hover:-translate-y-0.5 hover:shadow-md group relative"
         >
           <Zap className="w-3.5 h-3.5 text-purple-500" /> <span className="hidden sm:inline">Chaos</span>
+          <kbd className="absolute -top-8 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded-md bg-white/90 dark:bg-zinc-800/90 text-[10px] font-mono text-[var(--text-main)] opacity-0 group-hover:opacity-100 transition-opacity border border-black/5 dark:border-white/10 shadow-sm pointer-events-none">C</kbd>
         </button>
         <button
-          onClick={() => handleFlipPage()}
-          className="py-2.5 rounded-xl bg-[var(--text-main)] text-[var(--bg-page)] font-bold text-[10px] uppercase tracking-wider flex flex-row items-center justify-center gap-1.5 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent('shortcut-feedback', { detail: { text: 'Flip', icon: 'flip' } }));
+            handleFlipPage();
+          }}
+          title="Flip (F)"
+          className="py-2.5 rounded-xl bg-[var(--text-main)] text-[var(--bg-page)] font-bold text-[10px] uppercase tracking-wider flex flex-row items-center justify-center gap-1.5 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all group relative"
         >
           <ArrowRightLeft className="w-3.5 h-3.5" /> <span className="hidden sm:inline">Flip</span>
+          <kbd className="absolute -top-8 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded-md bg-white/90 dark:bg-zinc-800/90 text-[10px] font-mono text-black dark:text-white opacity-0 group-hover:opacity-100 transition-opacity border border-black/5 dark:border-white/10 shadow-sm pointer-events-none">F</kbd>
         </button>
       </div>
 
