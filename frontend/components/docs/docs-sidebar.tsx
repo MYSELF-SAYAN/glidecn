@@ -144,7 +144,7 @@ export function DocsSidebar() {
                       
                       <span className="relative z-10 flex items-center gap-3">
                         <span className="w-6 h-6 rounded bg-[var(--bg-surface)] border border-[var(--border-color)] flex items-center justify-center text-xs shadow-inner">
-                          {item.emoji}
+                          {/* {item.emoji} */}
                         </span>
                         <span className={`text-sm font-semibold truncate ${active ? 'text-[#fa5c4f]' : 'text-[var(--text-muted)] group-hover:text-[var(--text-main)]'}`}>
                           {item.displayName}
@@ -332,7 +332,7 @@ export function DocsSidebar() {
                                       />
                                     )}
                                     <span className="relative z-10 flex items-center gap-2.5 truncate">
-                                      <span className="text-xs grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all">{item.emoji}</span>
+                                     
                                       <span className={`truncate font-medium ${active ? 'text-[#fa5c4f] font-bold' : 'text-[var(--text-muted)] group-hover:text-[var(--text-main)]'}`}>
                                         {item.displayName}
                                       </span>

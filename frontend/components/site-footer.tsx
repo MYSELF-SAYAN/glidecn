@@ -33,7 +33,7 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
               <a href="https://github.com/MYSELF-SAYAN/glidecn" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all">
                 <Github className="size-4" />
               </a>
-              <a href="https://twitter.com/glidecn" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10 transition-all">
+              <a href="https://x.com/itz_sayan_03" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10 transition-all">
                 <Twitter className="size-4" />
               </a>
             </div>

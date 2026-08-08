@@ -180,11 +180,11 @@ export function TransitionDocsShell({ transition, tagline, sourceCode }: Showcas
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay" />
 
         <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto space-y-6">
-          {catalog && (
+          {/* {catalog && (
             <div className="text-6xl sm:text-7xl p-6 rounded-3xl bg-black/40 border border-white/10 shadow-2xl backdrop-blur-xl mb-2">
               {catalog.emoji}
             </div>
-          )}
+          )} */}
           <h1 className="text-5xl sm:text-7xl font-light tracking-tighter text-[var(--text-main)] font-display">
             {definition?.metadata.displayName}
           </h1>
@@ -347,7 +347,7 @@ export function TransitionDocsShell({ transition, tagline, sourceCode }: Showcas
             <Link key={item.slug} href={`/docs/transitions/${item.slug}`} className="group relative overflow-hidden rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] p-4 shadow-md hover:border-[#fa5c4f]/40 transition-colors">
               <div className="flex items-center justify-between z-10 relative">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">{item.emoji}</span>
+                  {/* <span className="text-2xl">{item.emoji}</span> */}
                   <span className="font-light text-[var(--text-main)] tracking-tight">{item.displayName}</span>
                 </div>
                 <ArrowRight className="size-4 text-[var(--text-muted)] group-hover:text-[#fa5c4f] transition-transform group-hover:translate-x-1" />
