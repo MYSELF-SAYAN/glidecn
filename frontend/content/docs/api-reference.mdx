@@ -104,6 +104,9 @@ A custom React hook that allows you to programmatically read and modify the acti
 
 ### Example Usage
 
+<Tabs items={['Next.js (App)', 'Next.js (Pages)', 'Vite / React', 'Remix']}>
+
+<Tab value="Next.js (App)">
 ```tsx title="components/settings-panel.tsx"
 'use client';
 
@@ -125,3 +128,72 @@ export function SettingsPanel() {
   );
 }
 ```
+</Tab>
+
+<Tab value="Next.js (Pages)">
+```tsx title="components/SettingsPanel.tsx"
+import { useGlide } from '@/components/glidecn';
+
+export function SettingsPanel() {
+  const { currentTransition, setTransition, setConfig } = useGlide();
+
+  return (
+    <div className="flex gap-4">
+      <button onClick={() => setTransition('cube')}>
+        Use 3D Cube (Current: {currentTransition})
+      </button>
+
+      <button onClick={() => setConfig({ duration: 1.2 })}>
+        Slow Down (1.2s)
+      </button>
+    </div>
+  );
+}
+```
+</Tab>
+
+<Tab value="Vite / React">
+```tsx title="src/components/SettingsPanel.tsx"
+import { useGlide } from '@/components/glidecn';
+
+export function SettingsPanel() {
+  const { currentTransition, setTransition, setConfig } = useGlide();
+
+  return (
+    <div className="flex gap-4">
+      <button onClick={() => setTransition('cube')}>
+        Use 3D Cube (Current: {currentTransition})
+      </button>
+
+      <button onClick={() => setConfig({ duration: 1.2 })}>
+        Slow Down (1.2s)
+      </button>
+    </div>
+  );
+}
+```
+</Tab>
+
+<Tab value="Remix">
+```tsx title="app/components/settings-panel.tsx"
+import { useGlide } from '~/components/glidecn';
+
+export function SettingsPanel() {
+  const { currentTransition, setTransition, setConfig } = useGlide();
+
+  return (
+    <div className="flex gap-4">
+      <button onClick={() => setTransition('cube')}>
+        Use 3D Cube (Current: {currentTransition})
+      </button>
+
+      <button onClick={() => setConfig({ duration: 1.2 })}>
+        Slow Down (1.2s)
+      </button>
+    </div>
+  );
+}
+```
+</Tab>
+
+</Tabs>

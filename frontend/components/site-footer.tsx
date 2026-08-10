@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/landing/logo';
-import { Github, Twitter, Heart, ArrowUpRight, Command } from 'lucide-react';
+import { Github, Twitter, Heart, ArrowUpRight, Command, Gamepad2, ArrowRight } from 'lucide-react';
 
 export function SiteFooter({ className = "mt-32" }: { className?: string }) {
   return (
@@ -13,7 +13,7 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 flex flex-col items-center">
 
-        {/* Top Bento Grid Links */}
+        {/* Bento Grid Links */}
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-12 mb-24">
 
           {/* Brand Col */}
@@ -56,7 +56,7 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
                 </Link>
               </li>
               <li>
-                <Link href="/docs/props" className="group flex items-center text-white/70 hover:text-white transition-colors">
+                <Link href="/docs/api-reference" className="group flex items-center text-white/70 hover:text-white transition-colors">
                   <span>API Reference</span>
                   <ArrowUpRight className="size-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                 </Link>

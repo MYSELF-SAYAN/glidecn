@@ -74,9 +74,9 @@ export function FloatingNavbar() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#fa5c4f] group-hover:animate-pulse" />
           </Link>
           <div className="w-px h-4 bg-black/10 dark:bg-white/10 mx-1" />
-          <Link href="/playground/landing" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-subtle)] hover:text-[#fa5c4f] hover:bg-[#fa5c4f]/10 transition-colors duration-200 flex items-center gap-1.5">
-            <Gamepad2 className="w-3.5 h-3.5" />
-            <span>Playground</span>
+          <Link href="/docs/installation" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[#fa5c4f] bg-[#fa5c4f]/10 hover:bg-[#fa5c4f]/20 transition-colors duration-200 flex items-center gap-1.5">
+            <span>Build</span>
+            {/* <span className="w-1.5 h-1.5 rounded-full bg-[#fa5c4f] animate-pulse" /> */}
           </Link>
         </nav>
 
@@ -108,11 +108,12 @@ export function FloatingNavbar() {
           </a>
 
           <Link
-            href="/docs/installation"
+            href="/playground/landing"
             className="group hidden sm:flex items-center gap-2 rounded-full bg-[#fa5c4f] hover:bg-[#e54235] px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-lg shadow-[#fa5c4f]/25 transition-[background-color,transform] duration-200 active:scale-95 btn-tactile overflow-hidden relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700" />
-            <span>Build</span>
+            <Gamepad2 className="size-3.5" />
+            <span>Playground</span>
             <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
           </Link>
 

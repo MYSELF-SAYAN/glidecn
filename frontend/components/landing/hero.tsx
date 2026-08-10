@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Copy, Check, Star, ChevronDown, Sparkles } from 'lucide-react';
+import { ArrowRight, Copy, Check, Star, ChevronDown, Sparkles, Play, Gamepad2 } from 'lucide-react';
 import Link from 'next/link';
 
 const PKG_COMMANDS = {
@@ -94,22 +94,27 @@ export function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-8 w-full sm:w-auto mb-20"
+          className="flex flex-col items-center justify-center gap-6 w-full sm:w-auto mb-20"
         >
-          <Link
-            href="/docs/installation"
-            className="group relative flex justify-center items-center gap-2 rounded-full bg-[#fa5c4f] px-8 py-4 text-sm font-bold text-white transition-[background-color,transform,box-shadow] duration-200 hover:bg-[#e54235] hover:shadow-[0_0_40px_-10px_rgba(250,92,79,0.5)] hover:-translate-y-1 active:scale-[0.97]"
-          >
-            <span>Start Building</span>
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-          
+          {/* Primary CTA — Playground */}
           <Link
             href="/playground/landing"
-            className="group flex justify-center items-center gap-2 text-sm font-medium text-[var(--text-main)] hover:text-[#fa5c4f] transition-colors"
+            className="group relative flex justify-center items-center gap-3 rounded-full bg-[#fa5c4f] px-10 py-5 text-base font-bold text-white transition-[background-color,transform,box-shadow] duration-300 hover:bg-[#e54235] hover:-translate-y-1 active:scale-[0.97] shadow-[0_0_0_4px_rgba(250,92,79,0.15),0_0_60px_-12px_rgba(250,92,79,0.4)]"
           >
-            <span>Explore Playground</span>
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            {/* Animated glow ring */}
+            <span className="absolute -inset-1 rounded-full bg-[#fa5c4f]/20 animate-pulse pointer-events-none" />
+            <span className="absolute -inset-2 rounded-full bg-[#fa5c4f]/10 animate-[pulse_2s_ease-in-out_infinite_0.5s] pointer-events-none" />
+            <Gamepad2 className="size-5 relative z-10" />
+            <span className="relative z-10">Try the Playground</span>
+            <ArrowRight className="size-4 relative z-10 transition-transform group-hover:translate-x-1" />
+          </Link>
+
+          {/* Secondary CTA — Docs */}
+          <Link
+            href="/docs/installation"
+            className="group flex justify-center items-center gap-2 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors"
+          >
+            <span>or start building →</span>
           </Link>
         </motion.div>
 

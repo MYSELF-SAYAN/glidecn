@@ -6,15 +6,23 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 
-function CodeBlock({ code, language = 'tsx', badge }: { code: string; language?: string; badge?: string }) {
-  return (
-    <div className="relative rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 shadow-lg my-4">
+function CodeBlock({ code, language = 'tsx', badge, isTabbed = false }: { code: string; language?: string; badge?: string; isTabbed?: boolean }) {
+  const inner = (
+    <>
       {badge && (
-        <div className="px-4 py-2 border-b border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-white/[0.02] text-xs font-mono text-zinc-500">
-          {badge}
+        <div className={`px-5 py-3 border-b border-zinc-200/80 dark:border-white/5 text-[11px] font-mono tracking-wide flex items-center ${isTabbed ? 'bg-[#FAFAFA]/50 dark:bg-transparent' : 'bg-zinc-50 dark:bg-white/[0.02]'} text-zinc-500`}>
+          <span className="opacity-80">{badge}</span>
         </div>
       )}
       <DynamicCodeBlock lang={language} code={code} />
+    </>
+  );
+
+  if (isTabbed) return inner;
+
+  return (
+    <div className="relative rounded-2xl overflow-hidden border border-zinc-200/80 dark:border-white/10 shadow-sm my-6 bg-white dark:bg-[#0f0f11]">
+      {inner}
     </div>
   );
 }
@@ -42,16 +50,16 @@ function PropRow({ name, type, defaultVal, description, required = false }: { na
   );
 }
 
-function AccordionItem({ title, description, code }: { title: string; description: React.ReactNode; code: string }) {
+function AccordionItem({ title, description, code, children }: { title: string; description: React.ReactNode; code?: string; children?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-zinc-200 dark:border-white/10 rounded-2xl bg-white dark:bg-[#0f0f11] overflow-hidden shadow-sm">
+    <div className="border border-zinc-200/80 dark:border-white/10 rounded-2xl bg-white dark:bg-[#0f0f11] overflow-hidden shadow-sm hover:shadow-md transition-all duration-500">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-6 text-left hover:bg-zinc-50 dark:hover:bg-white/[0.02] transition-colors"
+        className="w-full flex items-center justify-between p-6 text-left hover:bg-zinc-50/50 dark:hover:bg-white/[0.02] transition-colors"
       >
         <span className="font-display font-medium text-lg tracking-tight text-zinc-900 dark:text-zinc-100">{title}</span>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ type: "spring", bounce: 0, duration: 0.5 }}>
           <ChevronDown className="size-5 text-zinc-400" />
         </motion.div>
       </button>
@@ -65,14 +73,93 @@ function AccordionItem({ title, description, code }: { title: string; descriptio
             className="overflow-hidden"
           >
             <div className="p-6 pt-0 border-t border-zinc-100 dark:border-white/5">
-              <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 mt-4">
+              <div className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 mt-4">
                 {description}
               </div>
-              <CodeBlock code={code} />
+              {code ? <CodeBlock code={code} /> : children}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  );
+}
+
+function FrameworkTabs({ tabs, layoutIdPrefix }: { tabs: { id: string; label: string; content: React.ReactNode }[], layoutIdPrefix: string }) {
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
+
+  return (
+    <div className="flex flex-col w-full my-8 rounded-2xl border border-zinc-200/80 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden bg-white dark:bg-[#0f0f11] relative group">
+      
+      {/* Premium Header */}
+      <div className="relative flex items-end px-2 pt-2 bg-zinc-100/80 dark:bg-[#161618] border-b border-zinc-200/80 dark:border-white/10 overflow-x-auto no-scrollbar">
+        
+        {/* macOS Window Controls */}
+        <div className="flex items-center gap-1.5 px-3 pb-3.5 mb-0.5 opacity-80">
+          <div className="size-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700/80 border border-zinc-400/20 dark:border-black/20" />
+          <div className="size-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700/80 border border-zinc-400/20 dark:border-black/20" />
+          <div className="size-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700/80 border border-zinc-400/20 dark:border-black/20" />
+        </div>
+
+        {/* Tabs Container */}
+        <div className="flex items-end gap-1 flex-1 px-2">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative px-5 py-2.5 text-[13px] font-medium transition-all duration-300 rounded-t-xl z-10 ${
+                  isActive 
+                    ? 'text-zinc-900 dark:text-zinc-100' 
+                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-200/50 dark:hover:bg-white/5'
+                }`}
+              >
+                {isActive && (
+                  <>
+                    <motion.div
+                      layoutId={`active-tab-bg-${layoutIdPrefix}`}
+                      className="absolute inset-0 bg-white dark:bg-[#0f0f11] rounded-t-xl border-x border-t border-zinc-200/80 dark:border-white/10"
+                      transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+                    />
+                    {/* Glowing highlight matching the brand color */}
+                    <motion.div
+                      layoutId={`active-tab-glow-${layoutIdPrefix}`}
+                      className="absolute top-0 left-6 right-6 h-[1.5px] bg-gradient-to-r from-transparent via-[#fa5c4f] to-transparent opacity-60 blur-[0.5px]"
+                      transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+                    />
+                    {/* Solid top highlight for sharpness */}
+                    <motion.div
+                      layoutId={`active-tab-line-${layoutIdPrefix}`}
+                      className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-[#fa5c4f] to-transparent opacity-100"
+                      transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+                    />
+                    {/* Invisible bottom border overlay so it connects seamlessly to the white content */}
+                    <div className="absolute -bottom-[1px] left-0 right-0 h-[2px] bg-white dark:bg-[#0f0f11] z-20" />
+                  </>
+                )}
+                <span className="relative z-20 flex items-center gap-2 tracking-tight">
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="relative z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 4, filter: 'blur(2px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -4, filter: 'blur(2px)' }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {tabs.find((t) => t.id === activeTab)?.content}
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
@@ -119,9 +206,43 @@ export function DocsApiReference() {
           </div>
 
           <div className="lg:col-span-7 space-y-8">
-            <CodeBlock
-              badge="app/layout.tsx"
-              code={`import { GlideCNProvider } from 'glidecn';\n\nexport default function RootLayout({ children }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider defaultTransition="slide" defaultDuration={0.6}>\n          {children}\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
+            <FrameworkTabs
+              layoutIdPrefix="provider"
+              tabs={[
+                {
+                  id: 'next-app',
+                  label: 'Next.js (App)',
+                  content: (
+                    <CodeBlock
+                      isTabbed
+                      badge="app/layout.tsx"
+                      code={`import { GlideCNProvider } from 'glidecn';\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider defaultTransition="slide" defaultDuration={0.6}>\n          {children}\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
+                    />
+                  ),
+                },
+                {
+                  id: 'next-pages',
+                  label: 'Next.js (Pages)',
+                  content: (
+                    <CodeBlock
+                      isTabbed
+                      badge="pages/_app.tsx"
+                      code={`import { GlideCNProvider } from 'glidecn';\nimport type { AppProps } from 'next/app';\n\nexport default function App({ Component, pageProps }: AppProps) {\n  return (\n    <GlideCNProvider defaultTransition="slide" defaultDuration={0.6}>\n      <Component {...pageProps} />\n    </GlideCNProvider>\n  );\n}`}
+                    />
+                  ),
+                },
+                {
+                  id: 'vite-react',
+                  label: 'Vite / React',
+                  content: (
+                    <CodeBlock
+                      isTabbed
+                      badge="src/main.tsx"
+                      code={`import { GlideCNProvider } from 'glidecn';\nimport { createRoot } from 'react-dom/client';\nimport App from './App';\n\ncreateRoot(document.getElementById('root')!).render(\n  <GlideCNProvider defaultTransition="slide" defaultDuration={0.6}>\n    <App />\n  </GlideCNProvider>\n);`}
+                    />
+                  ),
+                },
+              ]}
             />
 
             <div className="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-xl overflow-hidden">
@@ -177,9 +298,43 @@ export function DocsApiReference() {
           </div>
 
           <div className="lg:col-span-7 space-y-8">
-            <CodeBlock
-              badge="app/about/page.tsx"
-              code={`import { Page } from 'glidecn';\n\nexport default function AboutPage() {\n  return (\n    // This specific page will use the 'liquid-morph' transition \n    // instead of the global default.\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
+            <FrameworkTabs
+              layoutIdPrefix="page-component"
+              tabs={[
+                {
+                  id: 'next-app',
+                  label: 'Next.js (App)',
+                  content: (
+                    <CodeBlock
+                      isTabbed
+                      badge="app/about/page.tsx"
+                      code={`import { Page } from 'glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
+                    />
+                  ),
+                },
+                {
+                  id: 'next-pages',
+                  label: 'Next.js (Pages)',
+                  content: (
+                    <CodeBlock
+                      isTabbed
+                      badge="pages/about.tsx"
+                      code={`import { Page } from 'glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
+                    />
+                  ),
+                },
+                {
+                  id: 'vite-react',
+                  label: 'Vite / React',
+                  content: (
+                    <CodeBlock
+                      isTabbed
+                      badge="src/pages/About.tsx"
+                      code={`import { Page } from 'glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
+                    />
+                  ),
+                },
+              ]}
             />
 
             <div className="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-xl overflow-hidden">
@@ -270,8 +425,27 @@ export function DocsApiReference() {
               <AccordionItem
                 title="1. Programmatic Navigation (Next Button)"
                 description={<p>You can override the transition dynamically just before navigating. For example, triggering a dramatic <code>scale</code> transition only when the user clicks the final "Submit" button in an onboarding flow.</p>}
-                code={`import { useGlide } from 'glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function CheckoutButton() {\n  const { setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleCheckout = () => {\n    // Force a specific transition for this action\n    setTransition('circular-portal');\n    \n    // Navigate immediately after setting it\n    router.push('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`}
-              />
+              >
+                <FrameworkTabs
+                  layoutIdPrefix="prog-nav"
+                  tabs={[
+                    {
+                      id: 'next-app',
+                      label: 'Next.js (App)',
+                      content: (
+                        <CodeBlock isTabbed badge="components/Checkout.tsx" code={`import { useGlide } from 'glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function CheckoutButton() {\n  const { setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleCheckout = () => {\n    setTransition('circular-portal');\n    router.push('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`} />
+                      ),
+                    },
+                    {
+                      id: 'vite-react',
+                      label: 'Vite / React (React Router)',
+                      content: (
+                        <CodeBlock isTabbed badge="src/components/Checkout.tsx" code={`import { useGlide } from 'glidecn';\nimport { useNavigate } from 'react-router-dom';\n\nexport function CheckoutButton() {\n  const { setTransition } = useGlide();\n  const navigate = useNavigate();\n\n  const handleCheckout = () => {\n    setTransition('circular-portal');\n    navigate('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`} />
+                      ),
+                    },
+                  ]}
+                />
+              </AccordionItem>
 
               <AccordionItem
                 title="2. Respecting User Preferences"
@@ -282,8 +456,27 @@ export function DocsApiReference() {
               <AccordionItem
                 title="3. Directional Orchestration"
                 description={<p>If you have a carousel-like UI (e.g., onboarding steps), you can dynamically change the slide direction based on whether the user clicked "Next" or "Back".</p>}
-                code={`import { useGlide } from 'glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function WizardControls({ currentStep }) {\n  const { setConfig, setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    router.push(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    router.push(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`}
-              />
+              >
+                <FrameworkTabs
+                  layoutIdPrefix="dir-orch"
+                  tabs={[
+                    {
+                      id: 'next-app',
+                      label: 'Next.js (App)',
+                      content: (
+                        <CodeBlock isTabbed badge="components/Wizard.tsx" code={`import { useGlide } from 'glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function WizardControls({ currentStep }: { currentStep: number }) {\n  const { setConfig, setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    router.push(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    router.push(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`} />
+                      ),
+                    },
+                    {
+                      id: 'vite-react',
+                      label: 'Vite / React (React Router)',
+                      content: (
+                        <CodeBlock isTabbed badge="src/components/Wizard.tsx" code={`import { useGlide } from 'glidecn';\nimport { useNavigate } from 'react-router-dom';\n\nexport function WizardControls({ currentStep }: { currentStep: number }) {\n  const { setConfig, setTransition } = useGlide();\n  const navigate = useNavigate();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    navigate(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    navigate(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`} />
+                      ),
+                    },
+                  ]}
+                />
+              </AccordionItem>
             </div>
 
           </div>
