@@ -42,17 +42,19 @@ This creates the `@/components/glidecn` folder in your project with full source 
 <Step>
 ## Wrap Your Root Layout
 
-Add `<GlideCNProvider>` inside your root layout (`app/layout.tsx`). This synchronizes route changes and coordinates frame exits/entries:
+Add `<GlideCNProvider>` and `<GlideCN>` inside your root layout (`app/layout.tsx`). The provider synchronizes configuration, while the Transition Manager (`GlideCN`) coordinates frame exits/entries using `AnimatePresence`:
 
 ```tsx title="app/layout.tsx"
-import { GlideCNProvider } from '@/components/glidecn';
+import { GlideCNProvider, GlideCNNextApp as GlideCN } from '@/components/glidecn';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <GlideCNProvider defaultTransition="cube">
-          {children}
+          <GlideCN>
+            {children}
+          </GlideCN>
         </GlideCNProvider>
       </body>
     </html>
@@ -61,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 <Callout type="info">
-  **Why do we need a provider?** GlideCN needs a fixed boundary to take a visual snapshot of the "outgoing" page when a route changes. The provider maintains this boundary so layout shifts don't ruin the transition.
+  **Why do we need a Transition Manager?** GlideCN needs a fixed boundary to take a visual snapshot of the "outgoing" page when a route changes. `GlideCN` maintains this boundary so layout shifts don't ruin the transition.
 </Callout>
 </Step>
 

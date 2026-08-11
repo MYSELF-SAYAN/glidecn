@@ -14,14 +14,15 @@ import {
   Settings2,
   ArrowRight,
 } from 'lucide-react';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
 
 export function DocsInstallation() {
   const [copiedCmd, setCopiedCmd] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'app' | 'pages' | 'vite'>('app');
   const [activePm, setActivePm] = useState<'pnpm' | 'npm' | 'bun' | 'yarn'>('pnpm');
 
-  const copyToClipboard = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
+  const handleCopy = (text: string, id: string) => {
+    copyToClipboard(text);
     setCopiedCmd(id);
     setTimeout(() => setCopiedCmd(null), 2000);
   };
@@ -106,7 +107,7 @@ export function DocsInstallation() {
                 </div>
                 
                 <button
-                  onClick={() => copyToClipboard(
+                  onClick={() => handleCopy(
                     `${activePm === 'npm' ? 'npx' : activePm === 'bun' ? 'bunx' : `${activePm} dlx`} glidecn-cli@latest init`,
                     'cli-init'
                   )}
@@ -347,7 +348,7 @@ export function DocsInstallation() {
                 </code>
               </div>
               <button
-                onClick={() => copyToClipboard(item.cmd, item.cmd)}
+                onClick={() => handleCopy(item.cmd, item.cmd)}
                 className="p-2 rounded-lg text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
               >
                 {copiedCmd === item.cmd ? <Check className="size-4 text-emerald-500" /> : <Copy className="size-4" />}

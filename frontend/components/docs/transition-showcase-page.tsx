@@ -1,4 +1,6 @@
 'use client';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
+
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -49,13 +51,13 @@ export function TransitionShowcasePage({ transition, tagline }: ShowcasePageProp
   const aiPrompt = `Implement the ${transition} transition using glidecn...`;
 
   const copyInstall = async () => {
-    await navigator.clipboard.writeText(installCommand);
+    await copyToClipboard(installCommand);
     setCopiedInstall(true);
     setTimeout(() => setCopiedInstall(false), 2000);
   };
 
   const copyPrompt = async () => {
-    await navigator.clipboard.writeText(aiPrompt);
+    await copyToClipboard(aiPrompt);
     setCopiedPrompt(true);
     setTimeout(() => setCopiedPrompt(false), 2000);
   };

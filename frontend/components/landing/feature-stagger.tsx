@@ -15,7 +15,7 @@ const FEATURES = [
   },
   {
     tag: 'Design System',
-    title: `${TRANSITION_CATALOG.length}+ Premium Shaders.`,
+    title: `${TRANSITION_CATALOG.length}+ Premium Transitions.`,
     description: 'We built a comprehensive library of spatial 3D effects, fluid portals, and retro simulations. Powered entirely by CSS and Framer Motion.',
     icon: <Layers className="w-6 h-6" />,
     cta: 'View Gallery'

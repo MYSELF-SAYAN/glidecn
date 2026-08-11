@@ -14,6 +14,7 @@ import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 import '@/components/glidecn/transitions';
 import { getCatalogEntry, TRANSITION_CATALOG } from '@/lib/transition-catalog';
 import type { TransitionCatalogEntry } from '@/lib/transition-catalog';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
 
 // Ensure transitions are registered
 
@@ -48,7 +49,7 @@ function InstallBlock({ slug }: { slug: string }) {
   const command = `${PM_LABELS[pm]} glidecn-cli add ${slug}`;
 
   async function copy() {
-    await navigator.clipboard.writeText(command);
+    await copyToClipboard(command);
     setCopied(true);
     setTimeout(() => setCopied(false), 1600);
   }
@@ -93,7 +94,7 @@ function FileBlock({ filename, source, defaultOpen = false, badge }: { filename:
   const [copied, setCopied] = useState(false);
 
   async function copy() {
-    await navigator.clipboard.writeText(source);
+    await copyToClipboard(source);
     setCopied(true);
     setTimeout(() => setCopied(false), 1600);
   }
@@ -160,9 +161,9 @@ export function TransitionDocsShell({ transition, tagline, sourceCode }: Showcas
   const aiPrompt = `Implement the ${transition} transition using glidecn...\n(Mock AI Prompt for Showcase)`;
   const codeToDisplay = sourceCode || `// Mock Source Code for ${transition}.tsx\nimport { motion } from 'framer-motion';\n\nexport default function Transition() {\n  return null;\n}`;
 
-  async function copyToClipboard(text: string, type: 'prompt' | 'all') {
+  async function handleCopy(text: string, type: 'prompt' | 'all') {
     if (typeof navigator === 'undefined') return;
-    await navigator.clipboard.writeText(text);
+    await copyToClipboard(text);
     if (type === 'prompt') { setCopiedPrompt(true); setTimeout(() => setCopiedPrompt(false), 1600); }
     else { setCopiedAll(true); setTimeout(() => setCopiedAll(false), 1600); }
   }
@@ -214,12 +215,12 @@ export function TransitionDocsShell({ transition, tagline, sourceCode }: Showcas
 
           <div className="flex items-center gap-2">
             <Tooltip label={copiedPrompt ? 'Copied!' : 'Copy AI Prompt'}>
-              <button type="button" onClick={() => copyToClipboard(aiPrompt, 'prompt')} className="rounded-full bg-white/5 border border-white/10 p-2 text-white/50 transition hover:bg-white/10 hover:text-white">
+              <button type="button" onClick={() => handleCopy(aiPrompt, 'prompt')} className="rounded-full bg-white/5 border border-white/10 p-2 text-white/50 transition hover:bg-white/10 hover:text-white">
                 {copiedPrompt ? <Check className="size-3.5 text-[#fa5c4f]" /> : <WandSparkles className="size-3.5" />}
               </button>
             </Tooltip>
             <Tooltip label={copiedAll ? 'Copied!' : 'Copy Source'}>
-              <button type="button" onClick={() => copyToClipboard(codeToDisplay, 'all')} className="rounded-full bg-white/5 border border-white/10 p-2 text-white/50 transition hover:bg-white/10 hover:text-white">
+              <button type="button" onClick={() => handleCopy(codeToDisplay, 'all')} className="rounded-full bg-white/5 border border-white/10 p-2 text-white/50 transition hover:bg-white/10 hover:text-white">
                 {copiedAll ? <Check className="size-3.5 text-[#fa5c4f]" /> : <Code2 className="size-3.5" />}
               </button>
             </Tooltip>

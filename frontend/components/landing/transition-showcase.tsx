@@ -199,7 +199,7 @@ export function TransitionShowcase() {
           </span>
           
           <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.15]">
-            {TRANSITION_CATALOG.length}+ production shaders. <br />
+            {TRANSITION_CATALOG.length}+ production transitions. <br />
             <span className="font-cursive text-[var(--text-muted)] font-normal text-5xl sm:text-6xl inline-block mt-2">
               Infinite <span className="relative text-[#fa5c4f]">
                 possibilities.
@@ -230,7 +230,7 @@ export function TransitionShowcase() {
           </h2>
 
           <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed font-light">
-            Explore 7 distinct families: Flow, Portal, Paper, Mask, Spatial, Dynamic, and Experimental. Every transition is fully customizable. Test any shader live inside the interactive 2-page playground.
+            Explore 7 distinct families: Flow, Portal, Paper, Mask, Spatial, Dynamic, and Experimental. Every transition is fully customizable. Test any transition live inside the interactive 2-page playground.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">

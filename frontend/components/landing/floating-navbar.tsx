@@ -46,14 +46,13 @@ export function FloatingNavbar() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="fixed left-0 right-0 top-6 z-50 mx-auto max-w-5xl px-4"
     >
-      <div 
-        className={`flex items-center justify-between rounded-full transition-[background-color,border-color,box-shadow,padding] duration-300 ease-out border ${
-          isScrolled 
-            ? 'bg-white/70 dark:bg-[#09090b]/70 backdrop-blur-3xl border-black/5 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5' 
-            : 'bg-white/20 dark:bg-black/20 backdrop-blur-xl border-transparent shadow-none px-6 py-4'
-        }`}
+      <div
+        className={`flex items-center justify-between rounded-full transition-[background-color,border-color,box-shadow,padding] duration-300 ease-out border ${isScrolled
+          ? 'bg-white/70 dark:bg-[#09090b]/70 backdrop-blur-3xl border-black/5 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-4 py-2.5'
+          : 'bg-white/20 dark:bg-black/20 backdrop-blur-xl border-transparent shadow-none px-6 py-4'
+          }`}
       >
-        
+
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 transition-transform hover:scale-105 group">
           <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-md shadow-[#fa5c4f]/25 group-hover:rotate-12 transition-transform duration-500">
@@ -82,7 +81,7 @@ export function FloatingNavbar() {
 
         {/* Right Actions */}
         <div className="flex items-center gap-3">
-          
+
           <ThemeToggle />
 
           <a

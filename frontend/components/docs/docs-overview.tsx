@@ -16,6 +16,7 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 import { TRANSITION_CATALOG } from '@/lib/transition-catalog';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
 
 export function DocsOverview() {
   const [copiedCmd, setCopiedCmd] = useState<string | null>(null);
@@ -27,8 +28,8 @@ export function DocsOverview() {
 
   const readyTransitionsCount = TRANSITION_CATALOG.filter((t) => t.status !== 'coming-soon').length;
 
-  const copyToClipboard = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
+  const handleCopy = (text: string, id: string) => {
+    copyToClipboard(text);
     setCopiedCmd(id);
     setTimeout(() => setCopiedCmd(null), 2000);
   };
@@ -107,7 +108,7 @@ export function DocsOverview() {
               </code>
               <button
                 type="button"
-                onClick={() => copyToClipboard('npx glidecn-cli init', 'hero-init')}
+                onClick={() => handleCopy('npx glidecn-cli init', 'hero-init')}
                 className="ml-4 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition"
               >
                 {copiedCmd === 'hero-init' ? (
@@ -396,7 +397,7 @@ export function DocsOverview() {
           <div className="p-6 md:p-8 bg-[#0d0d0d] text-zinc-300 font-mono text-[13px] leading-loose overflow-x-auto relative">
             <button
               type="button"
-              onClick={() => copyToClipboard('// code block', `code-${activeCodeTab}`)}
+              onClick={() => handleCopy('// code block', `code-${activeCodeTab}`)}
               className="absolute top-6 right-6 p-2 rounded-md bg-white/5 hover:bg-white/10 transition-colors text-zinc-400"
             >
               {copiedCmd === `code-${activeCodeTab}` ? <Check className="size-4 text-emerald-400" /> : <Copy className="size-4" />}

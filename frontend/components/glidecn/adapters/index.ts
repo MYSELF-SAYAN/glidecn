@@ -16,3 +16,10 @@ export {
   ReactRouterTransitionManager,
   type ReactRouterGlideCNProps,
 } from './react-router';
+
+// Next.js App Router
+export {
+  GlideCNNextApp,
+  NextAppTransitionManager,
+  type NextAppGlideCNProps,
+} from './next-app';

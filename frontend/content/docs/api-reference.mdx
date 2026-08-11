@@ -33,14 +33,15 @@ The `GlideCNProvider` is the root coordinator. It intercepts routing events, man
       type: 'string',
       default: '"fade"',
     },
-    defaultDuration: {
-      description: 'The default duration (in seconds) for animations.',
-      type: 'number',
-      default: '0.5',
+    defaultConfig: {
+      description: 'Global configuration overrides (e.g. duration, delay, easing) for transitions.',
+      type: 'TransitionConfig',
+      default: '{}',
     },
-    className: {
-      description: 'Optional CSS classes to apply to the provider wrapper container.',
-      type: 'string',
+    reducedMotion: {
+      description: 'Force reduced motion on or off. Auto-detects by default.',
+      type: 'boolean',
+      default: 'undefined',
     },
   }}
 />
@@ -68,9 +69,37 @@ The `<Page>` component represents an animatable route segment. You should wrap t
       type: 'number',
       default: 'Inherited',
     },
+    delay: {
+      description: 'Delay before animation starts, in seconds.',
+      type: 'number',
+      default: 'Inherited',
+    },
+    ease: {
+      description: 'Overrides the default easing for this specific page.',
+      type: 'EasingPreset',
+      default: 'Inherited',
+    },
     direction: {
-      description: 'Defines the directional flow (applicable for spatial and kinetic shaders like "slide" or "cube").',
-      type: '"in" | "out" | "left" | "right" | "up" | "down"',
+      description: 'Defines the directional flow (applicable for directional transitions like "slide" or "cube").',
+      type: '"left" | "right" | "up" | "down"',
+      default: 'Inherited',
+    },
+    stagger: {
+      description: 'Overrides the stagger delay for this specific page.',
+      type: 'number',
+      default: 'Inherited',
+    },
+    custom: {
+      description: 'Arbitrary custom data passed to the transition.',
+      type: 'Record<string, unknown>',
+    },
+    className: {
+      description: 'Additional CSS class applied to the motion div wrapping the page.',
+      type: 'string',
+    },
+    style: {
+      description: 'Inline styles applied to the motion div wrapping the page.',
+      type: 'CSSProperties',
     },
   }}
 />
@@ -84,20 +113,32 @@ A custom React hook that allows you to programmatically read and modify the acti
 <TypeTable
   type={{
     currentTransition: {
-      description: 'The currently active transition ID.',
+      description: 'The currently active transition name.',
       type: 'string',
     },
+    transitionDefinition: {
+      description: 'The resolved transition definition object.',
+      type: 'TransitionDefinition | null',
+    },
     config: {
-      description: 'The current global configuration object containing duration and direction.',
-      type: 'object',
+      description: 'The merged configuration object (defaults + overrides).',
+      type: 'Required<TransitionConfig>',
+    },
+    animationState: {
+      description: 'The current lifecycle state of the page transition.',
+      type: '"idle" | "entering" | "exiting" | "complete"',
+    },
+    reducedMotion: {
+      description: 'Whether reduced motion is currently active.',
+      type: 'boolean',
     },
     setTransition: {
-      description: 'Programmatically update the global transition type.',
-      type: '(id: string) => void',
+      description: 'Set the active transition by name.',
+      type: '(name: string) => void',
     },
     setConfig: {
-      description: 'Update the global transition configuration (e.g., duration, direction).',
-      type: '(cfg: Partial<Config>) => void',
+      description: 'Override config for the current transition.',
+      type: '(config: TransitionConfig) => void',
     },
   }}
 />

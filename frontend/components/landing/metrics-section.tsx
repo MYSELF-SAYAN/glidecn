@@ -7,7 +7,7 @@ import { TRANSITION_CATALOG } from '@/lib/transition-catalog';
 
 const metrics = [
   { value: '60', suffix: ' FPS', label: 'Compositor Speed', desc: 'Locked frame rates with Zero Layout Shift out of the box.' },
-  { value: TRANSITION_CATALOG.length.toString(), suffix: '+', label: 'Built-in Shaders', desc: 'A massive curated library of spatial, portal, and organic effects.' },
+  { value: TRANSITION_CATALOG.length.toString(), suffix: '+', label: 'Built-in Transitions', desc: 'A massive curated library of spatial, portal, and organic effects.' },
   { value: '0', suffix: ' kb', label: 'Runtime Bloat', desc: 'Copy-paste code ownership. You own the framer-motion variants.' },
 ];
 

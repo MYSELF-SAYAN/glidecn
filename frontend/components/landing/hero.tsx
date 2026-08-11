@@ -1,4 +1,6 @@
 'use client';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
+
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -17,20 +19,20 @@ export function Hero() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(PKG_COMMANDS[selectedPkg]);
+    await copyToClipboard(PKG_COMMANDS[selectedPkg]);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
 
   return (
     <section className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center pt-24 pb-16">
-      
+
       {/* Ambient Glows */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#fa5c4f]/10 rounded-full blur-[120px] pointer-events-none -z-10 mix-blend-screen" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none -z-10 mix-blend-screen" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full flex flex-col items-center text-center z-10">
-        
+
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +41,7 @@ export function Hero() {
           className="flex flex-wrap items-center justify-center gap-3 mb-12"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-muted)] text-xs font-medium tracking-wide">
-            <Sparkles className="size-3 text-[#fa5c4f]" /> 
+            <Sparkles className="size-3 text-[#fa5c4f]" />
             v1.0 is live
           </span>
         </motion.div>
@@ -65,10 +67,10 @@ export function Hero() {
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <motion.path 
-                d="M5 8C25 2 45 12 65 6C85 0 105 10 115 5" 
-                stroke="currentColor" 
-                strokeWidth="2.5" 
+              <motion.path
+                d="M5 8C25 2 45 12 65 6C85 0 105 10 115 5"
+                stroke="currentColor"
+                strokeWidth="2.5"
                 strokeLinecap="round"
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
@@ -86,7 +88,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl text-lg sm:text-2xl leading-relaxed text-[var(--text-muted)] mb-14 font-light"
         >
-          The pluggable page transition library for React & Next.js. Hardware-accelerated shaders that drop straight into your codebase. No lock-in. No bloat.
+          The pluggable page transition library for React & Next.js. Hardware-accelerated CSS effects that drop straight into your codebase. No lock-in. No bloat.
         </motion.p>
 
         <motion.div
@@ -128,21 +130,20 @@ export function Hero() {
         >
           {/* Subtle glowing shadow behind the box */}
           <div className="absolute -inset-1 bg-gradient-to-r from-[#fa5c4f]/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          
+
           <div className="relative rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)]/80 p-2 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 mx-auto overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50 pointer-events-none" />
-            
+
             <div className="relative flex items-center justify-between px-3 pb-2 pt-1 border-b border-[var(--border-color)]">
               <div className="flex items-center gap-1.5">
                 {(['pnpm', 'npm', 'bun', 'yarn'] as const).map((pkg) => (
                   <button
                     key={pkg}
                     onClick={() => setSelectedPkg(pkg)}
-                    className={`px-3 py-1 rounded-md text-xs font-medium transition-[background-color,color,box-shadow,transform] duration-150 cursor-pointer ${
-                      selectedPkg === pkg
+                    className={`px-3 py-1 rounded-md text-xs font-medium transition-[background-color,color,box-shadow,transform] duration-150 cursor-pointer ${selectedPkg === pkg
                         ? 'bg-[var(--text-main)] text-[var(--bg-page)] shadow-sm'
                         : 'text-[var(--text-subtle)] hover:text-[var(--text-main)] active:scale-[0.97]'
-                    }`}
+                      }`}
                   >
                     {pkg}
                   </button>

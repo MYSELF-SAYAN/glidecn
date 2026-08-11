@@ -1,4 +1,6 @@
 'use client';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
+
 
 import { useGlide, type TransitionDirection } from '@/components/glidecn';
 import {
@@ -175,7 +177,7 @@ export function PlaygroundTransitionStudio() {
   const exportCodeSnippet = `<Page\n  transition="${currentTransition}"\n  duration={${duration}}\n  direction="${direction}"\n  ease="${ease}"\n>\n  {/* Content */}\n</Page>`;
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(exportCodeSnippet);
+    copyToClipboard(exportCodeSnippet);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

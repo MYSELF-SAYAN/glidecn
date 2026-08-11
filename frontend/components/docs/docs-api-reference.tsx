@@ -122,19 +122,16 @@ function FrameworkTabs({ tabs, layoutIdPrefix }: { tabs: { id: string; label: st
                       className="absolute inset-0 bg-white dark:bg-[#0f0f11] rounded-t-xl border-x border-t border-zinc-200/80 dark:border-white/10"
                       transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                     />
-                    {/* Glowing highlight matching the brand color */}
                     <motion.div
                       layoutId={`active-tab-glow-${layoutIdPrefix}`}
                       className="absolute top-0 left-6 right-6 h-[1.5px] bg-gradient-to-r from-transparent via-[#fa5c4f] to-transparent opacity-60 blur-[0.5px]"
                       transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                     />
-                    {/* Solid top highlight for sharpness */}
                     <motion.div
                       layoutId={`active-tab-line-${layoutIdPrefix}`}
                       className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-[#fa5c4f] to-transparent opacity-100"
                       transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                     />
-                    {/* Invisible bottom border overlay so it connects seamlessly to the white content */}
                     <div className="absolute -bottom-[1px] left-0 right-0 h-[2px] bg-white dark:bg-[#0f0f11] z-20" />
                   </>
                 )}
@@ -198,10 +195,10 @@ export function DocsApiReference() {
               <Layers className="size-5" />
             </div>
             <h2 className="text-4xl font-display font-medium tracking-tight text-zinc-900 dark:text-white">
-              GlideCNProvider
+              GlideCNProvider & GlideCN
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-balance">
-              The root coordinator. It intercepts routing events, manages outgoing freeze-frame snapshots, and handles the dual-frame crossfading engine. Place this high in your component tree, typically in your root layout.
+              The root coordinators. <code>GlideCNProvider</code> injects the configuration context, while <code>GlideCN</code> (the Transition Manager) intercepts routing events and handles the dual-frame crossfading engine. Place these high in your component tree.
             </p>
           </div>
 
@@ -216,7 +213,7 @@ export function DocsApiReference() {
                     <CodeBlock
                       isTabbed
                       badge="app/layout.tsx"
-                      code={`import { GlideCNProvider } from 'glidecn';\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider defaultTransition="slide" defaultDuration={0.6}>\n          {children}\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
+                      code={`import { GlideCNProvider, GlideCNNextApp as GlideCN } from '@/components/glidecn';\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider defaultTransition="slide" defaultConfig={{ duration: 0.6 }}>\n          <GlideCN>\n            {children}\n          </GlideCN>\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
                     />
                   ),
                 },
@@ -227,18 +224,18 @@ export function DocsApiReference() {
                     <CodeBlock
                       isTabbed
                       badge="pages/_app.tsx"
-                      code={`import { GlideCNProvider } from 'glidecn';\nimport type { AppProps } from 'next/app';\n\nexport default function App({ Component, pageProps }: AppProps) {\n  return (\n    <GlideCNProvider defaultTransition="slide" defaultDuration={0.6}>\n      <Component {...pageProps} />\n    </GlideCNProvider>\n  );\n}`}
+                      code={`import { GlideCNProvider, GlideCNUniversal as GlideCN } from '@/components/glidecn';\nimport type { AppProps } from 'next/app';\n\nexport default function App({ Component, pageProps }: AppProps) {\n  return (\n    <GlideCNProvider defaultTransition="slide" defaultConfig={{ duration: 0.6 }}>\n      <GlideCN>\n        <Component {...pageProps} />\n      </GlideCN>\n    </GlideCNProvider>\n  );\n}`}
                     />
                   ),
                 },
                 {
                   id: 'vite-react',
-                  label: 'Vite / React',
+                  label: 'React Router',
                   content: (
                     <CodeBlock
                       isTabbed
                       badge="src/main.tsx"
-                      code={`import { GlideCNProvider } from 'glidecn';\nimport { createRoot } from 'react-dom/client';\nimport App from './App';\n\ncreateRoot(document.getElementById('root')!).render(\n  <GlideCNProvider defaultTransition="slide" defaultDuration={0.6}>\n    <App />\n  </GlideCNProvider>\n);`}
+                      code={`import { GlideCNProvider, GlideCNReactRouter as GlideCN } from '@/components/glidecn';\nimport { createRoot } from 'react-dom/client';\nimport App from './App';\n\ncreateRoot(document.getElementById('root')!).render(\n  <GlideCNProvider defaultTransition="slide" defaultConfig={{ duration: 0.6 }}>\n    <GlideCN>\n      <App />\n    </GlideCN>\n  </GlideCNProvider>\n);`}
                     />
                   ),
                 },
@@ -247,7 +244,7 @@ export function DocsApiReference() {
 
             <div className="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-xl overflow-hidden">
               <div className="px-6 py-4 border-b border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-white/[0.02]">
-                <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">Properties</h3>
+                <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">GlideCNProvider Properties</h3>
               </div>
               <div className="flex flex-col">
                 <PropRow
@@ -263,16 +260,48 @@ export function DocsApiReference() {
                   description="The fallback shader animation used if a <Page> doesn't specify its own transition override. Must match a registered transition name."
                 />
                 <PropRow
-                  name="defaultDuration"
-                  type="number"
-                  defaultVal="0.5"
-                  description="The global animation speed in seconds. This orchestrates exactly how fast the dual-frame crossfade executes across the entire app."
+                  name="defaultConfig"
+                  type="TransitionConfig"
+                  defaultVal="{}"
+                  description="Global configuration overrides (e.g. duration, delay, easing) for transitions."
+                />
+                <PropRow
+                  name="reducedMotion"
+                  type="boolean"
+                  defaultVal="undefined"
+                  description="Force reduced motion on or off. Auto-detects by default."
+                />
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-xl overflow-hidden mt-8">
+              <div className="px-6 py-4 border-b border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-white/[0.02]">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">GlideCN Properties</h3>
+              </div>
+              <div className="flex flex-col">
+                <PropRow
+                  name="children"
+                  type="React.ReactNode"
+                  required
+                  description="Your application layout and content. This must wrap the actual router nodes so GlideCN can freeze the DOM when a route change is detected."
                 />
                 <PropRow
                   name="mode"
-                  type='"sync" | "wait"'
-                  defaultVal='"wait"'
-                  description="Determines orchestration. 'wait' ensures the exiting page finishes before the entering page starts. 'sync' plays them simultaneously (best for overlapping transitions like slide or circular-portal)."
+                  type="'wait' | 'sync' | 'popLayout'"
+                  defaultVal="'wait'"
+                  description="AnimatePresence mode. 'wait' ensures the exit animation completes before the enter animation begins."
+                />
+                <PropRow
+                  name="routeKey"
+                  type="string"
+                  defaultVal="undefined"
+                  description="Optional custom route key override. By default, it auto-detects based on the framework adapter."
+                />
+                <PropRow
+                  name="restoreScroll"
+                  type="boolean"
+                  defaultVal="true"
+                  description="Enable automatic scroll restoration when transitioning between routes."
                 />
               </div>
             </div>
@@ -308,7 +337,7 @@ export function DocsApiReference() {
                     <CodeBlock
                       isTabbed
                       badge="app/about/page.tsx"
-                      code={`import { Page } from 'glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
+                      code={`import { Page } from '@/components/glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
                     />
                   ),
                 },
@@ -319,7 +348,7 @@ export function DocsApiReference() {
                     <CodeBlock
                       isTabbed
                       badge="pages/about.tsx"
-                      code={`import { Page } from 'glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
+                      code={`import { Page } from '@/components/glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
                     />
                   ),
                 },
@@ -330,7 +359,7 @@ export function DocsApiReference() {
                     <CodeBlock
                       isTabbed
                       badge="src/pages/About.tsx"
-                      code={`import { Page } from 'glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
+                      code={`import { Page } from '@/components/glidecn';\n\nexport default function AboutPage() {\n  return (\n    <Page transition="liquid-morph" duration={1.2}>\n      <main>\n        <h1>About Us</h1>\n      </main>\n    </Page>\n  );\n}`}
                     />
                   ),
                 },
@@ -343,6 +372,12 @@ export function DocsApiReference() {
               </div>
               <div className="flex flex-col">
                 <PropRow
+                  name="children"
+                  type="React.ReactNode"
+                  required
+                  description="The content of your page."
+                />
+                <PropRow
                   name="transition"
                   type="string"
                   defaultVal="Inherits from Provider"
@@ -352,19 +387,44 @@ export function DocsApiReference() {
                   name="duration"
                   type="number"
                   defaultVal="Inherits from Provider"
-                  description="Overrides the global animation speed for this page entry/exit."
+                  description="Overrides the global animation duration for this page entry/exit."
+                />
+                <PropRow
+                  name="delay"
+                  type="number"
+                  defaultVal="Inherits from Provider"
+                  description="Delay before animation starts, in seconds."
+                />
+                <PropRow
+                  name="ease"
+                  type="EasingPreset"
+                  defaultVal="Inherits from Provider"
+                  description="Overrides the default easing for this specific page."
                 />
                 <PropRow
                   name="direction"
-                  type='"left" | "right" | "up" | "down" | "in" | "out"'
-                  defaultVal="undefined"
+                  type='"left" | "right" | "up" | "down"'
+                  defaultVal="Inherits from Provider"
                   description="Defines the flow for directional shaders. E.g., a slide transition can be forced to enter from the left regardless of standard routing logic."
+                />
+
+                <PropRow
+                  name="custom"
+                  type="Record<string, unknown>"
+                  defaultVal="undefined"
+                  description="Arbitrary custom data passed to the transition."
                 />
                 <PropRow
                   name="className"
                   type="string"
-                  defaultVal="''"
+                  defaultVal="undefined"
                   description="Optional CSS classes applied to the internal motion.div wrapper."
+                />
+                <PropRow
+                  name="style"
+                  type="React.CSSProperties"
+                  defaultVal="undefined"
+                  description="Inline styles applied to the internal motion.div wrapper."
                 />
               </div>
             </div>
@@ -398,22 +458,56 @@ export function DocsApiReference() {
                 <PropRow
                   name="currentTransition"
                   type="string"
-                  description="The ID of the currently active transition."
+                  description="The currently active transition name."
+                />
+                <PropRow
+                  name="transitionDefinition"
+                  type="TransitionDefinition | null"
+                  description="The resolved transition definition object."
                 />
                 <PropRow
                   name="config"
-                  type="TransitionConfig"
-                  description="The global configuration object containing active duration, direction, and easing settings."
+                  type="Required<TransitionConfig>"
+                  description="The merged configuration object (defaults + overrides)."
+                />
+                <PropRow
+                  name="animationState"
+                  type='"idle" | "entering" | "exiting" | "complete"'
+                  description="The current lifecycle state of the page transition."
+                />
+                <PropRow
+                  name="reducedMotion"
+                  type="boolean"
+                  description="Whether reduced motion is currently active."
                 />
                 <PropRow
                   name="setTransition"
-                  type="(id: string) => void"
-                  description="Programmatically updates the global transition type. Excellent for changing the animation right before navigating."
+                  type="(name: string) => void"
+                  description="Set the active transition by name."
                 />
                 <PropRow
                   name="setConfig"
-                  type="(cfg: Partial<TransitionConfig>) => void"
-                  description="Updates global transition options, such as animation speed or directional flow."
+                  type="(config: TransitionConfig) => void"
+                  description="Override config for the current transition."
+                />
+              </div>
+            </div>
+
+            {/* Additional Hooks */}
+            <div className="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-xl overflow-hidden mt-8">
+              <div className="px-6 py-4 border-b border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-white/[0.02]">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">Additional Hooks</h3>
+              </div>
+              <div className="flex flex-col">
+                <PropRow
+                  name="useTransitionConfig()"
+                  type="{ config, setConfig }"
+                  description="Shortcut hook. Returns only the resolved configuration and the config setter."
+                />
+                <PropRow
+                  name="useAnimationState()"
+                  type='"idle" | "entering" | "exiting" | "complete"'
+                  description="Shortcut hook. Returns only the current lifecycle state of the page transition."
                 />
               </div>
             </div>
@@ -433,14 +527,14 @@ export function DocsApiReference() {
                       id: 'next-app',
                       label: 'Next.js (App)',
                       content: (
-                        <CodeBlock isTabbed badge="components/Checkout.tsx" code={`import { useGlide } from 'glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function CheckoutButton() {\n  const { setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleCheckout = () => {\n    setTransition('circular-portal');\n    router.push('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`} />
+                        <CodeBlock isTabbed badge="components/Checkout.tsx" code={`import { useGlide } from '@/components/glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function CheckoutButton() {\n  const { setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleCheckout = () => {\n    setTransition('circular-portal');\n    router.push('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`} />
                       ),
                     },
                     {
                       id: 'vite-react',
                       label: 'Vite / React (React Router)',
                       content: (
-                        <CodeBlock isTabbed badge="src/components/Checkout.tsx" code={`import { useGlide } from 'glidecn';\nimport { useNavigate } from 'react-router-dom';\n\nexport function CheckoutButton() {\n  const { setTransition } = useGlide();\n  const navigate = useNavigate();\n\n  const handleCheckout = () => {\n    setTransition('circular-portal');\n    navigate('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`} />
+                        <CodeBlock isTabbed badge="src/components/Checkout.tsx" code={`import { useGlide } from '@/components/glidecn';\nimport { useNavigate } from 'react-router-dom';\n\nexport function CheckoutButton() {\n  const { setTransition } = useGlide();\n  const navigate = useNavigate();\n\n  const handleCheckout = () => {\n    setTransition('circular-portal');\n    navigate('/success');\n  };\n\n  return <button onClick={handleCheckout}>Complete Purchase</button>;\n}`} />
                       ),
                     },
                   ]}
@@ -450,7 +544,7 @@ export function DocsApiReference() {
               <AccordionItem
                 title="2. Respecting User Preferences"
                 description={<p>You can tie GlideCN into your application's settings context. If a user toggles "Reduced Motion" in your app settings, you can instantly turn off all animations globally.</p>}
-                code={`import { useGlide } from 'glidecn';\nimport { useEffect } from 'react';\nimport { useSettings } from '@/hooks/useSettings';\n\nexport function MotionController() {\n  const { setConfig } = useGlide();\n  const { prefersReducedMotion } = useSettings();\n\n  useEffect(() => {\n    if (prefersReducedMotion) {\n      setConfig({ duration: 0 }); // Instant snap\n    } else {\n      setConfig({ duration: 0.6 }); // Standard smooth motion\n    }\n  }, [prefersReducedMotion]);\n\n  return null;\n}`}
+                code={`import { useGlide } from '@/components/glidecn';\nimport { useEffect } from 'react';\n\nexport function MotionController() {\n  const { reducedMotion, setConfig } = useGlide();\n\n  useEffect(() => {\n    if (reducedMotion) {\n      setConfig({ duration: 0 }); // Instant snap\n    } else {\n      setConfig({ duration: 0.6 }); // Standard smooth motion\n    }\n  }, [reducedMotion, setConfig]);\n\n  return null;\n}`}
               />
 
               <AccordionItem
@@ -464,14 +558,14 @@ export function DocsApiReference() {
                       id: 'next-app',
                       label: 'Next.js (App)',
                       content: (
-                        <CodeBlock isTabbed badge="components/Wizard.tsx" code={`import { useGlide } from 'glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function WizardControls({ currentStep }: { currentStep: number }) {\n  const { setConfig, setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    router.push(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    router.push(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`} />
+                        <CodeBlock isTabbed badge="components/Wizard.tsx" code={`import { useGlide } from '@/components/glidecn';\nimport { useRouter } from 'next/navigation';\n\nexport function WizardControls({ currentStep }: { currentStep: number }) {\n  const { setConfig, setTransition } = useGlide();\n  const router = useRouter();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    router.push(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    router.push(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`} />
                       ),
                     },
                     {
                       id: 'vite-react',
                       label: 'Vite / React (React Router)',
                       content: (
-                        <CodeBlock isTabbed badge="src/components/Wizard.tsx" code={`import { useGlide } from 'glidecn';\nimport { useNavigate } from 'react-router-dom';\n\nexport function WizardControls({ currentStep }: { currentStep: number }) {\n  const { setConfig, setTransition } = useGlide();\n  const navigate = useNavigate();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    navigate(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    navigate(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`} />
+                        <CodeBlock isTabbed badge="src/components/Wizard.tsx" code={`import { useGlide } from '@/components/glidecn';\nimport { useNavigate } from 'react-router-dom';\n\nexport function WizardControls({ currentStep }: { currentStep: number }) {\n  const { setConfig, setTransition } = useGlide();\n  const navigate = useNavigate();\n\n  const handleNext = () => {\n    setTransition('slide');\n    setConfig({ direction: 'left' });\n    navigate(\`/step/\${currentStep + 1}\`);\n  };\n\n  const handleBack = () => {\n    setTransition('slide');\n    setConfig({ direction: 'right' });\n    navigate(\`/step/\${currentStep - 1}\`);\n  };\n\n  return (\n    <div className="flex gap-4">\n      <button onClick={handleBack}>Back</button>\n      <button onClick={handleNext}>Next</button>\n    </div>\n  );\n}`} />
                       ),
                     },
                   ]}

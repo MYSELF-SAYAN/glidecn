@@ -1,4 +1,6 @@
 'use client';
+import { copyToClipboard } from '@/lib/copy-to-clipboard';
+
 
 /* ==========================================================================
  * Install Tabs — Package manager install commands
@@ -25,7 +27,7 @@ export function InstallTabs({ packages = 'glidecn' }: InstallTabsProps) {
   const command = `${MANAGERS[active].cmd} ${packages}`;
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(command);
+    await copyToClipboard(command);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

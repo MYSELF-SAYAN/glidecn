@@ -14,6 +14,8 @@ export {
   UniversalTransitionManager,
   GlideCNReactRouter,
   ReactRouterTransitionManager,
+  GlideCNNextApp,
+  NextAppTransitionManager,
 } from './adapters';
 export { FrozenRouter } from './core/router';
 
