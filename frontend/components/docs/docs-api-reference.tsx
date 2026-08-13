@@ -4,28 +4,7 @@ import React, { useState } from 'react';
 import { Layers, Box, Braces, Sparkles, ArrowRight, Code2, Paintbrush, Clock, Move, Check, Copy, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
-
-function CodeBlock({ code, language = 'tsx', badge, isTabbed = false }: { code: string; language?: string; badge?: string; isTabbed?: boolean }) {
-  const inner = (
-    <>
-      {badge && (
-        <div className={`px-5 py-3 border-b border-zinc-200/80 dark:border-white/5 text-[11px] font-mono tracking-wide flex items-center ${isTabbed ? 'bg-[#FAFAFA]/50 dark:bg-transparent' : 'bg-zinc-50 dark:bg-white/[0.02]'} text-zinc-500`}>
-          <span className="opacity-80">{badge}</span>
-        </div>
-      )}
-      <DynamicCodeBlock lang={language} code={code} />
-    </>
-  );
-
-  if (isTabbed) return inner;
-
-  return (
-    <div className="relative rounded-2xl overflow-hidden border border-zinc-200/80 dark:border-white/10 shadow-sm my-6 bg-white dark:bg-[#0f0f11]">
-      {inner}
-    </div>
-  );
-}
+import { CodeBlock } from '@/components/ui/code-block';
 
 function PropRow({ name, type, defaultVal, description, required = false }: { name: string; type: string; defaultVal?: string; description: string; required?: boolean }) {
   return (

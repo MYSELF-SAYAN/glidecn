@@ -1,8 +1,13 @@
 'use client';
 import { copyToClipboard } from '@/lib/copy-to-clipboard';
-
-
-import { useGlide, type TransitionDirection } from '@/components/glidecn';
+import { CodeBlock } from '@/components/ui/code-block';
+import {
+  useGlide,
+  type TransitionDirection,
+  defaultRegistry,
+  EASING_PRESETS as GLIDECN_EASING_PRESETS,
+  CATEGORY_LABELS,
+} from '@/components/glidecn';
 import {
   Layers,
   Settings2,
@@ -20,54 +25,30 @@ import {
   Zap,
   ArrowRightLeft
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export const ALL_PLAYGROUND_TRANSITIONS = [
-  // Spatial 3D
-  { id: 'cube', label: 'Cube 3D', category: 'Spatial' },
-  { id: 'flip', label: 'Card Flip', category: 'Spatial' },
-  { id: 'ghost', label: 'Ghost Shift', category: 'Spatial' },
-  { id: 'glass', label: 'Glass Refract', category: 'Spatial' },
-  { id: 'mirror', label: 'Mirror Split', category: 'Spatial' },
-  { id: 'shadow', label: 'Shadow Depth', category: 'Spatial' },
-  { id: 'spin', label: 'Spin Vortex', category: 'Spatial' },
-  // Portal & Aperture
-  { id: 'circular-portal', label: 'Circular Portal', category: 'Portal' },
-  { id: 'shutter-iris', label: 'Camera Shutter', category: 'Portal' },
-  { id: 'wormhole', label: 'Wormhole', category: 'Portal' },
-  { id: 'vortex', label: 'Vortex Swirl', category: 'Portal' },
-  { id: 'ripple', label: 'Wave Ripple', category: 'Portal' },
-  // Paper & Origami
-  { id: 'page-curl', label: 'Page Curl', category: 'Paper' },
-  { id: 'fold', label: 'Paper Fold', category: 'Paper' },
-  { id: 'origami-unfold', label: 'Origami Unfold', category: 'Paper' },
-  { id: 'slash', label: 'Blade Slash', category: 'Paper' },
-  // Mask & Fluid
-  { id: 'ink-spread', label: 'Ink Spread', category: 'Mask' },
-  { id: 'liquid-morph', label: 'Liquid Morph', category: 'Mask' },
-  { id: 'wave', label: 'Sine Wave', category: 'Mask' },
-  { id: 'wobble', label: 'Jelly Wobble', category: 'Mask' },
-  // Retro & Glitch
-  { id: 'glitch', label: 'Cyber Glitch', category: 'Retro' },
-  { id: 'tv-turn-off', label: 'CRT Turn-Off', category: 'Retro' },
-  { id: 'pixel', label: 'Pixel Dissolve', category: 'Retro' },
-  { id: 'neon', label: 'Neon Flicker', category: 'Retro' },
-  // Flow & Bounce
-  { id: 'slide', label: 'Slide Flow', category: 'Flow' },
-  { id: 'scale', label: 'Scale Zoom', category: 'Flow' },
-  { id: 'fade', label: 'Smooth Fade', category: 'Flow' },
-  { id: 'bounce', label: 'Elastic Bounce', category: 'Flow' },
-  { id: 'dissolve', label: 'Dissolve', category: 'Flow' },
-  { id: 'squeeze', label: 'Squeeze & Pop', category: 'Flow' },
-  { id: 'stretch', label: 'Taffy Stretch', category: 'Flow' },
-  { id: 'swipe', label: 'Card Swipe', category: 'Flow' },
-  { id: 'zoom', label: 'Hyperspace Zoom', category: 'Flow' }
-];
+/** Capitalize first letter for display (fallback when CATEGORY_LABELS has no entry) */
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-const EASING_PRESETS = ['easeInOut', 'easeOut', 'linear', 'easeIn'] as const;
+/**
+ * Build the playground transition list from the glidecn registry.
+ * Each item has { id, label, category } matching what the UI expects.
+ */
+function buildTransitionList() {
+  return defaultRegistry.listDefinitions().map((def) => ({
+    id: def.metadata.name,
+    label: def.metadata.displayName,
+    category: CATEGORY_LABELS[def.metadata.category] ?? capitalize(def.metadata.category),
+  }));
+}
+
+/** Re-export for any external consumers that previously imported this */
+export const ALL_PLAYGROUND_TRANSITIONS = buildTransitionList();
+
+const EASING_PRESETS_LIST = GLIDECN_EASING_PRESETS.filter((e): e is string => typeof e === 'string');
 const DIRECTION_PRESETS: TransitionDirection[] = ['left', 'right', 'up', 'down'];
 
 export function PlaygroundTransitionStudio() {
@@ -128,7 +109,10 @@ export function PlaygroundTransitionStudio() {
     }
   }, [activeTab, searchQuery, activeCategory, currentTransition, config, activeTheme, isMounted]);
 
-  const categories = ['All', 'Spatial', 'Portal', 'Paper', 'Mask', 'Retro', 'Flow'];
+  const categories = useMemo(() => {
+    const uniqueCats = [...new Set(ALL_PLAYGROUND_TRANSITIONS.map((t) => t.category))];
+    return ['All', ...uniqueCats];
+  }, []);
   const filteredTransitions = ALL_PLAYGROUND_TRANSITIONS.filter((t) => {
     const matchesCategory = activeCategory === 'All' || t.category === activeCategory;
     const matchesSearch = t.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -384,7 +368,7 @@ export function PlaygroundTransitionStudio() {
             <div className="space-y-3 pt-6 border-t border-black/5 dark:border-white/10">
               <span className="text-[10px] font-bold tracking-widest text-[var(--text-muted)] uppercase block">Curve</span>
               <div className="grid grid-cols-2 gap-2">
-                {EASING_PRESETS.map((easingName) => (
+                {EASING_PRESETS_LIST.map((easingName) => (
                   <button
                     key={easingName}
                     onClick={() => setConfig({ ease: easingName })}
@@ -464,17 +448,11 @@ export function PlaygroundTransitionStudio() {
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 select-text">
             <div className="flex items-center justify-between text-[10px] font-bold tracking-widest uppercase">
               <span className="text-[var(--text-muted)]">Source</span>
-              <button
-                onClick={handleCopyCode}
-                className="px-3 py-1.5 rounded-full bg-[var(--text-main)] text-[var(--bg-page)] flex items-center gap-1.5 hover:scale-105 transition-transform shadow-md"
-              >
-                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                {copied ? 'Copied' : 'Copy'}
-              </button>
+
             </div>
-            <pre className="p-5 rounded-2xl bg-white/50 dark:bg-black/30 border border-black/5 dark:border-white/10 text-[var(--text-muted)] font-mono text-[11px] leading-loose overflow-x-auto shadow-inner">
-              {exportCodeSnippet}
-            </pre>
+            <div className="mt-4">
+              <CodeBlock code={exportCodeSnippet} language="tsx" className="!my-0 !border-none !bg-transparent" />
+            </div>
             <p className="text-xs text-[var(--text-muted)] leading-relaxed">
               Copy this snippet and wrap your page content with the <code className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded-md font-mono text-[10px] text-[var(--text-main)]">{'<Page>'}</code> component to apply the current transition in your own application.
             </p>

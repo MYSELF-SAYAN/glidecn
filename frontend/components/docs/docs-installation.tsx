@@ -15,7 +15,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { copyToClipboard } from '@/lib/copy-to-clipboard';
-
+import { CodeBlock } from '@/components/ui/code-block';
 export function DocsInstallation() {
   const [copiedCmd, setCopiedCmd] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'app' | 'pages' | 'vite'>('app');
@@ -239,51 +239,57 @@ export function DocsInstallation() {
                 </div>
               </div>
               
-              <div className="ml-12 rounded-xl bg-[#0d0d0d] border border-zinc-800 p-6 font-mono text-[13px] text-zinc-300 overflow-x-auto leading-loose">
+              <div className="w-full mt-4">
                 {activeTab === 'app' && (
-                  <pre>
-<span className="text-zinc-500">// app/layout.tsx</span>
-<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;
-<br/><br/><span className="text-pink-400">export default function</span> <span className="text-blue-300">RootLayout</span>({'{'} children {'}'}: {'{'} children: React.ReactNode {'}'}) {'{'}
-<br/>  <span className="text-pink-400">return</span> (
-<br/>    &lt;<span className="text-blue-300">html</span> <span className="text-amber-200">lang</span>=<span className="text-emerald-300">"en"</span>&gt;
-<br/>      &lt;<span className="text-blue-300">body</span>&gt;
-<br/>        &lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
-<br/>          {'{'}children{'}'}
-<br/>        &lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;
-<br/>      &lt;/<span className="text-blue-300">body</span>&gt;
-<br/>    &lt;/<span className="text-blue-300">html</span>&gt;
-<br/>  );
-<br/>{'}'}
-                  </pre>
+                  <CodeBlock
+                    language="tsx"
+                    code={`// app/layout.tsx
+import { GlideCNProvider } from '@/components/glidecn';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <GlideCNProvider defaultTransition="cube">
+          {children}
+        </GlideCNProvider>
+      </body>
+    </html>
+  );
+}`}
+                  />
                 )}
                 {activeTab === 'pages' && (
-                  <pre>
-<span className="text-zinc-500">// pages/_app.tsx</span>
-<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;
-<br/><br/><span className="text-pink-400">export default function</span> <span className="text-blue-300">App</span>({'{'} Component, pageProps, router {'}'}: AppProps) {'{'}
-<br/>  <span className="text-pink-400">return</span> (
-<br/>    &lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">key</span>={'{'}router.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
-<br/>      &lt;<span className="text-blue-300">Component</span> {'{'}...pageProps{'}'} /&gt;
-<br/>    &lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;
-<br/>  );
-<br/>{'}'}
-                  </pre>
+                  <CodeBlock
+                    language="tsx"
+                    code={`// pages/_app.tsx
+import { GlideCNProvider } from '@/components/glidecn';
+
+export default function App({ Component, pageProps, router }: AppProps) {
+  return (
+    <GlideCNProvider key={router.pathname} defaultTransition="cube">
+      <Component {...pageProps} />
+    </GlideCNProvider>
+  );
+}`}
+                  />
                 )}
                 {activeTab === 'vite' && (
-                  <pre>
-<span className="text-zinc-500">// src/App.tsx</span>
-<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;
-<br/><span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">useLocation</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'react-router-dom'</span>;
-<br/><br/><span className="text-pink-400">export function</span> <span className="text-blue-300">App</span>() {'{'}
-<br/>  <span className="text-pink-400">const</span> location = <span className="text-amber-200">useLocation</span>();
-<br/>  <span className="text-pink-400">return</span> (
-<br/>    &lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">key</span>={'{'}location.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;
-<br/>      <span className="text-zinc-500">{/* Your Routes */}</span>
-<br/>    &lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;
-<br/>  );
-<br/>{'}'}
-                  </pre>
+                  <CodeBlock
+                    language="tsx"
+                    code={`// src/App.tsx
+import { GlideCNProvider } from '@/components/glidecn';
+import { useLocation } from 'react-router-dom';
+
+export function App() {
+  const location = useLocation();
+  return (
+    <GlideCNProvider key={location.pathname} defaultTransition="cube">
+      {/* Your Routes */}
+    </GlideCNProvider>
+  );
+}`}
+                  />
                 )}
               </div>
             </div>
@@ -300,17 +306,19 @@ export function DocsInstallation() {
                 </div>
               </div>
               
-              <div className="ml-12 rounded-xl bg-[#0d0d0d] border border-zinc-800 p-6 font-mono text-[13px] text-zinc-300 overflow-x-auto leading-loose">
-                <pre>
-<span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;
-<br/><br/><span className="text-pink-400">export default function</span> <span className="text-blue-300">Dashboard</span>() {'{'}
-<br/>  <span className="text-pink-400">return</span> (
-<br/>    &lt;<span className="text-amber-200">Page</span> <span className="text-amber-200">transition</span>=<span className="text-emerald-300">"circular-portal"</span> <span className="text-amber-200">duration</span>={'{'}0.7{'}'}&gt;
-<br/>      &lt;<span className="text-blue-300">h1</span>&gt;Dashboard&lt;/<span className="text-blue-300">h1</span>&gt;
-<br/>    &lt;/<span className="text-amber-200">Page</span>&gt;
-<br/>  );
-<br/>{'}'}
-                </pre>
+              <div className="w-full mt-4">
+                <CodeBlock
+                  language="tsx"
+                  code={`import { Page } from '@/components/glidecn';
+
+export default function Dashboard() {
+  return (
+    <Page transition="circular-portal" duration={0.7}>
+      <h1>Dashboard</h1>
+    </Page>
+  );
+}`}
+                />
               </div>
             </div>
 
@@ -374,17 +382,20 @@ export function DocsInstallation() {
             </div>
           </div>
 
-          <div className="w-full lg:w-1/2 bg-[#0d0d0d] p-8 md:p-12 font-mono text-[13px] leading-loose overflow-x-auto flex items-center text-zinc-300">
-            <pre>
-<span className="text-pink-400">const</span> {'{'} setTransition {'}'} = <span className="text-amber-200">useGlide</span>();
-<br/><br/><span className="text-pink-400">return</span> (
-<br/>  &lt;<span className="text-blue-300">button</span> 
-<br/>    <span className="text-amber-200">onClick</span>={'{'}() =&gt; <span className="text-blue-300">setTransition</span>(<span className="text-emerald-300">'cube'</span>){'}'}
-<br/>  &gt;
-<br/>    Switch to Cube
-<br/>  &lt;/<span className="text-blue-300">button</span>&gt;
-<br/>);
-            </pre>
+          <div className="w-full lg:w-1/2 flex items-center p-0 md:p-0 border-l border-zinc-200 dark:border-zinc-800">
+            <CodeBlock
+              language="tsx"
+              className="w-full m-0"
+              code={`const { setTransition } = useGlide();
+
+return (
+  <button 
+    onClick={() => setTransition('cube')}
+  >
+    Switch to Cube
+  </button>
+);`}
+            />
           </div>
 
         </div>

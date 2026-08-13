@@ -6,6 +6,7 @@
 
 import { motion } from 'framer-motion';
 import { Terminal, FolderTree, Layers } from 'lucide-react';
+import { CodeBlock } from '@/components/ui/code-block';
 
 const steps = [
   {
@@ -78,9 +79,11 @@ export function InstallationSection() {
               </p>
 
               <div className="mt-auto rounded-xl border border-fd-border bg-fd-muted/30 p-4">
-                <pre className="overflow-x-auto font-mono text-sm text-fd-foreground">
-                  {step.code}
-                </pre>
+                <CodeBlock 
+                  code={step.code} 
+                  language={step.step === '01' ? 'bash' : 'tsx'} 
+                  className="!my-0 border-none bg-transparent shadow-none [&>div]:bg-transparent" 
+                />
               </div>
             </motion.div>
           );

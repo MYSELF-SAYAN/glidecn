@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { TRANSITION_CATALOG } from '@/lib/transition-catalog';
 import { copyToClipboard } from '@/lib/copy-to-clipboard';
+import { CodeBlock } from '@/components/ui/code-block';
 
 export function DocsOverview() {
   const [copiedCmd, setCopiedCmd] = useState<string | null>(null);
@@ -394,84 +395,86 @@ export function DocsOverview() {
             ))}
           </div>
 
-          <div className="p-6 md:p-8 bg-[#0d0d0d] text-zinc-300 font-mono text-[13px] leading-loose overflow-x-auto relative">
-            <button
-              type="button"
-              onClick={() => handleCopy('// code block', `code-${activeCodeTab}`)}
-              className="absolute top-6 right-6 p-2 rounded-md bg-white/5 hover:bg-white/10 transition-colors text-zinc-400"
-            >
-              {copiedCmd === `code-${activeCodeTab}` ? <Check className="size-4 text-emerald-400" /> : <Copy className="size-4" />}
-            </button>
+          <div className="w-full">            {activeCodeTab === 'app-router' && (
+              <CodeBlock
+                language="tsx"
+                code={`// app/layout.tsx
+import { GlideCNProvider } from '@/components/glidecn';
 
-            {activeCodeTab === 'app-router' && (
-              <pre>
-                <span className="text-zinc-500">{'// app/layout.tsx'}</span>{'\n'}
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;{'\n\n'}
-                <span className="text-pink-400">export default function</span> <span className="text-blue-300">RootLayout</span>({'{'} children {'}'}: {'{'} children: React.ReactNode {'}'}) {'{'}{'\n'}
-                {'  '}<span className="text-pink-400">return</span> ({'\n'}
-                {'    '}&lt;<span className="text-blue-300">html</span> <span className="text-amber-200">lang</span>=<span className="text-emerald-300">"en"</span>&gt;{'\n'}
-                {'      '}&lt;<span className="text-blue-300">body</span>&gt;{'\n'}
-                {'        '}&lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"cube"</span>&gt;{'\n'}
-                {'          '}{'{'}children{'}'}{'\n'}
-                {'        '}&lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;{'\n'}
-                {'      '}&lt;/<span className="text-blue-300">body</span>&gt;{'\n'}
-                {'    '}&lt;/<span className="text-blue-300">html</span>&gt;{'\n'}
-                {'  '});{'\n'}
-                {'}'}{'\n\n'}
-                <span className="text-zinc-500">{'// app/page.tsx'}</span>{'\n'}
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;{'\n\n'}
-                <span className="text-pink-400">export default function</span> <span className="text-blue-300">Home</span>() {'{'}{'\n'}
-                {'  '}<span className="text-pink-400">return</span> ({'\n'}
-                {'    '}&lt;<span className="text-amber-200">Page</span> <span className="text-amber-200">transition</span>=<span className="text-emerald-300">"circular-portal"</span> <span className="text-amber-200">duration</span>={'{'}0.6{'}'}&gt;{'\n'}
-                {'      '}&lt;<span className="text-blue-300">main</span>&gt;...&lt;/<span className="text-blue-300">main</span>&gt;{'\n'}
-                {'    '}&lt;/<span className="text-amber-200">Page</span>&gt;{'\n'}
-                {'  '});{'\n'}
-                {'}'}
-              </pre>
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <GlideCNProvider defaultTransition="cube">
+          {children}
+        </GlideCNProvider>
+      </body>
+    </html>
+  );
+}
+
+// app/page.tsx
+import { Page } from '@/components/glidecn';
+
+export default function Home() {
+  return (
+    <Page transition="circular-portal" duration={0.6}>
+      <main>...</main>
+    </Page>
+  );
+}`}
+              />
             )}
 
             {activeCodeTab === 'pages-router' && (
-              <pre>
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;{'\n'}
-                <span className="text-pink-400">import type</span> {'{'} <span className="text-amber-200">AppProps</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'next/app'</span>;{'\n\n'}
-                <span className="text-pink-400">export default function</span> <span className="text-blue-300">MyApp</span>({'{'} Component, pageProps, router {'}'}: <span className="text-amber-200">AppProps</span>) {'{'}{'\n'}
-                {'  '}<span className="text-pink-400">return</span> ({'\n'}
-                {'    '}&lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">key</span>={'{'}router.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"fold"</span>&gt;{'\n'}
-                {'      '}&lt;<span className="text-blue-300">Component</span> {'{'}...pageProps{'}'} /&gt;{'\n'}
-                {'    '}&lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;{'\n'}
-                {'  '});{'\n'}
-                {'}'}
-              </pre>
+              <CodeBlock
+                language="tsx"
+                code={`import { GlideCNProvider } from '@/components/glidecn';
+import type { AppProps } from 'next/app';
+
+export default function MyApp({ Component, pageProps, router }: AppProps) {
+  return (
+    <GlideCNProvider key={router.pathname} defaultTransition="fold">
+      <Component {...pageProps} />
+    </GlideCNProvider>
+  );
+}`}
+              />
             )}
 
             {activeCodeTab === 'vite' && (
-              <pre>
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">GlideCNProvider</span>, <span className="text-amber-200">Page</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@/components/glidecn'</span>;{'\n'}
-                <span className="text-pink-400">import</span> {'{'} <span className="text-amber-200">useLocation</span>, <span className="text-amber-200">Routes</span>, <span className="text-amber-200">Route</span> {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'react-router-dom'</span>;{'\n\n'}
-                <span className="text-pink-400">export function</span> <span className="text-blue-300">App</span>() {'{'}{'\n'}
-                {'  '}<span className="text-pink-400">const</span> location = <span className="text-amber-200">useLocation</span>();{'\n'}
-                {'  '}<span className="text-pink-400">return</span> ({'\n'}
-                {'    '}&lt;<span className="text-amber-200">GlideCNProvider</span> <span className="text-amber-200">key</span>={'{'}location.pathname{'}'} <span className="text-amber-200">defaultTransition</span>=<span className="text-emerald-300">"slash"</span>&gt;{'\n'}
-                {'      '}&lt;<span className="text-blue-300">Routes</span> <span className="text-amber-200">location</span>={'{'}location{'}'}&gt;{'\n'}
-                {'        '}&lt;<span className="text-blue-300">Route</span> <span className="text-amber-200">path</span>=<span className="text-emerald-300">"/"</span> <span className="text-amber-200">element</span>={'{'}&lt;<span className="text-amber-200">Page</span> <span className="text-amber-200">transition</span>=<span className="text-emerald-300">"slide"</span>&gt;&lt;<span className="text-blue-300">Home</span> /&gt;&lt;/<span className="text-amber-200">Page</span>&gt;{'}'} /&gt;{'\n'}
-                {'      '}&lt;/<span className="text-blue-300">Routes</span>&gt;{'\n'}
-                {'    '}&lt;/<span className="text-amber-200">GlideCNProvider</span>&gt;{'\n'}
-                {'  '});{'\n'}
-                {'}'}
-              </pre>
+              <CodeBlock
+                language="tsx"
+                code={`import { GlideCNProvider, Page } from '@/components/glidecn';
+import { useLocation, Routes, Route } from 'react-router-dom';
+
+export function App() {
+  const location = useLocation();
+  return (
+    <GlideCNProvider key={location.pathname} defaultTransition="slash">
+      <Routes location={location}>
+        <Route path="/" element={<Page transition="slide"><Home /></Page>} />
+      </Routes>
+    </GlideCNProvider>
+  );
+}`}
+              />
             )}
 
             {activeCodeTab === 'cli' && (
-              <pre>
-                <span className="text-zinc-500"># 1. Initialize GlideCN in your Next.js / React project</span>{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> init{'\n\n'}
-                <span className="text-zinc-500"># 2. Add individual transitions on-demand (shadcn style)</span>{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> add cube{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> add circular-portal{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> add origami-unfold{'\n\n'}
-                <span className="text-zinc-500"># 3. Add all transitions at once</span>{'\n'}
-                <span className="text-pink-400">npx</span> <span className="text-blue-300">glidecn</span> add --all
-              </pre>
+              <CodeBlock
+                language="bash"
+                code={`# 1. Initialize GlideCN in your Next.js / React project
+npx glidecn init
+
+# 2. Add individual transitions on-demand (shadcn style)
+npx glidecn add cube
+npx glidecn add circular-portal
+npx glidecn add origami-unfold
+
+# 3. Add all transitions at once
+npx glidecn add --all`}
+              />
             )}
           </div>
         </div>
