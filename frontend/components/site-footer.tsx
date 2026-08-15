@@ -1,6 +1,100 @@
+'use client';
+
 import Link from 'next/link';
 import { Logo } from '@/components/landing/logo';
 import { Github, Twitter, Heart, ArrowUpRight, Command, Gamepad2, ArrowRight } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useState } from 'react';
+
+const FOOTER_LETTERS = ['G', 'L', 'I', 'D', 'E', 'C', 'N'];
+
+function FooterBrandText() {
+  const shouldReduceMotion = useReducedMotion();
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const letterVariants = {
+    hidden: shouldReduceMotion
+      ? { opacity: 0 }
+      : { opacity: 0, y: 40, filter: 'blur(8px)', scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as const,
+      },
+    },
+  };
+
+  return (
+    <div className="relative w-full flex flex-col items-center justify-center pt-16 sm:pt-20 border-t border-white/10 overflow-hidden group/footer-text select-none">
+      {/* Ambient Breathing Under-Glow */}
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.15, 0.3, 0.15],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[25vw] max-h-[220px] bg-gradient-to-r from-[#fa5c4f]/30 via-orange-500/20 to-blue-500/20 rounded-full blur-[100px] pointer-events-none -z-10"
+      />
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: '-40px' }}
+        className="flex items-center justify-center tracking-tighter"
+      >
+        {FOOTER_LETTERS.map((letter, i) => {
+          const isHovered = hoveredIdx === i;
+          const isNeighbor = hoveredIdx !== null && Math.abs(hoveredIdx - i) === 1;
+
+          return (
+            <motion.span
+              key={i}
+              variants={letterVariants}
+              onMouseEnter={() => setHoveredIdx(i)}
+              onMouseLeave={() => setHoveredIdx(null)}
+              animate={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      y: isHovered ? -16 : isNeighbor ? -6 : 0,
+                      scale: isHovered ? 1.05 : isNeighbor ? 1.02 : 1,
+                    }
+              }
+              transition={{
+                type: 'spring',
+                stiffness: 350,
+                damping: 18,
+              }}
+              className="inline-block text-[14vw] sm:text-[13vw] leading-[0.85] font-black font-display cursor-default transition-colors duration-200 text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-white/10 hover:from-[#fa5c4f] hover:via-orange-300 hover:to-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
+            >
+              {letter}
+            </motion.span>
+          );
+        })}
+      </motion.div>
+    </div>
+  );
+}
 
 export function SiteFooter({ className = "mt-32" }: { className?: string }) {
   return (
@@ -114,11 +208,8 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
 
         </div>
 
-        {/* Oversized Typography End-Cap */}
-        <div className="w-full flex flex-col items-center justify-center pt-16 border-t border-white/10">
-          <h2 className="text-[12vw] leading-none font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/10 font-display select-none pointer-events-none">
-            GLIDECN          </h2>
-        </div>
+        {/* Oversized Interactive Typography End-Cap */}
+        <FooterBrandText />
 
         {/* Bottom Bar */}
         <div className="w-full mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] font-bold uppercase tracking-widest text-white/30">

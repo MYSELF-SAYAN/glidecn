@@ -244,14 +244,16 @@ export function DocsInstallation() {
                   <CodeBlock
                     language="tsx"
                     code={`// app/layout.tsx
-import { GlideCNProvider } from '@/components/glidecn';
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <GlideCNProvider defaultTransition="cube">
-          {children}
+          <GlideCN>
+            {children}
+          </GlideCN>
         </GlideCNProvider>
       </body>
     </html>
@@ -263,12 +265,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <CodeBlock
                     language="tsx"
                     code={`// pages/_app.tsx
-import { GlideCNProvider } from '@/components/glidecn';
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
+import type { AppProps } from 'next/app';
 
-export default function App({ Component, pageProps, router }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
-    <GlideCNProvider key={router.pathname} defaultTransition="cube">
-      <Component {...pageProps} />
+    <GlideCNProvider defaultTransition="cube">
+      <GlideCN>
+        <Component {...pageProps} />
+      </GlideCN>
     </GlideCNProvider>
   );
 }`}
@@ -278,14 +283,14 @@ export default function App({ Component, pageProps, router }: AppProps) {
                   <CodeBlock
                     language="tsx"
                     code={`// src/App.tsx
-import { GlideCNProvider } from '@/components/glidecn';
-import { useLocation } from 'react-router-dom';
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
 
 export function App() {
-  const location = useLocation();
   return (
-    <GlideCNProvider key={location.pathname} defaultTransition="cube">
-      {/* Your Routes */}
+    <GlideCNProvider defaultTransition="cube">
+      <GlideCN>
+        {/* Your Routes */}
+      </GlideCN>
     </GlideCNProvider>
   );
 }`}

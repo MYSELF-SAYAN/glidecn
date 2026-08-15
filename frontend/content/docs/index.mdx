@@ -32,17 +32,19 @@ Traditional page transitions in React often suffer from layout shifts, flashing 
 
 ### Wrap Root Layout
 
-Wrap your root layout with `<GlideCNProvider>`:
+Wrap your root layout with `<GlideCNProvider>` and `<GlideCN>`:
 
 ```tsx title="app/layout.tsx"
-import { GlideCNProvider } from '@/components/glidecn';
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <GlideCNProvider defaultTransition="cube">
-          {children}
+          <GlideCN>
+            {children}
+          </GlideCN>
         </GlideCNProvider>
       </body>
     </html>

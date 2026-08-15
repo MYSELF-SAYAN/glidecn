@@ -6,12 +6,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { CodeBlock } from '@/components/ui/code-block';
 
-const CODE_SNIPPET = `import { GlideCNProvider, Page } from '@/components/glidecn';
+const CODE_SNIPPET = `import { GlideCNProvider, GlideCN, Page } from '@/components/glidecn';
 
 export default function RootLayout({ children }) {
   return (
     <GlideCNProvider defaultTransition="cube">
-      {children}
+      <GlideCN>
+        {children}
+      </GlideCN>
     </GlideCNProvider>
   );
 }
@@ -61,9 +63,10 @@ export function DxSection() {
                 <span className="ml-3 font-mono text-[11px] text-white/50 tracking-wider">layout.tsx</span>
               </div>
               
-              <button
+              <motion.button
+                whileTap={{ scale: 0.92 }}
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-mono text-white/50 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-mono text-white/50 hover:text-white hover:bg-white/10 active:scale-[0.92] transition-colors cursor-pointer"
                 title="Copy code"
               >
                 {copied ? (
@@ -77,7 +80,7 @@ export function DxSection() {
                     <span>Copy</span>
                   </>
                 )}
-              </button>
+              </motion.button>
             </div>
             <CodeBlock
               language="tsx"

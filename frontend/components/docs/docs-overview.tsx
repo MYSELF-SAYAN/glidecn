@@ -399,14 +399,16 @@ export function DocsOverview() {
               <CodeBlock
                 language="tsx"
                 code={`// app/layout.tsx
-import { GlideCNProvider } from '@/components/glidecn';
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <GlideCNProvider defaultTransition="cube">
-          {children}
+          <GlideCN>
+            {children}
+          </GlideCN>
         </GlideCNProvider>
       </body>
     </html>
@@ -429,13 +431,15 @@ export default function Home() {
             {activeCodeTab === 'pages-router' && (
               <CodeBlock
                 language="tsx"
-                code={`import { GlideCNProvider } from '@/components/glidecn';
+                code={`import { GlideCNProvider, GlideCN } from '@/components/glidecn';
 import type { AppProps } from 'next/app';
 
-export default function MyApp({ Component, pageProps, router }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <GlideCNProvider key={router.pathname} defaultTransition="fold">
-      <Component {...pageProps} />
+    <GlideCNProvider defaultTransition="fold">
+      <GlideCN>
+        <Component {...pageProps} />
+      </GlideCN>
     </GlideCNProvider>
   );
 }`}
@@ -445,16 +449,17 @@ export default function MyApp({ Component, pageProps, router }: AppProps) {
             {activeCodeTab === 'vite' && (
               <CodeBlock
                 language="tsx"
-                code={`import { GlideCNProvider, Page } from '@/components/glidecn';
-import { useLocation, Routes, Route } from 'react-router-dom';
+                code={`import { GlideCNProvider, GlideCN, Page } from '@/components/glidecn';
+import { Routes, Route } from 'react-router-dom';
 
 export function App() {
-  const location = useLocation();
   return (
-    <GlideCNProvider key={location.pathname} defaultTransition="slash">
-      <Routes location={location}>
-        <Route path="/" element={<Page transition="slide"><Home /></Page>} />
-      </Routes>
+    <GlideCNProvider defaultTransition="slash">
+      <GlideCN>
+        <Routes>
+          <Route path="/" element={<Page transition="slide"><Home /></Page>} />
+        </Routes>
+      </GlideCN>
     </GlideCNProvider>
   );
 }`}

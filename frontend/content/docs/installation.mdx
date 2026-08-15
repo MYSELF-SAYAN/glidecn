@@ -45,7 +45,7 @@ This creates the `@/components/glidecn` folder in your project with full source 
 Add `<GlideCNProvider>` and `<GlideCN>` inside your root layout (`app/layout.tsx`). The provider synchronizes configuration, while the Transition Manager (`GlideCN`) coordinates frame exits/entries using `AnimatePresence`:
 
 ```tsx title="app/layout.tsx"
-import { GlideCNProvider, GlideCNNextApp as GlideCN } from '@/components/glidecn';
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

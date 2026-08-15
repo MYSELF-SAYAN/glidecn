@@ -54,8 +54,8 @@ export function FloatingNavbar() {
       >
 
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 transition-transform hover:scale-105 group">
-          <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-md shadow-[#fa5c4f]/25 group-hover:rotate-12 transition-transform duration-500">
+        <Link href="/" className="flex items-center gap-3 group active:scale-[0.97] transition-transform duration-150">
+          <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-md shadow-[#fa5c4f]/25 group-hover:rotate-8 group-hover:scale-105 transition-transform duration-300 ease-out">
             <Logo className="size-4 text-white" />
           </div>
           <span className="font-bold tracking-tight text-sm font-display text-[var(--text-main)] transition-colors">
@@ -65,22 +65,21 @@ export function FloatingNavbar() {
 
         {/* Navigation Links - Centered & Glassy */}
         <nav className="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-          <Link href="/docs" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white dark:hover:bg-white/10 transition-colors duration-200">
+          <Link href="/docs" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/80 dark:hover:bg-white/10 active:scale-[0.96] transition-all duration-150">
             Docs
           </Link>
-          <Link href="/docs/transitions" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white dark:hover:bg-white/10 transition-colors duration-200 flex items-center gap-1.5 group">
+          <Link href="/docs/transitions" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/80 dark:hover:bg-white/10 active:scale-[0.96] transition-all duration-150 flex items-center gap-1.5 group">
             <span>Transitions</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#fa5c4f] group-hover:animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#fa5c4f] group-hover:scale-125 transition-transform duration-200" />
           </Link>
           <div className="w-px h-4 bg-black/10 dark:bg-white/10 mx-1" />
-          <Link href="/docs/installation" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[#fa5c4f] bg-[#fa5c4f]/10 hover:bg-[#fa5c4f]/20 transition-colors duration-200 flex items-center gap-1.5">
+          <Link href="/docs/installation" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[#fa5c4f] bg-[#fa5c4f]/10 hover:bg-[#fa5c4f]/20 active:scale-[0.96] transition-all duration-150 flex items-center gap-1.5">
             <span>Build</span>
-            {/* <span className="w-1.5 h-1.5 rounded-full bg-[#fa5c4f] animate-pulse" /> */}
           </Link>
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
 
           <ThemeToggle />
 
@@ -88,7 +87,7 @@ export function FloatingNavbar() {
             href="https://www.npmjs.com/package/glidecn-cli"
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/5 px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/10 transition-[background-color,color,transform] duration-200 active:scale-95 btn-tactile shadow-sm backdrop-blur-md"
+            className="hidden sm:flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-150 active:scale-[0.95] shadow-sm backdrop-blur-md"
             title="NPM Downloads (Last 30 Days)"
           >
             <Download className="size-3.5" />
@@ -99,7 +98,7 @@ export function FloatingNavbar() {
             href="https://github.com/MYSELF-SAYAN/glidecn"
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/5 px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/10 transition-[background-color,color,transform] duration-200 active:scale-95 btn-tactile shadow-sm backdrop-blur-md"
+            className="hidden sm:flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-150 active:scale-[0.95] shadow-sm backdrop-blur-md"
             title="GitHub Stars"
           >
             <Github className="size-3.5" />
@@ -108,7 +107,7 @@ export function FloatingNavbar() {
 
           <Link
             href="/playground/landing"
-            className="group hidden sm:flex items-center gap-2 rounded-full bg-[#fa5c4f] hover:bg-[#e54235] px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-lg shadow-[#fa5c4f]/25 transition-[background-color,transform] duration-200 active:scale-95 btn-tactile overflow-hidden relative"
+            className="group hidden sm:flex items-center gap-2 rounded-full bg-[#fa5c4f] hover:bg-[#e54235] px-4.5 py-2 text-[11px] font-bold uppercase tracking-widest text-white shadow-lg shadow-[#fa5c4f]/25 transition-all duration-150 active:scale-[0.95] overflow-hidden relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700" />
             <Gamepad2 className="size-3.5" />

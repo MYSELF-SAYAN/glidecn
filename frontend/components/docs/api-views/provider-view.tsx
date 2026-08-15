@@ -48,7 +48,7 @@ export function DocsProviderView() {
         badge="Context Root"
         title="<GlideCNProvider>"
         description="The top-level context coordinator that initializes transition state, manages global baseline configuration, and detects user motion preferences."
-        importSnippet="import { GlideCNProvider } from '@/components/glidecn';"
+        importSnippet="import { GlideCNProvider, GlideCN } from '@/components/glidecn';"
       />
 
       {/* 2. SETUP & INTEGRATION */}

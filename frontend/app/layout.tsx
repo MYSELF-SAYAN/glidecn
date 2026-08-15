@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono, Space_Grotesk, Caveat } from 'next/font/google';
 import { RootProvider } from 'fumadocs-ui/provider';
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { GlideCNProvider } from '@/components/glidecn';
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
 import { LenisProvider } from '@/components/lenis-provider';
 import { Analytics } from "@vercel/analytics/next"
 const inter = Inter({
@@ -56,7 +56,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <RootProvider>
           <LenisProvider>
             <GlideCNProvider defaultTransition="liquid-morph">
-              {children}
+              <GlideCN>
+                {children}
+              </GlideCN>
               <Analytics />
             </GlideCNProvider>
           </LenisProvider>

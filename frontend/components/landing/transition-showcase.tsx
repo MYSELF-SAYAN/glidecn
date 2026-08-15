@@ -120,7 +120,7 @@ function TVTurnOffDemo() {
           scaleY: off ? 0.02 : 1,
           opacity: off ? 0.3 : 1,
         }}
-        transition={{ duration: 0.5, ease: 'easeIn' }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         className="size-20 rounded-xl bg-slate-800 shadow-xl shadow-black/20 flex items-center justify-center text-2xl border border-slate-700"
       >
         <Monitor className="size-8 text-slate-400" />
@@ -265,15 +265,23 @@ export function TransitionShowcase() {
                   initial={{ opacity: 0, y: 40, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: false, margin: '-40px' }}
-                  transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className={`flex flex-col overflow-hidden rounded-[24px] bg-[var(--bg-surface)] border border-[var(--border-color)] group hover:border-[#fa5c4f]/50 hover:shadow-[0_20px_40px_-15px_rgba(250,92,79,0.15)] transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 ${
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: i * 0.08, 
+                    ease: [0.16, 1, 0.3, 1],
+                    scale: { type: 'spring', duration: 0.3, bounce: 0.15 },
+                    y: { type: 'spring', duration: 0.3, bounce: 0.15 }
+                  }}
+                  className={`flex flex-col overflow-hidden rounded-[24px] bg-[var(--bg-surface)] border border-[var(--border-color)] group hover:border-[#fa5c4f]/50 hover:shadow-[0_20px_40px_-15px_rgba(250,92,79,0.15)] transition-[border-color,box-shadow] duration-200 ease-out cursor-pointer ${
                     isEvenColumn ? 'sm:mt-12' : ''
                   }`}
                 >
                   {/* Animated transition preview area */}
                   <div className="relative h-48 w-full overflow-hidden bg-[var(--bg-page)]/50">
                     <DemoComponent />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </div>
 
                   <div className="flex flex-col p-6 flex-1 justify-between space-y-4 bg-gradient-to-b from-[var(--bg-page)]/50 to-[var(--bg-surface)]">
@@ -288,7 +296,7 @@ export function TransitionShowcase() {
 
                     <Link
                       href="/playground/landing"
-                      className="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs font-bold text-[var(--text-main)] group-hover:text-[#fa5c4f] transition-colors"
+                      className="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs font-bold text-[var(--text-main)] group-hover:text-[#fa5c4f] active:scale-[0.98] transition-all"
                     >
                       <span>Test in Playground</span>
                       <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />

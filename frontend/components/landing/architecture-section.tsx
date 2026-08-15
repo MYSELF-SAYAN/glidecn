@@ -91,8 +91,9 @@ export function ArchitectureSection() {
               <div className="w-full h-24 rounded-lg bg-[var(--bg-page)] border border-[var(--border-color)] mb-4" />
               <div className="w-2/3 h-4 rounded-md bg-[var(--border-color)]" />
               
-              <div className="absolute top-4 right-4 px-2 py-1 rounded bg-black text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5">
-                <Lock className="w-3 h-3" /> Frame A (Frozen)
+              <div className="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-zinc-900 text-zinc-200 text-[10px] font-mono font-medium flex items-center gap-1.5 border border-zinc-700 shadow-sm">
+                <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
+                <span>Frame A (Frozen)</span>
               </div>
             </motion.div>
 
@@ -116,8 +117,9 @@ export function ArchitectureSection() {
               <div className="w-full h-32 rounded-lg bg-[#fa5c4f]/5 border border-[#fa5c4f]/20 mb-4" />
               <div className="w-3/4 h-4 rounded-md bg-[var(--border-color)]" />
 
-              <div className="absolute top-4 right-4 px-2 py-1 rounded bg-[#fa5c4f] text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 shadow-md shadow-[#fa5c4f]/40">
-                <Frame className="w-3 h-3" /> Frame B (Active)
+              <div className="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-[#fa5c4f] text-white text-[10px] font-mono font-bold flex items-center gap-1.5 shadow-md shadow-[#fa5c4f]/40">
+                <span className="size-1.5 rounded-full bg-white animate-ping" />
+                <span>Frame B (Active)</span>
               </div>
             </motion.div>
 

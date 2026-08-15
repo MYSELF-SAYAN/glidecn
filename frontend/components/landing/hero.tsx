@@ -3,7 +3,7 @@ import { copyToClipboard } from '@/lib/copy-to-clipboard';
 
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Copy, Check, Star, ChevronDown, Sparkles, Play, Gamepad2 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -35,8 +35,7 @@ export function Hero() {
 
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap items-center justify-center gap-3 mb-12"
         >
@@ -48,8 +47,7 @@ export function Hero() {
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-6xl sm:text-8xl lg:text-9xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.05] mb-8 max-w-5xl"
         >
@@ -57,34 +55,32 @@ export function Hero() {
           that{' '}
           <span className="relative inline-block font-cursive text-[#fa5c4f] font-normal tracking-normal pr-4 scale-110">
             flow.
-            <motion.svg
-              className="absolute -bottom-1 sm:-bottom-3 left-0 w-full text-[#fa5c4f]/60"
+            <svg
+              className="absolute -bottom-1.5 sm:-bottom-3 left-0 w-full h-3 sm:h-4 text-[#fa5c4f] pointer-events-none overflow-visible"
               viewBox="0 0 120 12"
               fill="none"
+              preserveAspectRatio="none"
               xmlns="http://www.w3.org/2000/svg"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
             >
               <motion.path
                 d="M5 8C25 2 45 12 65 6C85 0 105 10 115 5"
                 stroke="currentColor"
-                strokeWidth="2.5"
+                strokeWidth="2.75"
                 strokeLinecap="round"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{ duration: 1.5, delay: 0.6, ease: 'easeInOut' }}
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 0.85 }}
+                transition={{
+                  pathLength: { duration: 1.3, delay: 0.4, ease: [0.16, 1, 0.3, 1] },
+                  opacity: { duration: 0.3, delay: 0.35 },
+                }}
               />
-            </motion.svg>
+            </svg>
           </span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl text-lg sm:text-2xl leading-relaxed text-[var(--text-muted)] mb-14 font-light"
         >
@@ -93,8 +89,7 @@ export function Hero() {
 
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center justify-center gap-6 w-full sm:w-auto mb-20"
         >
@@ -123,8 +118,7 @@ export function Hero() {
         {/* Glassmorphic CLI Installer */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, type: 'spring' }}
           className="w-full max-w-lg relative group"
         >
@@ -134,35 +128,81 @@ export function Hero() {
           <div className="relative rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)]/80 p-2 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 mx-auto overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50 pointer-events-none" />
 
-            <div className="relative flex items-center justify-between px-3 pb-2 pt-1 border-b border-[var(--border-color)]">
-              <div className="flex items-center gap-1.5">
-                {(['pnpm', 'npm', 'bun', 'yarn'] as const).map((pkg) => (
-                  <button
-                    key={pkg}
-                    onClick={() => setSelectedPkg(pkg)}
-                    className={`px-3 py-1 rounded-md text-xs font-medium transition-[background-color,color,box-shadow,transform] duration-150 cursor-pointer ${selectedPkg === pkg
-                        ? 'bg-[var(--text-main)] text-[var(--bg-page)] shadow-sm'
-                        : 'text-[var(--text-subtle)] hover:text-[var(--text-main)] active:scale-[0.97]'
+            <div className="relative flex items-center justify-between px-3 pb-2 pt-1.5 border-b border-[var(--border-color)]">
+              <div className="flex items-center gap-1">
+                {(['pnpm', 'npm', 'bun', 'yarn'] as const).map((pkg) => {
+                  const isActive = selectedPkg === pkg;
+                  return (
+                    <button
+                      key={pkg}
+                      onClick={() => setSelectedPkg(pkg)}
+                      className={`relative px-3 py-1 rounded-lg text-xs font-medium transition-colors duration-150 cursor-pointer active:scale-[0.96] ${
+                        isActive
+                          ? 'text-[var(--bg-page)] font-semibold'
+                          : 'text-[var(--text-subtle)] hover:text-[var(--text-main)]'
                       }`}
-                  >
-                    {pkg}
-                  </button>
-                ))}
+                    >
+                      {isActive && (
+                        <motion.div
+                          layoutId="hero-pkg-pill"
+                          className="absolute inset-0 bg-[var(--text-main)] rounded-lg -z-10 shadow-sm"
+                          transition={{ type: 'spring', duration: 0.35, bounce: 0.15 }}
+                        />
+                      )}
+                      <span className="relative z-10">{pkg}</span>
+                    </button>
+                  );
+                })}
               </div>
+              <span className="text-[10px] font-mono text-[var(--text-subtle)] px-2">v1.0.0</span>
             </div>
 
-            <div className="relative flex items-center justify-between px-5 py-4 font-mono text-sm text-[var(--text-main)]">
-              <div className="flex items-center gap-3 overflow-x-auto no-scrollbar">
+            <div className="relative flex items-center justify-between px-5 py-4 font-mono text-sm text-[var(--text-main)] min-h-[56px]">
+              <div className="flex items-center gap-3 overflow-x-auto no-scrollbar flex-1">
                 <span className="text-[var(--text-subtle)] font-medium select-none">$</span>
-                <span className="whitespace-nowrap">{PKG_COMMANDS[selectedPkg]}</span>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={selectedPkg}
+                    initial={{ opacity: 0, y: 3, filter: 'blur(3px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -3, filter: 'blur(3px)' }}
+                    transition={{ duration: 0.18, ease: [0.23, 1, 0.32, 1] }}
+                    className="whitespace-nowrap"
+                  >
+                    {PKG_COMMANDS[selectedPkg]}
+                  </motion.span>
+                </AnimatePresence>
               </div>
-              <button
+              <motion.button
+                whileTap={{ scale: 0.88 }}
                 onClick={handleCopy}
-                className="p-2 ml-4 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border-color)] transition-colors cursor-pointer shrink-0"
+                className="p-2 ml-4 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border-color)]/60 transition-colors cursor-pointer shrink-0"
                 title="Copy command"
               >
-                {copied ? <Check className="size-4 text-emerald-500" /> : <Copy className="size-4" />}
-              </button>
+                <AnimatePresence mode="wait">
+                  {copied ? (
+                    <motion.div
+                      key="check"
+                      initial={{ scale: 0.8, rotate: -20 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      exit={{ scale: 0.8 }}
+                      transition={{ type: 'spring', duration: 0.3, bounce: 0.2 }}
+                    >
+                      <Check className="size-4 text-emerald-500" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="copy"
+                      initial={{ scale: 0.8 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0.8 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <Copy className="size-4" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </div>
           </div>
         </motion.div>
