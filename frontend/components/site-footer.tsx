@@ -78,7 +78,7 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
 
           {/* Links Col 2 */}
           <div className="space-y-6">
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">Shaders</h4>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">Transitions</h4>
             <ul className="space-y-4 text-sm font-medium">
               <li><Link href="/docs/transitions#family-Flow" className="text-white/70 hover:text-white transition-colors">Flow</Link></li>
               <li><Link href="/docs/transitions#family-Portal" className="text-white/70 hover:text-white transition-colors">Portal</Link></li>

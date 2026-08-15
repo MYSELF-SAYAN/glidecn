@@ -1,240 +1,83 @@
 ---
-title: API Reference & Props
-description: Complete guide to the components, hooks, and configuration props available in GlideCN.
+title: "API Reference"
+description: "Comprehensive guide to GlideCN components, hooks, registry methods, utilities, and TypeScript types."
 ---
 
-import { TransitionCount } from '@/components/docs/transition-count';
+GlideCN is engineered with a clean, minimal API surface designed for maximum control with minimal boilerplate. Explore the dedicated reference pages for every primitive below.
 
+---
 
-import { TypeTable } from 'fumadocs-ui/components/type-table';
-import { Callout } from 'fumadocs-ui/components/callout';
+## Core Components
 
-GlideCN provides a clean, minimalistic API surface. You only need to interact with two main components and one hook to build incredibly rich transitions.
+### [`<GlideCNProvider>`](/docs/api/provider)
+The root context coordinator. Injects global transition configuration, sets baseline fallback transitions, manages default duration and easing curves, and auto-detects user motion preferences.
+- **[View `<GlideCNProvider>` Reference →](/docs/api/provider)**
 
-## `<GlideCNProvider>`
+### [`<GlideCN>`](/docs/api/glidecn)
+The framework-specific router adapter and transition coordinator. Orchestrates Framer Motion's `AnimatePresence`, freezes the exiting page router context to prevent white flashes, and manages automatic scroll restoration.
+- **[View `<GlideCN>` Reference →](/docs/api/glidecn)**
 
-The `GlideCNProvider` is the root coordinator. It intercepts routing events, manages the outgoing freeze-frame snapshots, and handles the dual-frame crossfade mounting logic.
+### [`<Page>`](/docs/api/page)
+The route-level segment component. Wrap each individual page or view to apply custom transitions, per-page duration and easing overrides, directional flow axes, and GPU acceleration hints.
+- **[View `<Page>` Reference →](/docs/api/page)**
 
-<Callout type="info">
-  **Placement Strategy**: Place this as high in your component tree as possible (e.g., inside `app/layout.tsx`).
-</Callout>
+---
 
-### Props
+## Context Hooks
 
-<TypeTable
-  type={{
-    children: {
-      description: 'Your application layout and content.',
-      type: 'ReactNode',
-      default: 'Required',
-    },
-    defaultTransition: {
-      description: 'The fallback transition animation used if a <Page> does not specify its own.',
-      type: 'string',
-      default: '"fade"',
-    },
-    defaultConfig: {
-      description: 'Global configuration overrides (e.g. duration, delay, easing) for transitions.',
-      type: 'TransitionConfig',
-      default: '{}',
-    },
-    reducedMotion: {
-      description: 'Force reduced motion on or off. Auto-detects by default.',
-      type: 'boolean',
-      default: 'undefined',
-    },
-  }}
-/>
+### [`useGlide()`](/docs/api/hooks/use-glide)
+Primary controller hook exposing the active transition name, merged configuration options, lifecycle animation state (`"idle" | "entering" | "exiting" | "complete"`), reduced motion status, and mutators (`setTransition`, `setConfig`).
+- **[View `useGlide()` Reference →](/docs/api/hooks/use-glide)**
 
-## `<Page>`
+### [`useTransitionConfig()`](/docs/api/hooks/use-transition-config)
+Lightweight convenience hook returning `{ config, setConfig }` for quick duration, easing, or direction manipulation without full state overhead.
+- **[View `useTransitionConfig()` Reference →](/docs/api/hooks/use-transition-config)**
 
-The `<Page>` component represents an animatable route segment. You should wrap the top-level content of every individual page with this component.
+### [`useAnimationState()`](/docs/api/hooks/use-animation-state)
+Lifecycle monitor hook returning the active transition phase (`"idle" | "entering" | "exiting" | "complete"`). Perfect for navigation guards, loading bars, and status indicators.
+- **[View `useAnimationState()` Reference →](/docs/api/hooks/use-animation-state)**
 
-### Props
+---
 
-<TypeTable
-  type={{
-    children: {
-      description: 'The content of your page.',
-      type: 'ReactNode',
-      default: 'Required',
-    },
-    transition: {
-      description: 'Overrides the defaultTransition. Choose from any of the <TransitionCount /> shaders.',
-      type: 'string',
-      default: 'Inherited',
-    },
-    duration: {
-      description: 'Overrides the default duration for this specific page.',
-      type: 'number',
-      default: 'Inherited',
-    },
-    delay: {
-      description: 'Delay before animation starts, in seconds.',
-      type: 'number',
-      default: 'Inherited',
-    },
-    ease: {
-      description: 'Overrides the default easing for this specific page.',
-      type: 'EasingPreset',
-      default: 'Inherited',
-    },
-    direction: {
-      description: 'Defines the directional flow (applicable for directional transitions like "slide" or "cube").',
-      type: '"left" | "right" | "up" | "down"',
-      default: 'Inherited',
-    },
-    stagger: {
-      description: 'Overrides the stagger delay for this specific page.',
-      type: 'number',
-      default: 'Inherited',
-    },
-    custom: {
-      description: 'Arbitrary custom data passed to the transition.',
-      type: 'Record<string, unknown>',
-    },
-    className: {
-      description: 'Additional CSS class applied to the motion div wrapping the page.',
-      type: 'string',
-    },
-    style: {
-      description: 'Inline styles applied to the motion div wrapping the page.',
-      type: 'CSSProperties',
-    },
-  }}
-/>
+## Engine & Tooling
 
-## `useGlide()`
+### [`TransitionRegistry`](/docs/api/registry)
+Discover, register, and dynamically resolve custom Framer Motion transition definitions. Includes step-by-step tutorial for authoring new animations.
+- **[View `TransitionRegistry` Reference →](/docs/api/registry)**
 
-A custom React hook that allows you to programmatically read and modify the active transition configuration at runtime.
+### [`Animation Engine & Utilities`](/docs/api/animation-engine)
+Pure function helpers for resolving easing curves, computing directional offsets, compiling variant trees, and analyzing CSS `will-change` hints.
+- **[View Animation Engine Reference →](/docs/api/animation-engine)**
 
-### Returned Object
+### [`TypeScript Types & Schemas`](/docs/api/types)
+Complete TypeScript definitions and interface glossaries for `TransitionConfig`, `TransitionDefinition`, `TransitionVariants`, `PageProps`, and more.
+- **[View TypeScript Types →](/docs/api/types)**
 
-<TypeTable
-  type={{
-    currentTransition: {
-      description: 'The currently active transition name.',
-      type: 'string',
-    },
-    transitionDefinition: {
-      description: 'The resolved transition definition object.',
-      type: 'TransitionDefinition | null',
-    },
-    config: {
-      description: 'The merged configuration object (defaults + overrides).',
-      type: 'Required<TransitionConfig>',
-    },
-    animationState: {
-      description: 'The current lifecycle state of the page transition.',
-      type: '"idle" | "entering" | "exiting" | "complete"',
-    },
-    reducedMotion: {
-      description: 'Whether reduced motion is currently active.',
-      type: 'boolean',
-    },
-    setTransition: {
-      description: 'Set the active transition by name.',
-      type: '(name: string) => void',
-    },
-    setConfig: {
-      description: 'Override config for the current transition.',
-      type: '(config: TransitionConfig) => void',
-    },
-  }}
-/>
+### [`CLI Reference`](/docs/cli)
+Command-line documentation and flag reference for `glidecn-cli init`, `glidecn-cli add`, and `glidecn-cli list`.
+- **[View CLI Reference →](/docs/cli)**
 
-### Example Usage
+---
 
-<Tabs items={['Next.js (App)', 'Next.js (Pages)', 'Vite / React', 'Remix']}>
+## Quick Navigation
 
-<Tab value="Next.js (App)">
-```tsx title="components/settings-panel.tsx"
-'use client';
-
-import { useGlide } from '@/components/glidecn';
-
-export function SettingsPanel() {
-  const { currentTransition, setTransition, setConfig } = useGlide();
-
-  return (
-    <div className="flex gap-4">
-      <button onClick={() => setTransition('cube')}>
-        Use 3D Cube (Current: {currentTransition})
-      </button>
-
-      <button onClick={() => setConfig({ duration: 1.2 })}>
-        Slow Down (1.2s)
-      </button>
-    </div>
-  );
-}
 ```
-</Tab>
+Foundation
+├── Overview (/docs)
+├── Installation & Setup (/docs/installation)
+└── Executive API Hub (/docs/api-reference)
 
-<Tab value="Next.js (Pages)">
-```tsx title="components/SettingsPanel.tsx"
-import { useGlide } from '@/components/glidecn';
+API Primitives
+├── <GlideCNProvider> (/docs/api/provider)
+├── <GlideCN> (/docs/api/glidecn)
+├── <Page> (/docs/api/page)
+├── useGlide() (/docs/api/hooks/use-glide)
+├── useTransitionConfig() (/docs/api/hooks/use-transition-config)
+└── useAnimationState() (/docs/api/hooks/use-animation-state)
 
-export function SettingsPanel() {
-  const { currentTransition, setTransition, setConfig } = useGlide();
-
-  return (
-    <div className="flex gap-4">
-      <button onClick={() => setTransition('cube')}>
-        Use 3D Cube (Current: {currentTransition})
-      </button>
-
-      <button onClick={() => setConfig({ duration: 1.2 })}>
-        Slow Down (1.2s)
-      </button>
-    </div>
-  );
-}
+Engine & Schemas
+├── TransitionRegistry (/docs/api/registry)
+├── Animation Engine (/docs/api/animation-engine)
+├── TypeScript Types (/docs/api/types)
+└── CLI Commands (/docs/api/cli)
 ```
-</Tab>
-
-<Tab value="Vite / React">
-```tsx title="src/components/SettingsPanel.tsx"
-import { useGlide } from '@/components/glidecn';
-
-export function SettingsPanel() {
-  const { currentTransition, setTransition, setConfig } = useGlide();
-
-  return (
-    <div className="flex gap-4">
-      <button onClick={() => setTransition('cube')}>
-        Use 3D Cube (Current: {currentTransition})
-      </button>
-
-      <button onClick={() => setConfig({ duration: 1.2 })}>
-        Slow Down (1.2s)
-      </button>
-    </div>
-  );
-}
-```
-</Tab>
-
-<Tab value="Remix">
-```tsx title="app/components/settings-panel.tsx"
-import { useGlide } from '~/components/glidecn';
-
-export function SettingsPanel() {
-  const { currentTransition, setTransition, setConfig } = useGlide();
-
-  return (
-    <div className="flex gap-4">
-      <button onClick={() => setTransition('cube')}>
-        Use 3D Cube (Current: {currentTransition})
-      </button>
-
-      <button onClick={() => setConfig({ duration: 1.2 })}>
-        Slow Down (1.2s)
-      </button>
-    </div>
-  );
-}
-```
-</Tab>
-
-</Tabs>

@@ -99,9 +99,9 @@ export default async function TransitionDocsPage(props: { params: Promise<{ slug
             <div className="flex items-start gap-3 text-left p-5 rounded-2xl bg-black/20 border border-white/5">
               <Sparkles className="size-5 text-[#fa5c4f] shrink-0 mt-0.5" />
               <div>
-                <h3 className="text-sm font-bold text-[var(--text-main)] mb-1">Shader Recipe in Development</h3>
+                <h3 className="text-sm font-bold text-[var(--text-main)] mb-1">Transition in Development</h3>
                 <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
-                  Our WebGL shader team is fine-tuning easing curves, GPU viewport masks, and zero-jank frame synchronization for this transition.
+                  Our engineering team is fine-tuning easing curves, GPU viewport masks, and zero-jank frame synchronization for this transition.
                 </p>
               </div>
             </div>

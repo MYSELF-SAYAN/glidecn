@@ -1,0 +1,91 @@
+---
+title: "useTransitionConfig()"
+description: "A lightweight convenience hook to read the resolved configuration and dynamically update transition settings."
+---
+
+`useTransitionConfig()` is a focused utility hook that extracts only `{ config, setConfig }` from the GlideCN context. It is ideal for preference panels, speed sliders, direction selectors, and controls that do not require full transition metadata.
+
+---
+
+## Import
+
+```tsx
+import { useTransitionConfig } from '@/components/glidecn';
+```
+
+---
+
+## Signature & Return Object
+
+```tsx
+const { config, setConfig } = useTransitionConfig();
+```
+
+---
+
+## Return Properties
+
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `config` | `Required<TransitionConfig>` | Current resolved timing, ease, direction, and custom options. |
+| `setConfig` | `(config: TransitionConfig) => void` | Updates transition parameters dynamically. |
+
+---
+
+## Code Examples
+
+### 1. Direction Switcher Toggle
+
+```tsx title="components/DirectionToggle.tsx"
+import { useTransitionConfig } from '@/components/glidecn';
+
+export function DirectionToggle() {
+  const { config, setConfig } = useTransitionConfig();
+
+  const toggleAxis = () => {
+    setConfig({
+      direction: config.direction === 'left' ? 'right' : 'left',
+    });
+  };
+
+  return (
+    <button onClick={toggleAxis} className="btn-tactile">
+      Current: {config.direction} (Click to switch)
+    </button>
+  );
+}
+```
+
+---
+
+### 2. Transition Duration Slider
+
+```tsx title="components/SpeedSlider.tsx"
+import { useTransitionConfig } from '@/components/glidecn';
+
+export function SpeedSlider() {
+  const { config, setConfig } = useTransitionConfig();
+
+  return (
+    <div className="flex items-center gap-4">
+      <label>Speed: {config.duration}s</label>
+      <input
+        type="range"
+        min="0.1"
+        max="2.0"
+        step="0.1"
+        value={config.duration}
+        onChange={(e) => setConfig({ duration: parseFloat(e.target.value) })}
+      />
+    </div>
+  );
+}
+```
+
+---
+
+## Related APIs
+
+- [`useGlide()`](/docs/api/hooks/use-glide) — Full state controller hook.
+- [`useAnimationState()`](/docs/api/hooks/use-animation-state) — Hook to check animation lifecycle status.
+- [`TransitionConfig`](/docs/api/types#transitionconfig) — Configuration type definition.

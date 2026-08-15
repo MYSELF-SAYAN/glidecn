@@ -1,0 +1,159 @@
+---
+title: "TransitionRegistry"
+description: "The global registry for discovering, registering, and dynamically resolving page transition definitions."
+---
+
+The `TransitionRegistry` is the runtime lookup engine that maps transition names (like `"fade"`, `"slide"`, `"circular-portal"`) to their full Framer Motion variant definitions and metadata.
+
+It allows you to easily register custom animations or inspect built-in presets.
+
+---
+
+## Import
+
+```tsx
+import {
+  TransitionRegistry,
+  defaultRegistry,
+  registerTransition,
+  resolveTransition,
+  getTransition,
+} from '@/components/glidecn';
+```
+
+---
+
+## Methods Reference
+
+### `registerTransition(definition)`
+
+Registers a new transition definition into the global registry. If a transition with the same name already exists, it will overwrite it with a warning.
+
+```tsx
+import { registerTransition } from '@/components/glidecn';
+
+registerTransition({
+  metadata: {
+    name: 'custom-zoom',
+    displayName: 'Custom Zoom',
+    description: 'Enters with dynamic scale and subtle blur.',
+    category: 'flow',
+    props: [],
+  },
+  defaultConfig: {
+    duration: 0.5,
+    ease: 'easeInOut',
+  },
+  getVariants: (config) => ({
+    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
+    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
+    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' },
+  }),
+});
+```
+
+---
+
+### `resolveTransition(name)`
+
+Safely resolves a transition definition by name. If the requested transition is not found, it gracefully falls back to the default `"fade"` transition and logs a helpful warning.
+
+```tsx
+import { resolveTransition } from '@/components/glidecn';
+
+// Returns the transition definition or fallback 'fade'
+const definition = resolveTransition('cube');
+```
+
+---
+
+### `getTransition(name)`
+
+Returns the exact transition definition for a given name, or `undefined` if not registered.
+
+```tsx
+import { getTransition } from '@/components/glidecn';
+
+const definition = getTransition('liquid-morph');
+if (definition) {
+  console.log(definition.metadata.displayName);
+}
+```
+
+---
+
+### `defaultRegistry`
+
+The singleton instance of `TransitionRegistry` containing all built-in and user-registered transitions.
+
+```tsx
+import { defaultRegistry } from '@/components/glidecn';
+
+// List all registered transition names
+const allNames = defaultRegistry.getNames();
+console.log(`Registered transitions: ${allNames.length}`);
+```
+
+---
+
+## Authoring a Custom Transition (Tutorial)
+
+To create a reusable transition, create a `.tsx` file (e.g. `components/glidecn/transitions/my-transition.tsx`):
+
+```tsx title="components/glidecn/transitions/my-transition.tsx"
+import { registerTransition, type TransitionDefinition } from '@/components/glidecn';
+
+export const myTransition: TransitionDefinition = {
+  metadata: {
+    name: 'my-transition',
+    displayName: 'My Transition',
+    description: 'Custom slide with 3D rotation perspective.',
+    category: 'spatial',
+    props: [],
+  },
+  defaultConfig: {
+    duration: 0.6,
+    ease: 'easeInOut',
+    direction: 'left',
+  },
+  getVariants: (config) => {
+    const isLeft = config.direction === 'left';
+    return {
+      initial: {
+        opacity: 0,
+        x: isLeft ? 100 : -100,
+        rotateY: isLeft ? 15 : -15,
+      },
+      animate: {
+        opacity: 1,
+        x: 0,
+        rotateY: 0,
+      },
+      exit: {
+        opacity: 0,
+        x: isLeft ? -100 : 100,
+        rotateY: isLeft ? -15 : 15,
+      },
+    };
+  },
+};
+
+// Register automatically on module load
+registerTransition(myTransition);
+```
+
+Then use it anywhere in your application:
+
+```tsx
+<Page transition="my-transition">
+  <h1>Custom Animated Route</h1>
+</Page>
+```
+
+---
+
+## Related APIs
+
+- [`<Page>`](/docs/api/page) — Component to apply registered transitions.
+- [`AnimationEngine`](/docs/api/animation-engine) — Variant and transition builders.
+- [`TransitionDefinition`](/docs/api/types#transitiondefinition) — TypeScript schema for transitions.

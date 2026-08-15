@@ -1,0 +1,85 @@
+---
+title: "useAnimationState()"
+description: "A specialized hook to monitor the current lifecycle state of page transitions."
+---
+
+`useAnimationState()` provides real-time information about whether a page is currently idle, playing its exit animation, entering the viewport, or has completed its transition lifecycle.
+
+---
+
+## Import
+
+```tsx
+import { useAnimationState } from '@/components/glidecn';
+```
+
+---
+
+## Signature & Return Value
+
+```tsx
+const state: AnimationState = useAnimationState();
+```
+
+Returns one of four lifecycle states:
+- `"idle"` — No transition running; page is stable.
+- `"exiting"` — Old page is playing its exit animation (router context is frozen).
+- `"entering"` — New page is playing its enter animation into view.
+- `"complete"` — Transition has finished.
+
+---
+
+## Code Examples
+
+### 1. Navigation Blocker / Pointer Events Lock
+
+Prevent user clicks and accidental double-submissions while an exit transition is actively playing:
+
+```tsx title="components/TransitionGuard.tsx"
+import { useAnimationState } from '@/components/glidecn';
+
+export function TransitionGuard({ children }: { children: React.ReactNode }) {
+  const state = useAnimationState();
+  const isNavigating = state === 'exiting' || state === 'entering';
+
+  return (
+    <div className={isNavigating ? 'pointer-events-none select-none' : ''}>
+      {children}
+    </div>
+  );
+}
+```
+
+---
+
+### 2. Transition Status Indicator Badge
+
+```tsx title="components/StatusIndicator.tsx"
+import { useAnimationState } from '@/components/glidecn';
+
+export function StatusIndicator() {
+  const state = useAnimationState();
+
+  const colors = {
+    idle: 'bg-zinc-500',
+    exiting: 'bg-amber-500 animate-pulse',
+    entering: 'bg-blue-500 animate-pulse',
+    complete: 'bg-emerald-500',
+  };
+
+  return (
+    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border border-border bg-card">
+      <span className={`size-2 rounded-full ${colors[state]}`} />
+      <span>{state.toUpperCase()}</span>
+    </div>
+  );
+}
+```
+
+---
+
+## Related APIs
+
+- [`useGlide()`](/docs/api/hooks/use-glide) — Full controller hook.
+- [`useTransitionConfig()`](/docs/api/hooks/use-transition-config) — Config read/write hook.
+- [`<GlideCN>`](/docs/api/glidecn) — Router transition coordinator.

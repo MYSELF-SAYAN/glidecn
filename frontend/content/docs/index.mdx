@@ -7,7 +7,7 @@ import { Cards, Card } from 'fumadocs-ui/components/card';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { TransitionCount } from '@/components/docs/transition-count';
 
-**GlideCN** is an open-source page transition engine designed for Next.js App Router and React. It delivers <TransitionCount /> hardware-accelerated 3D shaders, portals, origami folds, and fluid masks with copy-paste developer experience.
+**GlideCN** is an open-source page transition engine designed for Next.js App Router and React. It delivers <TransitionCount /> hardware-accelerated 3D effects, portals, origami folds, and fluid masks with copy-paste developer experience.
 
 ## Why GlideCN?
 
@@ -81,4 +81,4 @@ GlideCN synchronizes with the Next.js navigation lifecycle to manage concurrent 
 
 1. **Global GlideCNProvider**: Intercepts navigations and orchestrates the timeline.
 2. **Frozen Router Context**: Captures the outgoing route segment in a frozen visual boundary, preventing it from updating with new URL params or unmounting mid-animation.
-3. **Pluggable Shader Registry**: Every transition is an isolated `TransitionDefinition` containing pure Framer Motion variants. You only bundle what you use.
+3. **Pluggable Transition Registry**: Every transition is an isolated `TransitionDefinition` containing pure Framer Motion variants. You only bundle what you use.

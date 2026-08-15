@@ -1,0 +1,234 @@
+---
+title: "TypeScript Types & Schemas"
+description: "Complete TypeScript definitions, interface schemas, and type definitions for GlideCN."
+---
+
+All types and interfaces used throughout GlideCN are fully exported and strictly typed. You can import any type directly from `@/components/glidecn`.
+
+---
+
+## Import
+
+```tsx
+import type {
+  TransitionConfig,
+  TransitionDefinition,
+  TransitionMetadata,
+  TransitionVariants,
+  TransitionDirection,
+  TransitionCategory,
+  EasingPreset,
+  AnimationState,
+  GlideCNContextValue,
+  PageProps,
+  GlideCNProviderProps,
+} from '@/components/glidecn';
+```
+
+---
+
+## Configuration Types
+
+### `TransitionConfig`
+
+Configuration object controlling timing, easing curves, and directional flow:
+
+```ts
+export interface TransitionConfig {
+  /** Duration in seconds (default: 0.4) */
+  duration?: number;
+
+  /** Delay before animation starts, in seconds */
+  delay?: number;
+
+  /** Easing preset or custom cubic-bezier tuple */
+  ease?: EasingPreset;
+
+  /** Direction for directional transitions */
+  direction?: TransitionDirection;
+
+  /** Stagger children delay in seconds */
+  stagger?: number;
+
+  /** Arbitrary custom parameters passed to transitions */
+  custom?: Record<string, unknown>;
+}
+```
+
+---
+
+### `TransitionDirection`
+
+```ts
+export type TransitionDirection = 'left' | 'right' | 'up' | 'down';
+```
+
+---
+
+### `EasingPreset`
+
+```ts
+export type EasingPreset =
+  | 'linear'
+  | 'easeIn'
+  | 'easeOut'
+  | 'easeInOut'
+  | 'spring'
+  | [number, number, number, number]
+  | string;
+```
+
+---
+
+### `AnimationState`
+
+```ts
+export type AnimationState = 'idle' | 'entering' | 'exiting' | 'complete';
+```
+
+---
+
+### `TransitionCategory`
+
+```ts
+export type TransitionCategory =
+  | 'flow'
+  | 'portal'
+  | 'paper'
+  | 'mask'
+  | 'spatial'
+  | 'dynamic'
+  | 'experimental'
+  | 'retro';
+```
+
+---
+
+## Definition Schemas
+
+### `TransitionDefinition`
+
+Schema required to register a custom transition with [`TransitionRegistry`](/docs/api/registry):
+
+```ts
+export interface TransitionDefinition {
+  /** Metadata for docs and UI listings */
+  metadata: TransitionMetadata;
+
+  /** Default configuration values */
+  defaultConfig: TransitionConfig;
+
+  /** Resolves Framer Motion variants for this transition */
+  getVariants: (config: Required<TransitionConfig>) => TransitionVariants;
+
+  /** Optional Framer Motion transition timing override */
+  getTransition?: (config: Required<TransitionConfig>) => import('framer-motion').Transition;
+}
+```
+
+---
+
+### `TransitionMetadata`
+
+```ts
+export interface TransitionMetadata {
+  /** Machine identifier (e.g. "fade", "slide") */
+  name: string;
+
+  /** Human-readable display title */
+  displayName: string;
+
+  /** One-line explanation */
+  description: string;
+
+  /** Category family */
+  category: TransitionCategory;
+
+  /** Documented prop schema */
+  props: TransitionPropSchema[];
+}
+```
+
+---
+
+### `TransitionVariants`
+
+```ts
+import type { Variants } from 'framer-motion';
+
+export interface TransitionVariants {
+  /** State before the page enters */
+  initial: Variants['initial'];
+
+  /** Active / visible state */
+  animate: Variants['animate'];
+
+  /** State when the page exits */
+  exit: Variants['exit'];
+}
+```
+
+---
+
+## Component & Context Types
+
+### `GlideCNContextValue`
+
+State returned by the [`useGlide()`](/docs/api/hooks/use-glide) hook:
+
+```ts
+export interface GlideCNContextValue {
+  currentTransition: string;
+  transitionDefinition: TransitionDefinition | null;
+  config: Required<TransitionConfig>;
+  animationState: AnimationState;
+  reducedMotion: boolean;
+  setTransition: (name: string) => void;
+  setConfig: (config: TransitionConfig) => void;
+}
+```
+
+---
+
+### `PageProps`
+
+Props accepted by the [`<Page>`](/docs/api/page) component:
+
+```ts
+export interface PageProps {
+  children: React.ReactNode;
+  transition?: string;
+  duration?: number;
+  delay?: number;
+  ease?: EasingPreset;
+  direction?: TransitionDirection;
+  stagger?: number;
+  custom?: Record<string, unknown>;
+  className?: string;
+  style?: React.CSSProperties;
+}
+```
+
+---
+
+### `GlideCNProviderProps`
+
+Props accepted by the [`<GlideCNProvider>`](/docs/api/provider) component:
+
+```ts
+export interface GlideCNProviderProps {
+  children: React.ReactNode;
+  defaultTransition?: string;
+  defaultConfig?: TransitionConfig;
+  reducedMotion?: boolean;
+}
+```
+
+---
+
+## Related APIs
+
+- [`<GlideCNProvider>`](/docs/api/provider) — Root context provider.
+- [`<Page>`](/docs/api/page) — Route component.
+- [`useGlide()`](/docs/api/hooks/use-glide) — State hook.
+- [`TransitionRegistry`](/docs/api/registry) — Transition registry engine.

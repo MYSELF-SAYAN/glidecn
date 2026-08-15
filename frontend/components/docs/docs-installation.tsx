@@ -331,10 +331,10 @@ export default function Dashboard() {
         <div className="max-w-xl">
           <h2 className="text-2xl sm:text-3xl font-display font-medium tracking-tight text-zinc-900 dark:text-zinc-50 mb-3 flex items-center gap-3">
             <PackagePlus className="size-6 text-zinc-400" />
-            Curated Shader Registry
+            Curated Transition Registry
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            Pull down specific shaders to your project using the CLI without blowing up your bundle size.
+            Pull down specific transitions to your project using the CLI without blowing up your bundle size.
           </p>
         </div>
 

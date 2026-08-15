@@ -76,19 +76,8 @@ export function getWillChangeHint(
   definition: TransitionDefinition,
 ): string {
   const name = definition.metadata.name;
-
-  switch (name) {
-    case 'fade':
-      return 'opacity';
-    case 'slide':
-      return 'transform, opacity';
-    case 'scale':
-      return 'transform, opacity';
-    case 'circular-portal':
-      return 'clip-path, opacity';
-    case 'page-curl':
-      return 'transform, opacity';
-    default:
-      return 'transform, opacity';
-  }
+  if (name === 'fade') return 'opacity';
+  if (name === 'circular-portal') return 'clip-path, opacity';
+  return 'transform, opacity';
 }
+

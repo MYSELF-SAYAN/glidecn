@@ -1,0 +1,163 @@
+---
+title: "<GlideCN>"
+description: "The router transition coordinator that listens to route changes, manages AnimatePresence exit freezing, and handles scroll restoration."
+---
+
+`<GlideCN>` (the Transition Manager) is the component that wraps your dynamic routes. It listens to navigation events, orchestrates Framer Motion's `AnimatePresence`, prevents white flashes by freezing the exiting view's router context, and automatically restores scroll positions.
+
+---
+
+## Import
+
+```tsx
+import { GlideCN } from '@/components/glidecn';
+```
+
+---
+
+## How It Works Under the Hood
+
+When a route change occurs:
+
+1. **Context Freezing**: The exiting page is frozen in place using the `FrozenRouter` pattern (for Next.js App Router, it preserves `LayoutRouterContext`).
+2. **Exit Phase**: The exiting page triggers its `exit` animation variants while staying mounted in the DOM.
+3. **Scroll Position Saved**: The window's current scroll position is stored in `sessionStorage` under `glidecn-scroll-[routeKey]`.
+4. **Enter Phase**: Once the exit transition completes (`onExitComplete`), the old view unmounts, the new page mounts and executes `initial → animate`, and scroll is restored to the top (or to its previous position on back-navigation).
+
+---
+
+## Props Reference
+
+| Prop | Type | Default | Required | Description |
+| :--- | :--- | :--- | :---: | :--- |
+| [`children`](#children) | `ReactNode` | — | **Yes** | The active router or view elements. |
+| [`mode`](#mode) | `"wait" \| "sync" \| "popLayout"` | `"wait"` | No | AnimatePresence transition mode. |
+| [`routeKey`](#routekey) | `string` | `auto-detected` | No | Unique key representing the current route or view. |
+| [`restoreScroll`](#restorescroll) | `boolean` | `true` | No | Enables automatic scroll memory via `sessionStorage`. |
+| [`className`](#classname) | `string` | `"w-full flex-1 flex flex-col"` | No | CSS class applied to the motion container. |
+
+---
+
+## Detailed Properties & Examples
+
+### `children`
+
+The route content or layout body. Wrap your router or page children with `<GlideCN>` inside [`<GlideCNProvider>`](/docs/api/provider).
+
+```tsx title="app/layout.tsx"
+<GlideCNProvider>
+  <GlideCN>
+    {children}
+  </GlideCN>
+</GlideCNProvider>
+```
+
+---
+
+### `mode`
+
+Controls the timing between entering and exiting views in Framer Motion's `AnimatePresence`.
+
+- **`"wait"` (Default & Recommended)**: The exiting page finishes its complete exit animation before the new page begins its entrance. This prevents dual-page overlap or layout shifts.
+- **`"sync"`**: Both exiting and entering pages animate simultaneously. Useful for split-screen push or crossfade transitions.
+- **`"popLayout"`**: The exiting component is popped out of the document flow with `position: absolute` so the entering page immediately occupies layout space.
+
+```tsx
+// Simultaneous crossfade animation
+<GlideCN mode="sync">
+  {children}
+</GlideCN>
+```
+
+---
+
+### `routeKey`
+
+Explicit key representing the current active route. If omitted, `<GlideCN>` auto-detects the route key based on your framework:
+- In **Next.js App Router**: Uses `usePathname()`.
+- In **Next.js Pages Router**: Uses `router.asPath`.
+- In **React Router**: Uses `location.pathname` or `location.key`.
+- In **Universal SPAs**: Uses `window.location.pathname`.
+
+You can manually pass `routeKey` to trigger transitions on tab switches, sub-views, or query parameter changes:
+
+```tsx
+import { usePathname, useSearchParams } from 'next/navigation';
+
+export function CustomTransitionWrapper({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab') ?? 'default';
+
+  // Trigger page animation whenever the query parameter ?tab= changes
+  return (
+    <GlideCN routeKey={`${pathname}?tab=${tab}`}>
+      {children}
+    </GlideCN>
+  );
+}
+```
+
+---
+
+### `restoreScroll`
+
+When `true` (default), GlideCN saves the scroll position to `sessionStorage` on navigation and automatically scrolls to top for new pages or restores exact scroll coordinates on browser back/forward navigation.
+
+```tsx
+// Disable built-in scroll restoration if you use a custom smooth scroll library (e.g. Lenis)
+<GlideCN restoreScroll={false}>
+  {children}
+</GlideCN>
+```
+
+---
+
+### `className`
+
+CSS classes applied to the intermediate wrapper `<div>` rendered inside `AnimatePresence`.
+
+```tsx
+<GlideCN className="min-h-screen w-full flex flex-col bg-background">
+  {children}
+</GlideCN>
+```
+
+---
+
+## Framework Adapters
+
+GlideCN ships optimized adapters for every major React routing paradigm:
+
+### 1. Next.js App Router (`adapters/next-app.tsx`)
+Uses the `FrozenRouter` pattern around Next.js's internal `LayoutRouterContext` to preserve exiting page state:
+```tsx
+import { GlideCN } from '@/components/glidecn';
+```
+
+### 2. Next.js Pages Router (`adapters/next-pages.tsx`)
+Keyed to `router.asPath` in `pages/_app.tsx`:
+```tsx
+import { GlideCN } from '@/components/glidecn/adapters/next-pages';
+```
+
+### 3. React Router (`adapters/react-router.tsx`)
+Keyed to `useLocation().pathname` in SPAs:
+```tsx
+import { GlideCN } from '@/components/glidecn/adapters/react-router';
+```
+
+### 4. Universal / Standalone (`adapters/universal.tsx`)
+Framework-agnostic adapter for TanStack Router, Wouter, Astro, or vanilla React:
+```tsx
+import { GlideCN } from '@/components/glidecn/adapters/universal';
+```
+
+---
+
+## Related APIs
+
+- [`<GlideCNProvider>`](/docs/api/provider) — Root context provider.
+- [`<Page>`](/docs/api/page) — Route-level segment wrapper.
+- [`useGlide()`](/docs/api/hooks/use-glide) — Context hook to inspect animation state.
+- [`useAnimationState()`](/docs/api/hooks/use-animation-state) — Hook to check `"entering"` vs `"exiting"` states.

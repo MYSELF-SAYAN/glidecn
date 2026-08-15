@@ -1,0 +1,184 @@
+---
+title: "<GlideCNProvider>"
+description: "The root context coordinator that injects transition configuration and manages global animation state."
+---
+
+The `<GlideCNProvider>` is the top-level provider for GlideCN. It initializes the animation context, sets the global default transition, applies baseline configuration overrides, and automatically detects the user's `prefers-reduced-motion` accessibility preferences.
+
+Wrap your application root or layout with `<GlideCNProvider>` once at the highest level of your component tree.
+
+---
+
+## Import
+
+```tsx
+import { GlideCNProvider } from '@/components/glidecn';
+```
+
+---
+
+## Basic Usage
+
+```tsx title="app/layout.tsx"
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <GlideCNProvider defaultTransition="slide" defaultConfig={{ duration: 0.5 }}>
+          <GlideCN>{children}</GlideCN>
+        </GlideCNProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+---
+
+## Props Reference
+
+| Prop | Type | Default | Required | Description |
+| :--- | :--- | :--- | :---: | :--- |
+| [`children`](#children) | `ReactNode` | — | **Yes** | Your application layout and router tree. |
+| [`defaultTransition`](#defaulttransition) | `string` | `"fade"` | No | Global fallback transition if `<Page>` doesn't specify one. |
+| [`defaultConfig`](#defaultconfig) | [`TransitionConfig`](/docs/api/types#transitionconfig) | `{}` | No | Global transition timing, easing, and direction defaults. |
+| [`reducedMotion`](#reducedmotion) | `boolean` | `auto-detect` | No | Explicit override for reduced motion accessibility. |
+
+---
+
+## Detailed Properties & Examples
+
+### `children`
+
+The nested component tree. The provider injects context down to all descendant `<GlideCN>`, [`<Page>`](/docs/api/page), and [`useGlide()`](/docs/api/hooks/use-glide) consumers.
+
+```tsx
+<GlideCNProvider>
+  <GlideCN>
+    {children}
+  </GlideCN>
+</GlideCNProvider>
+```
+
+---
+
+### `defaultTransition`
+
+Sets the default transition used across all pages unless specifically overridden by a [`<Page transition="...">`](/docs/api/page#transition). Must match a registered transition name.
+
+```tsx
+// Use the "cube" 3D spatial transition as the default across the app
+<GlideCNProvider defaultTransition="cube">
+  <GlideCN>{children}</GlideCN>
+</GlideCNProvider>
+```
+
+> **Tip:** You can explore all available transition names in the [Transition Catalog](/docs/transitions).
+
+---
+
+### `defaultConfig`
+
+An object of type [`TransitionConfig`](/docs/api/types#transitionconfig) providing baseline timing, easing curve, and direction settings inherited by every page.
+
+```tsx
+<GlideCNProvider
+  defaultTransition="slide"
+  defaultConfig={{
+    duration: 0.6,
+    ease: "easeInOut",
+    direction: "left",
+    stagger: 0.05,
+  }}
+>
+  <GlideCN>{children}</GlideCN>
+</GlideCNProvider>
+```
+
+#### Supported Config Fields
+- **`duration`** (`number` in seconds, default: `0.4`): Baseline transition speed.
+- **`delay`** (`number` in seconds, default: `0`): Global entry delay.
+- **`ease`** (`EasingPreset | [number, number, number, number]`): Easing curve (`"linear"`, `"easeIn"`, `"easeOut"`, `"easeInOut"`, `"spring"`, or cubic-bezier array).
+- **`direction`** (`"left" | "right" | "up" | "down"`): Default flow axis for directional transitions.
+- **`custom`** (`Record<string, unknown>`): Custom animation parameters passed to transitions.
+
+---
+
+### `reducedMotion`
+
+By default, GlideCN automatically detects the user's OS-level `prefers-reduced-motion: reduce` media query. You can pass a boolean here to force reduced motion on or off (e.g. from an in-app accessibility toggle).
+
+```tsx
+// Force zero-motion instant transitions
+<GlideCNProvider reducedMotion={true}>
+  <GlideCN>{children}</GlideCN>
+</GlideCNProvider>
+```
+
+---
+
+## Framework Setup
+
+### Next.js App Router
+
+```tsx title="app/layout.tsx"
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <GlideCNProvider defaultTransition="fade">
+      <GlideCN>{children}</GlideCN>
+    </GlideCNProvider>
+  );
+}
+```
+
+### Next.js Pages Router
+
+```tsx title="pages/_app.tsx"
+import type { AppProps } from 'next/app';
+import { GlideCNProvider, GlideCN } from '@/components/glidecn';
+
+export default function MyApp({ Component, pageProps, router }: AppProps) {
+  return (
+    <GlideCNProvider defaultTransition="slide">
+      <GlideCN routerPath={router.asPath}>
+        <Component {...pageProps} key={router.asPath} />
+      </GlideCN>
+    </GlideCNProvider>
+  );
+}
+```
+
+### React Router / Vite
+
+```tsx title="src/App.tsx"
+import { useLocation, Routes, Route } from 'react-router-dom';
+import { GlideCNProvider, GlideCN, Page } from '@/components/glidecn';
+
+export default function App() {
+  const location = useLocation();
+
+  return (
+    <GlideCNProvider defaultTransition="scale">
+      <GlideCN locationKey={location.pathname}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Page>Home</Page>} />
+          <Route path="/about" element={<Page>About</Page>} />
+        </Routes>
+      </GlideCN>
+    </GlideCNProvider>
+  );
+}
+```
+
+---
+
+## Related APIs
+
+- [`<GlideCN>`](/docs/api/glidecn) — Router adapter and lifecycle manager.
+- [`<Page>`](/docs/api/page) — Route segment wrapper with page-level overrides.
+- [`useGlide()`](/docs/api/hooks/use-glide) — Hook to programmatically inspect and update transition state.
+- [`TransitionConfig`](/docs/api/types#transitionconfig) — Full configuration schema definition.

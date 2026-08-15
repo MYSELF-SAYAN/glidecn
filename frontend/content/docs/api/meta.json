@@ -1,0 +1,15 @@
+{
+  "title": "API Reference",
+  "pages": [
+    "provider",
+    "glidecn",
+    "page",
+    "---Hooks---",
+    "...hooks",
+    "---Engine & Tools---",
+    "registry",
+    "animation-engine",
+    "types",
+    "cli"
+  ]
+}

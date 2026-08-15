@@ -1,0 +1,196 @@
+---
+title: "<Page>"
+description: "The route segment component that applies motion variants, enables per-page transition overrides, and injects hardware-accelerated GPU hints."
+---
+
+The `<Page>` component represents an animatable view or page. Wrap the root content of every individual route or page with `<Page>` to connect it to the GlideCN animation engine.
+
+It allows individual routes to override the global transition, tweak timing, adjust easing curves, specify directional flow, and customize transition effects.
+
+---
+
+## Import
+
+```tsx
+import { Page } from '@/components/glidecn';
+```
+
+---
+
+## Basic Usage
+
+```tsx title="app/about/page.tsx"
+import { Page } from '@/components/glidecn';
+
+export default function AboutPage() {
+  return (
+    <Page transition="liquid-morph" duration={0.8} direction="left">
+      <main className="p-8">
+        <h1 className="text-4xl font-bold">About Us</h1>
+        <p>This page uses the liquid-morph transition with custom 0.8s duration.</p>
+      </main>
+    </Page>
+  );
+}
+```
+
+---
+
+## Props Reference
+
+| Prop | Type | Default | Required | Description |
+| :--- | :--- | :--- | :---: | :--- |
+| [`children`](#children) | `ReactNode` | — | **Yes** | The content of your page. |
+| [`transition`](#transition) | `string` | Inherited from Provider | No | Transition name override for this specific route. |
+| [`duration`](#duration) | `number` | Inherited from Provider | No | Animation duration in seconds. |
+| [`delay`](#delay) | `number` | `0` | No | Delay before entry animation starts, in seconds. |
+| [`ease`](#ease) | [`EasingPreset`](/docs/api/types#easingpreset) | Inherited from Provider | No | Easing preset name or cubic-bezier tuple. |
+| [`direction`](#direction) | [`TransitionDirection`](/docs/api/types#transitiondirection) | `"left"` | No | Flow axis for directional transitions (`"left"`, `"right"`, `"up"`, `"down"`). |
+| [`stagger`](#stagger) | `number` | `0` | No | Stagger children delay in seconds. |
+| [`custom`](#custom) | `Record<string, unknown>` | `{}` | No | Arbitrary custom parameters passed into the transition definition. |
+| [`className`](#classname) | `string` | `undefined` | No | CSS class applied to the internal `motion.div` container. |
+| [`style`](#style) | `CSSProperties` | `undefined` | No | Inline styles applied to the internal `motion.div` container. |
+
+---
+
+## Detailed Properties & Examples
+
+### `children`
+
+The page markup and UI elements. `<Page>` wraps your content in a Framer Motion `motion.div` bound to the active transition's `initial`, `animate`, and `exit` variant states.
+
+```tsx
+<Page>
+  <div className="container mx-auto">
+    <h1>Dashboard</h1>
+  </div>
+</Page>
+```
+
+---
+
+### `transition`
+
+Overrides the global transition specified in [`<GlideCNProvider defaultTransition="...">`](/docs/api/provider#defaulttransition) for this particular page. Must match a registered transition name.
+
+```tsx
+// This page uses the 3D circular portal animation
+<Page transition="circular-portal">
+  <PortfolioView />
+</Page>
+```
+
+> **Browse All Transitions:** View all 69+ presets in the [Transition Catalog](/docs/transitions).
+
+---
+
+### `duration`
+
+Overrides the animation speed for this page in seconds.
+
+```tsx
+// Fast 0.25s snappy entry/exit
+<Page transition="slide" duration={0.25}>
+  <SettingsView />
+</Page>
+
+// Cinematic 1.2s slow transition
+<Page transition="galaxy" duration={1.2}>
+  <CinematicHeroView />
+</Page>
+```
+
+---
+
+### `delay`
+
+Adds a pause (in seconds) before the entering page starts animating into view.
+
+```tsx
+<Page transition="fade" delay={0.15}>
+  <DelayedContentView />
+</Page>
+```
+
+---
+
+### `ease`
+
+Controls the acceleration curve of the transition. Can be a built-in easing preset (`"linear"`, `"easeIn"`, `"easeOut"`, `"easeInOut"`, `"spring"`) or a custom 4-number cubic-bezier tuple:
+
+```tsx
+// Using spring physics
+<Page transition="bounce" ease="spring">
+  <InteractiveView />
+</Page>
+
+// Using a custom cubic-bezier curve
+<Page transition="slide" ease={[0.22, 1, 0.36, 1]}>
+  <CustomCurveView />
+</Page>
+```
+
+---
+
+### `direction`
+
+Defines the flow direction for directional transitions (such as `slide`, `wipe`, `flip`, `cube`, `slash`). Accepts `"left"`, `"right"`, `"up"`, or `"down"`.
+
+```tsx
+// Slide down from top
+<Page transition="slide" direction="down">
+  <ModalView />
+</Page>
+
+// Slide left for forward wizard steps
+<Page transition="slide" direction="left">
+  <StepTwoView />
+</Page>
+```
+
+---
+
+### `custom`
+
+Passes arbitrary key-value parameters into custom transition definitions (e.g. glitch intensity, portal radius, blur scale).
+
+```tsx
+<Page
+  transition="glitch"
+  custom={{
+    sliceCount: 8,
+    colorOffset: 12,
+  }}
+>
+  <CyberpunkView />
+</Page>
+```
+
+---
+
+### `className` & `style`
+
+Apply styling directly to the underlying `motion.div` element. Useful for full-height containers or sticky layouts:
+
+```tsx
+<Page className="w-full min-h-screen flex flex-col justify-between">
+  <Header />
+  <Content />
+  <Footer />
+</Page>
+```
+
+---
+
+## Performance & GPU Acceleration
+
+`<Page>` automatically analyzes the active transition definition and computes the optimal CSS `will-change` property hint (e.g. `opacity`, `transform, opacity`, or `clip-path, opacity`) to promote the page layer to the GPU during animation and avoid CPU layout recalculations.
+
+---
+
+## Related APIs
+
+- [`<GlideCNProvider>`](/docs/api/provider) — Root context provider.
+- [`<GlideCN>`](/docs/api/glidecn) — Router transition manager.
+- [`useGlide()`](/docs/api/hooks/use-glide) — Hook to dynamically update page transition settings.
+- [`TransitionConfig`](/docs/api/types#transitionconfig) — Configuration interface.

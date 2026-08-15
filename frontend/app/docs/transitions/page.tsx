@@ -121,7 +121,7 @@ export default function TransitionsIndexPage() {
             
             <div className="flex items-center gap-4 flex-wrap pt-2">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#fa5c4f]/10 text-[#fa5c4f] text-sm font-medium">
-                <Sparkles className="size-4" /> {readyCount} Ready Shaders
+                <Sparkles className="size-4" /> {readyCount} Ready Transitions
               </span>
               <span className="font-mono text-sm text-[var(--text-subtle)]">
                 Dual-Frame Zero-Jank • 60 FPS

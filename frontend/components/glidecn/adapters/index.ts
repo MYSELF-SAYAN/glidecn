@@ -17,9 +17,10 @@ export {
   type ReactRouterGlideCNProps,
 } from './react-router';
 
-// Next.js App Router
+// Next.js App Router (Primary adapter for Next.js frontend)
 export {
   GlideCNNextApp,
+  GlideCNNextApp as GlideCN,
   NextAppTransitionManager,
   type NextAppGlideCNProps,
 } from './next-app';

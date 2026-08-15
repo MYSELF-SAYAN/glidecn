@@ -53,28 +53,28 @@ export function DocsOverview() {
     {
       name: 'Spatial & 3D',
       desc: 'Hardware 3D isometric cubes, page curls, 3D flips, and origami mesh folds.',
-      count: '6 Shaders',
+      count: '6 Transitions',
       tag: 'GPU Transform',
       href: '/docs/transitions#spatial',
     },
     {
       name: 'Portals & Iris',
       desc: 'Dynamic clip-path radial portals, iris shutters, and liquid morphing masks.',
-      count: '4 Shaders',
+      count: '4 Transitions',
       tag: 'Clip Path',
       href: '/docs/transitions#portal',
     },
     {
       name: 'Retro & Analog',
       desc: 'CRT electron-beam collapses, RGB channel glitch split, and neon glow dissolves.',
-      count: '5 Shaders',
+      count: '5 Transitions',
       tag: 'Filter & SVG',
       href: '/docs/transitions#retro',
     },
     {
       name: 'Kinetic & Dynamic',
       desc: 'Diagonal blade slashes, ripple springs, bounce overshoots, and fluid ink flows.',
-      count: '8 Shaders',
+      count: '8 Transitions',
       tag: 'Framer Physics',
       href: '/docs/transitions#dynamic',
     },
@@ -124,7 +124,7 @@ export function DocsOverview() {
               href="/docs/transitions"
               className="group flex items-center gap-2 px-6 py-3 bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 rounded-lg text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
             >
-              Browse {readyTransitionsCount}+ Shaders
+              Browse {readyTransitionsCount}+ Transitions
               <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -153,7 +153,7 @@ export function DocsOverview() {
                 </div>
                 <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">GPU Compositor Lock</div>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  Shaders animate strictly on GPU compositor layers (transform, opacity, clip-path) to ensure a 16.6ms frame budget.
+                  Transitions animate strictly on GPU compositor layers (transform, opacity, clip-path) to ensure a 16.6ms frame budget.
                 </p>
               </div>
             </div>
@@ -181,7 +181,7 @@ export function DocsOverview() {
                 <div className="text-4xl md:text-5xl font-display font-medium text-zinc-900 dark:text-zinc-50 tracking-tight mb-2">
                   {TRANSITION_CATALOG.length}+
                 </div>
-                <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">Production Shaders</div>
+                <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">Production Transitions</div>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   From 3D cubes and origami folds to electron-beam CRT collapses and fluid ink diffusion.
                 </p>
@@ -245,7 +245,7 @@ export function DocsOverview() {
         <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-[#09090b] p-8 md:p-12 overflow-hidden">
 
           <div className="flex justify-between items-center mb-12 px-4 max-w-2xl mx-auto">
-            {['Triggered', 'Frozen', 'Shader Active', 'Unmounted'].map((label, idx) => {
+            {['Triggered', 'Frozen', 'Transition Active', 'Unmounted'].map((label, idx) => {
               const stepNum = idx + 1;
               const isActive = simStep === stepNum;
               const isPast = simStep > stepNum;
@@ -303,7 +303,7 @@ export function DocsOverview() {
                 </div>
 
                 <div className="text-[10px] font-mono text-zinc-500 text-center border-t border-zinc-200 dark:border-zinc-800 pt-1.5">
-                  {simStep === 0 ? 'Active Route' : simStep === 2 ? 'Snapshot Locked' : simStep === 3 ? 'Exit Shader Active' : 'Unmounted'}
+                  {simStep === 0 ? 'Active Route' : simStep === 2 ? 'Snapshot Locked' : simStep === 3 ? 'Exit Transition Active' : 'Unmounted'}
                 </div>
               </motion.div>
 
@@ -465,15 +465,15 @@ export function App() {
               <CodeBlock
                 language="bash"
                 code={`# 1. Initialize GlideCN in your Next.js / React project
-npx glidecn init
+npx glidecn-cli init
 
 # 2. Add individual transitions on-demand (shadcn style)
-npx glidecn add cube
-npx glidecn add circular-portal
-npx glidecn add origami-unfold
+npx glidecn-cli add cube
+npx glidecn-cli add circular-portal
+npx glidecn-cli add origami-unfold
 
 # 3. Add all transitions at once
-npx glidecn add --all`}
+npx glidecn-cli add --all`}
               />
             )}
           </div>
@@ -488,7 +488,7 @@ npx glidecn add --all`}
               Transition Families
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Curated shader archetypes crafted for different aesthetic atmospheres.
+              Curated transition archetypes crafted for different aesthetic atmospheres.
             </p>
           </div>
           <Link

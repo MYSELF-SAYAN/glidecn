@@ -1,0 +1,82 @@
+---
+title: "CLI Reference"
+description: "Complete command-line interface documentation for initializing, adding, and inspecting GlideCN transitions."
+---
+
+The `glidecn-cli` tool allows you to quickly scaffold and copy animation source code directly into your codebase. It has zero external server dependencies, supports TypeScript (`.tsx`) and JavaScript (`.jsx`), and works across Next.js, Vite, and Remix.
+
+---
+
+## Commands Overview
+
+| Command | Description | Example |
+| :--- | :--- | :--- |
+| [`init`](#glidecn-cli-init) | Interactive setup wizard for fresh projects. | `npx glidecn-cli init` |
+| [`add`](#glidecn-cli-add) | Adds one or more transitions to your project. | `npx glidecn-cli add cube liquid-morph` |
+| [`list`](#glidecn-cli-list) | Displays all available transitions with category summaries. | `npx glidecn-cli list` |
+
+---
+
+## `glidecn-cli init`
+
+Initializes GlideCN in your project.
+
+```bash
+npx glidecn-cli init
+# Or: pnpm dlx glidecn-cli init / bunx glidecn-cli init
+```
+
+### Interactive Steps
+1. **Language Detection**: Prompts for TypeScript (`.tsx`) or clean JavaScript (`.jsx` with stripped types).
+2. **Framework Adapter Selection**:
+   - `Next.js App Router` (`app/` directory with `FrozenRouter`)
+   - `Next.js Pages Router` (`pages/_app.tsx`)
+   - `React Router / Vite` (`react-router-dom`)
+   - `TanStack / Universal` (framework-agnostic)
+3. **Installation Directory**: Defaults to `components/glidecn` (or `src/components/glidecn`).
+4. **Transition Preset Picker**: Allows selecting individual transitions or all 69+ presets grouped by category.
+5. **Dependency Check & Auto-Install**: Detects your package manager (`pnpm`, `npm`, `yarn`, `bun`) and checks for `framer-motion`.
+
+---
+
+## `glidecn-cli add`
+
+Installs one or more transitions directly into your existing `components/glidecn/transitions/` folder and automatically updates your barrel `index.ts`.
+
+```bash
+# Add a single transition
+npx glidecn-cli add circular-portal
+
+# Add multiple transitions simultaneously
+npx glidecn-cli add cube liquid-morph glitch page-curl
+
+# Add all transitions from a category
+npx glidecn-cli add --category spatial
+```
+
+### Options & Flags
+
+| Flag | Alias | Description |
+| :--- | :--- | :--- |
+| `--all` | `-a` | Install every available transition in the catalog. |
+| `--category <name>` | `-c` | Install all transitions belonging to a specific family. |
+| `--force` | `-f` | Overwrite existing transition files without prompting. |
+| `--path <dir>` | `-p` | Custom installation destination directory. |
+
+---
+
+## `glidecn-cli list`
+
+Prints the catalog of all available transitions grouped by family with descriptions, stats, and installation commands.
+
+```bash
+npx glidecn-cli list
+```
+
+---
+
+## Related Documentation
+
+- [Quickstart Installation Guide](/docs/installation)
+- [Executive API Hub](/docs/api-reference)
+- [Transition Catalog Showcase](/docs/transitions)

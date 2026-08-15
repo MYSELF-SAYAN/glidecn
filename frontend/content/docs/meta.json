@@ -3,6 +3,10 @@
   "pages": [
     "index",
     "installation",
+    "cli",
+    "api-reference",
+    "---API Reference---",
+    "...api",
     "---Transitions---",
     "...transitions"
   ]

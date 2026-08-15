@@ -1,0 +1,145 @@
+---
+title: "Animation Engine & Utilities"
+description: "Core utility functions for compiling Framer Motion variant trees, resolving easing curves, and optimizing GPU layer compositing."
+---
+
+GlideCN includes a lightweight animation engine composed of pure helper functions. These utilities resolve configurations, compute motion curves, and transform transition definitions into Framer Motion-compatible variants.
+
+---
+
+## Import
+
+```tsx
+import {
+  buildVariants,
+  buildTransition,
+  getWillChangeHint,
+  mergeConfig,
+  resolveEasing,
+  prefersReducedMotion,
+  getDirectionOffset,
+} from '@/components/glidecn';
+```
+
+---
+
+## Engine Methods
+
+### `buildVariants(definition, config, reducedMotion)`
+
+Produces the `{ initial, animate, exit }` variant object for Framer Motion. If `reducedMotion` is `true`, it returns an instant opacity-only variant set.
+
+```tsx
+const variants = buildVariants(definition, resolvedConfig, false);
+```
+
+---
+
+### `buildTransition(definition, config, reducedMotion)`
+
+Builds a Framer Motion `Transition` timing object `{ duration, delay, ease }`. If `definition` defines its own `getTransition` method, it delegates to that override.
+
+```tsx
+const transition = buildTransition(definition, resolvedConfig, false);
+```
+
+---
+
+### `getWillChangeHint(definition)`
+
+Returns optimal CSS `will-change` hints (`"opacity"`, `"clip-path, opacity"`, or `"transform, opacity"`) to promote the page layer to the GPU during transitions.
+
+```tsx
+const hint = getWillChangeHint(definition);
+// 'transform, opacity'
+```
+
+---
+
+## Configuration & Math Utilities
+
+### `mergeConfig(overrides, base)`
+
+Deep-merges partial user overrides onto default baseline configuration values.
+
+```tsx
+import { mergeConfig } from '@/components/glidecn';
+
+const merged = mergeConfig(
+  { duration: 0.6, direction: 'right' },
+  DEFAULT_TRANSITION_CONFIG
+);
+```
+
+---
+
+### `resolveEasing(ease)`
+
+Converts named easing presets (`"linear"`, `"easeIn"`, `"easeOut"`, `"easeInOut"`, `"spring"`) or a raw 4-number tuple into a cubic-bezier array:
+
+```tsx
+import { resolveEasing } from '@/components/glidecn';
+
+const bezier = resolveEasing('spring');
+// [0.22, 1, 0.36, 1]
+```
+
+---
+
+### `getDirectionOffset(direction, distance)`
+
+Calculates 2D cartesian offset coordinates (`{ x, y }`) for a given directional axis:
+
+```tsx
+import { getDirectionOffset } from '@/components/glidecn';
+
+const { x, y } = getDirectionOffset('left', 100);
+// { x: -100, y: 0 }
+```
+
+---
+
+### `prefersReducedMotion()`
+
+Returns a boolean indicating whether the client browser currently has `prefers-reduced-motion: reduce` enabled. Always returns `false` during SSR.
+
+```tsx
+import { prefersReducedMotion } from '@/components/glidecn';
+
+const isReduced = prefersReducedMotion();
+```
+
+---
+
+## Constants
+
+### `DEFAULT_TRANSITION_CONFIG`
+```ts
+export const DEFAULT_TRANSITION_CONFIG = {
+  duration: 0.4,
+  delay: 0,
+  ease: 'easeInOut',
+  direction: 'left',
+  stagger: 0,
+  custom: {},
+};
+```
+
+### `EASING_MAP`
+```ts
+export const EASING_MAP = {
+  linear: [0, 0, 1, 1],
+  easeIn: [0.4, 0, 1, 1],
+  easeOut: [0, 0, 0.2, 1],
+  easeInOut: [0.4, 0, 0.2, 1],
+  spring: [0.22, 1, 0.36, 1],
+};
+```
+
+---
+
+## Related APIs
+
+- [`TransitionRegistry`](/docs/api/registry) — Transition discovery and registration.
+- [`TypeScript Types`](/docs/api/types) — Core interface definitions.
+- [`<Page>`](/docs/api/page) — Route component utilizing the animation engine.

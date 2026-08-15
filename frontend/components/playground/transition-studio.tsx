@@ -61,7 +61,7 @@ export function PlaygroundTransitionStudio() {
   }, [transitionDefinition]);
   const { theme, setTheme } = useTheme();
   
-  const [activeTab, setActiveTab] = useState<'shaders' | 'physics' | 'themes' | 'export'>('shaders');
+  const [activeTab, setActiveTab] = useState<'transitions' | 'physics' | 'themes' | 'export'>('transitions');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTheme, setActiveTheme] = useState('zinc');
   const [activeCategory, setActiveCategory] = useState<string>('All');
@@ -207,7 +207,7 @@ export function PlaygroundTransitionStudio() {
       <div className="p-4 border-b border-black/5 dark:border-white/10 shrink-0 z-10 bg-white/40 dark:bg-black/20 backdrop-blur-xl">
         <div className="flex p-1 gap-1 bg-black/5 dark:bg-white/5 rounded-[14px] shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)]">
           {[
-            { id: 'shaders', icon: Layers, label: 'Layers' },
+            { id: 'transitions', icon: Layers, label: 'Transitions' },
             { id: 'physics', icon: Settings2, label: 'Physics' },
             { id: 'themes', icon: Sparkles, label: 'Themes' },
             { id: 'export', icon: Code2, label: 'Code' }
@@ -239,14 +239,14 @@ export function PlaygroundTransitionStudio() {
       {/* 3. Main Editor Panel (Scrollable) */}
       <div className="flex-1 overflow-y-auto custom-scrollbar p-5 pb-24 relative z-0">
         
-        {/* TAB 1: SHADERS */}
-        {activeTab === 'shaders' && (
+        {/* TAB 1: TRANSITIONS */}
+        {activeTab === 'transitions' && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
             <div className="relative group">
               <Search className="w-4 h-4 text-[var(--text-muted)] absolute left-3 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[var(--text-main)]" />
               <input
                 type="text"
-                placeholder="Search shaders..."
+                placeholder="Search transitions..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-9 pr-3 py-2.5 rounded-[14px] bg-black/5 dark:bg-white/5 border border-transparent text-sm text-[var(--text-main)] placeholder-[var(--text-muted)] focus:outline-none focus:bg-white dark:focus:bg-zinc-800 transition-all shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] focus:ring-1 focus:ring-black/10 dark:focus:ring-white/20 focus:shadow-[0_2px_8px_rgba(0,0,0,0.04)]"

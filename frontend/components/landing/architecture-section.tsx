@@ -60,7 +60,7 @@ export function ArchitectureSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-[var(--text-main)] mb-1">GPU Compositing</h4>
-                  <p className="text-sm text-[var(--text-muted)] font-light">The incoming frame (Frame B) is composited via GPU shaders, ensuring a butter-smooth 60fps handoff.</p>
+                  <p className="text-sm text-[var(--text-muted)] font-light">The incoming frame (Frame B) is composited via hardware-accelerated transforms, ensuring a butter-smooth 60fps handoff.</p>
                 </div>
               </div>
             </div>

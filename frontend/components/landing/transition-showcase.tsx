@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 /* ───────────────────────────────────────────────────────────────────────── */
-/*  Animated graphic components — these loop like live preview shaders      */
+/*  Animated graphic components — these loop like live preview transitions   */
 /* ───────────────────────────────────────────────────────────────────────── */
 
 function CubeDemo() {
@@ -195,7 +195,7 @@ export function TransitionShowcase() {
           className="w-full lg:w-1/3 flex flex-col items-start pt-2 lg:sticky lg:top-32 space-y-8"
         >
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-muted)] text-[10px] uppercase tracking-widest font-bold">
-            <Sparkles className="size-3 text-[#fa5c4f]" /> Handcrafted Shaders
+            <Sparkles className="size-3 text-[#fa5c4f]" /> Handcrafted Transitions
           </span>
           
           <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-[var(--text-main)] font-display leading-[1.15]">
@@ -252,7 +252,7 @@ export function TransitionShowcase() {
           </div>
         </motion.div>
 
-        {/* Right Side — Interactive Shader Grid (Masonry Staggered) */}
+        {/* Right Side — Interactive Transition Grid (Masonry Staggered) */}
         <div className="w-full lg:w-2/3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {transitionsList.map((item, i) => {
@@ -270,7 +270,7 @@ export function TransitionShowcase() {
                     isEvenColumn ? 'sm:mt-12' : ''
                   }`}
                 >
-                  {/* Animated shader preview area */}
+                  {/* Animated transition preview area */}
                   <div className="relative h-48 w-full overflow-hidden bg-[var(--bg-page)]/50">
                     <DemoComponent />
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

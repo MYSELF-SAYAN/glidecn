@@ -78,5 +78,8 @@ export function GlideCNNextApp({
   );
 }
 
-// Alias for convenience
-export { GlideCNNextApp as NextAppTransitionManager };
+// Aliases for convenience
+export {
+  GlideCNNextApp as GlideCN,
+  GlideCNNextApp as NextAppTransitionManager,
+};
