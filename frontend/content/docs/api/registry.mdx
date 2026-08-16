@@ -25,14 +25,14 @@ import {
 
 ## Methods Reference
 
-### `registerTransition(definition)`
+### `registerTransition(name, definition)`
 
 Registers a new transition definition into the global registry. If a transition with the same name already exists, it will overwrite it with a warning.
 
 ```tsx
-import { registerTransition } from '@/components/glidecn';
+import { registerTransition, type TransitionDefinition } from '@/components/glidecn';
 
-registerTransition({
+export const customZoom: TransitionDefinition = {
   metadata: {
     name: 'custom-zoom',
     displayName: 'Custom Zoom',
@@ -49,19 +49,21 @@ registerTransition({
     animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
     exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' },
   }),
-});
+};
+
+registerTransition('custom-zoom', customZoom);
 ```
 
 ---
 
 ### `resolveTransition(name)`
 
-Safely resolves a transition definition by name. If the requested transition is not found, it gracefully falls back to the default `"fade"` transition and logs a helpful warning.
+Resolves a transition definition by name. If the requested transition is not found, it throws an error listing the available installed options.
 
 ```tsx
 import { resolveTransition } from '@/components/glidecn';
 
-// Returns the transition definition or fallback 'fade'
+// Returns the transition definition or throws
 const definition = resolveTransition('cube');
 ```
 
@@ -89,9 +91,17 @@ The singleton instance of `TransitionRegistry` containing all built-in and user-
 ```tsx
 import { defaultRegistry } from '@/components/glidecn';
 
-// List all registered transition names
-const allNames = defaultRegistry.getNames();
-console.log(`Registered transitions: ${allNames.length}`);
+// List all registered transition names: string[]
+const allNames = defaultRegistry.list();
+console.log(`Registered transitions (${allNames.length}):`, allNames);
+
+// List all transition definition objects: TransitionDefinition[]
+const allDefinitions = defaultRegistry.listDefinitions();
+
+// Check if a transition is installed
+if (defaultRegistry.has('circular-portal')) {
+  console.log('Portal is ready');
+}
 ```
 
 ---
@@ -139,7 +149,7 @@ export const myTransition: TransitionDefinition = {
 };
 
 // Register automatically on module load
-registerTransition(myTransition);
+registerTransition('my-transition', myTransition);
 ```
 
 Then use it anywhere in your application:

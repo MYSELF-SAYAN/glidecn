@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, Layers, ArrowRightLeft, Shield, Clock } from 'lucide-react';
+import { Box, Layers, ArrowRightLeft, Shield, Clock, RotateCcw, Zap } from 'lucide-react';
 import { CodeBlock } from '@/components/ui/code-block';
 import {
   DocHero,
@@ -18,19 +18,31 @@ const GLIDECN_PROPS: PropItem[] = [
     name: 'children',
     type: 'React.ReactNode',
     required: true,
-    description: 'The active router or view elements. Must be wrapped inside GlideCN to orchestrate AnimatePresence.',
+    description: 'The active router or view elements. Must be wrapped inside GlideCN to orchestrate Framer Motion AnimatePresence.',
+  },
+  {
+    name: 'mode',
+    type: '"wait" | "sync" | "popLayout"',
+    defaultVal: '"wait"',
+    description: 'AnimatePresence sequencing mode. "wait" ensures the exiting view finishes its exit animation before the new view mounts; "sync" animates both simultaneously; "popLayout" pops exiting nodes from document flow.',
+  },
+  {
+    name: 'restoreScroll',
+    type: 'boolean',
+    defaultVal: 'true',
+    description: 'Automatically caches window scroll coordinates in sessionStorage per route and restores them on navigation and back/forward history.',
   },
   {
     name: 'routeKey',
     type: 'string',
-    defaultVal: 'auto-detected',
-    description: 'Explicit key representing current route. Auto-detected from pathname or router.asPath if omitted.',
+    defaultVal: 'auto-detected (pathname)',
+    description: 'Explicit key representing current route. Auto-detected from pathname or router.asPath if omitted. Useful for tab sub-routes.',
   },
   {
     name: 'className',
     type: 'string',
     defaultVal: '"w-full flex-1 flex flex-col"',
-    description: 'CSS class applied to the intermediate motion container rendered inside AnimatePresence.',
+    description: 'CSS classes applied to the intermediate motion container rendered inside AnimatePresence.',
   },
 ];
 
@@ -41,7 +53,7 @@ export function DocsGlidecnView() {
       <DocHero
         badge="Router Adapter"
         title="<GlideCN>"
-        description="The framework-specific router adapter that listens to navigation events, freezes exiting DOM contexts to prevent flashes, and manages scroll restoration."
+        description="The framework-specific router adapter that listens to navigation events, freezes exiting DOM contexts using FrozenRouter to eliminate white flashes, and manages scroll restoration."
         importSnippet="import { GlideCN } from '@/components/glidecn';"
       />
 
@@ -55,7 +67,7 @@ export function DocsGlidecnView() {
               <code>&lt;GlideCN&gt;</code> coordinates the transition lifecycle between leaving and entering pages.
             </p>
             <p className="text-xs text-zinc-500">
-              When a route change occurs, it locks the exiting view using the <code>FrozenRouter</code> pattern, executes exit variants, remembers scroll position in <code>sessionStorage</code>, and smoothly mounts the incoming view.
+              When a route change occurs, it locks the exiting view using the <code>FrozenRouter</code> pattern, executes exit variants, remembers scroll position in <code>sessionStorage</code>, and smoothly mounts the incoming view without layout jumps.
             </p>
           </div>
         }
@@ -70,7 +82,7 @@ export function DocsGlidecnView() {
                 <CodeBlock
                   isTabbed
                   badge="app/layout.tsx"
-                  code={`import { GlideCNProvider, GlideCN } from '@/components/glidecn';\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider>\n          {/* Next.js App Router Adapter */}\n          <GlideCN >\n            {children}\n          </GlideCN>\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
+                  code={`import { GlideCNProvider, GlideCN } from '@/components/glidecn';\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider defaultTransition="slide">\n          {/* Next.js App Router Adapter */}\n          <GlideCN mode="wait" restoreScroll={true}>\n            {children}\n          </GlideCN>\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
                 />
               ),
             },
@@ -81,7 +93,7 @@ export function DocsGlidecnView() {
                 <CodeBlock
                   isTabbed
                   badge="pages/_app.tsx"
-                  code={`import type { AppProps } from 'next/app';\nimport { GlideCNProvider, GlideCN } from '@/components/glidecn';\n\nexport default function MyApp({ Component, pageProps, router }: AppProps) {\n  return (\n    <GlideCNProvider>\n      <GlideCN routerPath={router.asPath}>\n        <Component {...pageProps} key={router.asPath} />\n      </GlideCN>\n    </GlideCNProvider>\n  );\n}`}
+                  code={`import type { AppProps } from 'next/app';\nimport { GlideCNProvider, GlideCNNextPages } from '@/components/glidecn';\n\nexport default function MyApp({ Component, pageProps, router }: AppProps) {\n  return (\n    <GlideCNProvider defaultTransition="slide">\n      <GlideCNNextPages routerPath={router.asPath} mode="wait">\n        <Component {...pageProps} key={router.asPath} />\n      </GlideCNNextPages>\n    </GlideCNProvider>\n  );\n}`}
                 />
               ),
             },
@@ -92,7 +104,18 @@ export function DocsGlidecnView() {
                 <CodeBlock
                   isTabbed
                   badge="src/App.tsx"
-                  code={`import { useLocation, Routes, Route } from 'react-router-dom';\nimport { GlideCNProvider, GlideCN, Page } from '@/components/glidecn';\n\nexport default function App() {\n  const location = useLocation();\n\n  return (\n    <GlideCNProvider>\n      <GlideCN locationKey={location.pathname}>\n        <Routes location={location} key={location.pathname}>\n          <Route path="/" element={<Page>Home</Page>} />\n          <Route path="/about" element={<Page>About</Page>} />\n        </Routes>\n      </GlideCN>\n    </GlideCNProvider>\n  );\n}`}
+                  code={`import { useLocation, Routes, Route } from 'react-router-dom';\nimport { GlideCNProvider, GlideCNReactRouter, Page } from '@/components/glidecn';\nimport HomePage from './pages/HomePage';\nimport AboutPage from './pages/AboutPage';\n\nexport default function App() {\n  const location = useLocation();\n\n  return (\n    <GlideCNProvider defaultTransition="fade">\n      <GlideCNReactRouter locationKey={location.pathname} mode="wait">\n        <Routes location={location} key={location.pathname}>\n          <Route path="/" element={<Page><HomePage /></Page>} />\n          <Route path="/about" element={<Page transition="cube"><AboutPage /></Page>} />\n        </Routes>\n      </GlideCNReactRouter>\n    </GlideCNProvider>\n  );\n}`}
+                />
+              ),
+            },
+            {
+              id: 'universal',
+              label: 'TanStack / Universal',
+              content: (
+                <CodeBlock
+                  isTabbed
+                  badge="src/Root.tsx"
+                  code={`import { GlideCNProvider, GlideCNUniversal, Page } from '@/components/glidecn';\n\nexport default function Root({ currentPath, children }: { currentPath: string; children: React.ReactNode }) {\n  return (\n    <GlideCNProvider defaultTransition="slide">\n      <GlideCNUniversal routeKey={currentPath} mode="wait">\n        {children}\n      </GlideCNUniversal>\n    </GlideCNProvider>\n  );\n}`}
                 />
               ),
             },
@@ -113,12 +136,19 @@ export function DocsGlidecnView() {
         }
       >
         <div className="space-y-4">
-          {/* <AccordionItem
+          <AccordionItem
             title="mode — Transition Timing Mode"
             description="Controls how entering and exiting components overlap. 'wait' finishes the exit before entering, 'sync' crossfades both simultaneously, and 'popLayout' pulls the exiting view out of document flow."
             badge="AnimatePresence Mode"
-            code={`// Simultaneous crossfade animation\n<GlideCN mode="sync">\n  {children}\n</GlideCN>`}
-          /> */}
+            code={`// 'wait' ensures complete exit before enter (default and recommended)\n<GlideCN mode="wait">\n  {children}\n</GlideCN>\n\n// Simultaneous crossfade animation\n<GlideCN mode="sync">\n  {children}\n</GlideCN>`}
+          />
+
+          <AccordionItem
+            title="restoreScroll — Automatic Scroll Restoration"
+            description="Automatically stores window scroll coordinates in sessionStorage before navigating and restores exact coordinates on browser back/forward buttons."
+            badge="Scroll Memory"
+            code={`// Disable built-in scroll restoration if using a custom smooth-scroll library like Lenis\n<GlideCN restoreScroll={false}>\n  {children}\n</GlideCN>`}
+          />
 
           <AccordionItem
             title="routeKey — Dynamic Sub-Route Keying"
@@ -126,13 +156,6 @@ export function DocsGlidecnView() {
             badge="Custom Key"
             code={`import { usePathname, useSearchParams } from 'next/navigation';\n\nexport function SubRouteWrapper({ children }: { children: React.ReactNode }) {\n  const pathname = usePathname();\n  const searchParams = useSearchParams();\n  const tab = searchParams.get('tab') ?? 'overview';\n\n  return (\n    <GlideCN routeKey={\`\${pathname}?tab=\${tab}\`}>\n      {children}\n    </GlideCN>\n  );\n}`}
           />
-
-          {/* <AccordionItem
-            title="restoreScroll — Automatic Scroll Memory"
-            description="Automatically stores window scroll coordinates in sessionStorage before navigating and restores exact coordinates on browser back/forward buttons."
-            badge="Scroll Memory"
-            code={`// Disable built-in scroll restoration if using a custom library like Lenis\n<GlideCN restoreScroll={false}>\n  {children}\n</GlideCN>`}
-          /> */}
         </div>
       </SectionTwoCol>
 
