@@ -233,6 +233,50 @@ export const TRANSITION_CATALOG: TransitionCatalogEntry[] = [
     features: ['GPU-accelerated', 'SSR-safe', 'Reduced-motion aware', 'CSS 3D perspective', '4 directions', 'Dynamic transform-origin'],
     status: 'done',
   },
+  {
+    slug: 'gravity',
+    displayName: 'Gravity',
+    description: 'Zero-gravity float with orbital drift and gravitational snap',
+    longDescription:
+      'Simulates a sudden loss of gravity where outgoing elements float upward and orbit around the viewport center, followed by the incoming page gravitationally falling and snapping into equilibrium.',
+    category: 'spatial',
+    family: 'Spatial',
+    emoji: '🪐',
+    featured: false,
+    metrics: { fps: 60, bundleSize: '~0.6kb', complexity: 'Medium' },
+    useCases: [
+      'Hero-to-dashboard transitions',
+      'Physics-inspired websites',
+      'Sci-fi & Web3 projects',
+      'High-impact landing experiences',
+    ],
+    whySpecial: 'Combines anti-gravity floating, orbital perspective tilt, and realistic gravitational settling curves in pure GPU-accelerated motion.',
+    bestFor: ['Sci-Fi', 'Interactive Portfolios', 'Creative Studios', 'Web3 & Space'],
+    features: ['GPU-accelerated', 'SSR-safe', 'Reduced-motion aware', '3D orbital perspective', 'Zero-G physics curve'],
+    status: 'done',
+  },
+  {
+    slug: 'camera-dive',
+    displayName: 'Camera Dive',
+    description: 'Rapid focal zoom that dives through an element into the next page',
+    longDescription:
+      'A cinematic camera push-in that zooms aggressively through an on-screen element with velocity blur and brightness blooming, immediately emerging inside the target page. Highly recommended for creative portfolios, product launches, and interactive storytelling.',
+    category: 'spatial',
+    family: 'Spatial',
+    emoji: '🎥',
+    featured: false,
+    metrics: { fps: 60, bundleSize: '~0.6kb', complexity: 'Medium' },
+    useCases: [
+      'Portfolio item deep-dives',
+      'E-commerce product reveals',
+      'Interactive visual storytelling',
+      'Hero-to-feature scene transitions',
+    ],
+    whySpecial: 'Combines extreme forward camera acceleration, perspective pass-through, and optical motion bloom for an unforgettable cinematic immersion.',
+    bestFor: ['Portfolios', 'Product Launches', 'Creative Agencies', 'Photography'],
+    features: ['GPU-accelerated', 'SSR-safe', 'Reduced-motion aware', '3D focal zoom', 'Configurable dive origin', 'Motion bloom'],
+    status: 'done',
+  },
 
   // ── Dynamic ─────────────────────────────────────────────────────────────
   {
