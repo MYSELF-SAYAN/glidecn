@@ -51,12 +51,6 @@ const PAGE_PROPS: PropItem[] = [
     description: 'Flow axis for directional transitions (e.g. slide, flip, cube).',
   },
   {
-    name: 'stagger',
-    type: 'number',
-    defaultVal: '0',
-    description: 'Stagger delay between child elements in seconds.',
-  },
-  {
     name: 'custom',
     type: 'Record<string, unknown>',
     defaultVal: '{}',

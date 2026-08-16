@@ -113,12 +113,12 @@ export function DocsGlidecnView() {
         }
       >
         <div className="space-y-4">
-          <AccordionItem
+          {/* <AccordionItem
             title="mode — Transition Timing Mode"
             description="Controls how entering and exiting components overlap. 'wait' finishes the exit before entering, 'sync' crossfades both simultaneously, and 'popLayout' pulls the exiting view out of document flow."
             badge="AnimatePresence Mode"
             code={`// Simultaneous crossfade animation\n<GlideCN mode="sync">\n  {children}\n</GlideCN>`}
-          />
+          /> */}
 
           <AccordionItem
             title="routeKey — Dynamic Sub-Route Keying"
@@ -127,12 +127,12 @@ export function DocsGlidecnView() {
             code={`import { usePathname, useSearchParams } from 'next/navigation';\n\nexport function SubRouteWrapper({ children }: { children: React.ReactNode }) {\n  const pathname = usePathname();\n  const searchParams = useSearchParams();\n  const tab = searchParams.get('tab') ?? 'overview';\n\n  return (\n    <GlideCN routeKey={\`\${pathname}?tab=\${tab}\`}>\n      {children}\n    </GlideCN>\n  );\n}`}
           />
 
-          <AccordionItem
+          {/* <AccordionItem
             title="restoreScroll — Automatic Scroll Memory"
             description="Automatically stores window scroll coordinates in sessionStorage before navigating and restores exact coordinates on browser back/forward buttons."
             badge="Scroll Memory"
             code={`// Disable built-in scroll restoration if using a custom library like Lenis\n<GlideCN restoreScroll={false}>\n  {children}\n</GlideCN>`}
-          />
+          /> */}
         </div>
       </SectionTwoCol>
 
