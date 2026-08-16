@@ -82,7 +82,7 @@ export function Page({
       exit={variants.exit as any}
       transition={motionTransition as any}
       style={{ willChange, ...style }}
-      className={`w-full flex-1 flex flex-col ${className || ''}`}
+      className={`w-full h-full ${className || ''}`}
     >
       {children}
     </motion.div>

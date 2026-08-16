@@ -60,7 +60,7 @@ const API_ITEMS: ApiItem[] = [
     badge: 'Router Adapter',
     category: 'components',
     categoryLabel: 'Core Component',
-    signature: '<GlideCN mode="wait" restoreScroll routeKey={pathname}>',
+    signature: '<GlideCN  routeKey={pathname}>',
     description: 'The framework-specific router coordinator orchestrating AnimatePresence, freezing exiting DOM trees to prevent white flashes, and handling scroll restoration.',
     highlights: ['mode', 'routeKey', 'restoreScroll', 'className', 'FrozenRouter'],
     icon: Box,

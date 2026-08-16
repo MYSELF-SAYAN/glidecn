@@ -3,9 +3,10 @@
  * Copy templates, transpile TS -> JS, generate barrel exports, resolve template paths.
  * ========================================================================== */
 
-import fs from 'fs-extra';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import fsPromises from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import pc from 'picocolors';
 import ts from 'typescript';
 import * as p from '@clack/prompts';
@@ -81,7 +82,7 @@ async function copyProcessedFile(
   destFileName: string,
   language: 'ts' | 'js',
 ): Promise<string> {
-  const content = await fs.readFile(src, 'utf-8');
+  const content = await fsPromises.readFile(src, 'utf-8');
 
   if (language === 'js') {
     const isJsx = src.endsWith('.tsx');
@@ -90,10 +91,10 @@ async function copyProcessedFile(
     const finalName = `${baseName}${jsExt}`;
     const transpiled = transpileToJs(content, isJsx);
 
-    await fs.writeFile(path.join(destDir, finalName), transpiled, 'utf-8');
+    await fsPromises.writeFile(path.join(destDir, finalName), transpiled, 'utf-8');
     return finalName;
   } else {
-    await fs.writeFile(path.join(destDir, destFileName), content, 'utf-8');
+    await fsPromises.writeFile(path.join(destDir, destFileName), content, 'utf-8');
     return destFileName;
   }
 }
@@ -115,19 +116,19 @@ export async function copyCore(destDir: string, language: 'ts' | 'js' = 'ts'): P
   const result: CopyResult = { dirs: [], files: [] };
 
   // Ensure destination exists
-  await fs.ensureDir(destDir);
+  await fsPromises.mkdir(destDir, { recursive: true });
   const coreDest = path.join(destDir, 'core');
-  await fs.ensureDir(coreDest);
+  await fsPromises.mkdir(coreDest, { recursive: true });
 
   // Copy core directory files
   const coreSrc = path.join(templatesDir, 'core');
-  if (await fs.pathExists(coreSrc)) {
-    const coreEntries = await fs.readdir(coreSrc);
+  if (fs.existsSync(coreSrc)) {
+    const coreEntries = await fsPromises.readdir(coreSrc);
     result.dirs.push('core/');
 
     for (const entry of coreEntries) {
       const srcFile = path.join(coreSrc, entry);
-      const stat = await fs.stat(srcFile);
+      const stat = await fsPromises.stat(srcFile);
       if (stat.isFile()) {
         const savedName = await copyProcessedFile(srcFile, coreDest, entry, language);
         result.files.push(`core/${savedName}`);
@@ -137,14 +138,14 @@ export async function copyCore(destDir: string, language: 'ts' | 'js' = 'ts'): P
 
   // Copy constants.ts
   const constantsSrc = path.join(templatesDir, 'constants.ts');
-  if (await fs.pathExists(constantsSrc)) {
+  if (fs.existsSync(constantsSrc)) {
     const saved = await copyProcessedFile(constantsSrc, destDir, 'constants.ts', language);
     result.files.push(saved);
   }
 
   // Copy page.tsx
   const pageSrc = path.join(templatesDir, 'page.tsx');
-  if (await fs.pathExists(pageSrc)) {
+  if (fs.existsSync(pageSrc)) {
     const saved = await copyProcessedFile(pageSrc, destDir, 'page.tsx', language);
     result.files.push(saved);
   }
@@ -176,14 +177,14 @@ export async function copyAdapter(
   const adaptersSrc = path.join(templatesDir, 'adapters');
   const adaptersDest = path.join(destDir, 'adapters');
 
-  await fs.ensureDir(adaptersDest);
+  await fsPromises.mkdir(adaptersDest, { recursive: true });
 
   const filesToCopy = ADAPTER_FILES[adapter] ?? ['universal.tsx'];
   const copied: string[] = [];
 
   for (const file of filesToCopy) {
     const src = path.join(adaptersSrc, file);
-    if (await fs.pathExists(src)) {
+    if (fs.existsSync(src)) {
       const saved = await copyProcessedFile(src, adaptersDest, file, language);
       copied.push(saved);
     }
@@ -212,14 +213,14 @@ export async function copyTransitions(
   const transitionsSrc = path.join(templatesDir, 'transitions');
   const transitionsDest = path.join(destDir, 'transitions');
 
-  await fs.ensureDir(transitionsDest);
+  await fsPromises.mkdir(transitionsDest, { recursive: true });
 
   const copied: string[] = [];
 
   for (const name of transitionNames) {
     const fileName = `${name}.tsx`;
     const src = path.join(transitionsSrc, fileName);
-    if (await fs.pathExists(src)) {
+    if (fs.existsSync(src)) {
       const saved = await copyProcessedFile(src, transitionsDest, fileName, language);
       copied.push(saved);
     } else {
@@ -257,7 +258,7 @@ export async function generateBarrelExport(
     '',
     '// Core components',
     "export { GlideCNProvider } from './core/provider';",
-    "export { TransitionManager as GlideCN, TransitionManager } from './core/transition-manager';",
+    "export { TransitionManager } from './core/transition-manager';",
     "export { Page } from './page';",
     '',
     '// Router Adapter',
@@ -331,7 +332,7 @@ export async function generateBarrelExport(
   lines.push('// Transitions', ...transitionExports, '');
 
   const indexFileName = language === 'js' ? 'index.js' : 'index.ts';
-  await fs.writeFile(path.join(destDir, indexFileName), lines.join('\n'), 'utf-8');
+  await fsPromises.writeFile(path.join(destDir, indexFileName), lines.join('\n'), 'utf-8');
 }
 
 // ---------------------------------------------------------------------------
@@ -342,23 +343,23 @@ function getAdapterExportLines(adapter: string): string[] {
   switch (adapter) {
     case 'next-app':
       return [
-        "export { GlideCNNextApp, FrozenRouter } from './adapters/next-app';",
+        "export { GlideCNNextApp as GlideCN, GlideCNNextApp, FrozenRouter, NextAppTransitionManager, type NextAppGlideCNProps } from './adapters/next-app';",
       ];
     case 'next-pages':
       return [
-        "export { GlideCNNextPages } from './adapters/next-pages';",
+        "export { GlideCNNextPages as GlideCN, GlideCNNextPages, NextPagesTransitionManager, type NextPagesGlideCNProps } from './adapters/next-pages';",
       ];
     case 'react-router':
       return [
-        "export { GlideCNReactRouter } from './adapters/react-router';",
+        "export { GlideCNReactRouter as GlideCN, GlideCNReactRouter, ReactRouterTransitionManager, type ReactRouterGlideCNProps } from './adapters/react-router';",
       ];
     case 'universal':
       return [
-        "export { GlideCNUniversal } from './adapters/universal';",
+        "export { GlideCNUniversal as GlideCN, GlideCNUniversal, UniversalTransitionManager, type UniversalGlideCNProps } from './adapters/universal';",
       ];
     default:
       return [
-        "export { GlideCNUniversal } from './adapters/universal';",
+        "export { GlideCNUniversal as GlideCN, GlideCNUniversal, UniversalTransitionManager, type UniversalGlideCNProps } from './adapters/universal';",
       ];
   }
 }
@@ -372,7 +373,7 @@ async function generateAdapterIndex(
     line.replace("from './adapters/", "from './"),
   );
   const fileName = language === 'js' ? 'index.js' : 'index.ts';
-  await fs.writeFile(
+  await fsPromises.writeFile(
     path.join(adaptersDest, fileName),
     lines.join('\n') + '\n',
     'utf-8',
@@ -395,7 +396,7 @@ export async function appendTransitionExports(
   indexPath: string,
   newTransitions: string[],
 ): Promise<void> {
-  let content = await fs.readFile(indexPath, 'utf-8');
+  let content = await fsPromises.readFile(indexPath, 'utf-8');
 
   for (const name of newTransitions) {
     const camelName = kebabToCamel(name) + 'Transition';
@@ -407,5 +408,5 @@ export async function appendTransitionExports(
     }
   }
 
-  await fs.writeFile(indexPath, content, 'utf-8');
+  await fsPromises.writeFile(indexPath, content, 'utf-8');
 }

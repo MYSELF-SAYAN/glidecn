@@ -4,35 +4,34 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const laserTransition: TransitionDefinition = {
   metadata: {
     name: 'laser',
     displayName: 'Laser',
-    description: 'A dynamic laser effect.',
+    description: 'An optic slit unmasking violently snapping open.',
     category: 'experimental',
     props: [
       {
         name: 'duration',
         type: 'number',
-        default: '0.6',
-        description: 'Duration of the transition in seconds.',
+        default: '0.4',
+        description: 'Duration of the transition',
       }
     ],
   },
   defaultConfig: {
-    duration: 0.6,
+    duration: 0.4,
   },
-  getVariants: (config) => ({
-
-    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' }
-    
+  getVariants: () => ({
+    initial: { clipPath: 'inset(50% 0 50% 0)', filter: 'brightness(3)' },
+    animate: { clipPath: 'inset(0% 0 0% 0)', filter: 'brightness(1)' },
+    exit: { clipPath: 'inset(0 50% 0 50%)', filter: 'brightness(3)' }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [1, 0, 0, 1], // Very aggressive snap
   }),
 };
 

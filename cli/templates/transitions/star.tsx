@@ -4,35 +4,34 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const starTransition: TransitionDefinition = {
   metadata: {
     name: 'star',
     displayName: 'Star',
-    description: 'A dynamic star effect.',
+    description: 'A spinning, bright shuriken-like entrance.',
     category: 'experimental',
     props: [
       {
         name: 'duration',
         type: 'number',
-        default: '0.6',
-        description: 'Duration of the transition in seconds.',
+        default: '0.8',
+        description: 'Duration of the transition',
       }
     ],
   },
   defaultConfig: {
-    duration: 0.6,
+    duration: 0.8,
   },
-  getVariants: (config) => ({
-
-    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' }
-    
+  getVariants: () => ({
+    initial: { opacity: 0, scale: 0.1, rotateZ: 180, filter: 'brightness(3) blur(10px)' },
+    animate: { opacity: 1, scale: 1, rotateZ: 0, filter: 'brightness(1) blur(0px)' },
+    exit: { opacity: 0, scale: 3, rotateZ: -180, filter: 'brightness(0) blur(10px)' }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [0.175, 0.885, 0.32, 1.275], // Pop and spin
   }),
 };
 

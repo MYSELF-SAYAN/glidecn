@@ -6,8 +6,8 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import path from 'path';
-import fs from 'fs-extra';
+import path from 'node:path';
+import fs from 'node:fs';
 import { findProjectRoot, findExistingInstallation } from '../utils/project.js';
 import {
   copyTransitions,

@@ -4,12 +4,13 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const windTransition: TransitionDefinition = {
   metadata: {
     name: 'wind',
     displayName: 'Wind',
-    description: 'A dynamic wind effect.',
+    description: 'A swift, skewed horizontal gust.',
     category: 'experimental',
     props: [
       {
@@ -24,15 +25,13 @@ export const windTransition: TransitionDefinition = {
     duration: 0.6,
   },
   getVariants: (config) => ({
-
-    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' }
-    
+    initial: { opacity: 0, x: -300, skewX: -20, filter: 'blur(10px)' },
+    animate: { opacity: 1, x: 0, skewX: 0, filter: 'blur(0px)' },
+    exit: { opacity: 0, x: 300, skewX: 20, filter: 'blur(10px)' }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [0.22, 1, 0.36, 1], // Swift easeOut
   }),
 };
 

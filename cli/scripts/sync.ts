@@ -115,6 +115,7 @@ function generateCatalog(metas: TransitionMeta[]): string {
     spatial: '🧊',
     dynamic: '⚡',
     experimental: '🧪',
+    retro: '👾',
   };
 
   const lines = [

@@ -21,22 +21,10 @@ const GLIDECN_PROPS: PropItem[] = [
     description: 'The active router or view elements. Must be wrapped inside GlideCN to orchestrate AnimatePresence.',
   },
   {
-    name: 'mode',
-    type: '"wait" | "sync" | "popLayout"',
-    defaultVal: '"wait"',
-    description: 'AnimatePresence transition mode. "wait" ensures the exiting page finishes its animation before the entering page mounts.',
-  },
-  {
     name: 'routeKey',
     type: 'string',
     defaultVal: 'auto-detected',
     description: 'Explicit key representing current route. Auto-detected from pathname or router.asPath if omitted.',
-  },
-  {
-    name: 'restoreScroll',
-    type: 'boolean',
-    defaultVal: 'true',
-    description: 'Enables automatic scroll position memory in sessionStorage across route transitions.',
   },
   {
     name: 'className',
@@ -82,7 +70,7 @@ export function DocsGlidecnView() {
                 <CodeBlock
                   isTabbed
                   badge="app/layout.tsx"
-                  code={`import { GlideCNProvider, GlideCN } from '@/components/glidecn';\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider>\n          {/* Next.js App Router Adapter */}\n          <GlideCN mode="wait" restoreScroll>\n            {children}\n          </GlideCN>\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
+                  code={`import { GlideCNProvider, GlideCN } from '@/components/glidecn';\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body>\n        <GlideCNProvider>\n          {/* Next.js App Router Adapter */}\n          <GlideCN >\n            {children}\n          </GlideCN>\n        </GlideCNProvider>\n      </body>\n    </html>\n  );\n}`}
                 />
               ),
             },

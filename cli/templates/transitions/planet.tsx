@@ -4,35 +4,34 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const planetTransition: TransitionDefinition = {
   metadata: {
     name: 'planet',
     displayName: 'Planet',
-    description: 'A dynamic planet effect.',
+    description: 'A spherical morph that flattens into the screen.',
     category: 'experimental',
     props: [
       {
         name: 'duration',
         type: 'number',
-        default: '0.6',
-        description: 'Duration of the transition in seconds.',
+        default: '0.8',
+        description: 'Duration of the transition',
       }
     ],
   },
   defaultConfig: {
-    duration: 0.6,
+    duration: 0.8,
   },
-  getVariants: (config) => ({
-
-    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' }
-    
+  getVariants: () => ({
+    initial: { opacity: 0, borderRadius: '50%', scale: 0.2, rotateZ: 90 },
+    animate: { opacity: 1, borderRadius: '0%', scale: 1, rotateZ: 0 },
+    exit: { opacity: 0, borderRadius: '50%', scale: 2, rotateZ: -90 }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    ease: 'backOut',
   }),
 };
 

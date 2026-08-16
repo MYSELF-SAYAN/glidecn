@@ -4,35 +4,34 @@
 
 import type { TransitionDefinition } from '../core/types';
 import { registerTransition } from '../core/registry';
+import type { Transition } from 'framer-motion';
 
 export const spaceTransition: TransitionDefinition = {
   metadata: {
     name: 'space',
     displayName: 'Space',
-    description: 'A dynamic space effect.',
+    description: 'A deep void drop along the Z-axis.',
     category: 'experimental',
     props: [
       {
         name: 'duration',
         type: 'number',
-        default: '0.6',
-        description: 'Duration of the transition in seconds.',
+        default: '1.0',
+        description: 'Duration of the transition',
       }
     ],
   },
   defaultConfig: {
-    duration: 0.6,
+    duration: 1.0,
   },
-  getVariants: (config) => ({
-
-    initial: { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-    exit: { opacity: 0, scale: 1.05, filter: 'blur(4px)' }
-    
+  getVariants: () => ({
+    initial: { opacity: 0, z: -2000, filter: 'brightness(0)', transformPerspective: 1000 },
+    animate: { opacity: 1, z: 0, filter: 'brightness(1)', transformPerspective: 1000 },
+    exit: { opacity: 0, z: 2000, filter: 'brightness(0)', transformPerspective: 1000 }
   }),
-  getTransition: (config) => ({
+  getTransition: (config): Transition => ({
     duration: config.duration,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [0.32, 0.72, 0, 1],
   }),
 };
 

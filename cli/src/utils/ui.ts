@@ -101,4 +101,5 @@ export const CATEGORY_EMOJI: Record<string, string> = {
   spatial: '🧊',
   dynamic: '⚡',
   experimental: '🧪',
+  retro: '👾',
 };

@@ -4,12 +4,15 @@
  * ========================================================================== */
 
 // Core components
-export { GlideCNProvider, PageFlowProvider } from './core/provider';
-export { TransitionManager as GlideCN, TransitionManager as PageFlow, TransitionManager } from './core/transition-manager';
+export { GlideCNProvider } from './core/provider';
+export { TransitionManager } from './core/transition-manager';
 export { Page } from './page';
 
-// Router Adapters (Universal, React Router)
+// Router Adapters (GlideCN aliases Next.js App Router for frontend)
 export {
+  GlideCNNextApp as GlideCN,
+  GlideCNNextApp,
+  NextAppTransitionManager,
   GlideCNUniversal,
   UniversalTransitionManager,
   GlideCNReactRouter,
@@ -29,7 +32,6 @@ export {
 // Context & hooks
 export {
   useGlide,
-  useGlide as usePageFlow,
   useTransitionConfig,
   useAnimationState,
 } from './core/transition-context';
@@ -72,11 +74,10 @@ export type {
   EasingPreset,
   AnimationState,
   GlideCNContextValue,
-  GlideCNContextValue as PageFlowContextValue,
   PageProps,
   GlideCNProviderProps,
-  GlideCNProviderProps as PageFlowProviderProps,
 } from './core/types';
+
 
 // Transition definitions (for docs / metadata access)
 export { blackholeTransition } from './transitions/blackhole';

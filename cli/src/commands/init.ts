@@ -6,8 +6,8 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import path from 'path';
-import fs from 'fs-extra';
+import path from 'node:path';
+import fs from 'node:fs';
 import {
   findProjectRoot,
   detectPackageManager,
@@ -309,9 +309,9 @@ export async function initCommand() {
 
   p.outro(
     pc.bold(pc.green('✨ Happy transitioning!')) +
-      pc.dim(' — run ') +
-      pc.cyan('glidecn list') +
-      pc.dim(' to see all available transitions'),
+    pc.dim(' — run ') +
+    pc.cyan('glidecn list') +
+    pc.dim(' to see all available transitions'),
   );
 }
 

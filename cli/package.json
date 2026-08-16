@@ -1,9 +1,12 @@
 {
   "name": "glidecn-cli",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "✨ Drop-in page transitions for React — works with Next.js, Vite, TanStack Router, and more",
   "homepage": "https://glidecn.vercel.app",
-  "repository": "github:MYSELF-SAYAN/glidecn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MYSELF-SAYAN/glidecn.git"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
@@ -13,7 +16,7 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "sync": "tsx scripts/sync.ts",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist",
@@ -37,12 +40,10 @@
   "dependencies": {
     "@clack/prompts": "^0.10.0",
     "commander": "^13.0.0",
-    "fs-extra": "^11.2.0",
     "picocolors": "^1.1.0",
     "typescript": "^5.7.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.0.0",
     "tsup": "^8.0.0",
     "tsx": "^4.0.0"

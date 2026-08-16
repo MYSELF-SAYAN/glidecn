@@ -82,21 +82,21 @@ export const slideTransition: TransitionDefinition = {
 registerTransition('slide', slideTransition);
 registerTransition('slide-left', {
   ...slideTransition,
-  metadata: { ...slideTransition.metadata, name: 'slide-left' },
+  metadata: { ...slideTransition.metadata, name: 'slide-left', displayName: 'Slide Left' },
   defaultConfig: { ...slideTransition.defaultConfig, direction: 'left' },
 });
 registerTransition('slide-right', {
   ...slideTransition,
-  metadata: { ...slideTransition.metadata, name: 'slide-right' },
+  metadata: { ...slideTransition.metadata, name: 'slide-right', displayName: 'Slide Right' },
   defaultConfig: { ...slideTransition.defaultConfig, direction: 'right' },
 });
 registerTransition('slide-up', {
   ...slideTransition,
-  metadata: { ...slideTransition.metadata, name: 'slide-up' },
+  metadata: { ...slideTransition.metadata, name: 'slide-up', displayName: 'Slide Up' },
   defaultConfig: { ...slideTransition.defaultConfig, direction: 'up' },
 });
 registerTransition('slide-down', {
   ...slideTransition,
-  metadata: { ...slideTransition.metadata, name: 'slide-down' },
+  metadata: { ...slideTransition.metadata, name: 'slide-down', displayName: 'Slide Down' },
   defaultConfig: { ...slideTransition.defaultConfig, direction: 'down' },
 });

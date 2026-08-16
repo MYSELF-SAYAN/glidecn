@@ -13,7 +13,7 @@ const program = new Command();
 program
   .name('glidecn-cli')
   .description('✨ Drop-in page transitions for React')
-  .version('0.1.3');
+  .version('0.1.7');
 
 // ---------------------------------------------------------------------------
 // glidecn init
