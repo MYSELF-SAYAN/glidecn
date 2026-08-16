@@ -83,6 +83,7 @@ export type {
 export { blackholeTransition } from './transitions/blackhole';
 export { blueprintTransition } from './transitions/blueprint';
 export { bounceTransition } from './transitions/bounce';
+export { cameraDiveTransition } from './transitions/camera-dive';
 export { circularPortalTransition } from './transitions/circular-portal';
 export { crystalTransition } from './transitions/crystal';
 export { cubeTransition } from './transitions/cube';
@@ -98,6 +99,7 @@ export { galaxyTransition } from './transitions/galaxy';
 export { ghostTransition } from './transitions/ghost';
 export { glassTransition } from './transitions/glass';
 export { glitchTransition } from './transitions/glitch';
+export { gravityTransition } from './transitions/gravity';
 export { hologramTransition } from './transitions/hologram';
 export { iceTransition } from './transitions/ice';
 export { illusionTransition } from './transitions/illusion';

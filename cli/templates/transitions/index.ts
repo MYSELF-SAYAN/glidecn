@@ -66,3 +66,5 @@ import '@/components/glidecn/transitions/paint-drip';
 import '@/components/glidecn/transitions/blueprint';
 import '@/components/glidecn/transitions/lens-flare';
 import '@/components/glidecn/transitions/origami-crush';
+import '@/components/glidecn/transitions/gravity';
+import '@/components/glidecn/transitions/camera-dive';

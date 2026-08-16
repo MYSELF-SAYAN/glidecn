@@ -497,6 +497,13 @@ export const TRANSITIONS: TransitionMeta[] = [
     fileName: 'pixel.tsx',
   },
   {
+    name: 'camera-dive',
+    displayName: 'Camera Dive',
+    description: 'Cinematic camera dive that zooms rapidly through an element into the next page.',
+    category: 'spatial',
+    fileName: 'camera-dive.tsx',
+  },
+  {
     name: 'cube',
     displayName: 'Cube',
     description: 'Pages rotate like faces of a 3D cube.',
@@ -509,6 +516,13 @@ export const TRANSITIONS: TransitionMeta[] = [
     description: 'Seamless paper accordion fold',
     category: 'spatial',
     fileName: 'fold.tsx',
+  },
+  {
+    name: 'gravity',
+    displayName: 'Gravity',
+    description: 'The page loses gravity, floats upward in orbit around the center, and gravitationally falls into place.',
+    category: 'spatial',
+    fileName: 'gravity.tsx',
   },
 ];
 
