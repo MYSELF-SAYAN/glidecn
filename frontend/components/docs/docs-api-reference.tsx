@@ -461,7 +461,7 @@ export function DocsApiReference() {
 
         <div className="flex flex-col sm:flex-row gap-4 shrink-0 w-full sm:w-auto">
           <Link
-            href="/docs/transitions"
+            href="/transition"
             className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#fa5c4f] hover:bg-[#e54235] text-xs font-bold text-white shadow-xl shadow-[#fa5c4f]/25 hover:shadow-[#fa5c4f]/40 hover:-translate-y-0.5 transition-all justify-center no-underline cursor-pointer"
           >
             <span>Explore Catalog</span>

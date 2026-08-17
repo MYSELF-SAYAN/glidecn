@@ -3,12 +3,16 @@
 import type { ReactNode } from 'react';
 import { DocsSidebar } from './docs-sidebar';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/landing/logo';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Github, Gamepad2, ArrowLeft } from 'lucide-react';
+import { Github, Gamepad2, Sparkles, BookOpen } from 'lucide-react';
 import { SiteFooter } from '@/components/site-footer';
 
 export function DocsShell({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const isTransitionSection = pathname.startsWith('/transition');
+
   return (
     <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-main)] font-sans antialiased selection:bg-[#fa5c4f]/20 selection:text-[#fa5c4f]">
       
@@ -16,7 +20,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 w-full border-b border-[var(--border-color)] bg-[var(--bg-surface)]/90 backdrop-blur-md">
         <div className="flex h-14 w-full items-center justify-between px-4 sm:px-8">
           
-          {/* Brand & Breadcrumb */}
+          {/* Brand & Dynamic Section Breadcrumb */}
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-sm shadow-[#fa5c4f]/20 group-hover:rotate-6 transition">
@@ -27,11 +31,43 @@ export function DocsShell({ children }: { children: ReactNode }) {
               </span>
             </Link>
             <span className="text-[var(--text-subtle)] text-sm font-mono">/</span>
-            <span className="text-sm font-semibold text-[var(--text-muted)]">Documentation</span>
+            {isTransitionSection ? (
+              <Link
+                href="/transition"
+                className="text-sm font-semibold text-[var(--text-main)] hover:text-[#fa5c4f] transition flex items-center gap-1.5"
+              >
+                <span>Transitions</span>
+              </Link>
+            ) : (
+              <Link
+                href="/docs"
+                className="text-sm font-semibold text-[var(--text-main)] hover:text-[#fa5c4f] transition flex items-center gap-1.5"
+              >
+                <span>Documentation</span>
+              </Link>
+            )}
           </div>
 
-          {/* Header Action Buttons */}
-          <div className="flex items-center gap-3">
+          {/* Header Action Buttons & Section Switching CTAs */}
+          <div className="flex items-center gap-2.5">
+            {isTransitionSection ? (
+              <Link
+                href="/docs"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--bg-card)] text-[var(--text-main)] border border-[var(--border-color)] hover:border-[#fa5c4f]/40 hover:text-[#fa5c4f] transition text-xs font-semibold btn-tactile"
+              >
+                <BookOpen className="w-3.5 h-3.5 text-[#fa5c4f]" />
+                <span>Docs</span>
+              </Link>
+            ) : (
+              <Link
+                href="/transition"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--bg-card)] text-[var(--text-main)] border border-[var(--border-color)] hover:border-[#fa5c4f]/40 hover:text-[#fa5c4f] transition text-xs font-semibold btn-tactile"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#fa5c4f]" />
+                <span>Transitions</span>
+              </Link>
+            )}
+
             <Link
               href="/playground/landing"
               className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fa5c4f]/10 text-[#fa5c4f] border border-[#fa5c4f]/30 hover:bg-[#fa5c4f] hover:text-white transition text-xs font-bold btn-tactile"

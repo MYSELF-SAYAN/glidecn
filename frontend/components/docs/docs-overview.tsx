@@ -55,28 +55,28 @@ export function DocsOverview() {
       desc: 'Hardware 3D isometric cubes, page curls, 3D flips, and origami mesh folds.',
       count: '6 Transitions',
       tag: 'GPU Transform',
-      href: '/docs/transitions#spatial',
+      href: '/transition#spatial',
     },
     {
       name: 'Portals & Iris',
       desc: 'Dynamic clip-path radial portals, iris shutters, and liquid morphing masks.',
       count: '4 Transitions',
       tag: 'Clip Path',
-      href: '/docs/transitions#portal',
+      href: '/transition#portal',
     },
     {
       name: 'Retro & Analog',
       desc: 'CRT electron-beam collapses, RGB channel glitch split, and neon glow dissolves.',
       count: '5 Transitions',
       tag: 'Filter & SVG',
-      href: '/docs/transitions#retro',
+      href: '/transition#retro',
     },
     {
       name: 'Kinetic & Dynamic',
       desc: 'Diagonal blade slashes, ripple springs, bounce overshoots, and fluid ink flows.',
       count: '8 Transitions',
       tag: 'Framer Physics',
-      href: '/docs/transitions#dynamic',
+      href: '/transition#dynamic',
     },
   ];
 
@@ -121,7 +121,7 @@ export function DocsOverview() {
             </div>
 
             <Link
-              href="/docs/transitions"
+              href="/transition"
               className="group flex items-center gap-2 px-6 py-3 bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 rounded-lg text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
             >
               Browse {readyTransitionsCount}+ Transitions
@@ -497,7 +497,7 @@ npx glidecn-cli add --all`}
             </p>
           </div>
           <Link
-            href="/docs/transitions"
+            href="/transition"
             className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-50 hover:opacity-70 transition-opacity shrink-0"
           >
             Explore {TRANSITION_CATALOG.length}+ Transitions

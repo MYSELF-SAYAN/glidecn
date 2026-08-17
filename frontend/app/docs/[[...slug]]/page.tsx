@@ -111,7 +111,7 @@ export default async function DocsPageContent(props: PageProps) {
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[var(--border-color)]">
               <Link
-                href="/docs/transitions"
+                href="/transition"
                 className="flex items-center gap-2 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] px-4 py-3 text-xs font-semibold text-[var(--text-main)] hover:bg-[var(--bg-card)] transition btn-tactile w-full sm:w-auto justify-center no-underline"
               >
                 <ArrowLeft className="size-4" />

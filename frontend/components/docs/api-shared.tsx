@@ -265,7 +265,7 @@ export function DocHero({
               <ArrowRight className="size-3 text-[#fa5c4f]" />
             </Link>
             <Link
-              href="/docs/transitions"
+              href="/transition"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-medium bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:border-[#fa5c4f]/50 hover:text-[#fa5c4f] transition-all no-underline cursor-pointer"
             >
               <span>69+ Transitions</span>
@@ -356,7 +356,7 @@ export function SectionTwoCol({
 
 export function BottomNavCards({
   prev = { label: 'API Reference Hub', href: '/docs/api-reference' },
-  next = { label: 'Explore Transitions', href: '/docs/transitions' },
+  next = { label: 'Explore Transitions', href: '/transition' },
 }: {
   prev?: { label: string; href: string };
   next?: { label: string; href: string };

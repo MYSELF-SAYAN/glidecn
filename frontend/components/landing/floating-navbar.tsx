@@ -68,7 +68,7 @@ export function FloatingNavbar() {
           <Link href="/docs" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/80 dark:hover:bg-white/10 active:scale-[0.96] transition-all duration-150">
             Docs
           </Link>
-          <Link href="/docs/transitions" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/80 dark:hover:bg-white/10 active:scale-[0.96] transition-all duration-150 flex items-center gap-1.5 group">
+          <Link href="/transition" className="px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/80 dark:hover:bg-white/10 active:scale-[0.96] transition-all duration-150 flex items-center gap-1.5 group">
             <span>Transitions</span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#fa5c4f] group-hover:scale-125 transition-transform duration-200" />
           </Link>

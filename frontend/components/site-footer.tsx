@@ -174,13 +174,13 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
           <div className="space-y-6">
             <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">Transitions</h4>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link href="/docs/transitions#family-Flow" className="text-white/70 hover:text-white transition-colors">Flow</Link></li>
-              <li><Link href="/docs/transitions#family-Portal" className="text-white/70 hover:text-white transition-colors">Portal</Link></li>
-              <li><Link href="/docs/transitions#family-Paper" className="text-white/70 hover:text-white transition-colors">Paper</Link></li>
-              <li><Link href="/docs/transitions#family-Mask" className="text-white/70 hover:text-white transition-colors">Mask</Link></li>
-              <li><Link href="/docs/transitions#family-Spatial" className="text-white/70 hover:text-white transition-colors">Spatial</Link></li>
-              <li><Link href="/docs/transitions#family-Dynamic" className="text-white/70 hover:text-white transition-colors">Dynamic</Link></li>
-              <li><Link href="/docs/transitions#family-Experimental" className="text-white/70 hover:text-white transition-colors">Experimental</Link></li>
+              <li><Link href="/transition#family-Flow" className="text-white/70 hover:text-white transition-colors">Flow</Link></li>
+              <li><Link href="/transition#family-Portal" className="text-white/70 hover:text-white transition-colors">Portal</Link></li>
+              <li><Link href="/transition#family-Paper" className="text-white/70 hover:text-white transition-colors">Paper</Link></li>
+              <li><Link href="/transition#family-Mask" className="text-white/70 hover:text-white transition-colors">Mask</Link></li>
+              <li><Link href="/transition#family-Spatial" className="text-white/70 hover:text-white transition-colors">Spatial</Link></li>
+              <li><Link href="/transition#family-Dynamic" className="text-white/70 hover:text-white transition-colors">Dynamic</Link></li>
+              <li><Link href="/transition#family-Experimental" className="text-white/70 hover:text-white transition-colors">Experimental</Link></li>
             </ul>
           </div>
 

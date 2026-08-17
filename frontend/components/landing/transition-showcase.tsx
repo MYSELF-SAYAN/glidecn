@@ -243,7 +243,7 @@ export function TransitionShowcase() {
             </Link>
 
             <Link
-              href="/docs/transitions"
+              href="/transition"
               className="w-full sm:w-auto group flex justify-center items-center gap-2 text-sm font-medium text-[var(--text-main)] hover:text-[#fa5c4f] transition-colors"
             >
               <span>View All {TRANSITION_CATALOG.length}+</span>
