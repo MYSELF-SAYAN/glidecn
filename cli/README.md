@@ -59,12 +59,26 @@ npx glidecn-cli add --category spatial
 npx glidecn-cli add --category portal
 npx glidecn-cli add --category flow
 
-# Add all 33 available transitions
+# Add all 70 available transitions
 npx glidecn-cli add --all
 ```
 
+### `glidecn-cli update`
+Update your existing GlideCN core engine files, adapters, and installed transitions to the latest template version.
+
+```bash
+# Interactive update
+npx glidecn-cli update
+
+# Update and install all 70 transitions
+npx glidecn-cli update --all
+
+# Skip prompts (CI / automated scripts)
+npx glidecn-cli update --yes
+```
+
 ### `glidecn-cli list`
-List all 33 available transitions categorized with descriptions and emoji tags.
+List all 70 available transitions categorized with descriptions and emoji tags.
 
 ```bash
 npx glidecn-cli list

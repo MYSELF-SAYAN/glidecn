@@ -13,6 +13,7 @@ The `glidecn-cli` tool allows you to quickly scaffold and copy animation source 
 | :--- | :--- | :--- |
 | [`init`](#glidecn-cli-init) | Interactive setup wizard for fresh projects. | `npx glidecn-cli init` |
 | [`add`](#glidecn-cli-add) | Adds one or more transitions to your project. | `npx glidecn-cli add cube liquid-morph` |
+| [`update`](#glidecn-cli-update) | Updates core engine files, adapters, and installed transitions. | `npx glidecn-cli update` |
 | [`list`](#glidecn-cli-list) | Displays all available transitions with category summaries. | `npx glidecn-cli list` |
 
 ---
@@ -34,7 +35,7 @@ npx glidecn-cli init
    - `React Router / Vite` (`react-router-dom`)
    - `TanStack / Universal` (framework-agnostic)
 3. **Installation Directory**: Defaults to `components/glidecn` (or `src/components/glidecn`).
-4. **Transition Preset Picker**: Allows selecting individual transitions or all 69+ presets grouped by category.
+4. **Transition Preset Picker**: Allows selecting individual transitions or all 70 presets grouped by category.
 5. **Dependency Check & Auto-Install**: Detects your package manager (`pnpm`, `npm`, `yarn`, `bun`) and checks for `framer-motion`.
 
 ---
@@ -52,6 +53,9 @@ npx glidecn-cli add cube liquid-morph glitch page-curl
 
 # Add all transitions from a category
 npx glidecn-cli add --category spatial
+
+# Add all 70 transitions
+npx glidecn-cli add --all
 ```
 
 ### Options & Flags
@@ -60,8 +64,31 @@ npx glidecn-cli add --category spatial
 | :--- | :--- | :--- |
 | `--all` | `-a` | Install every available transition in the catalog. |
 | `--category <name>` | `-c` | Install all transitions belonging to a specific family. |
-| `--force` | `-f` | Overwrite existing transition files without prompting. |
 | `--path <dir>` | `-p` | Custom installation destination directory. |
+
+---
+
+## `glidecn-cli update`
+
+Updates your existing GlideCN core engine files (`core/`), framework adapters (`adapters/`), and installed transitions to the latest template version.
+
+```bash
+# Interactive update (refreshes core, adapter, and existing transitions)
+npx glidecn-cli update
+
+# Update and upgrade to all 70 transitions
+npx glidecn-cli update --all
+
+# Non-interactive / CI mode
+npx glidecn-cli update --yes
+```
+
+### Options & Flags
+
+| Flag | Alias | Description |
+| :--- | :--- | :--- |
+| `--all` | `-a` | Update core and install all 70 transitions. |
+| `--yes` | `-y` | Skip interactive confirmation prompts (CI/CD mode). |
 
 ---
 

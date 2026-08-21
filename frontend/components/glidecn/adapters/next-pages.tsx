@@ -46,6 +46,22 @@ export function GlideCNNextPages({
 }: NextPagesGlideCNProps) {
   const activeKey =
     routerPath ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
+  const isPopState = useRef(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    const handlePopState = () => {
+      isPopState.current = true;
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     if (!restoreScroll || typeof window === 'undefined') return;
@@ -55,14 +71,20 @@ export function GlideCNNextPages({
   }, [activeKey, restoreScroll]);
 
   const handleExitComplete = () => {
-    if (!restoreScroll || typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return;
     if (window.location.hash) return;
 
-    const savedScroll = sessionStorage.getItem(`glidecn-scroll-${activeKey}`);
-    if (savedScroll) {
-      window.scrollTo(0, parseInt(savedScroll, 10));
+    if (restoreScroll && isPopState.current) {
+      const savedScroll = sessionStorage.getItem(`glidecn-scroll-${activeKey}`);
+      if (savedScroll) {
+        window.scrollTo({ top: parseInt(savedScroll, 10), left: 0, behavior: 'instant' as ScrollBehavior });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+      isPopState.current = false;
     } else {
-      window.scrollTo(0, 0);
+      // Normal link navigation: always start from top (y = 0)
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
     }
   };
 
@@ -75,5 +97,9 @@ export function GlideCNNextPages({
   );
 }
 
-// Alias for convenience
-export { GlideCNNextPages as NextPagesTransitionManager };
+// Aliases for convenience
+export {
+  GlideCNNextPages as GlideCN,
+  GlideCNNextPages as TransitionManager,
+  GlideCNNextPages as NextPagesTransitionManager,
+};

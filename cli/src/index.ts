@@ -7,13 +7,14 @@ import { Command } from 'commander';
 import { initCommand } from './commands/init.js';
 import { addCommand } from './commands/add.js';
 import { listCommand } from './commands/list.js';
+import { updateCommand } from './commands/update.js';
 
 const program = new Command();
 
 program
   .name('glidecn-cli')
   .description('✨ Drop-in page transitions for React')
-  .version('0.1.7');
+  .version('0.1.9');
 
 // ---------------------------------------------------------------------------
 // glidecn init
@@ -40,6 +41,19 @@ program
   });
 
 // ---------------------------------------------------------------------------
+// glidecn update
+// ---------------------------------------------------------------------------
+
+program
+  .command('update')
+  .description('Update GlideCN core files, adapters, and transitions to the latest version')
+  .option('-a, --all', 'Update and install all available transitions')
+  .option('-y, --yes', 'Skip confirmation prompts')
+  .action(async (options: { all?: boolean; yes?: boolean }) => {
+    await updateCommand(options);
+  });
+
+// ---------------------------------------------------------------------------
 // glidecn list
 // ---------------------------------------------------------------------------
 
@@ -55,3 +69,4 @@ program
 // ---------------------------------------------------------------------------
 
 program.parse();
+

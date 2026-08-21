@@ -258,10 +258,9 @@ export async function generateBarrelExport(
     '',
     '// Core components',
     "export { GlideCNProvider } from './core/provider';",
-    "export { TransitionManager } from './core/transition-manager';",
     "export { Page } from './page';",
     '',
-    '// Router Adapter',
+    '// Router Adapter / Transition Manager',
     ...adapterExports,
     '',
     '// Registry',
@@ -343,23 +342,23 @@ function getAdapterExportLines(adapter: string): string[] {
   switch (adapter) {
     case 'next-app':
       return [
-        "export { GlideCNNextApp as GlideCN, GlideCNNextApp, FrozenRouter, NextAppTransitionManager, type NextAppGlideCNProps } from './adapters/next-app';",
+        "export { GlideCNNextApp as GlideCN, GlideCNNextApp as TransitionManager, GlideCNNextApp, FrozenRouter, NextAppTransitionManager, type NextAppGlideCNProps } from './adapters/next-app';",
       ];
     case 'next-pages':
       return [
-        "export { GlideCNNextPages as GlideCN, GlideCNNextPages, NextPagesTransitionManager, type NextPagesGlideCNProps } from './adapters/next-pages';",
+        "export { GlideCNNextPages as GlideCN, GlideCNNextPages as TransitionManager, GlideCNNextPages, NextPagesTransitionManager, type NextPagesGlideCNProps } from './adapters/next-pages';",
       ];
     case 'react-router':
       return [
-        "export { GlideCNReactRouter as GlideCN, GlideCNReactRouter, ReactRouterTransitionManager, type ReactRouterGlideCNProps } from './adapters/react-router';",
+        "export { GlideCNReactRouter as GlideCN, GlideCNReactRouter as TransitionManager, GlideCNReactRouter, ReactRouterTransitionManager, type ReactRouterGlideCNProps } from './adapters/react-router';",
       ];
     case 'universal':
       return [
-        "export { GlideCNUniversal as GlideCN, GlideCNUniversal, UniversalTransitionManager, type UniversalGlideCNProps } from './adapters/universal';",
+        "export { GlideCNUniversal as GlideCN, GlideCNUniversal as TransitionManager, GlideCNUniversal, UniversalTransitionManager, type UniversalGlideCNProps } from './adapters/universal';",
       ];
     default:
       return [
-        "export { GlideCNUniversal as GlideCN, GlideCNUniversal, UniversalTransitionManager, type UniversalGlideCNProps } from './adapters/universal';",
+        "export { GlideCNUniversal as GlideCN, GlideCNUniversal as TransitionManager, GlideCNUniversal, UniversalTransitionManager, type UniversalGlideCNProps } from './adapters/universal';",
       ];
   }
 }
@@ -410,3 +409,17 @@ export async function appendTransitionExports(
 
   await fsPromises.writeFile(indexPath, content, 'utf-8');
 }
+
+/**
+ * Scan the transitions directory of an installation and return installed transition names.
+ */
+export function getInstalledTransitions(glidecnDir: string): string[] {
+  const transitionsDir = path.join(glidecnDir, 'transitions');
+  if (!fs.existsSync(transitionsDir)) return [];
+
+  const files = fs.readdirSync(transitionsDir);
+  return files
+    .filter((f) => (f.endsWith('.tsx') || f.endsWith('.jsx')) && !f.startsWith('index.'))
+    .map((f) => f.replace(/\.(tsx|jsx)$/, ''));
+}
+

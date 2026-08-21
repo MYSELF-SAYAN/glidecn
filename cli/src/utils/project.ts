@@ -130,13 +130,64 @@ export function findExistingInstallation(projectRoot: string): string | null {
     if (
       fs.existsSync(candidate) &&
       fs.existsSync(path.join(candidate, 'core')) &&
-      fs.existsSync(path.join(candidate, 'constants.ts'))
+      (
+        fs.existsSync(path.join(candidate, 'constants.ts')) ||
+        fs.existsSync(path.join(candidate, 'constants.js')) ||
+        fs.existsSync(path.join(candidate, 'index.ts')) ||
+        fs.existsSync(path.join(candidate, 'index.js'))
+      )
     ) {
       return candidate;
     }
   }
 
   return null;
+}
+
+/**
+ * Detect the installed framework adapter from an existing GlideCN installation.
+ */
+export function detectInstalledAdapter(glidecnDir: string, projectRoot?: string): string {
+  const adaptersDir = path.join(glidecnDir, 'adapters');
+  if (fs.existsSync(adaptersDir)) {
+    if (
+      fs.existsSync(path.join(adaptersDir, 'next-app.tsx')) ||
+      fs.existsSync(path.join(adaptersDir, 'next-app.jsx'))
+    ) {
+      return 'next-app';
+    }
+    if (
+      fs.existsSync(path.join(adaptersDir, 'next-pages.tsx')) ||
+      fs.existsSync(path.join(adaptersDir, 'next-pages.jsx'))
+    ) {
+      return 'next-pages';
+    }
+    if (
+      fs.existsSync(path.join(adaptersDir, 'react-router.tsx')) ||
+      fs.existsSync(path.join(adaptersDir, 'react-router.jsx'))
+    ) {
+      return 'react-router';
+    }
+    if (
+      fs.existsSync(path.join(adaptersDir, 'universal.tsx')) ||
+      fs.existsSync(path.join(adaptersDir, 'universal.jsx'))
+    ) {
+      return 'universal';
+    }
+  }
+
+  // Fallback: detect from project package.json if available
+  if (projectRoot) {
+    const pkg = readPackageJson(projectRoot);
+    if (pkg) {
+      if (hasDependency(pkg, 'next')) return 'next-app';
+      if (hasDependency(pkg, 'react-router-dom') || hasDependency(pkg, 'react-router')) {
+        return 'react-router';
+      }
+    }
+  }
+
+  return 'next-app';
 }
 
 // ---------------------------------------------------------------------------

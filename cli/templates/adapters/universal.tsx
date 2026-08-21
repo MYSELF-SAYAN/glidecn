@@ -35,13 +35,22 @@ export function GlideCNUniversal({
 
   const activeKey = routeKey ?? currentPath;
 
+  const isPopState = useRef(false);
+
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     if (routeKey !== undefined) {
       setCurrentPath(routeKey);
       return;
     }
 
     const handlePopState = () => {
+      isPopState.current = true;
       setCurrentPath(window.location.pathname);
     };
 
@@ -57,14 +66,20 @@ export function GlideCNUniversal({
   }, [activeKey, restoreScroll]);
 
   const handleExitComplete = () => {
-    if (!restoreScroll || typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return;
     if (window.location.hash) return;
 
-    const savedScroll = sessionStorage.getItem(`glidecn-scroll-${activeKey}`);
-    if (savedScroll) {
-      window.scrollTo(0, parseInt(savedScroll, 10));
+    if (restoreScroll && isPopState.current) {
+      const savedScroll = sessionStorage.getItem(`glidecn-scroll-${activeKey}`);
+      if (savedScroll) {
+        window.scrollTo({ top: parseInt(savedScroll, 10), left: 0, behavior: 'instant' as ScrollBehavior });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+      isPopState.current = false;
     } else {
-      window.scrollTo(0, 0);
+      // Normal link navigation: always start from top (y = 0)
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
     }
   };
 
@@ -77,5 +92,9 @@ export function GlideCNUniversal({
   );
 }
 
-// Alias for convenience
-export { GlideCNUniversal as UniversalTransitionManager };
+// Aliases for convenience
+export {
+  GlideCNUniversal as GlideCN,
+  GlideCNUniversal as TransitionManager,
+  GlideCNUniversal as UniversalTransitionManager,
+};

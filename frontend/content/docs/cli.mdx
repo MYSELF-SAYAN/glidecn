@@ -5,8 +5,16 @@ description: Complete command-line interface documentation for scaffolding, down
 
 # CLI Reference
 
-The official `glidecn-cli` tool scaffolds transition pipelines, downloads physics transitions, and auto-wires Framer Motion into your project with zero runtime dependencies.
+The official `glidecn-cli` tool scaffolds transition pipelines, downloads transitions, updates installed components, and auto-wires Framer Motion into your project with zero runtime dependencies.
 
 ```bash
+# Initialize GlideCN in a project
 npx glidecn-cli init
+
+# Add transitions
+npx glidecn-cli add cube circular-portal
+
+# Update core engine and installed transitions
+npx glidecn-cli update
 ```
+

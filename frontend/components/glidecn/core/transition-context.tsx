@@ -56,12 +56,12 @@ export function TransitionContextProvider({
     return defaultRegistry.get(currentTransition) ?? null;
   }, [currentTransition]);
 
-  // Merge: transition defaults → global defaults → per-instance overrides
+  // Merge: fallback → transition defaults → provider defaultConfig → per-instance overrides
   const config = useMemo(() => {
     const transitionDefaults = transitionDefinition?.defaultConfig ?? {};
     const merged = mergeConfig(
       configOverrides,
-      mergeConfig(transitionDefaults, mergeConfig(defaultConfig, DEFAULT_TRANSITION_CONFIG)),
+      mergeConfig(defaultConfig, mergeConfig(transitionDefaults, DEFAULT_TRANSITION_CONFIG)),
     );
     return merged as Required<TransitionConfig>;
   }, [transitionDefinition, defaultConfig, configOverrides]);

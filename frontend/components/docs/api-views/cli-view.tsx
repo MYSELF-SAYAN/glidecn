@@ -5,6 +5,7 @@ import {
   Terminal,
   PackagePlus,
   ListFilter,
+  RefreshCw,
   Play,
   Check,
   Copy,
@@ -36,18 +37,18 @@ const CLI_FLAGS: PropItem[] = [
     name: '--all, -a',
     type: 'boolean',
     defaultVal: 'false',
-    description: 'Installs all 69+ physics and page transitions in the catalog in a single batch.',
+    description: 'Installs or updates all 70 page and physics transitions in the catalog in a single batch.',
+  },
+  {
+    name: '--yes, -y',
+    type: 'boolean',
+    defaultVal: 'false',
+    description: 'Skips interactive confirmation prompts (ideal for CI/CD and automated upgrade scripts).',
   },
   {
     name: '--category, -c <name>',
     type: 'string',
     description: 'Installs all transitions belonging to a specific family: flow, portal, paper, mask, spatial, dynamic, experimental, retro.',
-  },
-  {
-    name: '--force, -f',
-    type: 'boolean',
-    defaultVal: 'false',
-    description: 'Overwrites existing transition and core files without interactive confirmation prompts.',
   },
   {
     name: '--path, -p <dir>',
@@ -56,18 +57,12 @@ const CLI_FLAGS: PropItem[] = [
     description: 'Specifies a custom destination directory for the generated components and transitions (ideal for monorepos).',
   },
   {
-    name: '--json',
-    type: 'boolean',
-    defaultVal: 'false',
-    description: 'Outputs machine-readable JSON for CI/CD pipelines and developer tooling (available on list command).',
-  },
-  {
     name: '--help, -h',
     type: 'boolean',
     description: 'Displays help information, usage instructions, and available flags for any command.',
   },
   {
-    name: '--version, -v',
+    name: '--version, -V',
     type: 'boolean',
     description: 'Prints the current installed version of the glidecn-cli package.',
   },
@@ -323,14 +318,14 @@ export function DocsCliView() {
             />
           </div>
 
-          {/* Card D: Complete 69+ Suite */}
+          {/* Card D: Complete 70 Suite */}
           <div className="p-6 sm:p-8 rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-md space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold font-display text-zinc-900 dark:text-zinc-100">
                 Complete Catalog Installation (--all)
               </h3>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#fa5c4f]/10 text-[#fa5c4f] border border-[#fa5c4f]/20">
-                All 69+ Transitions
+                All 70 Transitions
               </span>
             </div>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
@@ -347,13 +342,103 @@ export function DocsCliView() {
         </div>
       </SectionTwoCol>
 
+      {/* 3. UPDATE COMMAND */}
+      <SectionTwoCol
+        icon={<RefreshCw className="size-5" />}
+        title="3. Updating Existing Codebase (update)"
+        description={
+          <div className="space-y-4">
+            <p>
+              <code>glidecn-cli update</code> auto-detects your existing installation, checks your project language and framework adapter, and refreshes all core engine files, adapters, and installed transitions with the latest improvements and bugfixes.
+            </p>
+            <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-white/[0.03] border border-zinc-200/60 dark:border-white/5 text-xs text-zinc-500 space-y-2">
+              <span className="font-bold text-zinc-700 dark:text-zinc-300 block">What gets updated:</span>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Core engine (<code>transition-manager</code>, <code>transition-context</code>, etc.)</li>
+                <li>Framework adapters (<code>adapters/next-app</code>, etc.)</li>
+                <li>All currently installed transitions (or all 70 with <code>--all</code>)</li>
+                <li>Barrel exports (<code>index.ts</code> / <code>index.js</code>)</li>
+              </ul>
+            </div>
+          </div>
+        }
+      >
+        <div className="space-y-6">
+          {/* Interactive Update */}
+          <div className="p-6 sm:p-8 rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-md space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold font-display text-zinc-900 dark:text-zinc-100">
+                Interactive Project Update
+              </h3>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 border border-zinc-200/50 dark:border-white/5">
+                Interactive
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+              Refreshes your core engine and existing transitions with interactive confirmation.
+            </p>
+            <CliTerminalBlock
+              badge="Update Command"
+              command={(pm) => {
+                const runner = pm === 'pnpm' ? 'pnpm dlx' : pm === 'bun' ? 'bunx' : pm === 'yarn' ? 'yarn dlx' : 'npx';
+                return `${runner} glidecn-cli update`;
+              }}
+            />
+          </div>
+
+          {/* Update + All Transitions */}
+          <div className="p-6 sm:p-8 rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-md space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold font-display text-zinc-900 dark:text-zinc-100">
+                Update & Upgrade to All 70 Transitions
+              </h3>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#fa5c4f]/10 text-[#fa5c4f] border border-[#fa5c4f]/20">
+                --all Flag
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+              Refreshes the core and installs the full suite of all 70 transitions.
+            </p>
+            <CliTerminalBlock
+              badge="Full Upgrade"
+              command={(pm) => {
+                const runner = pm === 'pnpm' ? 'pnpm dlx' : pm === 'bun' ? 'bunx' : pm === 'yarn' ? 'yarn dlx' : 'npx';
+                return `${runner} glidecn-cli update --all`;
+              }}
+            />
+          </div>
+
+          {/* Non-interactive CI update */}
+          <div className="p-6 sm:p-8 rounded-3xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0f0f11] shadow-md space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold font-display text-zinc-900 dark:text-zinc-100">
+                Automated / CI Update (--yes)
+              </h3>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 border border-zinc-200/50 dark:border-white/5">
+                CI / Headless
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+              Skips prompts for automated upgrade scripts and GitHub Actions workflows.
+            </p>
+            <CliTerminalBlock
+              badge="Non-interactive"
+              command={(pm) => {
+                const runner = pm === 'pnpm' ? 'pnpm dlx' : pm === 'bun' ? 'bunx' : pm === 'yarn' ? 'yarn dlx' : 'npx';
+                return `${runner} glidecn-cli update --yes`;
+              }}
+            />
+          </div>
+        </div>
+      </SectionTwoCol>
+
       {/* 4. LIST COMMAND */}
       <SectionTwoCol
         icon={<ListFilter className="size-5" />}
-        title="3. Catalog Explorer (list)"
+        title="4. Catalog Explorer (list)"
         description={
           <p>
-            <code>glidecn-cli list</code> inspects available transitions, prints family statistics, and generates JSON for tooling.
+            <code>glidecn-cli list</code> inspects available transitions, prints family statistics, and prints terminal snippets.
           </p>
         }
       >
@@ -366,31 +451,13 @@ export function DocsCliView() {
               return `${runner} glidecn-cli list`;
             }}
           />
-
-          <CliTerminalBlock
-            badge="Filter by Category"
-            comment="List only 3D spatial transitions"
-            command={(pm) => {
-              const runner = pm === 'pnpm' ? 'pnpm dlx' : pm === 'bun' ? 'bunx' : pm === 'yarn' ? 'yarn dlx' : 'npx';
-              return `${runner} glidecn-cli list --category spatial`;
-            }}
-          />
-
-          <CliTerminalBlock
-            badge="JSON Output Mode"
-            comment="Export catalog as machine-readable JSON"
-            command={(pm) => {
-              const runner = pm === 'pnpm' ? 'pnpm dlx' : pm === 'bun' ? 'bunx' : pm === 'yarn' ? 'yarn dlx' : 'npx';
-              return `${runner} glidecn-cli list --json`;
-            }}
-          />
         </div>
       </SectionTwoCol>
 
       {/* 5. COMPLETE FLAGS MATRIX */}
       <SectionTwoCol
         icon={<Sliders className="size-5" />}
-        title="4. Flags & Options Reference"
+        title="5. Flags & Options Reference"
         description={
           <p>
             Complete matrix of all command-line flags and arguments supported by <code>glidecn-cli</code>.
@@ -403,7 +470,7 @@ export function DocsCliView() {
       {/* 6. MONOREPOS & PATH CONFIGURATION */}
       <SectionTwoCol
         icon={<Box className="size-5" />}
-        title="5. Monorepos & Custom Paths"
+        title="6. Monorepos & Custom Paths"
         description={
           <div className="space-y-3">
             <p>
