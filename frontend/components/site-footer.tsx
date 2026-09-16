@@ -113,8 +113,8 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="w-10 h-10 rounded-2xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-lg shadow-[#fa5c4f]/20 group-hover:rotate-12 transition-transform duration-500">
-                <Logo className="size-5 text-white" />
+              <div className=" flex items-center justify-center ">
+                <Logo className="size-10 " />
               </div>
               <span className="font-bold tracking-tight text-xl font-display text-white">
                 GlideCN

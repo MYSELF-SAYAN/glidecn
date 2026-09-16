@@ -54,9 +54,9 @@ export function FloatingNavbar() {
       >
 
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group active:scale-[0.97] transition-transform duration-150">
-          <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-md shadow-[#fa5c4f]/25 group-hover:rotate-8 group-hover:scale-105 transition-transform duration-300 ease-out">
-            <Logo className="size-4 text-white" />
+        <Link href="/" className="flex items-center gap-2 ">
+          <div className=" flex items-center justify-center ">
+            <Logo className="size-8 " />
           </div>
           <span className="font-bold tracking-tight text-sm font-display text-[var(--text-main)] transition-colors">
             GlideCN

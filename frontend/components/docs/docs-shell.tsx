@@ -24,7 +24,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="w-8 h-8 rounded-xl bg-[#fa5c4f] flex items-center justify-center text-white shadow-sm shadow-[#fa5c4f]/20 group-hover:rotate-6 transition">
-                <Logo className="size-4 text-white" />
+                <Logo className="size-5 text-white" />
               </div>
               <span className="font-bold tracking-tight text-base font-display text-[var(--text-main)]">
                 GlideCN

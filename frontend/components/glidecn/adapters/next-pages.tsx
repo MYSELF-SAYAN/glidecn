@@ -5,7 +5,7 @@
  * Seamless page transitions for Next.js Pages Router projects.
  * ========================================================================== */
 
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 export interface NextPagesGlideCNProps {
