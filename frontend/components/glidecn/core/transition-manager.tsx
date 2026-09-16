@@ -5,7 +5,7 @@
  * Orchestrates AnimatePresence and manages enter/exit lifecycle.
  * ========================================================================== */
 
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useRouteKey, FrozenRouter } from './router';
 

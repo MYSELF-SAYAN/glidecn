@@ -5,7 +5,7 @@
  * Seamless page transitions for React Router applications.
  * ========================================================================== */
 
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 export interface ReactRouterGlideCNProps {

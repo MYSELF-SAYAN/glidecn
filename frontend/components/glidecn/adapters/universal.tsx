@@ -6,7 +6,7 @@
  * Requires ZERO Next.js dependencies.
  * ========================================================================== */
 
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 export interface UniversalGlideCNProps {
