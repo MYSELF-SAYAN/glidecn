@@ -91,6 +91,9 @@ export const metadata: Metadata = {
     ],
     shortcut: '/favicon.png',
   },
+  verification:{
+    google:"aJlv5m0r45Zv_SexyuDcdbNz-11YuQHutURMOR7mFv8"
+  }
 };
 
 
