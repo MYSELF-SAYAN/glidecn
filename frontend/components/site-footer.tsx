@@ -108,7 +108,7 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 flex flex-col items-center">
 
         {/* Bento Grid Links */}
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-12 mb-24">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-8 gap-y-12 mb-24">
 
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-6">
@@ -204,6 +204,43 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
                 Build immersive storytelling pages with our section-based scrolling library.
               </p>
             </a>
+          </div>
+
+          {/* Links Col 4 (Featured) */}
+          <div className="space-y-6 sm:col-span-2 lg:col-span-2">
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">Featured</h4>
+            <div className="pt-1 flex flex-row items-center gap-3">
+              <a
+                href="https://spacerrapps.com/apps/glidecn?utm_source=badge&utm_medium=referral&utm_campaign=featured"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 rounded-lg overflow-hidden border border-white/10 hover:border-white/20"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://spacerrapps.com/badge/glidecn.svg?v=2"
+                  alt="GlideCN is featured on Spacerr"
+                  width="192"
+                  height="54"
+                  className="block h-10 sm:h-11 w-auto max-w-none object-contain"
+                />
+              </a>
+              <a
+                href="https://www.producthunt.com/products/glidecn?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-glidecn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 rounded-lg overflow-hidden border border-white/10 hover:border-white/20"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1252564&theme=light&t=1789665050546"
+                  alt="GlideCN - Premium transitions for modern React apps. | Product Hunt"
+                  width="250"
+                  height="54"
+                  className="block h-10 sm:h-11 w-auto max-w-none object-contain"
+                />
+              </a>
+            </div>
           </div>
 
         </div>
