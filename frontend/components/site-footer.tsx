@@ -240,6 +240,36 @@ export function SiteFooter({ className = "mt-32" }: { className?: string }) {
                   className="block h-10 sm:h-11 w-auto max-w-none object-contain"
                 />
               </a>
+              <a
+                href="https://nicklaunches.com/products/glidecn/?utm_source=glidecn.vercel.app&utm_medium=badge&utm_campaign=featured"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 rounded-lg overflow-hidden border border-white/10 hover:border-white/20"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://nicklaunches.com/badges/featured.png"
+                  alt="GlideCN on Nick Launches"
+                  width="244"
+                  height="56"
+                  className="block h-10 sm:h-11 w-auto max-w-none object-contain"
+                />
+              </a>
+              <a
+                href="https://tools.launchllama.co?utm_source=badge&utm_medium=referral"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 rounded-lg overflow-hidden border border-white/10 hover:border-white/20"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://tools.launchllama.co/featured-badge.png?v=2"
+                  alt="Featured on Launch Llama Tools"
+                  width="200"
+                  height="52"
+                  className="block h-10 sm:h-11 w-auto max-w-none object-contain"
+                />
+              </a>
             </div>
           </div>
 
